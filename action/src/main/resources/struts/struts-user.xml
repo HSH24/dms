@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="{http://dms}dms$user"
+		extends="{http://dms}dms$framework" namespace="/user">
+
+		<action name="address" class="userAddressAction" method="index">
+			<result name="success">/dms/user/address.vm</result>
+		</action>
+		
+	</package>
+	
+	<package name="{http://dms}dms$address"
+		extends="{http://dms}dms$framework" namespace="/address">
+		<action name="create" class="userAddressAction" method="create"></action>
+	</package>
+</struts>
