@@ -1,194 +1,81 @@
-var $table = $('#table');
-
-function initTable() {
-	$table.bootstrapTable({
-		height : getHeight(),
-		columns : [[{
-							title : '序号',
-							field : 'tradeId',
-							rowspan : 2,
-							align : 'center',
-							valign : 'middle',
-							sortable : true
-						}, {
-							title : '商品信息',
-							colspan : 2,
-							align : 'center'
-						}, {
-							title : '交易信息',
-							colspan : 3,
-							align : 'center'
-						}, {
-							title : '买家信息',
-							colspan : 2,
-							align : 'center'
-						}], [{
-							field : 'itemName',
-							title : '商品信息',
-							align : 'center'
-						}, {
-							field : 'sellerName',
-							title : '卖家信息',
-							align : 'center'
-						}, {
-							field : 'tradeCode',
-							title : '二维码',
-							align : 'center',
-							width : 1
-						}, {
-							field : 'tradeNo',
-							title : '交易单号',
-							sortable : true,
-							align : 'center',
-							formatter : function(value, row, index) {
-								if (value == undefined) {
-									return "";
-								} else {
-									return value;
-								}
-							},
-							editable : {
-								type : 'text',
-								title : '交易单号',
-								validate : function(value) {
-									return '';
-								},
-								url : function(params) {
-									var d = new $.Deferred;
-									$.ajax({
-												type : "post",
-												url : appUrl
-														+ "/trade/tradeNo.htm",
-												data : {
-													tradeId : params.pk,
-													tradeNo : params.value,
-													dateTime : new Date()
-															.getTime()
-												},
-												success : function(data) {
-													d.resolve();
-												},
-												error : function(data) {
-													d.reject(data);
-												}
-											});
-									return d.promise();
-								}
-							}
-						}, {
-							field : 'tradeDate',
-							title : '交易时间',
-							sortable : true,
-							align : 'center',
-							formatter : function(value, row, index) {
-								if (value == undefined) {
-									return "";
-								} else {
-									return value;
-								}
-							},
-							editable : {
-								type : 'text',
-								title : '交易时间',
-								defaultValue : deta,
-								validate : function(value) {
-									return '';
-								},
-								url : function(params) {
-									var d = new $.Deferred;
-									$.ajax({
-												type : "post",
-												url : appUrl
-														+ "/trade/tradeDate.htm",
-												data : {
-													tradeId : params.pk,
-													tradeDate : params.value,
-													dateTime : new Date()
-															.getTime()
-												},
-												success : function(data) {
-													d.resolve();
-												},
-												error : function(data) {
-													d.reject(data);
-												}
-											});
-									return d.promise();
-								}
-							}
-						}, {
-							field : 'like',
-							title : '评价',
-							align : 'center',
-							formatter : function(value, row, index) {
-								if (value == 'Y') {
-									return "赞";
-								} else if (value == 'N') {
-									return "差评";
-								} else {
-									return "";
-								}
-							}
-						}, {
-							field : 'likeDate',
-							title : '评价时间',
-							align : 'center'
-						}]],
-		queryParams : function(params) {
-			if (params.search != undefined) {
-				params.search = encodeURIComponent(params.search);
+// Initialize your app
+var myApp = new Framework7({
+			animateNavBackIcon : true,
+			animatePages : Framework7.prototype.device.ios,
+			swipePanel : 'left',
+			// Hide and show indicator during ajax requests
+			onAjaxStart : function(xhr) {
+				myApp.showIndicator();
+			},
+			onAjaxComplete : function(xhr) {
+				myApp.hideIndicator();
 			}
-			return params;
-		}
-	});
+		});
 
-	// sometimes footer render error.
-	setTimeout(function() {
-				$table.bootstrapTable('resetView');
-			}, 200);
+// Export selectors engine
+var $$ = Dom7;
 
-	$(window).resize(function() {
-				$table.bootstrapTable('resetView', {
-							height : getHeight()
+// Add view
+var mainView = myApp.addView('.view-main', {
+			// Because we use fixed-through navbar we can enable dynamic navbar
+			dynamicNavbar : true
+		});
+
+var view2 = myApp.addView('#view-2', {
+			dynamicNavbar : true
+		});
+$$('#href-2').on('click', function() {
+			if (view2.history.length == 1) {
+				view2.router.load({
+							url : appUrl + "/item/list.htm"
 						});
+			}
+		});
+
+var view4 = myApp.addView('#view-4', {
+			dynamicNavbar : true
+		});
+$$('#href-4').on('click', function() {
+			if (view4.history.length == 1) {
+				view4.router.load({
+							url : appUrl + "/cart/index.htm",
+							ignoreCache : true,
+							reload : true
+						});
+			}
+		});
+
+var view5 = myApp.addView('#view-5', {
+			dynamicNavbar : true
+		});
+$$('#href-5').on('click', function() {
+			if (view5.history.length == 1) {
+				view5.router.load({
+							url : appUrl + "/member/index.htm"
+						});
+			}
+		});
+
+$$('#view_2_click').on('click', function() {
+			if (view2.history.length == 1) {
+				view2.router.load({
+							url : appUrl + "/item/list.htm"
+						});
+			}
+
+			$$('#href-2').addClass("active");
+		});
+
+function portal_homepage_cart_stats() {
+	$$.get(appUrl + '/cart/stats.htm', {}, function(data) {
+				if (data > 0) {
+					$$('#portal/homepage/cart').addClass('badge bg-red');
+					$$('#portal/homepage/cart').html(data);
+				} else {
+					$$('#portal/homepage/cart').removeClass('badge bg-red');
+					$$('#portal/homepage/cart').html('');
+				}
 			});
 }
 
-function responseHandler(res) {
-	return res;
-}
-
-function detailFormatter(index, row) {
-}
-
-function getHeight() {
-	return $(window).height() - $('h1').outerHeight(true) - 70;
-}
-
-$(function() {
-			initTable();
-
-			$('#hideFrame').bind('load', promgtMsg);
-		});
-
-function create() {
-	$('#btn').button('loading');
-
-	var form = window.document.forms[0];
-	form.action = appUrl + "/trade/create.htm";
-	form.target = "hideFrame";
-	form.submit();
-}
-
-function promgtMsg() {
-	var hideFrame = document.getElementById("hideFrame");
-	var failResult = hideFrame.contentWindow.failResult;
-	var successResult = hideFrame.contentWindow.successResult;
-	if (failResult != undefined && failResult != "") {
-		alert(failResult);
-	} else if (successResult != undefined) {
-		$('#table').bootstrapTable('refresh');
-	}
-
-	$('#btn').button('reset');
-}
+// portal_homepage_cart_stats();

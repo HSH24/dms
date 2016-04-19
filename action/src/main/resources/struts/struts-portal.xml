@@ -11,13 +11,8 @@
 		</action>
 		
 		<action name="home" class="portalAction" method="home">
-			<interceptor-ref name="authenticationStack" />
-			<result name="success">/dms/portal/home.vm</result>
-		</action>
-		
-		<action name="homepage" class="portalAction" method="homepage">
 			<interceptor-ref name="oauth2Stack" />
-			<result name="success">/dms/portal/homepage.vm</result>
+			<result name="success">/dms/portal/home.vm</result>
 		</action>
 		
 	</package>

@@ -31,15 +31,6 @@ public class PortalAction extends BaseAction {
 	}
 
 	public String home() {
-		return SUCCESS;
-	}
-
-	/**
-	 * 移动商场.
-	 * 
-	 * @return
-	 */
-	public String homepage() {
 		String requestURL = env.getProperty("appUrl") + "/homepage.htm";
 		HttpServletRequest request = getServletRequest();
 		String queryString = request.getQueryString();

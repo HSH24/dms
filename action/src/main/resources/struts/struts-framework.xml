@@ -50,7 +50,7 @@
 			<result name="isNotExsit">/dms/framework/error/isNotExsit.vm</result>
 			<result name="jsonresult" type="json"></result>
 			<result name="oauth2" type="redirectAction">
-				<param name="actionName">shop/index</param>
+				<param name="actionName">sup/index</param>
 			</result>
 			<result name="resourceResult">/dms/framework/common/resourceResult.vm</result>
 			<result name="resultMessage">/dms/framework/common/resultMessage.vm</result>
