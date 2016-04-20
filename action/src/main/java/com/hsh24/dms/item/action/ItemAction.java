@@ -1,7 +1,6 @@
 package com.hsh24.dms.item.action;
 
 import com.hsh24.dms.api.item.IItemService;
-import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.framework.action.BaseAction;
 
 /**
@@ -15,25 +14,11 @@ public class ItemAction extends BaseAction {
 
 	private IItemService itemService;
 
-	private String itemId;
-
-	private Item item;
-
 	/**
 	 * 
 	 * @return
 	 */
 	public String list() {
-		return SUCCESS;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String detail() {
-		item = itemService.getItem(0L, itemId);
-
 		return SUCCESS;
 	}
 
@@ -43,22 +28,6 @@ public class ItemAction extends BaseAction {
 
 	public void setItemService(IItemService itemService) {
 		this.itemService = itemService;
-	}
-
-	public String getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
-
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
 	}
 
 }

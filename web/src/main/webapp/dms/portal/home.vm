@@ -21,7 +21,7 @@
 				<div class="navbar" style="background: #ff5500;">
 					<div class="navbar-inner">
 						<!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-						<div class="center sliding" style="color: white;">好社惠－供应商采购系统</div>
+						<div class="center sliding" style="color: white;">好社惠－亭主终端管理系统</div>
 					</div>
 				</div>
 				<!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -124,9 +124,9 @@
 		#JSM(["framework7", "weixin", "jquery", "common"])
 		#JS_ENV_VAL()
 		<script src="$!{env.imgUrl}/js/portal/home.js"></script>
-		<!-- script src="$!{env.imgUrl}/js/cart/index.js?t=20160316" async="async"></script>
-		<script src="$!{env.imgUrl}/js/item/detail.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/item/list.js" async="async"></script>
+		<!-- script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/pay/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>

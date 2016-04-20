@@ -49,7 +49,7 @@ public class CartServiceImpl implements ICartService {
 		cart.setModifyUser(userId);
 
 		if (supId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("供应商信息不能为空。");
 			return result;
 		}
 		cart.setSupId(supId);
@@ -77,9 +77,6 @@ public class CartServiceImpl implements ICartService {
 				return result;
 			}
 		}
-
-		// TODO
-		cart.setPointsId(0L);
 
 		if (StringUtils.isBlank(quantity)) {
 			result.setCode("购买商品数量不能为空。");

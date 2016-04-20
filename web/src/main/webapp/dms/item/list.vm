@@ -45,8 +45,8 @@
 									</select>
 								</div>
 								<div class="item-after">
-									<a href="#" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="#" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
+									<a href="$!{env.appUrl}/trade/create.htm?type=" class="button color-orange" data-ignore-cache="true">立即下单</a>
+									<a href="javascript:item_list_cart('1', '1');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
 								</div>
     						</div>
                         </div>
@@ -95,8 +95,8 @@
 									</select>
 								</div>
 								<div class="item-after">
-									<a href="#" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="#" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
+									<a href="$!{env.appUrl}/trade/create.htm?type=" class="button color-orange" data-ignore-cache="true">立即下单</a>
+									<a href="javascript:item_list_cart('2', '2');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
 								</div>
     						</div>
                         </div>
@@ -118,5 +118,10 @@
 				</ul>
 			</div>
         </div>
+		
+		<form id="item/list/cart" action="$!{env.appUrl}/cart/add.htm" method="POST" class="ajax-submit">
+			<input type="hidden" id="item_list_cart_itemId" name="itemId"></input>
+			<input type="hidden" id="item_list_cart_skuId" name="skuId"></input>
+        </form>
     </div>
 </div>

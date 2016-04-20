@@ -42,11 +42,6 @@ public class Cart extends SearchInfo {
 	private Long skuId;
 
 	/**
-	 * 0 非积分兑换 else 积分兑换.
-	 */
-	private Long pointsId;
-
-	/**
 	 * 购物车该sku商品的数量.
 	 */
 	private int quantity;
@@ -131,14 +126,6 @@ public class Cart extends SearchInfo {
 
 	public void setSkuId(Long skuId) {
 		this.skuId = skuId;
-	}
-
-	public Long getPointsId() {
-		return pointsId;
-	}
-
-	public void setPointsId(Long pointsId) {
-		this.pointsId = pointsId;
 	}
 
 	public int getQuantity() {

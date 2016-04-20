@@ -1,6 +1,5 @@
 // Initialize your app
 var myApp = new Framework7({
-	 pushState: true,
 			animateNavBackIcon : true,
 			animatePages : Framework7.prototype.device.ios,
 			swipePanel : 'left',
@@ -67,7 +66,7 @@ $$('#view_2_click').on('click', function() {
 			$$('#href-2').addClass("active");
 		});
 
-function portal_homepage_cart_stats() {
+function portal_home_cart_stats() {
 	$$.get(appUrl + '/cart/stats.htm', {}, function(data) {
 				if (data > 0) {
 					$$('#portal/homepage/cart').addClass('badge bg-red');
@@ -79,4 +78,4 @@ function portal_homepage_cart_stats() {
 			});
 }
 
-// portal_homepage_cart_stats();
+portal_home_cart_stats();
