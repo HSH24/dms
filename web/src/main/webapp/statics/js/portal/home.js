@@ -1,5 +1,6 @@
 // Initialize your app
 var myApp = new Framework7({
+	 pushState: true,
 			animateNavBackIcon : true,
 			animatePages : Framework7.prototype.device.ios,
 			swipePanel : 'left',

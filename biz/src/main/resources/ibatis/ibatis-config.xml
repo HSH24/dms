@@ -30,10 +30,16 @@
 	<typeAlias alias="charaRplace" type="com.hsh24.dms.framework.ibatis.type.CharacterReplaceHanlderCallback" />
 
 	<sqlMap resource="ibatis/global.xml" />
+	<sqlMap resource="ibatis/sqlmap-cart.xml" />
+	<sqlMap resource="ibatis/sqlmap-item.sku.xml" />
+	<sqlMap resource="ibatis/sqlmap-item.xml" />
 	<sqlMap resource="ibatis/sqlmap-monitor.action.xml" />
 	<sqlMap resource="ibatis/sqlmap-monitor.cache.xml" />
 	<sqlMap resource="ibatis/sqlmap-monitor.log.xml" />
 	<sqlMap resource="ibatis/sqlmap-monitor.method.xml" />
+	<sqlMap resource="ibatis/sqlmap-trade.order.refund.xml" />
+	<sqlMap resource="ibatis/sqlmap-trade.order.xml" />
+	<sqlMap resource="ibatis/sqlmap-trade.xml" />
 	<sqlMap resource="ibatis/sqlmap-user.xml" />
     
 </sqlMapConfig>

@@ -124,13 +124,13 @@
 		#JSM(["framework7", "weixin", "jquery", "common"])
 		#JS_ENV_VAL()
 		<script src="$!{env.imgUrl}/js/portal/home.js"></script>
-		<script src="$!{env.imgUrl}/js/cart/index.js?t=20160316" async="async"></script>
+		<!-- script src="$!{env.imgUrl}/js/cart/index.js?t=20160316" async="async"></script>
 		<script src="$!{env.imgUrl}/js/item/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/pay/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/user/address.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/user/address.js" async="async"></script -->
 		<script>
         wx.config({
         			debug : false,
