@@ -36,21 +36,6 @@ public class Trade extends SearchInfo {
 	private BigDecimal tradePrice;
 
 	/**
-	 * 交易积分（积分兑换）.
-	 */
-	private BigDecimal tradePoints;
-
-	/**
-	 * 优惠券使用价格.
-	 */
-	private BigDecimal couponPrice;
-
-	/**
-	 * 邮费.
-	 */
-	private BigDecimal postage;
-
-	/**
 	 * 涨价或减价.
 	 */
 	private BigDecimal change;
@@ -66,8 +51,7 @@ public class Trade extends SearchInfo {
 	private String remark;
 
 	/**
-	 * check: 临时订单; topay: 待付款; tosend: 待发货; send: 已发货; sign: 标记签收; cancel: 已关闭; feedback:
-	 * 维权订单; feedbacked: 已处理维权订单.
+	 * tosend: 待发货; send: 已发货; sign: 标记签收; cancel: 已关闭; feedback: 维权订单; feedbacked: 已处理维权订单.
 	 */
 	private String type;
 
@@ -219,11 +203,6 @@ public class Trade extends SearchInfo {
 	private int countOfCreate;
 
 	/**
-	 * 统计值 付款数量.
-	 */
-	private int countOfPay;
-
-	/**
 	 * 统计值 发货数量.
 	 */
 	private int countOfSend;
@@ -270,30 +249,6 @@ public class Trade extends SearchInfo {
 		this.tradePrice = tradePrice;
 	}
 
-	public BigDecimal getTradePoints() {
-		return tradePoints;
-	}
-
-	public void setTradePoints(BigDecimal tradePoints) {
-		this.tradePoints = tradePoints;
-	}
-
-	public BigDecimal getCouponPrice() {
-		return couponPrice;
-	}
-
-	public void setCouponPrice(BigDecimal couponPrice) {
-		this.couponPrice = couponPrice;
-	}
-
-	public BigDecimal getPostage() {
-		return postage;
-	}
-
-	public void setPostage(BigDecimal postage) {
-		this.postage = postage;
-	}
-
 	public BigDecimal getChange() {
 		return change;
 	}
@@ -303,13 +258,13 @@ public class Trade extends SearchInfo {
 	}
 
 	/**
-	 * 实付金额 tradePrice - couponPrice + postage + (change).
+	 * 实付金额 tradePrice + (change).
 	 * 
 	 * @return
 	 */
 	public BigDecimal getPrice() {
 		if (this.tradePrice != null) {
-			return this.tradePrice.add(this.couponPrice.negate()).add(this.postage).add(this.change);
+			return this.tradePrice.add(this.change);
 		}
 
 		return BigDecimal.ZERO;
@@ -569,14 +524,6 @@ public class Trade extends SearchInfo {
 
 	public void setCountOfCreate(int countOfCreate) {
 		this.countOfCreate = countOfCreate;
-	}
-
-	public int getCountOfPay() {
-		return countOfPay;
-	}
-
-	public void setCountOfPay(int countOfPay) {
-		this.countOfPay = countOfPay;
 	}
 
 	public int getCountOfSend() {

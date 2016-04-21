@@ -44,26 +44,103 @@
 								<ul class="mui-flex" style="padding: 0;">
 									<li class="cell" style="">
 										<a class="component type3 tab-link" href="#view-2" id="view_2_click" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/lxsp.png" width="36" height="36"></img>冷鲜食品
+                                            <img class="" src="$!{env.imgUrl}/image/portal/lxsp.png" width="36" height="36"></img>需派送订单
 										</a>
 									</li>
 									<li class="cell" style="">
 										<a class="component type3" href="" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/lyfs.png" width="36" height="36"></img>粮油副食
+                                            <img class="" src="$!{env.imgUrl}/image/portal/lyfs.png" width="36" height="36"></img>采购订单
 										</a>
 									</li>
 									<li class="cell" style="">
                                         <a class="component type3 external" href="$!{env.appUrl}/express/index.htm" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/kdsf.png" width="36" height="36"></img>快递收发
+                                            <img class="" src="$!{env.imgUrl}/image/portal/kdsf.png" width="36" height="36"></img>采购收货
                                         </a>
 									</li>
 									<li class="cell" style="">
                                         <a class="component type3" href="" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/shjf.png" width="36" height="36"></img>生活缴费
+                                            <img class="" src="$!{env.imgUrl}/image/portal/shjf.png" width="36" height="36"></img>我的资金
                                         </a>
 									</li>
 								</ul>
 							</div>
+							
+							<div class="" style="background-color:#ffffff;">
+								<div class="list-block sortable sortable-opened">
+									 <ul>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
+												<div class="item-inner">
+													<div class="item-title">
+														李大伯
+														<span style="font-size: 13px;">10:30 新飞路1500弄56号</span>
+													</div>
+													<div class="item-after">￥10</div>
+												</div>
+											</div>
+											<!-- 可排序句柄  -->
+											<div class="sortable-handler"></div>
+										</li>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
+												<div class="item-inner">
+													<div class="item-title">
+														李大伯
+														<span style="font-size: 13px;">04-20 10:30 新飞路1500弄56号</span>
+													</div>
+													<div class="item-after">￥10</div>
+												</div>
+											</div>
+											<!-- 可排序句柄  -->
+											<div class="sortable-handler"></div>
+										</li>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
+												<div class="item-inner">
+													<div class="item-title">
+														李大伯
+														<span style="font-size: 13px;">04-19 10:30 新飞路1500弄56号</span>
+													</div>
+													<div class="item-after">￥10</div>
+												</div>
+											</div>
+											<!-- 可排序句柄  -->
+											<div class="sortable-handler"></div>
+										</li>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
+												<div class="item-inner">
+													<div class="item-title">
+														李大伯
+														<span style="font-size: 13px;">04-18 10:30 新飞路1500弄56号</span>
+													</div>
+													<div class="item-after">￥10</div>
+												</div>
+											</div>
+											<!-- 可排序句柄  -->
+											<div class="sortable-handler"></div>
+										</li>
+										<li>
+											<div class="item-content">
+												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
+												<div class="item-inner">
+													<div class="item-title">
+														李大伯
+														<span style="font-size: 13px;">04-17 10:30 新飞路1500弄56号</span>
+													</div>
+													<div class="item-after">￥10</div>
+												</div>
+											</div>
+											<!-- 可排序句柄  -->
+											<div class="sortable-handler"></div>
+										</li>
+									 </ul>
+								</div>
+                            </div>
                         </div>
                     </div>
                 </div>

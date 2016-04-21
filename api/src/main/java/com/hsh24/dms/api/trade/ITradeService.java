@@ -17,17 +17,7 @@ public interface ITradeService {
 	String CREATE = "create";
 
 	/**
-	 * 临时.
-	 */
-	String CHECK = "check";
-
-	/**
-	 * 待付款.
-	 */
-	String TO_PAY = "topay";
-
-	/**
-	 * 已付款.
+	 * 已下单.
 	 */
 	String TO_SEND = "tosend";
 
@@ -137,17 +127,6 @@ public interface ITradeService {
 	BooleanResult cancelTrade(String userId, Long shopId, String tradeNo);
 
 	/**
-	 * 临时订单 -> 待付款订单.
-	 * 
-	 * @param userId
-	 * @param shopId
-	 * @param tradeNo
-	 * @param remark
-	 * @return
-	 */
-	BooleanResult topayTrade(String userId, Long shopId, String tradeNo, String remark);
-
-	/**
 	 * 获取某一交易某一订单明细信息(用于退款).
 	 * 
 	 * @param userId
@@ -181,23 +160,5 @@ public interface ITradeService {
 	 * @return
 	 */
 	BooleanResult signTrade(String userId, Long shopId, String tradeNo);
-
-	// >>>>>>>>>>以下是第三方交易平台<<<<<<<<<<
-
-	/**
-	 * 
-	 * @param tradeNo
-	 * @return
-	 */
-	Trade getTrade(String tradeNo);
-
-	/**
-	 * 
-	 * @param tradeNo
-	 * @param payType
-	 * @param payDate
-	 * @return
-	 */
-	BooleanResult payTrade(String tradeNo, String payType, String payDate);
 
 }

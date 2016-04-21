@@ -50,10 +50,10 @@ function cart_index_stats() {
 
 	if (count == 0) {
 		$$(".js-total-price").html(0);
-		$$(".btn.btn-orange-dark").html("结算");
+		$$(".btn.btn-orange-dark").html("下单");
 	} else {
 		$$(".js-total-price").html(total);
-		$$(".btn.btn-orange-dark").html("结算(" + count + ")");
+		$$(".btn.btn-orange-dark").html("下单(" + count + ")");
 	}
 }
 
@@ -109,7 +109,7 @@ function cart_index_check() {
 		$$('input[name="cartIds"]').prop('checked', false);
 
 		$$(".js-total-price").html(0);
-		$$(".btn.btn-orange-dark").html("结算");
+		$$(".btn.btn-orange-dark").html("下单");
 	} else {
 		$$('input[name="cartIds"]').prop('checked', true);
 

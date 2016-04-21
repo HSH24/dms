@@ -2,9 +2,7 @@ package com.hsh24.dms.trade.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.TransactionStatus;
@@ -87,13 +85,9 @@ public class TradeServiceImpl implements ITradeService {
 				trade.setShopId(shopId);
 				// 交易价格
 				trade.setTradePrice(BigDecimal.ONE);
-				// 积分兑换
-				trade.setTradePoints(BigDecimal.ZERO);
-				trade.setCouponPrice(BigDecimal.ZERO);
-				trade.setPostage(BigDecimal.ZERO);
 				trade.setChange(BigDecimal.ZERO);
-				// 买家结算
-				trade.setType(ITradeService.CHECK);
+				// 亭主下单
+				trade.setType(ITradeService.TO_SEND);
 
 				// 收货地址
 
@@ -169,13 +163,9 @@ public class TradeServiceImpl implements ITradeService {
 				trade.setShopId(shopId);
 				// 交易价格
 				trade.setTradePrice(cart.getPrice());
-				// 积分兑换
-				trade.setTradePoints(BigDecimal.ZERO);
-				trade.setCouponPrice(BigDecimal.ZERO);
-				trade.setPostage(cart.getPostage());
 				trade.setChange(BigDecimal.ZERO);
-				// 买家结算
-				trade.setType(ITradeService.CHECK);
+				// 亭主下单
+				trade.setType(ITradeService.TO_SEND);
 
 				// 14位日期 ＋ 11位随机数
 				trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
@@ -391,8 +381,8 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
-		if (!ITradeService.CHECK.equals(t.getType()) && !ITradeService.TO_PAY.equals(t.getType())) {
-			result.setCode("当前订单已付款或取消。");
+		if (!ITradeService.TO_SEND.equals(t.getType())) {
+			result.setCode("当前订单已发货或取消。");
 			return result;
 		}
 
@@ -400,42 +390,6 @@ public class TradeServiceImpl implements ITradeService {
 		trade.setTradeId(t.getTradeId());
 
 		return cancelTrade(trade, t.getType(), t.getUserId());
-	}
-
-	@Override
-	public BooleanResult topayTrade(String userId, Long shopId, String tradeNo, String remark) {
-		BooleanResult result = new BooleanResult();
-		result.setResult(false);
-
-		Trade trade = new Trade();
-		// 待付款
-		trade.setType(ITradeService.TO_PAY);
-
-		if (StringUtils.isBlank(userId)) {
-			result.setCode("用户信息不能为空。");
-			return result;
-		}
-		trade.setUserId(userId.trim());
-
-		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
-			return result;
-		}
-		trade.setShopId(shopId);
-
-		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("交易订单不能为空。");
-			return result;
-		}
-		trade.setTradeNo(tradeNo.trim());
-
-		if (StringUtils.isNotEmpty(remark)) {
-			trade.setReceiverRemark(remark);
-		}
-
-		trade.setModifyUser(userId);
-
-		return updateTrade(trade);
 	}
 
 	@Override
@@ -520,52 +474,6 @@ public class TradeServiceImpl implements ITradeService {
 		return result;
 	}
 
-	// >>>>>>>>>>以下是第三方交易平台<<<<<<<<<<
-
-	@Override
-	public Trade getTrade(String tradeNo) {
-		if (StringUtils.isBlank(tradeNo)) {
-			return null;
-		}
-
-		Trade trade = new Trade();
-		trade.setTradeNo(tradeNo.trim());
-
-		return getTrade(trade);
-	}
-
-	@Override
-	public BooleanResult payTrade(String tradeNo, String payType, String payDate) {
-		BooleanResult result = new BooleanResult();
-		result.setResult(false);
-
-		Trade trade = new Trade();
-		// 待发货
-		trade.setType(ITradeService.TO_SEND);
-
-		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("交易订单不能为空。");
-			return result;
-		}
-		trade.setTradeNo(tradeNo.trim());
-
-		if (StringUtils.isBlank(payType)) {
-			result.setCode("支付类型不能为空。");
-			return result;
-		}
-		trade.setPayType(payType.trim());
-
-		if (StringUtils.isBlank(payDate)) {
-			result.setCode("支付时间不能为空。");
-			return result;
-		}
-		trade.setPayDate(payDate);
-
-		trade.setModifyUser(payType);
-
-		return updateTrade(trade);
-	}
-
 	/**
 	 * 
 	 * @param trade
@@ -616,67 +524,6 @@ public class TradeServiceImpl implements ITradeService {
 		List<Item> items = null;
 		// 用于统计 还有 sku 的商品的合计库存数
 		String[] itemIds = null;
-
-		// 根据 type 判断 是否需要 释放已占库存
-		if (ITradeService.TO_PAY.equals(type)) {
-			// 需要释放库存
-			f = true;
-
-			// 1. 判断库存
-			List<Order> orderList = orderService.getOrderList(trade.getUserId(), trade.getShopId(), trade.getTradeId());
-			if (orderList == null || orderList.size() == 0) {
-				BooleanResult result = new BooleanResult();
-				result.setResult(false);
-				result.setCode("当前订单明细不存在。");
-
-				return result;
-			}
-
-			// 存放各个商品库存数量 存在 购物相同商品 的情况
-			Map<String, Integer> map = new HashMap<String, Integer>();
-
-			for (Order order : orderList) {
-				String key = order.getItemId() + "&" + order.getSkuId();
-				if (!map.containsKey(key)) {
-					map.put(key, order.getStock());
-				}
-
-				int quantity = order.getQuantity();
-				int stock = map.get(key);
-
-				map.put(key, stock + quantity);
-			}
-
-			// 根据 map 组装 skuList
-			skus = new ArrayList<ItemSku>();
-			items = new ArrayList<Item>();
-			itemIds = new String[orderList.size()];
-			int i = 0;
-
-			for (Map.Entry<String, Integer> m : map.entrySet()) {
-				String[] key = m.getKey().split("&");
-
-				// if skuId is null or 0 then 商品没有规格
-				if (StringUtils.isBlank(key[1]) || "0".equals(key[1])) {
-					Item item = new Item();
-					item.setItemId(Long.valueOf(key[0]));
-					item.setStock(m.getValue());
-
-					items.add(item);
-
-					continue;
-				}
-
-				ItemSku sku = new ItemSku();
-				sku.setItemId(Long.valueOf(key[0]));
-				sku.setSkuId(Long.valueOf(key[1]));
-				sku.setStock(m.getValue());
-
-				skus.add(sku);
-
-				itemIds[i++] = key[0];
-			}
-		}
 
 		// type 取消
 		trade.setType(ITradeService.CANCEL);
