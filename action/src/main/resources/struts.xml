@@ -12,7 +12,7 @@
 	<include file="struts/struts-member.xml" />
 	<include file="struts/struts-pay.xml" />
 	<include file="struts/struts-portal.xml" />
-	<include file="struts/struts-shop.xml" />
+	<include file="struts/struts-sup.xml" />
 	<include file="struts/struts-trade.xml" />
 	<include file="struts/struts-user.xml" />
 </struts>
