@@ -204,9 +204,8 @@
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/item/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
-		<!-- script src="$!{env.imgUrl}/js/trade/list.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/trade/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/user/address.js" async="async"></script -->
 		<script>
         wx.config({
         			debug : false,
