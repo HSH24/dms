@@ -534,6 +534,11 @@ a.component.type3 img {
     border-left-style: dashed;
 }
 
+.page-settings .col-33 + .col-33 {
+    border-left: 1px solid #ccc;
+    border-left-style: dashed;
+}
+
 .list-block .page-settings:after {
 	height: 0;
 }
