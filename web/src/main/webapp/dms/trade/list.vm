@@ -37,7 +37,7 @@
 						</div>
 					</li>
 					<li>
-						<div class="item-content">
+						<a href="$!{env.appUrl}/trade/detail.htm?tradeNo=$!{trade.tradeNo}" class="item-content" style="color: inherit;" data-ignore-cache="true">
 							#set($order = $!{trade.orderList.get(0)})
 							<div class="item-media" style="padding-top: 7px; padding-bottom: 8px;">
 								<img src="$!{env.imgUrl}/image/item/detail-3.jpg" style="width: 50px;"></img>
@@ -52,14 +52,10 @@
 									<div class="item-after">×$!{order.quantity}</div>
 								</div>
 							</div>
-                        </div>
+                        </a>
 					</li>
 					<li>
-						#if($!{trade.type} == 'check' || $!{trade.type} == 'topay')
-						<a href="$!{env.appUrl}/pay/index.htm?tradeNo=$!{trade.tradeNo}" class="item-link item-content" style="min-height: 0;" data-ignore-cache="true">
-						#else
 						<a href="$!{env.appUrl}/trade/detail.htm?tradeNo=$!{trade.tradeNo}" class="item-link item-content" style="min-height: 0;" data-ignore-cache="true">
-						#end
 							<div class="item-inner" style="display: inherit; min-height: 0; text-align: center; padding-top: 7px; padding-bottom: 6px;">
 								<div class="item-title" style="font-weight: 400; font-size: 13px; width: 100%;">查看全部$!{trade.orderList.size()}件商品</div>
 							</div>
