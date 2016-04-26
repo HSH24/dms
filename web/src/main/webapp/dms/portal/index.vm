@@ -6,22 +6,74 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<title>好社惠</title>
+		<title>好社惠 | 亭主终端管理系统</title>
 		#ICON()
 		#CSSM(["framework7"])
 		#UA()
 	</head>
-	<body>
+	<body onload="setPassport();">
 		<!-- Should be a direct child of BODY -->
 		<div class="login-screen modal-in">
 			<!-- Default view-page layout -->
 			<div class="view view-main">
+				<div class="pages">
+    				<div data-page="portal.index" class="page">
+    					<!-- page-content has additional login-screen content -->
+    					<div class="page-content login-screen-content">
+    						<div class="login-screen-title" style="margin-top: 20%;">
+								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
+							</div>
+    						<!-- Login form -->
+    						<form action="$!{env.appUrl}/login.htm" method="POST">
+    							<div class="list-block">
+    								<ul>
+    									<li class="item-content">
+    										<div class="item-inner">
+    											<div class="item-title label" style="text-align: center;">+86</div>
+    											<div class="item-input">
+                                                    <input type="text" name="passport" placeholder="手机号码"></input>
+    											</div>
+    										</div>
+    									</li>
+    									<li class="item-content">
+    										<div class="item-inner">
+    											<div class="item-title label" style="text-align: center;">密码</div>
+    											<div class="item-input">
+                                                    <input type="password" name="password" placeholder="请输入登录密码"></input>
+    											</div>
+    										</div>
+    									</li>
+    								</ul>
+    							</div>
+    							<div class="list-block" style="width: 90%;">
+    								<ul>
+    									<li>
+    										<a href="javascript:submit();" class="button button-big button-fill" style="background-color: #04BE02;">登 录</a>
+    									</li>
+    								</ul>
+    								<div class="list-block-label">
+    									<a href="#" data-popup=".popup-forgetPassword" class="open-popup">忘记登录密码？</a>
+    								</div>
+    							</div>
+    						</form>
+    					</div>
+    				</div>
+                </div>
+			</div>
+		</div>
+		
+		<div class="popup popup-forgetPassword">
+			<div class="view">
+				<!-- Top Navbar-->
+				<div class="navbar" style="background: #ffffff;">
+					<div class="navbar-inner">
+						<div class="left"><a href="#" class="back link close-popup"> <i class="icon icon-back"></i><span></span></a></div>
+					</div>
+				</div>
 				<div class="page">
-					<!-- page-content has additional login-screen content -->
 					<div class="page-content login-screen-content">
-						<div class="login-screen-title">好社惠</div>
-						<!-- Login form -->
-						<form action="$!{env.appUrl}/login.htm" method="POST">
+						<div class="login-screen-title" style="margin-top: 20%;">通过短信找回密码</div>
+						<form>
 							<div class="list-block">
 								<ul>
 									<li class="item-content">
@@ -34,30 +86,29 @@
 									</li>
 									<li class="item-content">
 										<div class="item-inner">
-											<div class="item-title label" style="text-align: center;">密码</div>
+											<div class="item-title label" style="text-align: center;">验证码</div>
 											<div class="item-input">
-                                                <input type="password" name="password" placeholder="6位登录密码"></input>
+                                                <input type="text" name="password" placeholder="请输入短信验证码"></input>
 											</div>
 										</div>
 									</li>
 								</ul>
 							</div>
-							<div class="list-block">
+							<div class="list-block" style="width: 90%;">
 								<ul>
 									<li>
-										<a href="javascript:submit();" class="item-link list-button">登 录</a>
+										<a href="javascript:submit();" class="button button-big button-fill" style="background-color: #04BE02;">提 交</a>
 									</li>
 								</ul>
 								<div class="list-block-label">
-									<p>占位占位占位占位占位占位占位占位.</p>
-									<p><a href="javascript:submit();" class="close-login-screen">忘记登录密码？</a></p>
+									<a href="#">No verification code received?</a>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-		</div>
+        </div>
 		
 		#JSM(["framework7", "jquery", "jquery.cookie"])
 		#JS_ENV_VAL()

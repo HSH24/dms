@@ -38,6 +38,16 @@ public interface IMemcachedCacheService extends ICacheService<String, Object> {
 	int CACHE_KEY_SSO_TOKEN_DEFAULT_EXP = 60;
 
 	/**
+	 * check code.
+	 */
+	String CACHE_KEY_CHECK_CODE = "key_check_code_";
+
+	/**
+	 * check code.
+	 */
+	int CACHE_KEY_CHECK_CODE_DEFAULT_EXP = 10 * 60;
+
+	/**
 	 * user id.
 	 */
 	String CACHE_KEY_USER_ID = "key_user_id_";

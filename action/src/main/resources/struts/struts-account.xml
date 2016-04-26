@@ -1,0 +1,20 @@
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="{http://dms}dms$auth"
+		extends="{http://dms}dms$framework" namespace="/account">
+
+		<!-- 忘记密码 -->
+		<action name="forgetPassword" class="accountAction" method="forgetPassword">
+			<result name="success">/dms/account/forgetPassword.vm</result>
+		</action>
+		
+		<!-- 发送验证码 -->
+		<action name="sendCheckCode" class="accountAction" method="sendCheckCode"></action>
+		
+		<!-- 重置密码 -->
+		<action name="setPassword" class="accountAction" method="setPassword"></action>
+		
+	</package>
+</struts>

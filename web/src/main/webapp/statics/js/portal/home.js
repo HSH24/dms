@@ -69,11 +69,11 @@ $$('#view_2_click').on('click', function() {
 function portal_home_cart_stats() {
 	$$.get(appUrl + '/cart/stats.htm', {}, function(data) {
 				if (data > 0) {
-					$$('#portal/homepage/cart').addClass('badge bg-red');
-					$$('#portal/homepage/cart').html(data);
+					$$('#portal/home/cart').addClass('badge bg-red');
+					$$('#portal/home/cart').html(data);
 				} else {
-					$$('#portal/homepage/cart').removeClass('badge bg-red');
-					$$('#portal/homepage/cart').html('');
+					$$('#portal/home/cart').removeClass('badge bg-red');
+					$$('#portal/home/cart').html('');
 				}
 			});
 }
