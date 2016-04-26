@@ -15,7 +15,7 @@
 		<!-- Should be a direct child of BODY -->
 		<div class="login-screen modal-in">
 			<!-- Default view-page layout -->
-			<div class="view view-main">
+			<div class="view">
 				<div class="pages">
     				<div data-page="portal.index" class="page">
     					<!-- page-content has additional login-screen content -->
@@ -63,50 +63,52 @@
 		</div>
 		
 		<div class="popup popup-forgetPassword">
-			<div class="view">
+			<div class="view view-main">
 				<!-- Top Navbar-->
 				<div class="navbar" style="background: #ffffff;">
 					<div class="navbar-inner">
-						<div class="left"><a href="#" class="back link close-popup"> <i class="icon icon-back"></i><span></span></a></div>
+						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> 取消<span></span></a></div>
 					</div>
 				</div>
-				<div class="page">
-					<div class="page-content login-screen-content">
-						<div class="login-screen-title" style="margin-top: 20%;">通过短信找回密码</div>
-						<form>
-							<div class="list-block">
-								<ul>
-									<li class="item-content">
-										<div class="item-inner">
-											<div class="item-title label" style="text-align: center;">账号</div>
-											<div class="item-input">
-                                                <input type="text" name="passport" placeholder="手机号码"></input>
-											</div>
-										</div>
-									</li>
-									<li class="item-content">
-										<div class="item-inner">
-											<div class="item-title label" style="text-align: center;">验证码</div>
-											<div class="item-input">
-                                                <input type="text" name="password" placeholder="请输入短信验证码"></input>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<div class="list-block" style="width: 90%;">
-								<ul>
-									<li>
-										<a href="javascript:submit();" class="button button-big button-fill" style="background-color: #04BE02;">提 交</a>
-									</li>
-								</ul>
-								<div class="list-block-label">
-									<a href="#">No verification code received?</a>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
+				<div class="pages navbar-through">
+    				<div data-page="portal.forgetPassword" class="page">
+    					<div class="page-content login-screen-content">
+    						<div class="login-screen-title" style="font-size: 25px;">通过短信找回密码</div>
+    						<form>
+    							<div class="list-block">
+    								<ul>
+    									<li class="item-content">
+    										<div class="item-inner">
+    											<div class="item-title label" style="text-align: center;">账号</div>
+    											<div class="item-input">
+                                                    <input type="text" name="passport" placeholder="手机号码"></input>
+    											</div>
+    										</div>
+    									</li>
+    									<li class="item-content">
+    										<div class="item-inner">
+    											<div class="item-title label" style="text-align: center;">验证码</div>
+    											<div class="item-input">
+                                                    <input type="text" name="password" placeholder="请输入短信验证码"></input>
+    											</div>
+    										</div>
+    									</li>
+    								</ul>
+    							</div>
+    							<div class="list-block" style="width: 90%;">
+    								<ul>
+    									<li>
+    										<a href="javascript:validate();" class="button button-big button-fill" style="background-color: #04BE02;">提 交</a>
+    									</li>
+    								</ul>
+    								<div class="list-block-label">
+    									<a href="#">No verification code received?</a>
+    								</div>
+    							</div>
+    						</form>
+    					</div>
+    				</div>
+                </div>
 			</div>
         </div>
 		
@@ -118,5 +120,6 @@
 		var domain = '$!{env.domain}';
         </script>
 		<script type="text/javascript" src="$!{env.imgUrl}/js/portal/index.js"></script>
+		<script type="text/javascript" src="$!{env.imgUrl}/js/account/setPassword.js"></script>
 	</body>
 </html>

@@ -55,3 +55,7 @@ function submit() {
 	setPassportCookies();
 	window.document.forms[0].submit();
 }
+
+function validate() {
+	mainView.router.loadPage(appUrl + "/account/setPassword.htm");
+}

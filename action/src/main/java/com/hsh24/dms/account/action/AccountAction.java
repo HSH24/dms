@@ -1,7 +1,5 @@
 package com.hsh24.dms.account.action;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.hsh24.dms.api.account.IAccountService;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.annotation.ActionMonitor;
@@ -32,23 +30,6 @@ public class AccountAction extends BaseAction {
 	private String checkCode;
 
 	/**
-	 * 忘记密码.
-	 * 
-	 * @return
-	 */
-	public String forgetPassword() {
-		if (StringUtils.isNotBlank(passport)) {
-			try {
-				passport = new String(passport.trim().getBytes("ISO8859-1"), "UTF-8");
-			} catch (Exception e) {
-				logger.error(passport, e);
-			}
-		}
-
-		return SUCCESS;
-	}
-
-	/**
 	 * 找回登录密码 发送验证码.
 	 * 
 	 * @return
@@ -65,8 +46,21 @@ public class AccountAction extends BaseAction {
 		}
 	}
 
-	@ActionMonitor(actionName = "密码重置")
+	public String validateCheckCode() {
+		return SUCCESS;
+	}
+
+	/**
+	 * 修改密码.
+	 * 
+	 * @return
+	 */
 	public String setPassword() {
+		return SUCCESS;
+	}
+
+	@ActionMonitor(actionName = "密码重置")
+	public String updatePassword() {
 		BooleanResult result = accountService.setPassword(checkCode, password);
 
 		if (result.getResult()) {

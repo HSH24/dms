@@ -5,16 +5,15 @@
 	<package name="{http://dms}dms$auth"
 		extends="{http://dms}dms$framework" namespace="/account">
 
-		<!-- 忘记密码 -->
-		<action name="forgetPassword" class="accountAction" method="forgetPassword">
-			<result name="success">/dms/account/forgetPassword.vm</result>
-		</action>
-		
 		<!-- 发送验证码 -->
 		<action name="sendCheckCode" class="accountAction" method="sendCheckCode"></action>
 		
 		<!-- 重置密码 -->
-		<action name="setPassword" class="accountAction" method="setPassword"></action>
+		<action name="setPassword" class="accountAction" method="setPassword">
+			<result name="success">/dms/account/setPassword.vm</result>
+		</action>
+		
+		<action name="updatePassword" class="accountAction" method="updatePassword" />
 		
 	</package>
 </struts>
