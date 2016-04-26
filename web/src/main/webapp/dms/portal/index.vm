@@ -3,37 +3,64 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>$!{env.companyName}</title>
-		<meta name="keywords" content="">
-		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>好社惠</title>
 		#ICON()
-		#CSSM(["bootstrap"])
+		#CSSM(["framework7"])
 		#UA()
 	</head>
 	<body>
-		<div class="container">
-			<div class="col-md-4 col-md-offset-4">
-    			<div class="modal-header">
-    				<h4 class="modal-title">
-						<span class="glyphicon glyphicon-cloud" aria-hidden="true" style="color: cornflowerblue;"></span>
-					</h4>
-    			</div>
-				<div class="modal-body">
-      				<form class="form-horizontal" role="form" action="$!{env.appUrl}/login.htm" method="POST">
-    					<div class="form-group text-center">
-    						<a class="" id="btn" data-loading-text="正在登录..." href="javascript:submit();">
-								<img alt="Ld-d.png" src="$!{env.imgUrl}/image/weixin/Ld-d.png" width="240" height="50" />
-							</a>
-                        </div>
-          			</form>
-                </div>
-      		</div>
-        </div>
+		<!-- Should be a direct child of BODY -->
+		<div class="login-screen modal-in">
+			<!-- Default view-page layout -->
+			<div class="view view-main">
+				<div class="page">
+					<!-- page-content has additional login-screen content -->
+					<div class="page-content login-screen-content">
+						<div class="login-screen-title">好社惠</div>
+						<!-- Login form -->
+						<form action="$!{env.appUrl}/login.htm" method="POST">
+							<div class="list-block">
+								<ul>
+									<li class="item-content">
+										<div class="item-inner">
+											<div class="item-title label" style="text-align: center;">账号</div>
+											<div class="item-input">
+                                                <input type="text" name="passport" placeholder="手机号码"></input>
+											</div>
+										</div>
+									</li>
+									<li class="item-content">
+										<div class="item-inner">
+											<div class="item-title label" style="text-align: center;">密码</div>
+											<div class="item-input">
+                                                <input type="password" name="password" placeholder="6位登录密码"></input>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="list-block">
+								<ul>
+									<li>
+										<a href="javascript:submit();" class="item-link list-button">登 录</a>
+									</li>
+								</ul>
+								<div class="list-block-label">
+									<p>占位占位占位占位占位占位占位占位.</p>
+									<p><a href="javascript:submit();" class="close-login-screen">忘记登录密码？</a></p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-		#parse("/dms/framework/footer.vm")
-		
-		#JSM(["jquery", "jquery.cookie", "bootstrap"])
+		#JSM(["framework7", "jquery", "jquery.cookie"])
+		#JS_ENV_VAL()
 		<script>
 		var appUrl = '$!{env.appUrl}';
     	var appName = '$!{env.appName}';

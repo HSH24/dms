@@ -55,7 +55,8 @@ public class LoginAction extends BaseAction {
 
 		HttpSession session = this.getSession();
 		session.setAttribute("ACEGI_SECURITY_LAST_PASSPORT", u.getPassport());
-
+		// TODO
+		session.setAttribute("ACEGI_SECURITY_LAST_OPEN_ID", u.getUserId());
 		session.setAttribute("ACEGI_SECURITY_LAST_LOGINUSER", u);
 
 		HttpServletResponse response = getServletResponse();

@@ -5,4 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
+	<bean id="caService" class="com.hsh24.dms.ca.service.impl.CAServiceImpl">
+	</bean>
+	
 </beans>
