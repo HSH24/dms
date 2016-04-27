@@ -25,6 +25,7 @@
         						<div class="login-screen-title" style="margin-top: 20%;">
     								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
     							</div>
+								
         						<!-- Login form -->
         						<form action="$!{env.appUrl}/login.htm" method="POST">
         							<div class="list-block">
@@ -58,6 +59,10 @@
         								</div>
         							</div>
         						</form>
+								
+								<div style="bottom: 0; margin-bottom: 10px; position: fixed; text-align: center; width: 100%;">
+									<a href="javascript:more();" style="color: #8f8f94;">更多</a>
+                                </div>
         					</div>
         				</div>
                     </div>
@@ -68,7 +73,7 @@
 		<div class="popup popup-forgetPassword">
 			<div class="view view-main">
 				<!-- Top Navbar-->
-				<div class="navbar no-border" style="background: #FFFFFF;">
+				<div class="navbar" style="background: #FFFFFF;">
 					<div class="navbar-inner">
 						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> <i class="icon iconfont icon-unfold" style="font-size: 21px;"></i><span></span></a></div>
 					</div>

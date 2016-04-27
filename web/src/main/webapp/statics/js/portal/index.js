@@ -56,6 +56,18 @@ function submit() {
 	window.document.forms[0].submit();
 }
 
+function more() {
+	var buttons = [{
+				text : '帮助中心',
+				onClick : function() {
+
+				}
+			}, {
+				text : '取消'
+			}];
+	myApp.actions(buttons);
+}
+
 function sendCheckCode() {
 	if (disabled) {
 		return;
