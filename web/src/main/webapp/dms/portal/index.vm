@@ -100,7 +100,7 @@
     											<div class="item-input">
 													<div class="row">
 														<div class="col-60">
-															<input type="text" name="checkCode" placeholder="短信校验码"></input>
+															<input type="tel" name="checkCode" placeholder="短信校验码"></input>
                                                         </div>
 														<div class="col-40" style="margin-top: 8px;">
 															<a href="javascript:sendCheckCode();" class="button color-green" id="sendBtn">点击获取</a>
