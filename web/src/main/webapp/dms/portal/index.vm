@@ -89,7 +89,14 @@
     										<div class="item-inner">
     											<div class="item-title label" style="text-align: center;">验证码</div>
     											<div class="item-input">
-                                                    <input type="text" name="password" placeholder="请输入短信验证码"></input>
+													<div class="row">
+														<div class="col-60">
+															<input type="text" name="checkCode" placeholder="短信校验码"></input>
+                                                        </div>
+														<div class="col-40" style="margin-top: 8px;">
+															<a href="javascript:sendCheckCode();" class="button" id="sendBtn">点击获取</a>
+														</div>
+                                                    </div>
     											</div>
     										</div>
     									</li>

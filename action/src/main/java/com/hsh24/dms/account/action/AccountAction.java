@@ -37,13 +37,14 @@ public class AccountAction extends BaseAction {
 	public String sendCheckCode() {
 		BooleanResult result = accountService.generateCheckCode(passport);
 
-		this.setSuccessMessage(result.getCode());
-
 		if (result.getResult()) {
-			return SUCCESS;
+			this.setResourceResult(result.getCode());
 		} else {
-			return ERROR;
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult(result.getCode());
 		}
+
+		return RESOURCE_RESULT;
 	}
 
 	public String validateCheckCode() {
