@@ -12,62 +12,65 @@
 		#UA()
 	</head>
 	<body onload="setPassport();">
-		<!-- Should be a direct child of BODY -->
-		<div class="login-screen modal-in">
-			<!-- Default view-page layout -->
-			<div class="view">
-				<div class="pages">
-    				<div data-page="portal.index" class="page">
-    					<!-- page-content has additional login-screen content -->
-    					<div class="page-content login-screen-content">
-    						<div class="login-screen-title" style="margin-top: 20%;">
-								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
-							</div>
-    						<!-- Login form -->
-    						<form action="$!{env.appUrl}/login.htm" method="POST">
-    							<div class="list-block">
-    								<ul>
-    									<li class="item-content">
-    										<div class="item-inner">
-    											<div class="item-title label" style="text-align: center;">+86</div>
-    											<div class="item-input">
-                                                    <input type="text" name="passport" placeholder="手机号码"></input>
-    											</div>
-    										</div>
-    									</li>
-    									<li class="item-content">
-    										<div class="item-inner">
-    											<div class="item-title label" style="text-align: center;">密码</div>
-    											<div class="item-input">
-                                                    <input type="password" name="password" placeholder="请输入登录密码"></input>
-    											</div>
-    										</div>
-    									</li>
-    								</ul>
+		<!-- Views -->
+		<div class="views toolbar-through">
+    		<!-- Should be a direct child of BODY -->
+    		<div class="login-screen modal-in">
+    			<!-- Default view-page layout -->
+    			<div class="view">
+    				<div class="pages">
+        				<div data-page="portal.index" class="page">
+        					<!-- page-content has additional login-screen content -->
+        					<div class="page-content login-screen-content">
+        						<div class="login-screen-title" style="margin-top: 20%;">
+    								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
     							</div>
-    							<div class="list-block" style="width: 90%;">
-    								<ul>
-    									<li>
-    										<a href="javascript:submit();" class="button button-big button-fill" style="background-color: #04BE02;">登 录</a>
-    									</li>
-    								</ul>
-    								<div class="list-block-label">
-    									<a href="#" data-popup=".popup-forgetPassword" class="open-popup">忘记登录密码？</a>
-    								</div>
-    							</div>
-    						</form>
-    					</div>
-    				</div>
-                </div>
-			</div>
+        						<!-- Login form -->
+        						<form action="$!{env.appUrl}/login.htm" method="POST">
+        							<div class="list-block">
+        								<ul>
+        									<li class="item-content">
+        										<div class="item-inner">
+        											<div class="item-title label" style="text-align: center;">+86</div>
+        											<div class="item-input">
+                                                        <input type="text" name="passport" placeholder="手机号码"></input>
+        											</div>
+        										</div>
+        									</li>
+        									<li class="item-content">
+        										<div class="item-inner">
+        											<div class="item-title label" style="text-align: center;">密码</div>
+        											<div class="item-input">
+                                                        <input type="password" name="password" placeholder="请输入登录密码"></input>
+        											</div>
+        										</div>
+        									</li>
+        								</ul>
+        							</div>
+        							<div class="list-block" style="width: 90%;">
+        								<ul>
+        									<li>
+        										<a href="javascript:submit();" class="button button-big button-fill" style="background-color: #04BE02;">登 录</a>
+        									</li>
+        								</ul>
+        								<div class="list-block-label">
+        									<a href="#" data-popup=".popup-forgetPassword" class="open-popup">忘记登录密码？</a>
+        								</div>
+        							</div>
+        						</form>
+        					</div>
+        				</div>
+                    </div>
+    			</div>
+    		</div>
 		</div>
 		
 		<div class="popup popup-forgetPassword">
 			<div class="view view-main">
 				<!-- Top Navbar-->
-				<div class="navbar" style="background: #ffffff;">
+				<div class="navbar no-border" style="background: #FFFFFF;">
 					<div class="navbar-inner">
-						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> <i class="icon iconfont icon-close" style="font-size: 21px;"></i><span></span></a></div>
+						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> <i class="icon iconfont icon-unfold" style="font-size: 21px;"></i><span></span></a></div>
 					</div>
 				</div>
 				<div class="pages navbar-through">
