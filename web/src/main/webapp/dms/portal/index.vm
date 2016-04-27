@@ -35,7 +35,7 @@
         										<div class="item-inner">
         											<div class="item-title label" style="text-align: center;">+86</div>
         											<div class="item-input">
-                                                        <input type="text" name="passport" value="13000000000" placeholder="手机号码"></input>
+                                                        <input type="tel" name="passport" value="13000000000" placeholder="手机号码"></input>
         											</div>
         										</div>
         									</li>
@@ -90,7 +90,7 @@
     										<div class="item-inner">
     											<div class="item-title label" style="text-align: center;">账号</div>
     											<div class="item-input">
-                                                    <input type="text" name="passport" value="13000000000" placeholder="手机号码"></input>
+                                                    <input type="tel" name="passport" value="13000000000" placeholder="手机号码"></input>
     											</div>
     										</div>
     									</li>
