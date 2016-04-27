@@ -9,6 +9,7 @@
 		<title>好社惠 | 亭主终端管理系统</title>
 		#ICON()
 		#CSSM(["framework7", "iconfont"])
+		<link rel="stylesheet" href="$!{env.imgUrl}/css/portal/index.css" />
 		#UA()
 	</head>
 	<body onload="setPassport();">
@@ -34,7 +35,7 @@
         										<div class="item-inner">
         											<div class="item-title label" style="text-align: center;">+86</div>
         											<div class="item-input">
-                                                        <input type="text" name="passport" placeholder="手机号码"></input>
+                                                        <input type="text" name="passport" value="13000000000" placeholder="手机号码"></input>
         											</div>
         										</div>
         									</li>
@@ -61,7 +62,7 @@
         						</form>
 								
 								<div style="bottom: 0; margin-bottom: 10px; position: fixed; text-align: center; width: 100%;">
-									<a href="javascript:more();" style="color: #8f8f94;">更多</a>
+									<a href="javascript:more();">更多</a>
                                 </div>
         					</div>
         				</div>
@@ -75,7 +76,7 @@
 				<!-- Top Navbar-->
 				<div class="navbar" style="background: #FFFFFF;">
 					<div class="navbar-inner">
-						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> <i class="icon iconfont icon-unfold" style="font-size: 21px;"></i><span></span></a></div>
+						<div class="left"><a href="#" class="close-popup link"> <i class="icon iconfont icon-unfold" style="font-size: 21px;"></i><span></span></a></div>
 					</div>
 				</div>
 				<div class="pages navbar-through">
@@ -89,7 +90,7 @@
     										<div class="item-inner">
     											<div class="item-title label" style="text-align: center;">账号</div>
     											<div class="item-input">
-                                                    <input type="text" name="passport" placeholder="手机号码"></input>
+                                                    <input type="text" name="passport" value="13000000000" placeholder="手机号码"></input>
     											</div>
     										</div>
     									</li>
