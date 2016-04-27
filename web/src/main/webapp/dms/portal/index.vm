@@ -8,7 +8,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<title>好社惠 | 亭主终端管理系统</title>
 		#ICON()
-		#CSSM(["framework7"])
+		#CSSM(["framework7", "iconfont"])
 		#UA()
 	</head>
 	<body onload="setPassport();">
@@ -67,7 +67,7 @@
 				<!-- Top Navbar-->
 				<div class="navbar" style="background: #ffffff;">
 					<div class="navbar-inner">
-						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> 取消<span></span></a></div>
+						<div class="left"><a href="#" class="close-popup link" style="color: #8f8f94;"> <i class="icon iconfont icon-close" style="font-size: 21px;"></i><span></span></a></div>
 					</div>
 				</div>
 				<div class="pages navbar-through">
