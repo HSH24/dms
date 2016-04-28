@@ -145,6 +145,16 @@ $$('#view_5_click').on('click', function() {
 			$$('#href-5').addClass("active");
 		});
 
+$$('#view_6_click').on('click', function() {
+			if (view5.history.length == 1) {
+				view5.router.load({
+							url : appUrl + "/member/index.htm"
+						});
+			}
+
+			$$('#href-5').addClass("active");
+		});
+
 function portal_home_cart_stats() {
 	$$.get(appUrl + '/cart/stats.htm', {}, function(data) {
 				if (data > 0) {

@@ -50,7 +50,7 @@
                                         </a>
 									</li>
 									<li class="cell" style="">
-                                        <a class="component type3 tab-link" href="#view-5" id="view_5_click" style="padding:4px" 0px="" 0px;="">
+                                        <a class="component type3 tab-link" href="#view-5" id="view_6_click" style="padding:4px" 0px="" 0px;="">
                                             <img class="" src="$!{env.imgUrl}/image/portal/shjf.png" width="36" height="36"></img>我的资金
                                         </a>
 									</li>
