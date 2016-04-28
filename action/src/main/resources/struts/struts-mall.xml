@@ -1,0 +1,13 @@
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="{http://dms}dms$mall"
+		extends="{http://dms}dms$framework" namespace="/mall">
+
+		<action name="list" class="orderAction" method="list">
+			<result name="success">/dms/mall/list.vm</result>
+		</action>
+		
+	</package>
+</struts>

@@ -30,15 +30,7 @@
 					<div data-page="portal.home" class="page">
 						<!-- Scrollable page content -->
 						<div class="page-content">
-							 <!-- Slider -->
-							<div class="swiper-container swiper-init" data-pagination=".swiper-pagination-h">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide">
-                                        <img src="$!{env.imgUrl}/image/portal/ad-1.png" width="100%"></img>
-									</div>
-								</div>
-								<div class="swiper-pagination swiper-pagination-h"></div>
-							</div>
+    						<div style="height: 200px;" id="main"></div>
 							
 							<div class="" style="background-color:#ffffff;">
 								<ul class="mui-flex" style="padding: 0;">
@@ -48,17 +40,17 @@
 										</a>
 									</li>
 									<li class="cell" style="">
-										<a class="component type3" href="" style="padding:4px" 0px="" 0px;="">
+										<a class="component type3 tab-link" href="#view-3" id="view_3_click" style="padding:4px" 0px="" 0px;="">
                                             <img class="" src="$!{env.imgUrl}/image/portal/lyfs.png" width="36" height="36"></img>采购订单
 										</a>
 									</li>
 									<li class="cell" style="">
-                                        <a class="component type3" href="" style="padding:4px" 0px="" 0px;="">
+                                        <a class="component type3 tab-link" href="#view-5" id="view_5_click" style="padding:4px" 0px="" 0px;="">
                                             <img class="" src="$!{env.imgUrl}/image/portal/kdsf.png" width="36" height="36"></img>采购收货
                                         </a>
 									</li>
 									<li class="cell" style="">
-                                        <a class="component type3" href="" style="padding:4px" 0px="" 0px;="">
+                                        <a class="component type3 tab-link" href="#view-5" id="view_5_click" style="padding:4px" 0px="" 0px;="">
                                             <img class="" src="$!{env.imgUrl}/image/portal/shjf.png" width="36" height="36"></img>我的资金
                                         </a>
 									</li>
@@ -110,34 +102,6 @@
 											<!-- 可排序句柄  -->
 											<div class="sortable-handler"></div>
 										</li>
-										<li>
-											<div class="item-content">
-												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
-												<div class="item-inner">
-													<div class="item-title">
-														李大伯
-														<span style="font-size: 13px;">04-18 10:30 新飞路1500弄56号</span>
-													</div>
-													<div class="item-after">￥10</div>
-												</div>
-											</div>
-											<!-- 可排序句柄  -->
-											<div class="sortable-handler"></div>
-										</li>
-										<li>
-											<div class="item-content">
-												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
-												<div class="item-inner">
-													<div class="item-title">
-														李大伯
-														<span style="font-size: 13px;">04-17 10:30 新飞路1500弄56号</span>
-													</div>
-													<div class="item-after">￥10</div>
-												</div>
-											</div>
-											<!-- 可排序句柄  -->
-											<div class="sortable-handler"></div>
-										</li>
 									 </ul>
 								</div>
                             </div>
@@ -181,7 +145,11 @@
 						<span class="tabbar-label">首页</span>
                     </a>
                     <a id="href-2" href="#view-2" class="tab-link">
-                        <i class="icon iconfont icon-goods" style="font-size: 25px;"></i>
+                        <i class="icon iconfont icon-deliver" style="font-size: 25px;"></i>
+						<span class="tabbar-label">派送订单</span>
+                    </a>
+					<a id="href-3" href="#view-3" class="tab-link">
+                        <i class="icon iconfont icon-shop" style="font-size: 25px;"></i>
 						<span class="tabbar-label">采购中心</span>
                     </a>
 					<a id="href-4" href="#view-4" class="tab-link">
@@ -200,6 +168,7 @@
 		
 		#JSM(["framework7", "weixin", "jquery", "common"])
 		#JS_ENV_VAL()
+		<script src="$!{env.imgUrl}/js/portal/echarts.min.js"></script>
 		<script src="$!{env.imgUrl}/js/portal/home.js"></script>
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/item/list.js" async="async"></script>

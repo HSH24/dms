@@ -10,9 +10,4 @@
 		</action>
 		
 	</package>
-	
-	<package name="{http://dms}dms$address"
-		extends="{http://dms}dms$framework" namespace="/address">
-		<action name="create" class="userAddressAction" method="create"></action>
-	</package>
 </struts>
