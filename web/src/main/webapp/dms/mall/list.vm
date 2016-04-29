@@ -25,41 +25,45 @@
 			
 		<!-- Scrollable page content-->
 		<div class="page-content">
-			<div class="list-block accordion-list list-block-search searchbar-found" style="font-size: 15px;">
+			<div class="list-block media-list list-block-search searchbar-found" style="font-size: 14px;">
 				<ul>
-                    <li class="accordion-item">
-						<a href="#" class="item-content item-link">
-							<div class="item-media">
+					<li>
+						<div class="item-content">
+							<div class="item-inner" style="display: inherit;">
+								<div class="item-title" style="font-weight: 400;">流水号：#1</div>
+								<div class="item-after">订单号：1000000000</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<a href="$!{env.appUrl}/mall/detail.htm?tradeNo=$!{trade.tradeNo}" class="item-content" style="color: inherit;" data-ignore-cache="true">
+							<div class="item-media" style="padding-top: 7px; padding-bottom: 8px;">
 								<img src="$!{env.imgUrl}/image/item/detail-3.jpg" style="width: 50px;"></img>
 							</div>
 							<div class="item-inner">
-								<div class="item-title">
-									特仑苏纯牛奶利乐苗条装 ￥10<br />
-                                    <span style="font-size: 12px; color: #8e8e93;">250ml×8盒×3提 共24盒</span>
+								<div class="item-title-row" style="margin-top: 3px;">
+									<div class="item-title" style="font-weight: 400;">特仑苏纯牛奶利乐苗条装</div>
+									<div class="item-after"></div>
 								</div>
-                            </div>
+								<div class="item-title-row" style="margin-top: 3px;">
+									<div class="item-subtitle" style="font-size: 12px; color: #8e8e93;">250ml×8盒×3提 共24盒</div>
+									<div class="item-after">×10</div>
+								</div>
+							</div>
+                        </a>
+					</li>
+					<li>
+						<a href="$!{env.appUrl}/mall/detail.htm?tradeNo=$!{trade.tradeNo}" class="item-link item-content" style="min-height: 0;" data-ignore-cache="true">
+							<div class="item-inner" style="display: inherit; min-height: 0; text-align: center; padding-top: 7px; padding-bottom: 6px;">
+								<div class="item-title" style="font-weight: 400; font-size: 13px; width: 100%;">查看全部1件商品</div>
+							</div>
 						</a>
+					</li>
+					<li>
 						<div class="item-content">
-    						<div class="item-inner">
-								<div class="item-title"></div>
-								<div class="item-after">
-									<a href="javascript:item_list_trade('1', '1');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('1', '1');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
-								</div>
-    						</div>
-                        </div>
-						<div class="accordion-item-content">
-							<div class="content-block">
-								<p style="font-size: 15px;">特仑苏纯牛奶利乐苗条装250ml×8盒×3提 共24盒</p>
-								<p>
-        							生产许可证编号：QS1501 0501 0294<br />
-        							产品标准号：GB25190<br />
-        							厂名：内蒙古蒙牛乳业(集团)股份有限公司<br />
-        							配料表：生牛乳<br />
-        							储藏方法：常温密闭保存<br />
-        							保质期：180 天<br />
-        							净含量: 8x3x250ml
-        						</p>
+							<div class="item-inner" style="display: inherit;">
+                                <div class="item-title" style="font-weight: 400;">总件数：<span style="color: #ff5500;">10</span></div>
+								<div class="item-after"></div>
 							</div>
 						</div>
 					</li>

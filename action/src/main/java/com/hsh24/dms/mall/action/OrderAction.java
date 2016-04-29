@@ -4,6 +4,7 @@ import com.hsh24.dms.api.mall.IOrderService;
 import com.hsh24.dms.framework.action.BaseAction;
 
 /**
+ * 消费者订单推送亭主.
  * 
  * @author JiakunXu
  * 
@@ -19,6 +20,14 @@ public class OrderAction extends BaseAction {
 	 * @return
 	 */
 	public String list() {
+		return SUCCESS;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String detail() {
 		return SUCCESS;
 	}
 
