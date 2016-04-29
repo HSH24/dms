@@ -62,6 +62,17 @@
 					</li>
 				</ul>
             </div>
+			<div class="list-block" style="font-size: 15px;">
+				<ul>
+					<li>
+						<a href="$!{env.appUrl}/logout.htm" class="item-content external" style="color: inherit;">
+							<div class="item-inner">
+								<div class="item-title" style="text-align: center; width: 100%;">退出登录</div>
+							</div>
+						</a>
+					</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
