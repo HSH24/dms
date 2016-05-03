@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.hsh24.dms.api.account.IAccountService;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
+import com.hsh24.dms.api.sms.ISMSService;
 import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
@@ -21,6 +22,8 @@ public class AccountServiceImpl implements IAccountService {
 
 	private IMemcachedCacheService memcachedCacheService;
 
+	private ISMSService smsService;
+
 	@Override
 	public BooleanResult generateCheckCode(String passport) {
 		BooleanResult result = new BooleanResult();
@@ -31,7 +34,10 @@ public class AccountServiceImpl implements IAccountService {
 			return result;
 		}
 
-		String token = String.valueOf(new Random().nextInt(99999));
+		// TODO
+		// 验证登录账号是否存在
+
+		String token = String.valueOf(new Random().nextInt(999999));
 
 		String key = passport.trim() + "@" + token;
 
@@ -45,7 +51,9 @@ public class AccountServiceImpl implements IAccountService {
 			return result;
 		}
 
-		result.setResult(true);
+		result =
+			smsService.send("身份验证", "SMS_8360170", "{\"code\":\"" + token + "\",\"product\":\"好社惠\"}", passport, null);
+
 		return result;
 	}
 
@@ -61,6 +69,14 @@ public class AccountServiceImpl implements IAccountService {
 
 	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
 		this.memcachedCacheService = memcachedCacheService;
+	}
+
+	public ISMSService getSmsService() {
+		return smsService;
+	}
+
+	public void setSmsService(ISMSService smsService) {
+		this.smsService = smsService;
 	}
 
 }

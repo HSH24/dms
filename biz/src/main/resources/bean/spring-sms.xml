@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="smsService" class="com.hsh24.dms.sms.service.impl.SMSServiceImpl">
+		<property name="serverUrl">
+			<value>${alidayu.server.url}</value>
+		</property>
+		<property name="appKey">
+			<value>${alidayu.app.key}</value>
+		</property>
+		<property name="appSecret">
+			<value>${alidayu.app.secret}</value>
+		</property>
+	</bean>
+	
+</beans>

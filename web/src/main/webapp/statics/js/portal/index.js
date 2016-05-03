@@ -77,7 +77,8 @@ function sendCheckCode() {
 				type : "post",
 				url : appUrl + "/account/sendCheckCode.htm",
 				data : {
-					"passport" : '000',
+					"passport" : $('#portal_index_forgetPassword_passport')
+							.val(),
 					dateTime : new Date().getTime()
 				},
 				beforeSend : function() {

@@ -12,6 +12,7 @@
 	<!-- 账号管理 -->
 	<bean id="accountService" class="com.hsh24.dms.account.service.impl.AccountServiceImpl">
 		<property name="memcachedCacheService" ref="memcachedCacheService" />
+		<property name="smsService" ref="smsService" />
 	</bean>
 	
 </beans>
