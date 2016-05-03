@@ -56,6 +56,13 @@ function submit() {
 	window.document.forms[0].submit();
 }
 
+function forgetPassword() {
+	$('#portal_index_forgetPassword_passport').val($('#portal_index_passport')
+			.val());
+
+	myApp.popup('.popup-forgetPassword');
+}
+
 function more() {
 	var buttons = [{
 				text : '帮助中心',
