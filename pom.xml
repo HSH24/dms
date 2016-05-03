@@ -11,6 +11,7 @@
 		<java.version>1.6</java.version>
 		<java.encoding>UTF-8</java.encoding>
 
+		<alidayu.version>1455552377940-20160426</alidayu.version>
 		<aspectjweaver.version>1.8.6</aspectjweaver.version>
 		<cglib.version>2.2.2</cglib.version>
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
@@ -256,6 +257,13 @@
 				<groupId>com.sun.mail</groupId>
 				<artifactId>javax.mail</artifactId>
 				<version>${javax.mail.version}</version>
+			</dependency>
+
+			<!-- alidayu -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>alidayu</artifactId>
+				<version>${alidayu.version}</version>
 			</dependency>
 
 			<!-- slf4j -->

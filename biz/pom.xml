@@ -83,6 +83,12 @@
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 		</dependency>
+		
+		<!-- alidayu -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>alidayu</artifactId>
+		</dependency>
 	
 		<!-- dubbo
 		<dependency>
