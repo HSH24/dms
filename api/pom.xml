@@ -21,8 +21,7 @@
 		<!-- module weixin -->
 		<dependency>
 			<groupId>com.wideka</groupId>
-			<artifactId>weixin-biz</artifactId>
-			<version>${project.version}</version>
+			<artifactId>weixin-api</artifactId>
 		</dependency>
 
 		<!-- servlet -->
