@@ -51,8 +51,7 @@ public class AccountServiceImpl implements IAccountService {
 			return result;
 		}
 
-		result =
-			smsService.send("身份验证", "SMS_8360170", "{\"code\":\"" + token + "\",\"product\":\"好社惠\"}", passport, null);
+		result = smsService.send("好社惠", "SMS_8550784", "{\"code\":\"" + token + "\"}", passport, null);
 
 		return result;
 	}

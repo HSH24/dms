@@ -19,6 +19,8 @@ public class ItemAction extends BaseAction {
 	 * @return
 	 */
 	public String list() {
+		
+		
 		return SUCCESS;
 	}
 

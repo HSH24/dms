@@ -14,34 +14,38 @@ public interface IItemService {
 
 	/**
 	 * 
-	 * @param supId
+	 * @param storeId
+	 *            门店编号.
 	 * @param item
 	 * @return
 	 */
-	int getItemCount(Long supId, Item item);
+	int getItemCount(Long storeId, Item item);
 
 	/**
 	 * 
-	 * @param supId
+	 * @param storeId
+	 *            门店编号.
 	 * @param item
 	 * @return
 	 */
-	List<Item> getItemList(Long supId, Item item);
+	List<Item> getItemList(Long storeId, Item item);
 
 	/**
 	 * 
-	 * @param supId
+	 * @param storeId
+	 *            门店编号.
 	 * @param itemId
 	 * @return
 	 */
-	Item getItem(Long supId, String itemId);
+	Item getItem(Long storeId, String itemId);
 
 	/**
 	 * 
-	 * @param supId
+	 * @param storeId
+	 *            门店编号.
 	 * @param itemId
 	 * @return
 	 */
-	Map<Long, Item> getItem(Long supId, String[] itemId);
+	Map<Long, Item> getItem(Long storeId, String[] itemId);
 
 }
