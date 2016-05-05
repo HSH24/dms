@@ -8,6 +8,7 @@ import com.hsh24.dms.api.account.IAccountService;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.sms.ISMSService;
 import com.hsh24.dms.framework.bo.BooleanResult;
+import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
 
@@ -30,7 +31,7 @@ public class AccountServiceImpl implements IAccountService {
 		result.setResult(false);
 
 		if (StringUtils.isBlank(passport)) {
-			result.setCode("登录帐号不能为空！");
+			result.setCode("登录帐号不能为空。");
 			return result;
 		}
 
@@ -39,20 +40,62 @@ public class AccountServiceImpl implements IAccountService {
 
 		String token = String.valueOf(new Random().nextInt(999999));
 
-		String key = passport.trim() + "@" + token;
+		String key = passport.trim();
 
 		try {
-			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key, passport,
+			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key, token,
 				IMemcachedCacheService.CACHE_KEY_CHECK_CODE_DEFAULT_EXP);
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			logger.error(e);
 
-			result.setCode("系统正忙，请稍后再试！");
+			result.setCode("系统正忙，请稍后再试。");
 			return result;
 		}
 
 		result = smsService.send("好社惠", "SMS_8550784", "{\"code\":\"" + token + "\"}", passport, null);
 
+		return result;
+	}
+
+	@Override
+	public BooleanResult validateCheckCode(String passport, String checkCode) {
+		BooleanResult result = new BooleanResult();
+		result.setResult(false);
+
+		if (StringUtils.isBlank(passport)) {
+			result.setCode("登录帐号不能为空。");
+			return result;
+		}
+
+		if (StringUtils.isBlank(checkCode)) {
+			result.setCode("验证码不能为空。");
+			return result;
+		}
+
+		String value = null;
+
+		String key = passport.trim();
+
+		try {
+			value = (String) memcachedCacheService.get(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key);
+		} catch (ServiceException e) {
+			logger.error(e);
+
+			result.setCode("系统正忙，请稍后再试。");
+			return result;
+		}
+
+		if (StringUtils.isEmpty(value)) {
+			result.setCode("验证码已失效，请稍后再试。");
+			return result;
+		}
+
+		if (!value.equals(checkCode.trim())) {
+			result.setCode("验证码不正确，请稍后再试。");
+			return result;
+		}
+
+		result.setResult(true);
 		return result;
 	}
 

@@ -21,46 +21,29 @@ var mainView = myApp.addView('.view-main', {
 			dynamicNavbar : true
 		});
 
-var __last_login_passport__ = "__last_login_passport__";
+$$('form.ajax-submit').on('beforeSubmit', function(e) {
+		});
 
-function setPassport() {
-	var lastuser = $.cookie(__last_login_passport__);
+$$('form.ajax-submit').on('submitted', function(e) {
+			myApp.hideIndicator();
+			var xhr = e.detail.xhr;
 
-	if (lastuser != null && lastuser != "" && lastuser != "null") {
-		document.forms[0].passport.value = lastuser;
-		document.forms[0].password.focus();
-	} else {
-		document.forms[0].passport.focus();
-		document.forms[0].passport.select();
-	}
-}
+			mainView.router.load({
+						url : appUrl + "/account/setPassword.htm"
+					});
+		});
 
-function setPassportCookies() {
-	$.cookie(__last_login_passport__, null);
-
-	var passport = document.forms[0].passport.value;
-
-	$.cookie(__last_login_passport__, passport, {
-				expires : 30,
-				path : '/' + appName + '/',
-				domain : domain
-			});
-
-	// _gaq.push(['_trackEvent', 'Home', 'Login', passport]);
-}
+$$('form.ajax-submit').on('submitError', function(e) {
+			myApp.hideIndicator();
+			var xhr = e.detail.xhr;
+			myApp.alert(xhr.responseText, '错误');
+		});
 
 function submit() {
 	myApp.showIndicator();
 
 	setPassportCookies();
 	window.document.forms[0].submit();
-}
-
-function forgetPassword() {
-	$('#portal_index_forgetPassword_passport').val($('#portal_index_passport')
-			.val());
-
-	myApp.popup('.popup-forgetPassword');
 }
 
 function more() {
@@ -73,6 +56,15 @@ function more() {
 				text : '取消'
 			}];
 	myApp.actions(buttons);
+}
+
+// forgetPassword
+
+function forgetPassword() {
+	$('#portal_index_forgetPassword_passport').val($('#portal_index_passport')
+			.val());
+
+	myApp.popup('.popup-forgetPassword');
 }
 
 function sendCheckCode() {
@@ -99,6 +91,15 @@ function sendCheckCode() {
 					stopTimer();
 				}
 			});
+}
+
+function validate() {
+	myApp.showIndicator();
+
+	$$('#portal/forgetPassword/form').attr("action",
+			appUrl + "/account/validateCheckCode.htm");
+
+	$$('#portal/forgetPassword/form').trigger("submit");
 }
 
 var timer;
@@ -130,6 +131,32 @@ function btnCountdown(obj, second, callback) {
 	}
 }
 
-function validate() {
-	mainView.router.loadPage(appUrl + "/account/setPassword.htm");
+// base
+
+var __last_login_passport__ = "__last_login_passport__";
+
+function setPassport() {
+	var lastuser = $.cookie(__last_login_passport__);
+
+	if (lastuser != null && lastuser != "" && lastuser != "null") {
+		document.forms[0].passport.value = lastuser;
+		document.forms[0].password.focus();
+	} else {
+		document.forms[0].passport.focus();
+		document.forms[0].passport.select();
+	}
+}
+
+function setPassportCookies() {
+	$.cookie(__last_login_passport__, null);
+
+	var passport = document.forms[0].passport.value;
+
+	$.cookie(__last_login_passport__, passport, {
+				expires : 30,
+				path : '/' + appName + '/',
+				domain : domain
+			});
+
+	// _gaq.push(['_trackEvent', 'Home', 'Login', passport]);
 }

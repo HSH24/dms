@@ -8,6 +8,8 @@
 		<!-- 发送验证码 -->
 		<action name="sendCheckCode" class="accountAction" method="sendCheckCode"></action>
 		
+		<action name="validateCheckCode" class="accountAction" method="validateCheckCode"></action>
+		
 		<!-- 重置密码 -->
 		<action name="setPassword" class="accountAction" method="setPassword">
 			<result name="success">/dms/account/setPassword.vm</result>

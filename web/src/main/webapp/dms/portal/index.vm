@@ -83,7 +83,7 @@
     				<div data-page="portal.forgetPassword" class="page">
     					<div class="page-content login-screen-content">
     						<div class="login-screen-title" style="font-size: 25px;">通过短信找回密码</div>
-    						<form>
+    						<form id="portal/forgetPassword/form" method="POST" class="ajax-submit">
     							<div class="list-block">
     								<ul>
     									<li class="item-content">

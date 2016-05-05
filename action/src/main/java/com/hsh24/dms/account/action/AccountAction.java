@@ -47,8 +47,22 @@ public class AccountAction extends BaseAction {
 		return RESOURCE_RESULT;
 	}
 
+	/**
+	 * 验证验证码.
+	 * 
+	 * @return
+	 */
 	public String validateCheckCode() {
-		return SUCCESS;
+		BooleanResult result = accountService.validateCheckCode(passport, checkCode);
+
+		if (result.getResult()) {
+			this.setResourceResult(result.getCode());
+		} else {
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult(result.getCode());
+		}
+
+		return RESOURCE_RESULT;
 	}
 
 	/**
@@ -57,6 +71,7 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	public String setPassword() {
+
 		return SUCCESS;
 	}
 

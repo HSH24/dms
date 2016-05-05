@@ -18,6 +18,15 @@ public interface IAccountService {
 	BooleanResult generateCheckCode(String passport);
 
 	/**
+	 * 验证验证码.
+	 * 
+	 * @param passport
+	 * @param checkCode
+	 * @return
+	 */
+	BooleanResult validateCheckCode(String passport, String checkCode);
+
+	/**
 	 * 忘记密码.
 	 * 
 	 * @param checkCode
