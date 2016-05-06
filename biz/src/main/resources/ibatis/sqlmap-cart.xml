@@ -109,7 +109,6 @@
 			   t.quantity = #quantity#
 		 WHERE t.state = 'U'
 		   AND t.user_id = #userId#
-		   AND t.sup_id = #supId#
 		   AND t.cart_id = #cartId#
 	]]>
 	</update>
