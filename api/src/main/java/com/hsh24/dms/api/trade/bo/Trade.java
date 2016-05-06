@@ -26,9 +26,9 @@ public class Trade extends SearchInfo {
 	private String userId;
 
 	/**
-	 * 店铺ID.
+	 * 供应商ID.
 	 */
-	private Long shopId;
+	private Long supId;
 
 	/**
 	 * 交易价格（不含折扣）.
@@ -233,12 +233,12 @@ public class Trade extends SearchInfo {
 		this.userId = userId;
 	}
 
-	public Long getShopId() {
-		return shopId;
+	public Long getSupId() {
+		return supId;
 	}
 
-	public void setShopId(Long shopId) {
-		this.shopId = shopId;
+	public void setSupId(Long supId) {
+		this.supId = supId;
 	}
 
 	public BigDecimal getTradePrice() {

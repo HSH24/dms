@@ -47,7 +47,7 @@
 		 WHERE qq.state = 'U'
 		   AND qq.sku_id = #skuId#) q ON t.item_id = q.item_id
 		 WHERE t.state = 'U'
-		   AND t.shop_id = #shopId#
+		   AND t.sup_id = #supId#
 		   AND t.item_id = #itemId#
 		  )
 	]]>
@@ -106,7 +106,7 @@
 				 ) k ON t.points_id = k.points_id
 		 WHERE t.state = 'U'
 		   AND p.state = 'U'
-		   AND p.shop_id = #shopId#
+		   AND p.sup_id = #supId#
 		   AND t.cart_id  IN
 	]]>
 		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
@@ -136,7 +136,6 @@
 		 WHERE p.item_id is not null
 		   AND t.state = 'U'
 		   AND p.state = 'U'
-		   AND p.shop_id = #shopId#
 		   AND t.trade_id = #tradeId#
 	]]>
 	</select>

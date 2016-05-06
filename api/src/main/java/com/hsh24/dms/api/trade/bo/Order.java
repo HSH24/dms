@@ -81,9 +81,9 @@ public class Order extends SearchInfo {
 	private String modifyUser;
 
 	/**
-	 * 店铺id 创建时权限控制.
+	 * 供应商id 创建时权限控制.
 	 */
-	private Long shopId;
+	private Long supId;
 
 	public Long getOrderId() {
 		return orderId;
@@ -210,12 +210,12 @@ public class Order extends SearchInfo {
 		this.modifyUser = modifyUser;
 	}
 
-	public Long getShopId() {
-		return shopId;
+	public Long getSupId() {
+		return supId;
 	}
 
-	public void setShopId(Long shopId) {
-		this.shopId = shopId;
+	public void setSupId(Long supId) {
+		this.supId = supId;
 	}
 
 }

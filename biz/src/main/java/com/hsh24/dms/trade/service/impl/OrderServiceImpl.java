@@ -24,7 +24,7 @@ public class OrderServiceImpl implements IOrderService {
 	private IOrderDao orderDao;
 
 	@Override
-	public BooleanResult createOrder(Long shopId, Long tradeId, String itemId, String skuId, String modifyUser) {
+	public BooleanResult createOrder(Long supId, Long tradeId, String itemId, String skuId, String modifyUser) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -36,11 +36,11 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		order.setTradeId(tradeId);
 
-		if (shopId == null) {
+		if (supId == null) {
 			result.setCode("店铺信息不能为空！");
 			return result;
 		}
-		order.setShopId(shopId);
+		order.setSupId(supId);
 
 		if (StringUtils.isBlank(itemId)) {
 			result.setCode("商品信息不能为空！");
@@ -87,7 +87,7 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public BooleanResult createOrder(Long shopId, Long tradeId, String[] cartId, String modifyUser) {
+	public BooleanResult createOrder(Long supId, Long tradeId, String[] cartId, String modifyUser) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -99,11 +99,11 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		order.setTradeId(tradeId);
 
-		if (shopId == null) {
+		if (supId == null) {
 			result.setCode("店铺信息不能为空！");
 			return result;
 		}
-		order.setShopId(shopId);
+		order.setSupId(supId);
 
 		if (cartId == null || cartId.length == 0) {
 			result.setCode("购物车不能为空！");
@@ -131,13 +131,12 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public List<Order> getOrderList(String userId, Long shopId, Long tradeId) {
-		if (StringUtils.isBlank(userId) || shopId == null || tradeId == null) {
+	public List<Order> getOrderList(String userId, Long tradeId) {
+		if (StringUtils.isBlank(userId) || tradeId == null) {
 			return null;
 		}
 
 		Order order = new Order();
-		order.setShopId(shopId);
 		order.setTradeId(tradeId);
 
 		try {
@@ -150,13 +149,12 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public Order getOrder(String userId, Long shopId, Long tradeId, Long orderId) {
-		if (StringUtils.isBlank(userId) || shopId == null || tradeId == null) {
+	public Order getOrder(String userId, Long tradeId, Long orderId) {
+		if (StringUtils.isBlank(userId) || tradeId == null) {
 			return null;
 		}
 
 		Order order = new Order();
-		order.setShopId(shopId);
 		order.setTradeId(tradeId);
 		order.setOrderId(orderId);
 

@@ -111,7 +111,7 @@
 	<select id="getCartStats" parameterClass="cart" resultClass="cart">
 	<![CDATA[
 		SELECT MIN(p.postage) AS postage,
-			   SUM(CASE WHEN k.points_id IS NULL THEN CASE WHEN q.price IS NULL THEN p.price * t.quantity ELSE q.price * t.quantity END ELSE 0 END) AS price
+			   SUM(CASE WHEN q.price IS NULL THEN p.price * t.quantity ELSE q.price * t.quantity END) AS price
 		  FROM dms_tb_cart t
 		  left join dms_tb_item p on t.item_id= p.item_id
 		  left join(

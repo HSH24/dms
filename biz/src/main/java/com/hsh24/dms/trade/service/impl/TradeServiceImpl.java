@@ -51,7 +51,7 @@ public class TradeServiceImpl implements ITradeService {
 	private ITradeDao tradeDao;
 
 	@Override
-	public BooleanResult createTrade(final String userId, final Long shopId, final String itemId, final String skuId,
+	public BooleanResult createTrade(final String userId, final Long supId, final String itemId, final String skuId,
 		String quantity) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
@@ -61,7 +61,7 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
-		if (shopId == null) {
+		if (supId == null) {
 			result.setCode("店铺信息不能为空。");
 			return result;
 		}
@@ -82,7 +82,7 @@ public class TradeServiceImpl implements ITradeService {
 
 				Trade trade = new Trade();
 				trade.setUserId(userId);
-				trade.setShopId(shopId);
+				trade.setSupId(supId);
 				// 交易价格
 				trade.setTradePrice(BigDecimal.ONE);
 				trade.setChange(BigDecimal.ZERO);
@@ -105,7 +105,7 @@ public class TradeServiceImpl implements ITradeService {
 				}
 
 				// 2. 创建订单
-				result = orderService.createOrder(shopId, tradeId, itemId, skuId, userId);
+				result = orderService.createOrder(supId, tradeId, itemId, skuId, userId);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -121,7 +121,7 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public BooleanResult createTrade(final String userId, final Long shopId, final String[] cartId) {
+	public BooleanResult createTrade(final String userId, final Long supId, final String[] cartId) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -130,7 +130,7 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
-		if (shopId == null) {
+		if (supId == null) {
 			result.setCode("店铺信息不能为空！");
 			return result;
 		}
@@ -141,7 +141,7 @@ public class TradeServiceImpl implements ITradeService {
 		}
 
 		// 获取选中商品总计价格
-		final Cart cart = cartService.getCartStats(userId.trim(), shopId, cartId);
+		final Cart cart = cartService.getCartStats(userId.trim(), supId, cartId);
 
 		// 合计价格 合计积分 最小运费
 		if (cart.getPrice() == null || cart.getPoints() == null || cart.getPostage() == null) {
@@ -160,7 +160,7 @@ public class TradeServiceImpl implements ITradeService {
 
 				Trade trade = new Trade();
 				trade.setUserId(userId.trim());
-				trade.setShopId(shopId);
+				trade.setSupId(supId);
 				// 交易价格
 				trade.setTradePrice(cart.getPrice());
 				trade.setChange(BigDecimal.ZERO);
@@ -191,7 +191,7 @@ public class TradeServiceImpl implements ITradeService {
 				}
 
 				// 2. 创建订单
-				result = orderService.createOrder(shopId, tradeId, cartId, userId.trim());
+				result = orderService.createOrder(supId, tradeId, cartId, userId.trim());
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -207,14 +207,13 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public int getTradeCount(String userId, Long shopId, String[] type) {
-		if (StringUtils.isBlank(userId) || shopId == null) {
+	public int getTradeCount(String userId, String[] type) {
+		if (StringUtils.isBlank(userId)) {
 			return 0;
 		}
 
 		Trade trade = new Trade();
 		trade.setUserId(userId.trim());
-		trade.setShopId(shopId);
 		trade.setCodes(type);
 
 		return getTradeCount(trade);
@@ -236,14 +235,13 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public List<Trade> getTradeList(String userId, Long shopId, String[] type) {
-		if (StringUtils.isBlank(userId) || shopId == null) {
+	public List<Trade> getTradeList(String userId, String[] type) {
+		if (StringUtils.isBlank(userId)) {
 			return null;
 		}
 
 		Trade t = new Trade();
 		t.setUserId(userId.trim());
-		t.setShopId(shopId);
 		t.setCodes(type);
 
 		// 暂不分页
@@ -259,7 +257,7 @@ public class TradeServiceImpl implements ITradeService {
 		}
 
 		for (Trade trade : tradeList) {
-			trade.setOrderList(orderService.getOrderList(userId, shopId, trade.getTradeId()));
+			trade.setOrderList(orderService.getOrderList(userId, trade.getTradeId()));
 		}
 
 		return tradeList;
@@ -281,14 +279,13 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public Trade getTrade(String userId, Long shopId, String tradeNo) {
-		if (StringUtils.isBlank(userId) || shopId == null || StringUtils.isBlank(tradeNo)) {
+	public Trade getTrade(String userId, String tradeNo) {
+		if (StringUtils.isBlank(userId) || StringUtils.isBlank(tradeNo)) {
 			return null;
 		}
 
 		Trade t = new Trade();
 		t.setUserId(userId.trim());
-		t.setShopId(shopId);
 		t.setTradeNo(tradeNo.trim());
 
 		Trade trade = getTrade(t);
@@ -297,7 +294,7 @@ public class TradeServiceImpl implements ITradeService {
 			return null;
 		}
 
-		List<Order> orderList = orderService.getOrderList(userId, shopId, trade.getTradeId());
+		List<Order> orderList = orderService.getOrderList(userId, trade.getTradeId());
 
 		if (orderList != null && orderList.size() > 0) {
 			trade.setOrderList(orderList);
@@ -307,17 +304,12 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public BooleanResult updateReceiver(String userId, Long shopId, String tradeNo, Trade trade) {
+	public BooleanResult updateReceiver(String userId, String tradeNo, Trade trade) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		if (StringUtils.isBlank(userId)) {
 			result.setCode("用户信息不能为空。");
-			return result;
-		}
-
-		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
 			return result;
 		}
 
@@ -333,14 +325,13 @@ public class TradeServiceImpl implements ITradeService {
 
 		trade.setUserId(userId.trim());
 		trade.setModifyUser(userId.trim());
-		trade.setShopId(shopId);
 		trade.setTradeNo(tradeNo.trim());
 
 		return updateTrade(trade);
 	}
 
 	@Override
-	public BooleanResult cancelTrade(String userId, Long shopId, String tradeNo) {
+	public BooleanResult cancelTrade(String userId, String tradeNo) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -352,12 +343,6 @@ public class TradeServiceImpl implements ITradeService {
 		}
 		trade.setUserId(userId.trim());
 		trade.setModifyUser(userId);
-
-		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
-			return result;
-		}
-		trade.setShopId(shopId);
 
 		if (StringUtils.isBlank(tradeNo)) {
 			result.setCode("订单信息不能为空。");
@@ -393,9 +378,8 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public Trade getOrder(String userId, Long shopId, String tradeNo, String orderId) {
-		if (StringUtils.isBlank(userId) || shopId == null || StringUtils.isBlank(tradeNo)
-			|| StringUtils.isBlank(orderId)) {
+	public Trade getOrder(String userId, String tradeNo, String orderId) {
+		if (StringUtils.isBlank(userId) || StringUtils.isBlank(tradeNo) || StringUtils.isBlank(orderId)) {
 			return null;
 		}
 
@@ -411,7 +395,6 @@ public class TradeServiceImpl implements ITradeService {
 
 		Trade t = new Trade();
 		t.setUserId(userId.trim());
-		t.setShopId(shopId);
 		t.setTradeNo(tradeNo.trim());
 
 		Trade trade = getTrade(t);
@@ -420,7 +403,7 @@ public class TradeServiceImpl implements ITradeService {
 			return null;
 		}
 
-		Order order = orderService.getOrder(userId, shopId, trade.getTradeId(), id);
+		Order order = orderService.getOrder(userId, trade.getTradeId(), id);
 
 		if (order != null) {
 			List<Order> orderList = new ArrayList<Order>();
@@ -438,7 +421,7 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public BooleanResult signTrade(String userId, Long shopId, String tradeNo) {
+	public BooleanResult signTrade(String userId, String tradeNo) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -451,12 +434,6 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 		trade.setUserId(userId.trim());
-
-		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
-			return result;
-		}
-		trade.setShopId(shopId);
 
 		if (StringUtils.isBlank(tradeNo)) {
 			result.setCode("交易订单不能为空。");
