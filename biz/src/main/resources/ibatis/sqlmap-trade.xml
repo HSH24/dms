@@ -70,8 +70,6 @@
 			   t.trade_no AS tradeNo,
 			   t.trade_price AS tradePrice,
 			   t.change,
-			   t.receiver_name AS receiverName,
-			   t.receiver_tel AS receiverTel,
 			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate,
 			   DATE_FORMAT(t.modify_date, '%Y-%m-%d %T') AS modifyDate,
 			   DATE_FORMAT(t.pay_date, '%Y-%m-%d %T') AS payDate,
@@ -81,7 +79,6 @@
 			   DATE_FORMAT(t.feedbacked_date, '%Y-%m-%d %T') AS feedbackedDate,
 			   t.type,
 			   IFNULL(t.score, 0),
-			   t.shipment,
 			   t.feedback_type AS feedbackType
 		  FROM dms_tb_trade t
 		 WHERE t.state = 'U'
@@ -112,13 +109,6 @@
 			   t.pay_type AS payType,
 			   t.trade_price AS tradePrice,
 			   t.change,
-			   t.receiver_name AS receiverName,
-			   t.receiver_province AS receiverProvince,
-			   t.receiver_city AS receiverCity,
-			   t.receiver_area AS receiverArea,
-			   t.receiver_address AS receiverAddress,
-			   t.receiver_tel AS receiverTel,
-			   t.receiver_remark AS receiverRemark,
 			   t.cart_id AS cartId,
 			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate,
 			   DATE_FORMAT(t.modify_date, '%Y-%m-%d %T') AS modifyDate,
@@ -163,36 +153,6 @@
 				<isEqual property="type" compareValue="feedbacked" prepend=",">
 				<![CDATA[ t.FEEDBACKED_DATE = NOW() ]]>
 				</isEqual>
-			</isNotEmpty>
-			<isNotEmpty property="receiverName" prepend=",">
-			<![CDATA[ t.receiver_name = #receiverName# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverProvince" prepend=",">
-			<![CDATA[ t.receiver_province = #receiverProvince# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverCity" prepend=",">
-			<![CDATA[ t.receiver_city = #receiverCity# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverArea" prepend=",">
-			<![CDATA[ t.receiver_area = #receiverArea# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverBackCode" prepend=",">
-			<![CDATA[ t.receiver_back_code = #receiverBackCode# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverAddress" prepend=",">
-			<![CDATA[ t.receiver_address = #receiverAddress# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverZip" prepend=",">
-			<![CDATA[ t.receiver_zip = #receiverZip# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverTel" prepend=",">
-			<![CDATA[ t.receiver_tel = #receiverTel# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="receiverRemark" prepend=",">
-			<![CDATA[ t.receiver_remark = #receiverRemark# ]]>
-			</isNotEmpty>
-			<isNotEmpty property="shipment" prepend=",">
-			<![CDATA[ t.shipment = #shipment# ]]>
 			</isNotEmpty>
 			<isNotEmpty property="payType" prepend=",">
 			<![CDATA[ t.pay_type = #payType# ]]>
