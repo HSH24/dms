@@ -73,10 +73,9 @@ public interface ICartService {
 	 * 根据购物车完成订单.
 	 * 
 	 * @param userId
-	 * @param shopId
 	 * @param cartId
 	 * @return
 	 */
-	BooleanResult finishCart(String userId, Long shopId, String[] cartId);
+	BooleanResult finishCart(String userId, String[] cartId);
 
 }

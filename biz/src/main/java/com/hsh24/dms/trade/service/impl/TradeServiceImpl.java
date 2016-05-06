@@ -239,6 +239,16 @@ public class TradeServiceImpl implements ITradeService {
 					tradeNo.append(trade.getTradeNo());
 				}
 
+				// 修改购物车状态
+				if (cartId != null && cartId.length > 0) {
+					result = cartService.finishCart(userId, cartId);
+					if (!result.getResult()) {
+						ts.setRollbackOnly();
+
+						return result;
+					}
+				}
+
 				result.setCode(tradeNo.toString());
 				return result;
 			}
