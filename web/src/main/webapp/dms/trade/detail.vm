@@ -33,7 +33,7 @@
 					<li>
 						<div class="item-content">
 							<div class="item-inner" style="display: inherit;">
-								<div class="item-title" style="font-weight: 400;">店铺：好社惠</div>
+								<div class="item-title" style="font-weight: 400;">供应商：$!{trade.supName}</div>
 							</div>
 						</div>
 					</li>

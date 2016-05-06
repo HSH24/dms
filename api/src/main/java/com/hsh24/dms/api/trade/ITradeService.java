@@ -51,13 +51,12 @@ public interface ITradeService {
 	 * 立即购买.
 	 * 
 	 * @param userId
-	 * @param supId
 	 * @param itemId
 	 * @param skuId
 	 * @param quantity
 	 * @return
 	 */
-	BooleanResult createTrade(String userId, Long supId, String itemId, String skuId, String quantity);
+	BooleanResult createTrade(String userId, String itemId, String skuId, String quantity);
 
 	/**
 	 * 卖家下单交易.

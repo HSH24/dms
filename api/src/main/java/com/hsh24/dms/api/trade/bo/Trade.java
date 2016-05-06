@@ -123,9 +123,9 @@ public class Trade extends SearchInfo {
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
 
 	/**
-	 * 公司id.
+	 * 供应商名称.
 	 */
-	private String companyId;
+	private String supName;
 
 	/**
 	 * 订单行项目.
@@ -348,12 +348,12 @@ public class Trade extends SearchInfo {
 		this.payType = payType;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSupName() {
+		return supName;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSupName(String supName) {
+		this.supName = supName;
 	}
 
 	public List<Order> getOrderList() {

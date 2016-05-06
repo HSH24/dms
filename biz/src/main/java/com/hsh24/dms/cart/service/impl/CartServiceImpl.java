@@ -13,6 +13,8 @@ import com.hsh24.dms.api.item.IItemSkuService;
 import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.api.item.bo.ItemFile;
 import com.hsh24.dms.api.item.bo.ItemSku;
+import com.hsh24.dms.api.supplier.ISupplierService;
+import com.hsh24.dms.api.supplier.bo.Supplier;
 import com.hsh24.dms.cart.dao.ICartDao;
 import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -31,6 +33,8 @@ public class CartServiceImpl implements ICartService {
 	private IItemService itemService;
 
 	private IItemSkuService itemSkuService;
+
+	private ISupplierService supplierService;
 
 	private ICartDao cartDao;
 
@@ -73,40 +77,14 @@ public class CartServiceImpl implements ICartService {
 		}
 
 		// 验证 itemId skuId 并获取 supId
-		if (cart.getSkuId() != null && cart.getSkuId().equals(0L)) {
-			// 根据 skuId 获得 item 并 验证
-			Map<Long, ItemSku> map = itemSkuService.getItemSku(new String[] { skuId });
-			if (map == null || map.size() == 0) {
-				result.setCode("SKU信息不存在。");
-				return result;
-			}
-
-			ItemSku itemSku = map.get(skuId);
-			if (itemSku == null) {
-				result.setCode("SKU信息不存在。");
-				return result;
-			}
-
-			if (!cart.getItemId().equals(itemSku.getItemId())) {
-				result.setCode("商品和SKU信息不匹配。");
-				return result;
-			}
-		}
-
-		// 根据 itemId 获得 item
-		Map<Long, Item> map = itemService.getItem(new String[] { itemId });
-		if (map == null || map.size() == 0) {
-			result.setCode("商品信息不存在。");
+		result = itemService.validate(cart.getItemId(), cart.getSkuId());
+		if (!result.getResult()) {
 			return result;
+		} else {
+			result.setResult(false);
 		}
 
-		Item item = map.get(cart.getItemId());
-		if (item == null) {
-			result.setCode("商品信息不存在。");
-			return result;
-		}
-
-		cart.setSupId(item.getSupId());
+		cart.setSupId(Long.valueOf(result.getCode()));
 
 		if (StringUtils.isBlank(quantity)) {
 			result.setCode("购买商品数量不能为空。");
@@ -210,47 +188,69 @@ public class CartServiceImpl implements ICartService {
 			return null;
 		}
 
+		// 供应商信息
+		String[] supId = new String[cartList.size()];
+		int i = 0;
+
 		// 商品信息
 		String[] itemId = new String[cartList.size()];
-		int i = 0;
-		for (Cart ca : cartList) {
-			itemId[i++] = ca.getItemId().toString();
-		}
+		int j = 0;
 
 		// sku信息
 		String[] skuId = new String[cartList.size()];
-		int j = 0;
+		int k = 0;
+
 		for (Cart ca : cartList) {
+			// 供应商
+			supId[i++] = ca.getSupId().toString();
+
+			// 商品
+			itemId[j++] = ca.getItemId().toString();
+
+			// sku
 			Long id = ca.getSkuId();
-			if (id == 0L) {
-				continue;
+			if (!id.equals(0L)) {
+				skuId[k++] = id.toString();
 			}
-			skuId[j++] = id.toString();
 		}
+
+		// 1. 获取供应商信息
+		Map<Long, Supplier> supplierMap = supplierService.getSupplier(supId);
 
 		// 2. 获取商品信息
 		Map<Long, Item> itemMap = itemService.getItem(itemId);
 
 		// 3. 获取sku信息
-		Map<Long, ItemSku> itemSkuMap = j == 0 ? new HashMap<Long, ItemSku>() : itemSkuService.getItemSku(skuId);
+		Map<Long, ItemSku> itemSkuMap = k == 0 ? new HashMap<Long, ItemSku>() : itemSkuService.getItemSku(skuId);
 
 		// 4. 获取商品文件信息
 		Map<String, List<ItemFile>> itemFileMap = null;// itemFileService.getItemFileList(shopId,
 
 		for (Cart ca : cartList) {
+			// 供应商信息
+			Supplier supplier = supplierMap.get(ca.getSupId());
+			if (supplier != null) {
+				ca.setSupName(supplier.getSupName());
+			}
+
 			// 商品名称 & 商品价格
 			Item item = itemMap.get(ca.getItemId());
-			ca.setItemName(item.getItemName());
-			ca.setPrice(item.getPrice());
+			if (item != null) {
+				ca.setItemName(item.getItemName());
+				ca.setPrice(item.getPrice());
+			}
 
 			// sku名称 & 商品价格
 			Long id = ca.getSkuId();
 			if (id != 0L) {
 				ItemSku sku = itemSkuMap.get(id);
-				ca.setPropertiesName(sku.getPropertiesName());
-				ca.setPrice(sku.getPrice());
+				if (sku != null) {
+					ca.setPropertiesName(sku.getPropertiesName());
+					ca.setPrice(sku.getPrice());
+				}
 			}
 
+			// 商品文件信息
 			if (itemFileMap != null && !itemFileMap.isEmpty()) {
 				ca.setItemFileList(itemFileMap.get(ca.getItemId()));
 			}
@@ -445,6 +445,14 @@ public class CartServiceImpl implements ICartService {
 
 	public void setItemSkuService(IItemSkuService itemSkuService) {
 		this.itemSkuService = itemSkuService;
+	}
+
+	public ISupplierService getSupplierService() {
+		return supplierService;
+	}
+
+	public void setSupplierService(ISupplierService supplierService) {
+		this.supplierService = supplierService;
 	}
 
 	public ICartDao getCartDao() {

@@ -59,6 +59,11 @@ public class Cart extends SearchInfo {
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
 
 	/**
+	 * 供应商名称.
+	 */
+	private String supName;
+
+	/**
 	 * 查询结果.
 	 */
 	private String itemName;
@@ -140,6 +145,14 @@ public class Cart extends SearchInfo {
 
 	public void setModifyUser(String modifyUser) {
 		this.modifyUser = modifyUser;
+	}
+
+	public String getSupName() {
+		return supName;
+	}
+
+	public void setSupName(String supName) {
+		this.supName = supName;
 	}
 
 	public String getItemName() {

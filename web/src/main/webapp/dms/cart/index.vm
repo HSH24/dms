@@ -16,11 +16,13 @@
 		<div class="page-content" style="padding-bottom: 100px;">
 			<form id="cart/index/form" method="POST" class="ajax-submit">
     			<div class="list-block media-list" style="font-size: 14px;">
+					#set($cart = $!{cartList.get(0)})
+					#set($supId = $!{cart.supId})
     				<ul>
     					<li>
     						<div class="item-content">
     							<div class="item-inner" style="display: inherit;">
-    								<div class="item-title" style="font-weight: 400;"></div>
+    								<div class="item-title" style="font-weight: 400;">供应商：$!{cart.supName}</div>
     								<div class="item-after">
     									<a id="cart/index/edit" href="javascript:cart_index_edit();" style="margin: -10px 0px; padding: 10px 0px;">编辑</a>
     									<a id="cart/index/edited" href="javascript:cart_index_edited();" style="margin: -10px 0px; padding: 10px 0px; display: none;">完成</a>
@@ -29,6 +31,17 @@
     						</div>
     					</li>
     					#foreach($cart in $!{cartList})
+						#if($supId != $!{cart.supId})
+						#set($supId = $!{cart.supId})
+						<li>
+    						<div class="item-content">
+    							<div class="item-inner" style="display: inherit;">
+    								<div class="item-title" style="font-weight: 400;">供应商：$!{cart.supName}</div>
+    								<div class="item-after"></div>
+    							</div>
+    						</div>
+    					</li>
+						#end
     					<li>
     						<div class="item-content">
 								<label class="label-checkbox">

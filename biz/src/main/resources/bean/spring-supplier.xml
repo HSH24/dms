@@ -5,7 +5,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
-	<bean id="supAction" class="com.hsh24.dms.sup.action.SupAction" parent="baseAction" scope="request">
+	<bean id="supplierAction" class="com.hsh24.dms.supplier.action.SupplierAction" parent="baseAction" scope="request">
 	</bean>
+	
+	<bean id="supplierService" class="com.hsh24.dms.supplier.service.impl.SupplierServiceImpl">
+		<property name="supplierDao" ref="supplierDao" />
+	</bean>
+	
+	<bean id="supplierDao" class="com.hsh24.dms.supplier.dao.impl.SupplierDaoImpl" parent="baseDao" />
 	
 </beans>

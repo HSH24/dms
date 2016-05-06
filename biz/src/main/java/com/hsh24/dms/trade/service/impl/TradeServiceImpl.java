@@ -14,8 +14,11 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.cart.ICartService;
 import com.hsh24.dms.api.cart.bo.Cart;
+import com.hsh24.dms.api.item.IItemService;
 import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.api.item.bo.ItemSku;
+import com.hsh24.dms.api.supplier.ISupplierService;
+import com.hsh24.dms.api.supplier.bo.Supplier;
 import com.hsh24.dms.api.trade.IOrderRefundService;
 import com.hsh24.dms.api.trade.IOrderService;
 import com.hsh24.dms.api.trade.ITradeService;
@@ -50,11 +53,14 @@ public class TradeServiceImpl implements ITradeService {
 
 	private ICartService cartService;
 
+	private ISupplierService supplierService;
+
+	private IItemService itemService;
+
 	private ITradeDao tradeDao;
 
 	@Override
-	public BooleanResult createTrade(final String userId, final Long supId, final String itemId, final String skuId,
-		String quantity) {
+	public BooleanResult createTrade(final String userId, final String itemId, final String skuId, String quantity) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -63,15 +69,30 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
-		if (supId == null) {
-			result.setCode("店铺信息不能为空。");
-			return result;
-		}
-
 		if (StringUtils.isBlank(itemId)) {
 			result.setCode("商品信息不能为空。");
 			return result;
 		}
+
+		if (StringUtils.isBlank(skuId)) {
+			result.setCode("商品SKU信息不能为空。");
+			return result;
+		}
+
+		try {
+			result = itemService.validate(Long.valueOf(itemId), Long.valueOf(skuId));
+		} catch (NumberFormatException e) {
+			logger.error(e);
+
+			result.setCode("商品，SKU信息不存在。");
+			return result;
+		}
+
+		if (!result.getResult()) {
+			return result;
+		}
+
+		final Long supId = Long.valueOf(result.getCode());
 
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
@@ -343,6 +364,12 @@ public class TradeServiceImpl implements ITradeService {
 
 		if (trade == null) {
 			return null;
+		}
+
+		Supplier supplier = supplierService.getSupplier(trade.getSupId());
+
+		if (supplier != null) {
+			trade.setSupName(supplier.getSupName());
 		}
 
 		List<Order> orderList = orderService.getOrderList(userId, trade.getTradeId());
@@ -622,6 +649,22 @@ public class TradeServiceImpl implements ITradeService {
 
 	public void setCartService(ICartService cartService) {
 		this.cartService = cartService;
+	}
+
+	public ISupplierService getSupplierService() {
+		return supplierService;
+	}
+
+	public void setSupplierService(ISupplierService supplierService) {
+		this.supplierService = supplierService;
+	}
+
+	public IItemService getItemService() {
+		return itemService;
+	}
+
+	public void setItemService(IItemService itemService) {
+		this.itemService = itemService;
 	}
 
 	public ITradeDao getTradeDao() {

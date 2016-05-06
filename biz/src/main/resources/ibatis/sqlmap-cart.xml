@@ -84,7 +84,7 @@
 			</isNotEmpty>
 		</dynamic>
 	<![CDATA[
-		 ORDER BY t.create_date DESC
+		 ORDER BY t.sup_id, t.create_date DESC
 	]]>
 	</select>
 	

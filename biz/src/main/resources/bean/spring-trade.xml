@@ -15,6 +15,8 @@
 		<property name="orderService" ref="orderService" />
 		<property name="orderRefundService" ref="orderRefundService" />
 		<property name="cartService" ref="cartService" />
+		<property name="supplierService" ref="supplierService" />
+		<property name="itemService" ref="itemService" />
 		<property name="tradeDao" ref="tradeDao" />
 	</bean>
 	<bean id="tradeDao" class="com.hsh24.dms.trade.dao.impl.TradeDaoImpl" parent="baseDao" />
