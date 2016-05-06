@@ -35,7 +35,7 @@ public class CartServiceImpl implements ICartService {
 	private ICartDao cartDao;
 
 	@Override
-	public BooleanResult createCart(String userId, Long supId, String itemId, String skuId, String quantity) {
+	public BooleanResult createCart(String userId, String itemId, String skuId, String quantity) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -47,12 +47,6 @@ public class CartServiceImpl implements ICartService {
 		}
 		cart.setUserId(userId.trim());
 		cart.setModifyUser(userId);
-
-		if (supId == null) {
-			result.setCode("供应商信息不能为空。");
-			return result;
-		}
-		cart.setSupId(supId);
 
 		if (StringUtils.isBlank(itemId)) {
 			result.setCode("商品信息不能为空。");
@@ -71,12 +65,48 @@ public class CartServiceImpl implements ICartService {
 			try {
 				cart.setSkuId(Long.valueOf(skuId));
 			} catch (NumberFormatException e) {
-				logger.error(itemId, e);
+				logger.error(skuId, e);
 
 				result.setCode("SKU信息错误。");
 				return result;
 			}
 		}
+
+		// 验证 itemId skuId 并获取 supId
+		if (cart.getSkuId() != null && cart.getSkuId().equals(0L)) {
+			// 根据 skuId 获得 item 并 验证
+			Map<Long, ItemSku> map = itemSkuService.getItemSku(new String[] { skuId });
+			if (map == null || map.size() == 0) {
+				result.setCode("SKU信息不存在。");
+				return result;
+			}
+
+			ItemSku itemSku = map.get(skuId);
+			if (itemSku == null) {
+				result.setCode("SKU信息不存在。");
+				return result;
+			}
+
+			if (!cart.getItemId().equals(itemSku.getItemId())) {
+				result.setCode("商品和SKU信息不匹配。");
+				return result;
+			}
+		}
+
+		// 根据 itemId 获得 item
+		Map<Long, Item> map = itemService.getItem(new String[] { itemId });
+		if (map == null || map.size() == 0) {
+			result.setCode("商品信息不存在。");
+			return result;
+		}
+
+		Item item = map.get(itemId);
+		if (item == null) {
+			result.setCode("商品信息不存在。");
+			return result;
+		}
+
+		cart.setSupId(item.getSupId());
 
 		if (StringUtils.isBlank(quantity)) {
 			result.setCode("购买商品数量不能为空。");
@@ -120,6 +150,7 @@ public class CartServiceImpl implements ICartService {
 		if (result.getResult()) {
 			result.setCode("添加成功。");
 		}
+
 		return result;
 	}
 
@@ -159,23 +190,22 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public List<Cart> getCartList(String userId, Long supId) {
+	public List<Cart> getCartList(String userId) {
+		return getCartList(userId, null);
+	}
+
+	@Override
+	public List<Cart> getCartList(String userId, String[] cartId) {
 		// userId 必填
-		if (StringUtils.isBlank(userId) || supId == null) {
+		if (StringUtils.isBlank(userId)) {
 			return null;
 		}
 
 		Cart cart = new Cart();
 		cart.setUserId(userId.trim());
-		cart.setSupId(supId);
+		cart.setCodes(cartId);
 
-		List<Cart> cartList = null;
-
-		try {
-			cartList = cartDao.getCartList(cart);
-		} catch (Exception e) {
-			logger.error(LogUtil.parserBean(cart), e);
-		}
+		List<Cart> cartList = getCartList(cart);
 
 		if (cartList == null || cartList.size() == 0) {
 			return null;
@@ -200,10 +230,10 @@ public class CartServiceImpl implements ICartService {
 		}
 
 		// 2. 获取商品信息
-		Map<Long, Item> itemMap = itemService.getItem(supId, itemId);
+		Map<Long, Item> itemMap = itemService.getItem(itemId);
 
 		// 3. 获取sku信息
-		Map<Long, ItemSku> itemSkuMap = j == 0 ? new HashMap<Long, ItemSku>() : itemSkuService.getItemSku(supId, skuId);
+		Map<Long, ItemSku> itemSkuMap = j == 0 ? new HashMap<Long, ItemSku>() : itemSkuService.getItemSku(skuId);
 
 		// 4. 获取商品文件信息
 		Map<String, List<ItemFile>> itemFileMap = null;// itemFileService.getItemFileList(shopId,
@@ -231,7 +261,7 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public BooleanResult removeCart(String userId, Long supId, String[] cartId) {
+	public BooleanResult removeCart(String userId, String[] cartId) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -243,12 +273,6 @@ public class CartServiceImpl implements ICartService {
 		}
 		cart.setUserId(userId.trim());
 		cart.setModifyUser(userId);
-
-		if (supId == null) {
-			result.setCode("店铺信息不能为空！");
-			return result;
-		}
-		cart.setSupId(supId);
 
 		if (cartId == null || cartId.length == 0) {
 			result.setCode("购物车商品信息不能为空！");
@@ -271,7 +295,7 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public BooleanResult updateQuantity(String userId, Long supId, String cartId, String quantity) {
+	public BooleanResult updateQuantity(String userId, String cartId, String quantity) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -283,12 +307,6 @@ public class CartServiceImpl implements ICartService {
 		}
 		cart.setUserId(userId.trim());
 		cart.setModifyUser(userId);
-
-		if (supId == null) {
-			result.setCode("0");
-			return result;
-		}
-		cart.setSupId(supId);
 
 		if (StringUtils.isBlank(cartId)) {
 			result.setCode("0");
@@ -353,26 +371,6 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public Cart getCartStats(String userId, Long supId, String[] cartId) {
-		if (StringUtils.isBlank(userId) || supId == null || cartId == null || cartId.length == 0) {
-			return new Cart();
-		}
-
-		Cart cart = new Cart();
-		cart.setUserId(userId.trim());
-		cart.setSupId(supId);
-		cart.setCodes(cartId);
-
-		try {
-			return cartDao.getCartStats(cart);
-		} catch (Exception e) {
-			logger.error(LogUtil.parserBean(cart), e);
-		}
-
-		return cart;
-	}
-
-	@Override
 	public BooleanResult finishCart(String userId, Long supId, String[] cartId) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
@@ -408,6 +406,21 @@ public class CartServiceImpl implements ICartService {
 
 		result.setResult(true);
 		return result;
+	}
+
+	/**
+	 * 
+	 * @param cart
+	 * @return
+	 */
+	private List<Cart> getCartList(Cart cart) {
+		try {
+			return cartDao.getCartList(cart);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(cart), e);
+		}
+
+		return null;
 	}
 
 	/**

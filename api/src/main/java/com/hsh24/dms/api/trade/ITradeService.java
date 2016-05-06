@@ -64,13 +64,11 @@ public interface ITradeService {
 	 * 
 	 * @param userId
 	 *            必填.
-	 * @param supId
-	 *            必填.
 	 * @param cartId
 	 *            购物车id.
 	 * @return
 	 */
-	BooleanResult createTrade(String userId, Long supId, String[] cartId);
+	BooleanResult createTrade(String userId, String[] cartId);
 
 	/**
 	 * 卖家查询交易.

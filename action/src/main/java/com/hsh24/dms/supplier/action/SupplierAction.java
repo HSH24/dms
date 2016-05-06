@@ -1,4 +1,4 @@
-package com.hsh24.dms.sup.action;
+package com.hsh24.dms.supplier.action;
 
 import com.hsh24.dms.framework.action.BaseAction;
 
@@ -7,7 +7,7 @@ import com.hsh24.dms.framework.action.BaseAction;
  * @author JiakunXu
  * 
  */
-public class SupAction extends BaseAction {
+public class SupplierAction extends BaseAction {
 
 	private static final long serialVersionUID = -3517081429091032617L;
 

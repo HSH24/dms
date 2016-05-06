@@ -60,9 +60,9 @@ public class TradeAction extends BaseAction {
 
 			}
 
-			return SUCCESS;
+			return RESOURCE_RESULT;
 		} else {
-			result = tradeService.createTrade(this.getUser().getUserId(), 0L, cartIds);
+			result = tradeService.createTrade(this.getUser().getUserId(), cartIds);
 
 			if (result.getResult()) {
 				this.setResourceResult(result.getCode());

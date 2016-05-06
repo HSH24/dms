@@ -70,7 +70,6 @@
 			PROPERTIES_NAME,
 			PRICE,
 			`CHANGE`,
-			POINTS,
 			QUANTITY,
 			STATE,
 			CREATE_DATE,
@@ -83,27 +82,20 @@
 			   p.item_name,
 			   t.sku_id,
 			   q.properties_name,
-			   CASE WHEN k.points_id IS NULL THEN CASE WHEN q.price IS NULL THEN p.price ELSE q.price END ELSE 0 END,
+			   CASE WHEN q.price IS NULL THEN p.price ELSE q.price END,
 			   0,
-			   IFNULL(k.points, 0),
 			   t.quantity,
 			   'U',
 			   NOW(),
 			   #modifyUser#,
 			   NOW(),
 			   #modifyUser#
-		  FROM basis_tb_cart t
+		  FROM dms_tb_cart t
 		  LEFT JOIN dms_tb_item p ON t.item_id = p.item_id
 		  LEFT JOIN(
 		SELECT qq.item_id, qq.sku_id, qq.properties_name, qq.price
 		  FROM dms_tb_item_sku qq
 		 WHERE qq.state = 'U') q ON t.sku_id = q.sku_id
-		  LEFT JOIN(
-		SELECT kk.points_id, kk.points
-		  FROM basis_tb_points kk
-		 WHERE kk.state = 'U'
-		   AND kk.shop_id = #shopId#
-				 ) k ON t.points_id = k.points_id
 		 WHERE t.state = 'U'
 		   AND p.state = 'U'
 		   AND p.sup_id = #supId#
@@ -122,7 +114,6 @@
 			   t.properties_name AS propertiesName,
 			   t.quantity,
 			   t.price,
-			   t.points,
 			   t.change,
 			   t.item_id AS itemId,
 			   t.sku_id AS skuId,
@@ -147,7 +138,6 @@
 			   t.properties_name AS propertiesName,
 			   t.quantity,
 			   t.price,
-			   t.points,
 			   t.change
 		  FROM dms_tb_order t
 		 WHERE t.state = 'U'

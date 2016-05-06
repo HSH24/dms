@@ -19,13 +19,12 @@ public interface ICartService {
 	/**
 	 * 
 	 * @param userId
-	 * @param shopId
 	 * @param itemId
 	 * @param skuId
 	 * @param quantity
 	 * @return
 	 */
-	BooleanResult createCart(String userId, Long shopId, String itemId, String skuId, String quantity);
+	BooleanResult createCart(String userId, String itemId, String skuId, String quantity);
 
 	/**
 	 * 
@@ -39,40 +38,36 @@ public interface ICartService {
 	 * 获取用户购物车.
 	 * 
 	 * @param userId
-	 * @param shopId
 	 * @return
 	 */
-	List<Cart> getCartList(String userId, Long shopId);
+	List<Cart> getCartList(String userId);
+
+	/**
+	 * 获取用户购物车.
+	 * 
+	 * @param userId
+	 * @param cartId
+	 * @return
+	 */
+	List<Cart> getCartList(String userId, String[] cartId);
 
 	/**
 	 * 移除购物车.
 	 * 
 	 * @param userId
-	 * @param shopId
 	 * @param cartId
 	 * @return
 	 */
-	BooleanResult removeCart(String userId, Long shopId, String[] cartId);
+	BooleanResult removeCart(String userId, String[] cartId);
 
 	/**
 	 * 
 	 * @param userId
-	 * @param shopId
 	 * @param cartId
 	 * @param quantity
 	 * @return
 	 */
-	BooleanResult updateQuantity(String userId, Long shopId, String cartId, String quantity);
-
-	/**
-	 * 统计商品总金额 运费.
-	 * 
-	 * @param userId
-	 * @param shopId
-	 * @param cartId
-	 * @return
-	 */
-	Cart getCartStats(String userId, Long shopId, String[] cartId);
+	BooleanResult updateQuantity(String userId, String cartId, String quantity);
 
 	/**
 	 * 根据购物车完成订单.

@@ -19,7 +19,6 @@
 		  t.remark
 		FROM dms_tb_item t
 		WHERE t.state = 'U'
-		AND t.sup_id = #supId#
 	]]>	
 		<dynamic>
 			<isNotEmpty property="codes" prepend="and">

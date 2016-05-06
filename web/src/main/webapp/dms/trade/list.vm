@@ -68,8 +68,6 @@
 								<div class="item-after">
 									#if($!{trade.type} == 'send')
 									<a href="javascript:trade_list_sign('$!{trade.tradeNo}');" class="button color-gray">确认收货</a>
-    								#elseif($!{trade.type} == 'sign')
-    								<a href="#" class="button color-gray" style="margin-left: 5px;">评价</a>
 									#end
 								</div>
 							</div>

@@ -8,7 +8,7 @@ myApp.onPageInit('cart.index', function(page) {
 
 				if (cart_index_flag == "create") {
 					view4.router.load({
-								url : appUrl + "/pay/index.htm?tradeNo="
+								url : appUrl + "/trade/detail.htm?tradeNo="
 										+ xhr.responseText
 							});
 				} else if (cart_index_flag == "remove") {

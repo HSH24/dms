@@ -78,16 +78,6 @@ public class Cart extends SearchInfo {
 	 */
 	private BigDecimal price;
 
-	/**
-	 * 邮费.
-	 */
-	private BigDecimal postage;
-
-	/**
-	 * 兑换所需积分.
-	 */
-	private BigDecimal points;
-
 	public Long getCartId() {
 		return cartId;
 	}
@@ -182,22 +172,6 @@ public class Cart extends SearchInfo {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
-	}
-
-	public BigDecimal getPostage() {
-		return postage;
-	}
-
-	public void setPostage(BigDecimal postage) {
-		this.postage = postage;
-	}
-
-	public BigDecimal getPoints() {
-		return points;
-	}
-
-	public void setPoints(BigDecimal points) {
-		this.points = points;
 	}
 
 }

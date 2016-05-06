@@ -45,7 +45,7 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String index() {
-		cartList = cartService.getCartList(this.getUser().getUserId(), 0L);
+		cartList = cartService.getCartList(this.getUser().getUserId());
 
 		return SUCCESS;
 	}
@@ -56,7 +56,7 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String add() {
-		BooleanResult result = cartService.createCart(this.getUser().getUserId(), 0L, itemId, skuId, "1");
+		BooleanResult result = cartService.createCart(this.getUser().getUserId(), itemId, skuId, "1");
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -74,7 +74,7 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String remove() {
-		BooleanResult result = cartService.removeCart(this.getUser().getUserId(), 0L, cartIds);
+		BooleanResult result = cartService.removeCart(this.getUser().getUserId(), cartIds);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -92,7 +92,7 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String num() {
-		BooleanResult result = cartService.updateQuantity(this.getUser().getUserId(), 0L, cartId, quantity);
+		BooleanResult result = cartService.updateQuantity(this.getUser().getUserId(), cartId, quantity);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());

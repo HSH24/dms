@@ -2,7 +2,9 @@ package com.hsh24.dms.trade.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.TransactionStatus;
@@ -121,31 +123,53 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public BooleanResult createTrade(final String userId, final Long supId, final String[] cartId) {
+	public BooleanResult createTrade(final String userId, final String[] cartId) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		if (StringUtils.isBlank(userId)) {
-			result.setCode("用户信息不能为空！");
-			return result;
-		}
-
-		if (supId == null) {
-			result.setCode("店铺信息不能为空！");
+			result.setCode("用户信息不能为空。");
 			return result;
 		}
 
 		if (cartId == null || cartId.length == 0) {
-			result.setCode("购物车不能为空！");
+			result.setCode("购物车不能为空。");
 			return result;
 		}
 
-		// 获取选中商品总计价格
-		final Cart cart = cartService.getCartStats(userId.trim(), supId, cartId);
+		// 获取选中商品明细
+		List<Cart> cartList = cartService.getCartList(userId.trim(), cartId);
 
-		// 合计价格 合计积分 最小运费
-		if (cart.getPrice() == null || cart.getPoints() == null || cart.getPostage() == null) {
-			result.setCode("购物车商品总价为空！");
+		if (cartList == null || cartList.size() == 0) {
+			result.setCode("购物车信息不存在。");
+			return result;
+		}
+
+		// 遍历 根据 supId 统计金额 -> 拆分订单
+		final Map<Long, List<Long>> map1 = new HashMap<Long, List<Long>>();
+		final Map<Long, BigDecimal> map2 = new HashMap<Long, BigDecimal>();
+
+		for (Cart cart : cartList) {
+			Long cratId = cart.getCartId();
+			Long supId = cart.getSupId();
+			BigDecimal p = cart.getPrice().multiply(BigDecimal.valueOf(cart.getQuantity()));
+
+			if (map1.containsKey(supId)) {
+				List<Long> cid = map1.get(supId);
+				cid.add(cratId);
+
+				map2.put(supId, map2.get(supId).add(p));
+			} else {
+				List<Long> list = new ArrayList<Long>();
+				list.add(cratId);
+				map1.put(supId, list);
+
+				map2.put(supId, p);
+			}
+		}
+
+		if (map1.size() == 0) {
+			result.setCode("购物车商品总价为空。");
 			return result;
 		}
 
@@ -154,51 +178,68 @@ public class TradeServiceImpl implements ITradeService {
 				BooleanResult result = new BooleanResult();
 				result.setResult(false);
 
-				// 1. 创建交易
-				// create trade
-				Long tradeId = null;
+				StringBuilder tradeNo = new StringBuilder();
 
-				Trade trade = new Trade();
-				trade.setUserId(userId.trim());
-				trade.setSupId(supId);
-				// 交易价格
-				trade.setTradePrice(cart.getPrice());
-				trade.setChange(BigDecimal.ZERO);
-				// 亭主下单
-				trade.setType(ITradeService.TO_SEND);
-
-				// 14位日期 ＋ 11位随机数
-				trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
-
-				// 交易订单 关联 购物车
-				StringBuilder sb = new StringBuilder();
-				for (String id : cartId) {
-					if (sb.length() > 0) {
-						sb.append(",");
+				for (Map.Entry<Long, List<Long>> m : map1.entrySet()) {
+					Long supId = m.getKey();
+					List<Long> list = m.getValue();
+					String[] cartId = new String[list.size()];
+					int i = 0;
+					for (Long cid : list) {
+						cartId[i++] = cid.toString();
 					}
-					sb.append(id);
+
+					// 1. 创建交易
+					// create trade
+					Long tradeId = null;
+
+					Trade trade = new Trade();
+					trade.setUserId(userId.trim());
+					trade.setSupId(supId);
+					// 交易价格
+					trade.setTradePrice(map2.get(supId));
+					trade.setChange(BigDecimal.ZERO);
+					// 亭主下单
+					trade.setType(ITradeService.TO_SEND);
+
+					// 14位日期 ＋ 11位随机数
+					trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
+
+					// 交易订单 关联 购物车
+					StringBuilder sb = new StringBuilder();
+					for (String id : cartId) {
+						if (sb.length() > 0) {
+							sb.append(",");
+						}
+						sb.append(id);
+					}
+					trade.setCartId(sb.toString());
+
+					try {
+						tradeId = tradeDao.createTrade(trade);
+					} catch (Exception e) {
+						logger.error(LogUtil.parserBean(trade), e);
+						ts.setRollbackOnly();
+
+						result.setCode("创建交易失败。");
+						return result;
+					}
+
+					// 2. 创建订单
+					result = orderService.createOrder(supId, tradeId, cartId, userId.trim());
+					if (!result.getResult()) {
+						ts.setRollbackOnly();
+
+						return result;
+					}
+
+					if (tradeNo.length() > 0) {
+						tradeNo.append(",");
+					}
+					tradeNo.append(trade.getTradeNo());
 				}
-				trade.setCartId(sb.toString());
 
-				try {
-					tradeId = tradeDao.createTrade(trade);
-				} catch (Exception e) {
-					logger.error(LogUtil.parserBean(trade), e);
-					ts.setRollbackOnly();
-
-					result.setCode("创建交易失败！");
-					return result;
-				}
-
-				// 2. 创建订单
-				result = orderService.createOrder(supId, tradeId, cartId, userId.trim());
-				if (!result.getResult()) {
-					ts.setRollbackOnly();
-
-					return result;
-				}
-
-				result.setCode(trade.getTradeNo());
+				result.setCode(tradeNo.toString());
 				return result;
 			}
 		});

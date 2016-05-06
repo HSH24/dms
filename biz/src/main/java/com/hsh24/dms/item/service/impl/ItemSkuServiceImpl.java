@@ -29,8 +29,8 @@ public class ItemSkuServiceImpl implements IItemSkuService {
 	}
 
 	@Override
-	public Map<Long, ItemSku> getItemSku(Long shopId, String[] skuId) {
-		if (shopId == null || skuId == null || skuId.length == 0) {
+	public Map<Long, ItemSku> getItemSku(String[] skuId) {
+		if (skuId == null || skuId.length == 0) {
 			return null;
 		}
 

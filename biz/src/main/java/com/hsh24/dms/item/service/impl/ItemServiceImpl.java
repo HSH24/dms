@@ -40,12 +40,12 @@ public class ItemServiceImpl implements IItemService {
 	private IItemDao itemDao;
 
 	@Override
-	public int getItemCount(Long supId, Item item) {
-		if (supId == null || item == null) {
+	public int getItemCount(Long shopId, Item item) {
+		if (shopId == null || item == null) {
 			return 0;
 		}
 
-		item.setSupId(supId);
+		item.setSupId(shopId);
 
 		try {
 			return itemDao.getItemCount(item);
@@ -63,14 +63,14 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public Item getItem(Long supId, String itemId) {
-		if (supId == null || StringUtils.isBlank(itemId)) {
+	public Item getItem(Long shopId, String itemId) {
+		if (shopId == null || StringUtils.isBlank(itemId)) {
 			return null;
 		}
 
 		// 1. 获取商品基本信息
 		Item item = new Item();
-		item.setSupId(supId);
+		item.setSupId(shopId);
 
 		try {
 			item.setItemId(Long.valueOf(itemId));
@@ -87,10 +87,10 @@ public class ItemServiceImpl implements IItemService {
 		}
 
 		// 2. 获取商品文件信息
-		item.setItemFileList(itemFileService.getItemFileList(supId, itemId));
+		item.setItemFileList(itemFileService.getItemFileList(shopId, itemId));
 
 		// 3. 获取商品 sku 信息
-		List<ItemSku> skuList = itemSkuService.getItemSkuList(supId, itemId);
+		List<ItemSku> skuList = itemSkuService.getItemSkuList(shopId, itemId);
 
 		// 不存在 sku 信息 直接返回
 		if (skuList == null || skuList.size() == 0) {
@@ -112,7 +112,7 @@ public class ItemServiceImpl implements IItemService {
 			specCId[i++] = cid[0];
 		}
 
-		List<SpecCat> specCatList = specService.getSpecCatList(supId, specCId);
+		List<SpecCat> specCatList = specService.getSpecCatList(shopId, specCId);
 		// 根据 specCId[] 重新排序
 		if (specCatList != null && specCatList.size() > 0) {
 			Map<Long, SpecCat> map = new HashMap<Long, SpecCat>();
@@ -166,7 +166,7 @@ public class ItemServiceImpl implements IItemService {
 		item.setOriginRange(min0.toString() + " - " + max0.toString());
 		item.setPriceRange(min1.toString() + " - " + max1.toString());
 
-		List<SpecItem> specItemList = specService.getSpecItemList(supId, specItemId);
+		List<SpecItem> specItemList = specService.getSpecItemList(shopId, specItemId);
 
 		// 规格组合 黑色 大 ／ 红色 大
 		if (specItemList != null && specItemList.size() > 0) {
@@ -201,13 +201,12 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public Map<Long, Item> getItem(Long supId, String[] itemId) {
-		if (supId == null || itemId == null || itemId.length == 0) {
+	public Map<Long, Item> getItem(String[] itemId) {
+		if (itemId == null || itemId.length == 0) {
 			return null;
 		}
 
 		Item item = new Item();
-		item.setSupId(supId);
 		item.setCodes(itemId);
 		item.setLimit(itemId.length);
 		item.setOffset(0);

@@ -22,10 +22,9 @@ public interface IItemSkuService {
 
 	/**
 	 * 
-	 * @param supId
 	 * @param skuId
 	 * @return
 	 */
-	Map<Long, ItemSku> getItemSku(Long supId, String[] skuId);
+	Map<Long, ItemSku> getItemSku(String[] skuId);
 
 }
