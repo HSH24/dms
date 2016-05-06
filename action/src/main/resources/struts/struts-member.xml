@@ -6,6 +6,7 @@
 		extends="{http://dms}dms$framework" namespace="/member">
 
 		<action name="index" class="memberAction" method="index">
+			<interceptor-ref name="authenticationStack" />
 			<result name="success">/dms/member/index.vm</result>
 		</action>
 		

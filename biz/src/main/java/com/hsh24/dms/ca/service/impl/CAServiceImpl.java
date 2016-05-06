@@ -10,6 +10,8 @@ import com.hsh24.dms.api.user.bo.User;
  * 
  */
 public class CAServiceImpl implements ICAService {
+	
+	
 
 	@Override
 	public ValidateResult validateUser(String passport, String password) {

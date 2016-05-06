@@ -35,7 +35,7 @@
         										<div class="item-inner">
         											<div class="item-title label" style="text-align: center;">+86</div>
         											<div class="item-input">
-                                                        <input type="tel" id="portal_index_passport" name="passport" value="13000000000" placeholder="手机号码"></input>
+                                                        <input type="tel" id="portal_index_passport" name="passport" placeholder="手机号码"></input>
         											</div>
         										</div>
         									</li>

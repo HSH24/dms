@@ -52,7 +52,7 @@ public class TradeAction extends BaseAction {
 
 		// 直接购买
 		if (cartIds == null || cartIds.length == 0) {
-			result = tradeService.createTrade(this.getOpenId(), 0L, "1", "1", "1");
+			result = tradeService.createTrade(this.getUser().getUserId(), 0L, "1", "1", "1");
 
 			if (result.getResult()) {
 				tradeNo = result.getCode();
@@ -62,7 +62,7 @@ public class TradeAction extends BaseAction {
 
 			return SUCCESS;
 		} else {
-			result = tradeService.createTrade(this.getOpenId(), 0L, cartIds);
+			result = tradeService.createTrade(this.getUser().getUserId(), 0L, cartIds);
 
 			if (result.getResult()) {
 				this.setResourceResult(result.getCode());
@@ -83,7 +83,7 @@ public class TradeAction extends BaseAction {
 	public String stats() {
 		StringBuilder sb = new StringBuilder();
 
-		String userId = this.getOpenId();
+		String userId = this.getUser().getUserId();
 
 		sb.append(tradeService.getTradeCount(userId, new String[] { "check", "topay" })).append("&");
 		sb.append(tradeService.getTradeCount(userId, new String[] { "tosend" })).append("&");
@@ -101,7 +101,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String list() {
-		String userId = this.getOpenId();
+		String userId = this.getUser().getUserId();
 
 		// 待付款
 		if ("topay".equals(type)) {
@@ -125,7 +125,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String cancel() {
-		BooleanResult result = tradeService.cancelTrade(this.getOpenId(), tradeNo);
+		BooleanResult result = tradeService.cancelTrade(this.getUser().getUserId(), tradeNo);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -142,7 +142,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String detail() {
-		trade = tradeService.getTrade(this.getOpenId(), tradeNo);
+		trade = tradeService.getTrade(this.getUser().getUserId(), tradeNo);
 
 		return SUCCESS;
 	}
@@ -153,7 +153,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String refund() {
-		trade = tradeService.getOrder(this.getOpenId(), tradeNo, orderId);
+		trade = tradeService.getOrder(this.getUser().getUserId(), tradeNo, orderId);
 
 		return SUCCESS;
 	}
@@ -164,7 +164,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String sign() {
-		BooleanResult result = tradeService.signTrade(this.getOpenId(), tradeNo);
+		BooleanResult result = tradeService.signTrade(this.getUser().getUserId(), tradeNo);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());

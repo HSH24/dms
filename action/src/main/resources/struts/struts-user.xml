@@ -5,9 +5,5 @@
 	<package name="{http://dms}dms$user"
 		extends="{http://dms}dms$framework" namespace="/user">
 
-		<action name="address" class="userAddressAction" method="index">
-			<result name="success">/dms/user/address.vm</result>
-		</action>
-		
 	</package>
 </struts>
