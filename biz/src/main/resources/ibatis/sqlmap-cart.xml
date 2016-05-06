@@ -63,7 +63,6 @@
 		  FROM dms_tb_cart t
 		 WHERE t.STATE = 'U'
 		   AND t.user_id = #userId#
-		   AND t.sup_id = #supId#
 	]]>
 	</select>
 	

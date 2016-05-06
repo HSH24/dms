@@ -100,7 +100,7 @@ public class CartServiceImpl implements ICartService {
 			return result;
 		}
 
-		Item item = map.get(itemId);
+		Item item = map.get(cart.getItemId());
 		if (item == null) {
 			result.setCode("商品信息不存在。");
 			return result;
@@ -170,15 +170,14 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public int getCartCount(String userId, Long supId) {
+	public int getCartCount(String userId) {
 		// userId 必填
-		if (StringUtils.isBlank(userId) || supId == null) {
+		if (StringUtils.isBlank(userId)) {
 			return 0;
 		}
 
 		Cart cart = new Cart();
 		cart.setUserId(userId.trim());
-		cart.setSupId(supId);
 
 		try {
 			return cartDao.getCartCount(cart);

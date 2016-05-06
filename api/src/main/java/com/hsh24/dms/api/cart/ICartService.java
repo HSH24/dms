@@ -29,10 +29,9 @@ public interface ICartService {
 	/**
 	 * 
 	 * @param userId
-	 * @param shopId
 	 * @return
 	 */
-	int getCartCount(String userId, Long shopId);
+	int getCartCount(String userId);
 
 	/**
 	 * 获取用户购物车.

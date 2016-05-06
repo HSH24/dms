@@ -7,18 +7,18 @@ myApp.onPageInit('cart.index', function(page) {
 				var xhr = e.detail.xhr;
 
 				if (cart_index_flag == "create") {
-					view4.router.load({
-								url : appUrl + "/trade/detail.htm?tradeNo="
-										+ xhr.responseText
+					myApp.alert("下单成功，订单号：" + xhr.responseText, '信息',
+							function() {
+								view4.router.refreshPage();
 							});
 				} else if (cart_index_flag == "remove") {
 					myApp.alert(xhr.responseText, '信息', function() {
 								view4.router.refreshPage();
-
-								// 更新首页购物车标记
-								portal_home_cart_stats();
 							});
 				}
+
+				// 更新首页购物车标记
+				portal_home_cart_stats();
 			});
 
 			$$('form.ajax-submit').on('submitError', function(e) {
