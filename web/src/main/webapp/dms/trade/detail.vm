@@ -80,7 +80,6 @@
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title" style="font-weight: 400; width: 100%; text-align: center;">
-                                    <div>￥$!formatUtil.getAmountFormat($!{trade.tradePrice})</div>
 									<div style="font-size: 16px; color: #ff5500;">
 										#if($!{trade.type} == 'check' || $!{trade.type} == 'topay' || $!{trade.type} == 'cancel')
 										应付：￥$!formatUtil.getAmountFormat($!{trade.price})

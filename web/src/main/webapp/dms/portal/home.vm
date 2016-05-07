@@ -56,55 +56,6 @@
 									</li>
 								</ul>
 							</div>
-							
-							<div class="" style="background-color:#ffffff;">
-								<div class="list-block sortable sortable-opened">
-									 <ul>
-										<li>
-											<div class="item-content">
-												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
-												<div class="item-inner">
-													<div class="item-title">
-														李大伯
-														<span style="font-size: 13px;">10:30 新飞路1500弄56号</span>
-													</div>
-													<div class="item-after">￥10</div>
-												</div>
-											</div>
-											<!-- 可排序句柄  -->
-											<div class="sortable-handler"></div>
-										</li>
-										<li>
-											<div class="item-content">
-												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
-												<div class="item-inner">
-													<div class="item-title">
-														李大伯
-														<span style="font-size: 13px;">04-20 10:30 新飞路1500弄56号</span>
-													</div>
-													<div class="item-after">￥10</div>
-												</div>
-											</div>
-											<!-- 可排序句柄  -->
-											<div class="sortable-handler"></div>
-										</li>
-										<li>
-											<div class="item-content">
-												<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
-												<div class="item-inner">
-													<div class="item-title">
-														李大伯
-														<span style="font-size: 13px;">04-19 10:30 新飞路1500弄56号</span>
-													</div>
-													<div class="item-after">￥10</div>
-												</div>
-											</div>
-											<!-- 可排序句柄  -->
-											<div class="sortable-handler"></div>
-										</li>
-									 </ul>
-								</div>
-                            </div>
                         </div>
                     </div>
                 </div>
