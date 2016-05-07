@@ -382,33 +382,6 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
-	public BooleanResult updateReceiver(String userId, String tradeNo, Trade trade) {
-		BooleanResult result = new BooleanResult();
-		result.setResult(false);
-
-		if (StringUtils.isBlank(userId)) {
-			result.setCode("用户信息不能为空。");
-			return result;
-		}
-
-		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("订单信息不能为空。");
-			return result;
-		}
-
-		if (trade == null) {
-			result.setCode("联系人信息不能为空。");
-			return result;
-		}
-
-		trade.setUserId(userId.trim());
-		trade.setModifyUser(userId.trim());
-		trade.setTradeNo(tradeNo.trim());
-
-		return updateTrade(trade);
-	}
-
-	@Override
 	public BooleanResult cancelTrade(String userId, String tradeNo) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);

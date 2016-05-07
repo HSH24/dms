@@ -139,13 +139,21 @@ public class OrderServiceImpl implements IOrderService {
 		Order order = new Order();
 		order.setTradeId(tradeId);
 
+		List<Order> orderList = null;
+
 		try {
-			return orderDao.getOrderList(order);
+			orderList = orderDao.getOrderList(order);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(order), e);
+
+			return null;
 		}
 
-		return null;
+		if (orderList == null || orderList.size() == 0) {
+			return null;
+		}
+
+		return orderList;
 	}
 
 	@Override

@@ -14,14 +14,9 @@ public class FileInfo extends SearchInfo {
 
 	private Long fileId;
 
-	private Long shopId;
+	private Long supId;
 
 	private String fileName;
-
-	/**
-	 * dfs or hdfs.
-	 */
-	private String fileType;
 
 	/**
 	 * txt jpg ...
@@ -48,12 +43,12 @@ public class FileInfo extends SearchInfo {
 		this.fileId = fileId;
 	}
 
-	public Long getShopId() {
-		return shopId;
+	public Long getSupId() {
+		return supId;
 	}
 
-	public void setShopId(Long shopId) {
-		this.shopId = shopId;
+	public void setSupId(Long supId) {
+		this.supId = supId;
 	}
 
 	public String getFileName() {
@@ -62,14 +57,6 @@ public class FileInfo extends SearchInfo {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
-	}
-
-	public String getFileType() {
-		return fileType;
-	}
-
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
 	}
 
 	public String getSuffix() {

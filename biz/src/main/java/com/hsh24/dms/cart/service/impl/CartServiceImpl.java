@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.hsh24.dms.api.cart.ICartService;
 import com.hsh24.dms.api.cart.bo.Cart;
+import com.hsh24.dms.api.item.IItemFileService;
 import com.hsh24.dms.api.item.IItemService;
 import com.hsh24.dms.api.item.IItemSkuService;
 import com.hsh24.dms.api.item.bo.Item;
@@ -33,6 +34,8 @@ public class CartServiceImpl implements ICartService {
 	private IItemService itemService;
 
 	private IItemSkuService itemSkuService;
+
+	private IItemFileService itemFileService;
 
 	private ISupplierService supplierService;
 
@@ -224,7 +227,7 @@ public class CartServiceImpl implements ICartService {
 		Map<Long, ItemSku> itemSkuMap = k == 0 ? new HashMap<Long, ItemSku>() : itemSkuService.getItemSku(skuId);
 
 		// 4. 获取商品文件信息
-		Map<String, List<ItemFile>> itemFileMap = null;// itemFileService.getItemFileList(shopId,
+		Map<Long, List<ItemFile>> itemFileMap = itemFileService.getItemFileList(itemId);
 
 		for (Cart ca : cartList) {
 			// 供应商信息
@@ -445,6 +448,14 @@ public class CartServiceImpl implements ICartService {
 
 	public void setItemSkuService(IItemSkuService itemSkuService) {
 		this.itemSkuService = itemSkuService;
+	}
+
+	public IItemFileService getItemFileService() {
+		return itemFileService;
+	}
+
+	public void setItemFileService(IItemFileService itemFileService) {
+		this.itemFileService = itemFileService;
 	}
 
 	public ISupplierService getSupplierService() {

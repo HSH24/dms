@@ -88,7 +88,7 @@ public class ItemServiceImpl implements IItemService {
 		}
 
 		// 2. 获取商品文件信息
-		item.setItemFileList(itemFileService.getItemFileList(shopId, itemId));
+		item.setItemFileList(itemFileService.getItemFileList(shopId, item.getItemId()));
 
 		// 3. 获取商品 sku 信息
 		List<ItemSku> skuList = itemSkuService.getItemSkuList(shopId, itemId);
