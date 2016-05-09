@@ -8,9 +8,7 @@
 		<!-- 登陆 -->
 		<action name="login" class="loginAction" method="login">
 			<result name="incorrect">/dms/portal/index.vm</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">home</param>
-			</result>
+			<result name="success" type="redirect">${env.appUrl}/home.htm</result>
 		</action>
 		
 		<!-- 退出 -->
