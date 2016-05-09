@@ -18,6 +18,6 @@ public interface IReceiptDetailDao {
 	 * @param modifyUser
 	 * @return
 	 */
-	Long createReceiptDetail(Long receiptId, List<ReceiptDetail> receiptDetailList, String modifyUser);
+	int createReceiptDetail(Long receiptId, List<ReceiptDetail> receiptDetailList, String modifyUser);
 
 }

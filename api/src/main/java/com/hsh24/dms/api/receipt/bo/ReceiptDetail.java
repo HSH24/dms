@@ -22,6 +22,8 @@ public class ReceiptDetail implements Serializable {
 	 */
 	private int quantity;
 
+	private String modifyUser;
+
 	public Long getDetailId() {
 		return detailId;
 	}
@@ -52,6 +54,14 @@ public class ReceiptDetail implements Serializable {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getModifyUser() {
+		return modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
 	}
 
 }

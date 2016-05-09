@@ -7,14 +7,13 @@ import com.hsh24.dms.receipt.dao.IReceiptDao;
 /**
  * 
  * @author JiakunXu
- *
+ * 
  */
 public class ReceiptDaoImpl extends BaseDaoImpl implements IReceiptDao {
 
 	@Override
 	public Long createReceipt(Receipt receipt) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Long) getSqlMapClientTemplate().insert("receipt.createReceipt", receipt);
 	}
 
 }

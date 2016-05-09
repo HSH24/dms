@@ -19,6 +19,14 @@ public interface IReceiptService {
 	 * @param receiptDetailList
 	 * @return
 	 */
-	BooleanResult part(String userId, String tradeId, List<ReceiptDetail> receiptDetailList);
+	BooleanResult part(Long userId, String tradeId, List<ReceiptDetail> receiptDetailList);
+
+	/**
+	 * 
+	 * @param userId
+	 * @param tradeId
+	 * @return
+	 */
+	BooleanResult all(Long userId, String tradeId);
 
 }

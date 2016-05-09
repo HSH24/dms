@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="receipt.detail">
+	
+	<typeAlias alias="receiptDetail" type="com.hsh24.dms.api.receipt.bo.ReceiptDetail" />
+	
+	<insert id="createReceiptDetail" parameterClass="receiptDetail">
+	<![CDATA[
+		INSERT
+		INTO dms_tb_receipt_detail
+		  (
+			RECEIPT_ID,
+			ORDER_ID,
+			QUANTITY,
+			STATE,
+			CREATE_DATE,
+			CREATE_USER,
+			MODIFY_DATE,
+			MODIFY_USER
+		  )
+		  VALUES
+		  (
+			#receiptId#,
+			#orderId#,
+			#quantity#,
+			'U',
+			NOW(),
+			#modifyUser#,
+			NOW(),
+			#modifyUser#
+		  )
+	]]>
+		<selectKey resultClass="java.lang.Long" keyProperty="receiptDetailId">
+		<![CDATA[
+			SELECT LAST_INSERT_ID()
+		]]>
+		</selectKey>
+	</insert>
+
+</sqlMap>

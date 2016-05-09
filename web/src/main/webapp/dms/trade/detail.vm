@@ -35,8 +35,10 @@
 							<div class="item-inner" style="display: inherit;">
 								<div class="item-title" style="font-weight: 400;">供应商：$!{trade.supName}</div>
 								<div class="item-after">
+									#if($!{trade.type} == 'send')
 									<a id="trade/detail/edit" href="javascript:trade_detail_edit();" style="margin: -10px 0px; padding: 10px 0px;">部分收货</a>
 									<a id="trade/detail/edited" href="javascript:trade_detail_edited();" style="margin: -10px 0px; padding: 10px 0px; display: none;">取消</a>
+									#end
 								</div>
 							</div>
 						</div>
