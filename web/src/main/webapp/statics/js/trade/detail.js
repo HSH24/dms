@@ -15,10 +15,29 @@ myApp.onPageInit('trade.detail', function(page) {
 					});
 		});
 
+function trade_detail_receipt() {
+	myApp.showIndicator();
+
+	var params = [];
+
+	$$("input[name='trade/detail/orderId']").each(function(e) {
+				var orderId = this.value;
+				params.push({
+							"orderId" : orderId,
+							"quantity" : $$('#trade/detail/quantity/' + orderId)
+									.val()
+						});
+			});
+
+	$$('#trade/detail/form/receiptDetailList').val(JSON.stringify(params));
+
+	$$('#trade/detail/form').trigger("submit");
+}
+
 function trade_detail_minus(orderId) {
 	var q = $$('#trade/detail/quantity/' + orderId).val();
 
-	if (q == 1) {
+	if (q == 0) {
 		return;
 	}
 

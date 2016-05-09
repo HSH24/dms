@@ -44,6 +44,7 @@
 						</div>
 					</li>
 					#foreach($order in $!{trade.orderList})
+					<input type="hidden" name="trade/detail/orderId" value="$!{order.orderId}"></input>
 					<li>
 						<div class="item-content">
 							<div class="item-media" style="padding-top: 7px; padding-bottom: 8px;">
@@ -128,9 +129,9 @@
 				<p><a id="trade/detail/btn/receipt" href="javascript:trade_detail_receipt();" class="button button-big button-fill weui_btn_primary" style="display: none;">确认部分收货</a></p>
             </div>
 			
-			<form id="trade/detail/receipt" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit">
+			<form id="trade/detail/form" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit">
             	<input type="hidden" name="tradeId" value="$!{trade.tradeId}"/>
-				<input type="hidden" name="receiptDetailList" id="trade/detail/receipt/receiptDetailList"/>
+				<input type="hidden" name="receiptDetailList" id="trade/detail/form/receiptDetailList"/>
             </form>
         </div>
     </div>

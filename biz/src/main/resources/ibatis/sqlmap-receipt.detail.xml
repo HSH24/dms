@@ -32,7 +32,7 @@
 			#modifyUser#
 		  )
 	]]>
-		<selectKey resultClass="java.lang.Long" keyProperty="receiptDetailId">
+		<selectKey resultClass="java.lang.Long" keyProperty="detailId">
 		<![CDATA[
 			SELECT LAST_INSERT_ID()
 		]]>
