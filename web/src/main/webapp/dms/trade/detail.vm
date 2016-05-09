@@ -34,6 +34,10 @@
 						<div class="item-content">
 							<div class="item-inner" style="display: inherit;">
 								<div class="item-title" style="font-weight: 400;">供应商：$!{trade.supName}</div>
+								<div class="item-after">
+									<a id="trade/detail/edit" href="javascript:trade_detail_edit();" style="margin: -10px 0px; padding: 10px 0px;">部分收货</a>
+									<a id="trade/detail/edited" href="javascript:trade_detail_edited();" style="margin: -10px 0px; padding: 10px 0px; display: none;">取消</a>
+								</div>
 							</div>
 						</div>
 					</li>
@@ -50,9 +54,18 @@
 								</div>
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-subtitle" style="font-size: 13px; color: #8e8e93;">$!{order.propertiesName}</div>
-									<div class="item-after">×$!{order.quantity}</div>
+									<div id="trade/detail/quantity/edited/$!{order.orderId}" class="item-after">×$!{order.quantity}</div>
+									<div id="trade/detail/quantity/edit" class="item-after" style="display: none;">
+										<div class="quantity">
+											<button class="minus" type="button"></button>
+                                            <input id="trade/detail/quantity/$!{order.orderId}" type="text" class="txt" value="$!{order.quantity}"></input>
+											<button class="plus" type="button"></button>
+											<div class="response-area response-area-minus" onclick="trade_detail_minus('$!{order.orderId}');"></div>
+											<div class="response-area response-area-plus" onclick="trade_detail_plus('$!{order.orderId}');"></div>
+										</div>
+									</div>
 								</div>
-								#if($!{trade.type} == 'tosend' || $!{trade.type} == 'send')
+								#if($!{trade.type} == 'tosend')
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-title"></div>
 									<div class="item-after">
@@ -64,7 +77,7 @@
 						</div>
 					</li>
 					#end
-					<li>
+					<li id="trade/detail/item/price">
 						<div class="item-content">
 							<div class="item-inner" style="display: inherit;">
 								<div class="item-title" style="font-weight: 400;">合计</div>
@@ -74,7 +87,7 @@
 					</li>
 				</ul>
             </div>
-			<div class="list-block media-list" style="font-size: 15px;">
+			<div id="trade/detail/media/2" class="list-block media-list" style="font-size: 15px;">
 				<ul>
 					<li>
 						<div class="item-content">
@@ -108,6 +121,15 @@
 					</li>
 				</ul>
             </div>
+			
+			<div class="content-block">
+				<p><a id="trade/detail/btn/receipt" href="javascript:trade_detail_receipt();" class="button button-big button-fill weui_btn_primary" style="display: none;">确认部分收货</a></p>
+            </div>
+			
+			<form id="trade/detail/receipt" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit">
+            	<input type="hidden" name="tradeId" value="$!{trade.tradeId}"/>
+				<input type="hidden" name="receiptDetailList" id="trade/detail/receipt/receiptDetailList"/>
+            </form>
         </div>
     </div>
 </div>

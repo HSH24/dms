@@ -10,8 +10,6 @@ import com.hsh24.dms.api.user.bo.User;
  * 
  */
 public class CAServiceImpl implements ICAService {
-	
-	
 
 	@Override
 	public ValidateResult validateUser(String passport, String password) {
@@ -20,7 +18,7 @@ public class CAServiceImpl implements ICAService {
 		result.setResultCode(ICAService.RESULT_SUCCESS);
 
 		User user = new User();
-		user.setUserId("oTT3bsrzIeC8zTk7m9LJpnEFqzl0");
+		user.setUserId(1L);
 		user.setPassport("oTT3bsrzIeC8zTk7m9LJpnEFqzl0");
 		result.setUser(user);
 

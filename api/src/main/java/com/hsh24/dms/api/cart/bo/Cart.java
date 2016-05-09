@@ -24,7 +24,7 @@ public class Cart extends SearchInfo {
 	/**
 	 * 用户ID.
 	 */
-	private String userId;
+	private Long userId;
 
 	/**
 	 * 供应商ID.
@@ -91,11 +91,11 @@ public class Cart extends SearchInfo {
 		this.cartId = cartId;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

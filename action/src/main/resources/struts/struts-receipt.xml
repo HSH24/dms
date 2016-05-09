@@ -1,0 +1,17 @@
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="{http://dms}dms$receipt"
+		extends="{http://dms}dms$framework" namespace="/receipt">
+
+		<action name="part" class="receiptAction" method="part">
+			<interceptor-ref name="authenticationStack" />
+		</action>
+		
+		<action name="all" class="receiptAction" method="all">
+			<interceptor-ref name="authenticationStack" />
+		</action>
+		
+	</package>
+</struts>

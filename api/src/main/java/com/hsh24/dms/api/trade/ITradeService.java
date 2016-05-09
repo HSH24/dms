@@ -56,7 +56,7 @@ public interface ITradeService {
 	 * @param quantity
 	 * @return
 	 */
-	BooleanResult createTrade(String userId, String itemId, String skuId, String quantity);
+	BooleanResult createTrade(Long userId, String itemId, String skuId, String quantity);
 
 	/**
 	 * 卖家下单交易.
@@ -67,7 +67,7 @@ public interface ITradeService {
 	 *            购物车id.
 	 * @return
 	 */
-	BooleanResult createTrade(String userId, String[] cartId);
+	BooleanResult createTrade(Long userId, String[] cartId);
 
 	/**
 	 * 卖家查询交易.
@@ -77,7 +77,7 @@ public interface ITradeService {
 	 * @param type
 	 * @return
 	 */
-	int getTradeCount(String userId, String[] type);
+	int getTradeCount(Long userId, String[] type);
 
 	/**
 	 * 卖家查询某店铺交易.
@@ -87,7 +87,7 @@ public interface ITradeService {
 	 * @param type
 	 * @return
 	 */
-	List<Trade> getTradeList(String userId, String[] type);
+	List<Trade> getTradeList(Long userId, String[] type);
 
 	/**
 	 * 卖家查看订单.
@@ -96,7 +96,7 @@ public interface ITradeService {
 	 * @param tradeNo
 	 * @return
 	 */
-	Trade getTrade(String userId, String tradeNo);
+	Trade getTrade(Long userId, String tradeNo);
 
 	/**
 	 * 取消订单.
@@ -105,7 +105,7 @@ public interface ITradeService {
 	 * @param tradeNo
 	 * @return
 	 */
-	BooleanResult cancelTrade(String userId, String tradeNo);
+	BooleanResult cancelTrade(Long userId, String tradeNo);
 
 	/**
 	 * 获取某一交易某一订单明细信息(用于退款).
@@ -115,7 +115,7 @@ public interface ITradeService {
 	 * @param orderId
 	 * @return
 	 */
-	Trade getOrder(String userId, String tradeNo, String orderId);
+	Trade getOrder(Long userId, String tradeNo, String orderId);
 
 	/**
 	 * 退款申请.
@@ -138,6 +138,6 @@ public interface ITradeService {
 	 * @param tradeNo
 	 * @return
 	 */
-	BooleanResult signTrade(String userId, String tradeNo);
+	BooleanResult signTrade(Long userId, String tradeNo);
 
 }

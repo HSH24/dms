@@ -79,7 +79,7 @@ public class TradeAction extends BaseAction {
 	public String stats() {
 		StringBuilder sb = new StringBuilder();
 
-		String userId = this.getUser().getUserId();
+		Long userId = this.getUser().getUserId();
 
 		sb.append(tradeService.getTradeCount(userId, new String[] { "check", "topay" })).append("&");
 		sb.append(tradeService.getTradeCount(userId, new String[] { "tosend" })).append("&");
@@ -97,7 +97,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String list() {
-		String userId = this.getUser().getUserId();
+		Long userId = this.getUser().getUserId();
 
 		// 待付款
 		if ("topay".equals(type)) {

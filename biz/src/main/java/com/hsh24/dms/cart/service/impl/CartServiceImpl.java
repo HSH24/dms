@@ -42,18 +42,18 @@ public class CartServiceImpl implements ICartService {
 	private ICartDao cartDao;
 
 	@Override
-	public BooleanResult createCart(String userId, String itemId, String skuId, String quantity) {
+	public BooleanResult createCart(Long userId, String itemId, String skuId, String quantity) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		Cart cart = new Cart();
 
-		if (StringUtils.isBlank(userId)) {
+		if (userId == null) {
 			result.setCode("用户信息不能为空。");
 			return result;
 		}
-		cart.setUserId(userId.trim());
-		cart.setModifyUser(userId);
+		cart.setUserId(userId);
+		cart.setModifyUser(userId.toString());
 
 		if (StringUtils.isBlank(itemId)) {
 			result.setCode("商品信息不能为空。");
@@ -151,14 +151,14 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public int getCartCount(String userId) {
+	public int getCartCount(Long userId) {
 		// userId 必填
-		if (StringUtils.isBlank(userId)) {
+		if (userId == null) {
 			return 0;
 		}
 
 		Cart cart = new Cart();
-		cart.setUserId(userId.trim());
+		cart.setUserId(userId);
 
 		try {
 			return cartDao.getCartCount(cart);
@@ -170,19 +170,19 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public List<Cart> getCartList(String userId) {
+	public List<Cart> getCartList(Long userId) {
 		return getCartList(userId, null);
 	}
 
 	@Override
-	public List<Cart> getCartList(String userId, String[] cartId) {
+	public List<Cart> getCartList(Long userId, String[] cartId) {
 		// userId 必填
-		if (StringUtils.isBlank(userId)) {
+		if (userId == null) {
 			return null;
 		}
 
 		Cart cart = new Cart();
-		cart.setUserId(userId.trim());
+		cart.setUserId(userId);
 		cart.setCodes(cartId);
 
 		List<Cart> cartList = getCartList(cart);
@@ -263,18 +263,18 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public BooleanResult removeCart(String userId, String[] cartId) {
+	public BooleanResult removeCart(Long userId, String[] cartId) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		Cart cart = new Cart();
 
-		if (StringUtils.isBlank(userId)) {
+		if (userId == null) {
 			result.setCode("用户信息不能为空！");
 			return result;
 		}
-		cart.setUserId(userId.trim());
-		cart.setModifyUser(userId);
+		cart.setUserId(userId);
+		cart.setModifyUser(userId.toString());
 
 		if (cartId == null || cartId.length == 0) {
 			result.setCode("购物车商品信息不能为空！");
@@ -297,18 +297,18 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public BooleanResult updateQuantity(String userId, String cartId, String quantity) {
+	public BooleanResult updateQuantity(Long userId, String cartId, String quantity) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		Cart cart = new Cart();
 
-		if (StringUtils.isBlank(userId)) {
+		if (userId == null) {
 			result.setCode("0");
 			return result;
 		}
-		cart.setUserId(userId.trim());
-		cart.setModifyUser(userId);
+		cart.setUserId(userId);
+		cart.setModifyUser(userId.toString());
 
 		if (StringUtils.isBlank(cartId)) {
 			result.setCode("0");
@@ -373,18 +373,18 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public BooleanResult finishCart(String userId, String[] cartId) {
+	public BooleanResult finishCart(Long userId, String[] cartId) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
 		Cart cart = new Cart();
 
-		if (StringUtils.isBlank(userId)) {
+		if (userId == null) {
 			result.setCode("用户信息不能为空！");
 			return result;
 		}
-		cart.setUserId(userId.trim());
-		cart.setModifyUser(userId);
+		cart.setUserId(userId);
+		cart.setModifyUser(userId.toString());
 
 		if (cartId == null || cartId.length == 0) {
 			result.setCode("购物车商品信息不能为空！");
