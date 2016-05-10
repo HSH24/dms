@@ -13,7 +13,7 @@
 		  (
 			TRADE_ID,
 			TRADE_NO,
-			USER_ID,
+			SHOP_ID,
 			SUP_ID,
 			TYPE,
 			TRADE_PRICE,
@@ -29,7 +29,7 @@
 		  (
 			#tradeId#,
 			#tradeNo#,
-			#userId#,
+			#shopId#,
 			#supId#,
 			#type#,
 			#tradePrice#,
@@ -37,9 +37,9 @@
 			#cartId#,
 			NOW(),
 			'U',
-			#userId#,
+			#modifyUser#,
 			NOW(),
-			#userId#
+			#modifyUser#
 		  )
 	]]>
 		<selectKey resultClass="java.lang.Long" keyProperty="tradeId">
@@ -54,7 +54,7 @@
 		SELECT COUNT(1)
 		  FROM dms_tb_trade t
 		 WHERE t.STATE = 'U'
-		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 	]]>
 		<dynamic>
 			<isNotEmpty property="codes" prepend="and">
@@ -82,7 +82,7 @@
 			   t.feedback_type AS feedbackType
 		  FROM dms_tb_trade t
 		 WHERE t.state = 'U'
-		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 	]]>
 		<dynamic>
 			<isNotEmpty property="codes" prepend="and">
@@ -122,8 +122,8 @@
 		 WHERE t.trade_no = #tradeNo#
 	]]>
 		<dynamic>
-			<isNotEmpty property="userId" prepend="and">
-			<![CDATA[ t.user_id = #userId# ]]>
+			<isNotEmpty property="shopId" prepend="and">
+			<![CDATA[ t.shop_id = #shopId# ]]>
 			</isNotEmpty>
 		</dynamic>
 	</select>
@@ -175,8 +175,8 @@
 			<isNotEmpty property="tradeNo" prepend="and">
 			<![CDATA[ t.trade_no = #tradeNo# ]]>
 			</isNotEmpty>
-			<isNotEmpty property="userId" prepend="and">
-			<![CDATA[ t.user_id = #userId# ]]>
+			<isNotEmpty property="shopId" prepend="and">
+			<![CDATA[ t.shop_id = #shopId# ]]>
 			</isNotEmpty>
 			<isNotEmpty property="type" prepend="and">
 			<![CDATA[ t.type <> #type# ]]>

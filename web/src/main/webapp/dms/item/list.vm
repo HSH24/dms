@@ -144,6 +144,7 @@
 		<form id="item/list/trade" action="$!{env.appUrl}/trade/create.htm" method="POST" class="ajax-submit">
 			<input type="hidden" id="item_list_trade_itemId" name="itemId"></input>
 			<input type="hidden" id="item_list_trade_skuId" name="skuId"></input>
+			<input type="hidden" id="item_list_trade_quantity" name="quantity"></input>
         </form>
 		
 		<form id="item/list/cart" action="$!{env.appUrl}/cart/add.htm" method="POST" class="ajax-submit">

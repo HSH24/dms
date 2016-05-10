@@ -21,9 +21,9 @@ public class Trade extends SearchInfo {
 	private Long tradeId;
 
 	/**
-	 * 用户ID.
+	 * 店铺ID.
 	 */
-	private Long userId;
+	private Long shopId;
 
 	/**
 	 * 供应商ID.
@@ -175,12 +175,12 @@ public class Trade extends SearchInfo {
 		this.tradeId = tradeId;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Long getShopId() {
+		return shopId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setShopId(Long shopId) {
+		this.shopId = shopId;
 	}
 
 	public Long getSupId() {

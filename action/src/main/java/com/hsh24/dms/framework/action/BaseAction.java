@@ -126,6 +126,10 @@ public class BaseAction extends ActionSupport {
 		return (User) getSession().getAttribute("ACEGI_SECURITY_LAST_LOGINUSER");
 	}
 
+	public Long getShopId() {
+		return (Long) getSession().getAttribute("ACEGI_SECURITY_LAST_SHOP");
+	}
+
 	public String getGmtStart() {
 		return gmtStart;
 	}

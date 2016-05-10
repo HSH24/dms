@@ -24,7 +24,8 @@ public class OrderServiceImpl implements IOrderService {
 	private IOrderDao orderDao;
 
 	@Override
-	public BooleanResult createOrder(Long supId, Long tradeId, String itemId, String skuId, String modifyUser) {
+	public BooleanResult createOrder(Long supId, Long tradeId, String itemId, String skuId, String quantity,
+		String modifyUser) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
@@ -37,7 +38,7 @@ public class OrderServiceImpl implements IOrderService {
 		order.setTradeId(tradeId);
 
 		if (supId == null) {
-			result.setCode("店铺信息不能为空！");
+			result.setCode("供应商信息不能为空！");
 			return result;
 		}
 		order.setSupId(supId);
@@ -65,6 +66,19 @@ public class OrderServiceImpl implements IOrderService {
 			logger.error(itemId, e);
 
 			result.setCode("SKU信息不正确！");
+			return result;
+		}
+
+		if (StringUtils.isBlank(quantity)) {
+			result.setCode("数量信息不能为空！");
+			return result;
+		}
+		try {
+			order.setQuantity(Integer.valueOf(quantity));
+		} catch (NumberFormatException e) {
+			logger.error(itemId, e);
+
+			result.setCode("数量信息不正确！");
 			return result;
 		}
 
@@ -100,7 +114,7 @@ public class OrderServiceImpl implements IOrderService {
 		order.setTradeId(tradeId);
 
 		if (supId == null) {
-			result.setCode("店铺信息不能为空！");
+			result.setCode("供应商信息不能为空！");
 			return result;
 		}
 		order.setSupId(supId);
@@ -131,8 +145,8 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public List<Order> getOrderList(Long userId, Long tradeId) {
-		if (userId == null || tradeId == null) {
+	public List<Order> getOrderList(Long shopId, Long tradeId) {
+		if (shopId == null || tradeId == null) {
 			return null;
 		}
 
@@ -157,8 +171,8 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public Order getOrder(Long userId, Long tradeId, Long orderId) {
-		if (userId == null || tradeId == null) {
+	public Order getOrder(Long shopId, Long tradeId, Long orderId) {
+		if (shopId == null || tradeId == null) {
 			return null;
 		}
 

@@ -63,6 +63,7 @@ function item_list_trade(itemId, skuId) {
 
 						$$('#item_list_trade_itemId').val(itemId);
 						$$('#item_list_trade_skuId').val(skuId);
+						$$('#item_list_trade_quantity').val("3");
 						$$('#item/list/trade').trigger("submit");
 					}
 				}]

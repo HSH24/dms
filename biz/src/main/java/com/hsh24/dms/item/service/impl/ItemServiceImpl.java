@@ -242,6 +242,9 @@ public class ItemServiceImpl implements IItemService {
 			return result;
 		}
 
+		// 某一商品价格
+		BigDecimal price = null;
+
 		if (skuId.equals(0L)) {
 			// 根据 skuId 获得 item 并 验证
 			Map<Long, ItemSku> map = itemSkuService.getItemSku(new String[] { skuId.toString() });
@@ -260,6 +263,8 @@ public class ItemServiceImpl implements IItemService {
 				result.setCode("商品和SKU信息不匹配。");
 				return result;
 			}
+
+			price = itemSku.getPrice();
 		}
 
 		// 根据 itemId 获得 item
@@ -275,7 +280,7 @@ public class ItemServiceImpl implements IItemService {
 			return result;
 		}
 
-		result.setCode(item.getSupId().toString());
+		result.setCode(item.getSupId().toString() + "&" + (skuId.equals(0L) ? price : item.getPrice()));
 		result.setResult(true);
 		return result;
 	}
