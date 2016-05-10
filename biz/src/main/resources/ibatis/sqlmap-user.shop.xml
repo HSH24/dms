@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="user.shop">
+	
+	<typeAlias alias="user" type="com.hsh24.dms.api.user.bo.User" />
+	<typeAlias alias="shop" type="com.hsh24.dms.api.shop.bo.Shop" />
+	
+	<select id="getShopList" parameterClass="user" resultClass="shop">
+	<![CDATA[
+		SELECT q.shop_id AS shopId,
+			   q.shop_name AS shopName
+		  FROM dms_tb_user t,
+			   dms_tb_user_shop p,
+			   mdm.mdm_tb_shop q
+		 WHERE t.user_id = p.user_id
+		   AND p.shop_id = q.shop_id
+		   AND t.state = 'U'
+		   AND p.state = 'U'
+		   AND q.state = 'U'
+		   AND t.user_id = #userId#
+	]]>
+	</select>
+	
+</sqlMap>

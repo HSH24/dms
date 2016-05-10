@@ -8,6 +8,7 @@
 	<bean id="loginAction" class="com.hsh24.dms.login.action.LoginAction" parent="baseAction" scope="request">
 		<property name="memcachedCacheService" ref="memcachedCacheService" />
 		<property name="caService" ref="caService" />
+		<property name="userShopService" ref="userShopService" />
 	</bean>
 	
 </beans>

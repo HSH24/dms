@@ -1,5 +1,7 @@
 package com.hsh24.dms.login.action;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import com.hsh24.dms.api.ca.ICAService;
 import com.hsh24.dms.api.ca.bo.ValidateResult;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
+import com.hsh24.dms.api.shop.bo.Shop;
+import com.hsh24.dms.api.user.IUserShopService;
 import com.hsh24.dms.api.user.bo.User;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.annotation.ActionMonitor;
@@ -29,9 +33,13 @@ public class LoginAction extends BaseAction {
 
 	private ICAService caService;
 
+	private IUserShopService userShopService;
+
 	private String passport;
 
 	private String password;
+
+	private List<Shop> shopList;
 
 	/**
 	 * 登录验证.
@@ -68,7 +76,22 @@ public class LoginAction extends BaseAction {
 		}
 
 		// 判断是否关联多个店铺
-		
+		shopList = userShopService.getShopList(u.getUserId());
+
+		if (shopList == null || shopList.size() == 0) {
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult("当前账号没有关联店铺。");
+
+			return RESOURCE_RESULT;
+		}
+
+		if (shopList.size() == 1) {
+			session.setAttribute("ACEGI_SECURITY_LAST_SHOP", shopList.get(0).getShopId());
+
+			this.setResourceResult(env.getProperty("appUrl") + "/home.htm");
+		} else {
+			this.setResourceResult("");
+		}
 
 		return RESOURCE_RESULT;
 	}
@@ -126,6 +149,14 @@ public class LoginAction extends BaseAction {
 		this.caService = caService;
 	}
 
+	public IUserShopService getUserShopService() {
+		return userShopService;
+	}
+
+	public void setUserShopService(IUserShopService userShopService) {
+		this.userShopService = userShopService;
+	}
+
 	public String getPassport() {
 		return passport;
 	}
@@ -140,6 +171,14 @@ public class LoginAction extends BaseAction {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Shop> getShopList() {
+		return shopList;
+	}
+
+	public void setShopList(List<Shop> shopList) {
+		this.shopList = shopList;
 	}
 
 }

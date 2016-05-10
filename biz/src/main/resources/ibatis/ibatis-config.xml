@@ -44,6 +44,7 @@
 	<sqlMap resource="ibatis/sqlmap-trade.order.refund.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.order.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.xml" />
+	<sqlMap resource="ibatis/sqlmap-user.shop.xml" />
 	<sqlMap resource="ibatis/sqlmap-user.xml" />
     
 </sqlMapConfig>
