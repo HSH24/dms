@@ -1,6 +1,6 @@
-package com.hsh24.dms.account.action;
+package com.hsh24.dms.user.action;
 
-import com.hsh24.dms.api.account.IAccountService;
+import com.hsh24.dms.api.user.IUserAccService;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.annotation.ActionMonitor;
 import com.hsh24.dms.framework.bo.BooleanResult;
@@ -12,13 +12,13 @@ import com.hsh24.dms.framework.log.Logger4jExtend;
  * @author JiakunXu
  * 
  */
-public class AccountAction extends BaseAction {
+public class UserAccAction extends BaseAction {
 
 	private static final long serialVersionUID = 8267298257804000897L;
 
-	private Logger4jExtend logger = Logger4jCollection.getLogger(AccountAction.class);
+	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAccAction.class);
 
-	private IAccountService accountService;
+	private IUserAccService userAccService;
 
 	private String passport;
 
@@ -35,7 +35,7 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	public String sendCheckCode() {
-		BooleanResult result = accountService.generateCheckCode(passport);
+		BooleanResult result = userAccService.generateCheckCode(passport);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -53,7 +53,7 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	public String validateCheckCode() {
-		BooleanResult result = accountService.validateCheckCode(passport, checkCode);
+		BooleanResult result = userAccService.validateCheckCode(passport, checkCode);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -77,7 +77,7 @@ public class AccountAction extends BaseAction {
 
 	@ActionMonitor(actionName = "密码重置")
 	public String updatePassword() {
-		BooleanResult result = accountService.setPassword(checkCode, password);
+		BooleanResult result = userAccService.setPassword(checkCode, password);
 
 		if (result.getResult()) {
 			this.setSuccessMessage("成功修改密码！");
@@ -88,12 +88,12 @@ public class AccountAction extends BaseAction {
 		return RESULT_MESSAGE;
 	}
 
-	public IAccountService getAccountService() {
-		return accountService;
+	public IUserAccService getUserAccService() {
+		return userAccService;
 	}
 
-	public void setAccountService(IAccountService accountService) {
-		this.accountService = accountService;
+	public void setUserAccService(IUserAccService userAccService) {
+		this.userAccService = userAccService;
 	}
 
 	public String getPassport() {

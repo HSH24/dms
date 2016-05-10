@@ -1,4 +1,4 @@
-package com.hsh24.dms.api.account;
+package com.hsh24.dms.api.user;
 
 import com.hsh24.dms.framework.bo.BooleanResult;
 
@@ -7,7 +7,7 @@ import com.hsh24.dms.framework.bo.BooleanResult;
  * @author JiakunXu
  * 
  */
-public interface IAccountService {
+public interface IUserAccService {
 
 	/**
 	 * 验证码找回密码.

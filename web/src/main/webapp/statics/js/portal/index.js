@@ -29,7 +29,7 @@ $$('form.ajax-submit').on('submitted', function(e) {
 			var xhr = e.detail.xhr;
 
 			mainView.router.load({
-						url : appUrl + "/account/setPassword.htm"
+						url : appUrl + "/user/setPassword.htm"
 					});
 		});
 
@@ -74,7 +74,7 @@ function sendCheckCode() {
 
 	$.ajax({
 				type : "post",
-				url : appUrl + "/account/sendCheckCode.htm",
+				url : appUrl + "/user/sendCheckCode.htm",
 				data : {
 					"passport" : $('#portal_index_forgetPassword_passport')
 							.val(),
@@ -97,7 +97,7 @@ function validate() {
 	myApp.showIndicator();
 
 	$$('#portal/forgetPassword/form').attr("action",
-			appUrl + "/account/validateCheckCode.htm");
+			appUrl + "/user/validateCheckCode.htm");
 
 	$$('#portal/forgetPassword/form').trigger("submit");
 }
