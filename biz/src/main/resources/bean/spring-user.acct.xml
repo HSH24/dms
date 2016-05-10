@@ -5,12 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
-	<bean id="userAccAction" class="com.hsh24.dms.user.action.UserAccAction" parent="baseAction" scope="request">
-		<property name="userAccService" ref="userAccService" />
+	<bean id="userAcctAction" class="com.hsh24.dms.user.action.UserAcctAction" parent="baseAction" scope="request">
+		<property name="userAcctService" ref="userAcctService" />
 	</bean>
 	
 	<!-- 账号管理 -->
-	<bean id="userAccService" class="com.hsh24.dms.user.service.impl.UserAccServiceImpl">
+	<bean id="userAcctService" class="com.hsh24.dms.user.service.impl.UserAcctServiceImpl">
 		<property name="memcachedCacheService" ref="memcachedCacheService" />
 		<property name="smsService" ref="smsService" />
 	</bean>

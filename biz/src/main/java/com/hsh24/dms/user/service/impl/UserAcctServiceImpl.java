@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.sms.ISMSService;
-import com.hsh24.dms.api.user.IUserAccService;
+import com.hsh24.dms.api.user.IUserAcctService;
 import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -17,9 +17,9 @@ import com.hsh24.dms.framework.log.Logger4jExtend;
  * @author JiakunXu
  * 
  */
-public class UserAccServiceImpl implements IUserAccService {
+public class UserAcctServiceImpl implements IUserAcctService {
 
-	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAccServiceImpl.class);
+	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAcctServiceImpl.class);
 
 	private IMemcachedCacheService memcachedCacheService;
 

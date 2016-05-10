@@ -30,7 +30,9 @@
 	<typeAlias alias="charaRplace" type="com.hsh24.dms.framework.ibatis.type.CharacterReplaceHanlderCallback" />
 
 	<sqlMap resource="ibatis/global.xml" />
+	<sqlMap resource="ibatis/sqlmap-bankAcct.xml" />
 	<sqlMap resource="ibatis/sqlmap-cart.xml" />
+	<sqlMap resource="ibatis/sqlmap-cashflow.xml" />
 	<sqlMap resource="ibatis/sqlmap-item.file.xml" />
 	<sqlMap resource="ibatis/sqlmap-item.sku.xml" />
 	<sqlMap resource="ibatis/sqlmap-item.xml" />

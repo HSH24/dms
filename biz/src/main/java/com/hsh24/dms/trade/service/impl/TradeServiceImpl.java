@@ -11,9 +11,13 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.hsh24.dms.api.bankAcct.IBankAcctService;
+import com.hsh24.dms.api.bankAcct.bo.BankAcct;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.cart.ICartService;
 import com.hsh24.dms.api.cart.bo.Cart;
+import com.hsh24.dms.api.cashflow.ICashflowService;
+import com.hsh24.dms.api.cashflow.bo.Cashflow;
 import com.hsh24.dms.api.item.IItemService;
 import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.api.item.bo.ItemSku;
@@ -56,6 +60,10 @@ public class TradeServiceImpl implements ITradeService {
 	private ISupplierService supplierService;
 
 	private IItemService itemService;
+
+	private IBankAcctService bankAcctService;
+
+	private ICashflowService cashflowService;
 
 	private ITradeDao tradeDao;
 
@@ -101,6 +109,12 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
+		final BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
+		if (bankAcct == null) {
+			result.setCode("资金账户信息不能为空。");
+			return result;
+		}
+
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
 				BooleanResult result = new BooleanResult();
@@ -134,6 +148,21 @@ public class TradeServiceImpl implements ITradeService {
 
 				// 2. 创建订单
 				result = orderService.createOrder(supId, tradeId, itemId, skuId, quantity, modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
+				// 3. 记录现金流水账
+				Cashflow cashflow = new Cashflow();
+				cashflow.setBankAcctId(bankAcct.getBankAcctId());
+				cashflow.setSummary("店铺上单：" + trade.getPrice());
+				cashflow.setCrAmount(trade.getPrice());
+				cashflow.setDrAmount(BigDecimal.ZERO);
+				cashflow.setTradeDate(trade.getPayDate());
+				cashflow.setTradeNo(trade.getTradeNo());
+				result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -210,6 +239,12 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
+		final BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
+		if (bankAcct == null) {
+			result.setCode("资金账户信息不能为空。");
+			return result;
+		}
+
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
 				BooleanResult result = new BooleanResult();
@@ -264,6 +299,21 @@ public class TradeServiceImpl implements ITradeService {
 
 					// 2. 创建订单
 					result = orderService.createOrder(supId, tradeId, cartId, shopId.toString());
+					if (!result.getResult()) {
+						ts.setRollbackOnly();
+
+						return result;
+					}
+
+					// 3. 记录现金流水账
+					Cashflow cashflow = new Cashflow();
+					cashflow.setBankAcctId(bankAcct.getBankAcctId());
+					cashflow.setSummary("店铺上单：" + trade.getPrice());
+					cashflow.setCrAmount(trade.getPrice());
+					cashflow.setDrAmount(BigDecimal.ZERO);
+					cashflow.setTradeDate(trade.getPayDate());
+					cashflow.setTradeNo(trade.getTradeNo());
+					result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
 					if (!result.getResult()) {
 						ts.setRollbackOnly();
 
@@ -659,6 +709,22 @@ public class TradeServiceImpl implements ITradeService {
 
 	public void setItemService(IItemService itemService) {
 		this.itemService = itemService;
+	}
+
+	public IBankAcctService getBankAcctService() {
+		return bankAcctService;
+	}
+
+	public void setBankAcctService(IBankAcctService bankAcctService) {
+		this.bankAcctService = bankAcctService;
+	}
+
+	public ICashflowService getCashflowService() {
+		return cashflowService;
+	}
+
+	public void setCashflowService(ICashflowService cashflowService) {
+		this.cashflowService = cashflowService;
 	}
 
 	public ITradeDao getTradeDao() {

@@ -7,7 +7,7 @@ import com.hsh24.dms.framework.bo.BooleanResult;
  * @author JiakunXu
  * 
  */
-public interface IUserAccService {
+public interface IUserAcctService {
 
 	/**
 	 * 验证码找回密码.

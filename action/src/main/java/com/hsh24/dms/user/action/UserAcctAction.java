@@ -1,6 +1,6 @@
 package com.hsh24.dms.user.action;
 
-import com.hsh24.dms.api.user.IUserAccService;
+import com.hsh24.dms.api.user.IUserAcctService;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.annotation.ActionMonitor;
 import com.hsh24.dms.framework.bo.BooleanResult;
@@ -12,13 +12,13 @@ import com.hsh24.dms.framework.log.Logger4jExtend;
  * @author JiakunXu
  * 
  */
-public class UserAccAction extends BaseAction {
+public class UserAcctAction extends BaseAction {
 
 	private static final long serialVersionUID = 8267298257804000897L;
 
-	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAccAction.class);
+	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAcctAction.class);
 
-	private IUserAccService userAccService;
+	private IUserAcctService userAccService;
 
 	private String passport;
 
@@ -88,11 +88,11 @@ public class UserAccAction extends BaseAction {
 		return RESULT_MESSAGE;
 	}
 
-	public IUserAccService getUserAccService() {
+	public IUserAcctService getUserAccService() {
 		return userAccService;
 	}
 
-	public void setUserAccService(IUserAccService userAccService) {
+	public void setUserAccService(IUserAcctService userAccService) {
 		this.userAccService = userAccService;
 	}
 
