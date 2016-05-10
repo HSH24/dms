@@ -21,6 +21,8 @@ var mainView = myApp.addView('.view-main', {
 			dynamicNavbar : true
 		});
 
+var portal_index_op;
+
 $$('form.ajax-submit').on('beforeSubmit', function(e) {
 		});
 
@@ -28,9 +30,13 @@ $$('form.ajax-submit').on('submitted', function(e) {
 			myApp.hideIndicator();
 			var xhr = e.detail.xhr;
 
-			mainView.router.load({
-						url : appUrl + "/user/setPassword.htm"
-					});
+			if (portal_index_op == 'login') {
+				top.location.href = appUrl + "/home.htm";
+			} else if (portal_index_op == 'forgetPassword') {
+				mainView.router.load({
+							url : appUrl + "/user/setPassword.htm"
+						});
+			}
 		});
 
 $$('form.ajax-submit').on('submitError', function(e) {
@@ -40,10 +46,14 @@ $$('form.ajax-submit').on('submitError', function(e) {
 		});
 
 function submit() {
+	setPassportCookies();
+
 	myApp.showIndicator();
 
-	setPassportCookies();
-	window.document.forms[0].submit();
+	portal_index_op = "login";
+	$$('#portal/index/login/form').attr("action", appUrl + "/login.htm");
+
+	$$('#portal/index/login/form').trigger("submit");
 }
 
 function more() {
@@ -96,10 +106,11 @@ function sendCheckCode() {
 function validate() {
 	myApp.showIndicator();
 
-	$$('#portal/forgetPassword/form').attr("action",
+	portal_index_op = "forgetPassword";
+	$$('#portal/index/forgetPassword/form').attr("action",
 			appUrl + "/user/validateCheckCode.htm");
 
-	$$('#portal/forgetPassword/form').trigger("submit");
+	$$('#portal/index/forgetPassword/form').trigger("submit");
 }
 
 var timer;
