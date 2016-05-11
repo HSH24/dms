@@ -60,8 +60,9 @@
 			   t.trade_no AS tradeNo
 		  FROM dms_tb_cashflow t
 		 WHERE t.state = 'U'
+		 ORDER BY $sort$ $order$
 		 LIMIT $limit$ OFFSET $offset$
-	]]>		
+	]]>
 	</select>
 	
 </sqlMap>

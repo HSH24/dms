@@ -33,9 +33,9 @@
                 </ul>
             </div>
 			
-			#foreach($cashflow in $!{cashflowList})
 			<div class="list-block" style="font-size: 14px;">
 				<ul>
+					#foreach($cashflow in $!{cashflowList})
 					<li>
 						<div class="item-content">
 							<div class="item-media">#$!{cashflow.cashflowId}</div>
@@ -45,9 +45,9 @@
 							</div>
 						</div>
 					</li>
+					#end
 				</ul>
             </div>
-			#end
         </div>
     </div>
 </div>

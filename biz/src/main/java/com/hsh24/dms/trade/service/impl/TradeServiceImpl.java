@@ -352,7 +352,7 @@ public class TradeServiceImpl implements ITradeService {
 		String modifyUser) {
 		Cashflow cashflow = new Cashflow();
 		cashflow.setBankAcctId(bankAcctId);
-		cashflow.setSummary("店铺上单：" + price);
+		cashflow.setSummary("店铺商品采购支出");
 		cashflow.setCrAmount(price);
 		cashflow.setDrAmount(BigDecimal.ZERO);
 		cashflow.setTradeDate(DateUtil.getNowDatetimeStr());

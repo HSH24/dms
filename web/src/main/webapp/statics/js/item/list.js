@@ -7,7 +7,7 @@ myApp.onPageInit('item.list', function(page) {
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '信息', function() {
 									// 更新首页购物车标记
-									// portal_home_cart_stats();
+									portal_home_cart_stats();
 								});
 					});
 
