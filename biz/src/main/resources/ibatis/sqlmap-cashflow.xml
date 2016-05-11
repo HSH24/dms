@@ -49,6 +49,16 @@
 		</selectKey>
 	</insert>
 	
+	<select id="getCashflowStats" parameterClass="cashflow" resultClass="cashflow">
+	<![CDATA[
+		SELECT SUM(t.cr_amount) AS crAmount,
+			   SUM(t.dr_amount) AS drAmount
+		  FROM dms_tb_cashflow t
+		 WHERE t.state = 'U'
+		   AND t.shop_id = #shopId#
+	]]>
+	</select>
+	
 	<select id="getCashflowList" parameterClass="cashflow" resultClass="cashflow">
 	<![CDATA[
 		SELECT t.cashflow_id AS cashflowId,

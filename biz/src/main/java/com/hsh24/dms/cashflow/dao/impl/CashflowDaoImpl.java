@@ -19,6 +19,11 @@ public class CashflowDaoImpl extends BaseDaoImpl implements ICashflowDao {
 	}
 
 	@Override
+	public Cashflow getCashflowStats(Cashflow cashflow) {
+		return (Cashflow) getSqlMapClientTemplate().queryForObject("cashflow.getCashflowStats", cashflow);
+	}
+
+	@Override
 	public int getCashflowCount(Cashflow cashflow) {
 		// TODO Auto-generated method stub
 		return 0;

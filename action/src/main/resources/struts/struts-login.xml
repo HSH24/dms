@@ -10,9 +10,7 @@
 		
 		<!-- 退出 -->
 		<action name="logout" class="loginAction" method="logout">
-			<result name="logout" type="redirect">
-				/
-			</result>
+			<result name="logout" type="redirect">${env.appUrl}/</result>
 		</action>
 		
 	</package>

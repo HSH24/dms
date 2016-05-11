@@ -17,6 +17,8 @@ public class CashflowAction extends BaseAction {
 
 	private ICashflowService cashflowService;
 
+	private Cashflow cashflow;
+
 	private List<Cashflow> cashflowList;
 
 	/**
@@ -24,7 +26,11 @@ public class CashflowAction extends BaseAction {
 	 * @return
 	 */
 	public String index() {
-		cashflowList = cashflowService.getCashflowList(this.getShop().getShopId(), new Cashflow());
+		Long shopId = this.getShop().getShopId();
+
+		cashflow = cashflowService.getCashflowStats(shopId);
+
+		cashflowList = cashflowService.getCashflowList(shopId, new Cashflow());
 
 		return SUCCESS;
 	}
@@ -35,6 +41,14 @@ public class CashflowAction extends BaseAction {
 
 	public void setCashflowService(ICashflowService cashflowService) {
 		this.cashflowService = cashflowService;
+	}
+
+	public Cashflow getCashflow() {
+		return cashflow;
+	}
+
+	public void setCashflow(Cashflow cashflow) {
+		this.cashflow = cashflow;
 	}
 
 	public List<Cashflow> getCashflowList() {

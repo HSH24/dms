@@ -24,6 +24,13 @@ public interface ICashflowService {
 	/**
 	 * 
 	 * @param shopId
+	 * @return
+	 */
+	Cashflow getCashflowStats(Long shopId);
+
+	/**
+	 * 
+	 * @param shopId
 	 * @param cashflow
 	 * @return
 	 */

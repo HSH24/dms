@@ -23,6 +23,13 @@ public interface ICashflowDao {
 	 * @param cashflow
 	 * @return
 	 */
+	Cashflow getCashflowStats(Cashflow cashflow);
+
+	/**
+	 * 
+	 * @param cashflow
+	 * @return
+	 */
 	int getCashflowCount(Cashflow cashflow);
 
 	/**

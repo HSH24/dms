@@ -63,6 +63,24 @@ public class CashflowServiceImpl implements ICashflowService {
 	}
 
 	@Override
+	public Cashflow getCashflowStats(Long shopId) {
+		if (shopId == null) {
+			return null;
+		}
+
+		Cashflow cashflow = new Cashflow();
+		cashflow.setShopId(shopId);
+
+		try {
+			return cashflowDao.getCashflowStats(cashflow);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(cashflow), e);
+		}
+
+		return null;
+	}
+
+	@Override
 	public int getCashflowCount(Long shopId, Cashflow cashflow) {
 		// TODO Auto-generated method stub
 		return 0;
