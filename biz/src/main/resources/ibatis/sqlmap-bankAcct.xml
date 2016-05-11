@@ -21,4 +21,16 @@
 	]]>
 	</select>
 	
+	<update id="updateBankAcct" parameterClass="bankAcct">
+	<![CDATA[
+		UPDATE dms_tb_bank_account t
+		   SET t.modify_date = NOW(),
+			   t.modify_user = #modifyUser#,
+			   t.cur_bal= t.cur_bal + #amount#
+		 WHERE t.state = 'U'
+		   AND t.shop_id = #shopId#
+		   AND t.bank_acct_id = #bankAcctId#
+	]]>
+	</update>
+	
 </sqlMap>

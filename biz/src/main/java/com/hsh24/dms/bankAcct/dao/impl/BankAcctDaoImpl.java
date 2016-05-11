@@ -16,4 +16,9 @@ public class BankAcctDaoImpl extends BaseDaoImpl implements IBankAcctDao {
 		return (BankAcct) getSqlMapClientTemplate().queryForObject("bankAcct.getBankAcct", bankAcct);
 	}
 
+	@Override
+	public int updateBankAcct(BankAcct bankAcct) {
+		return getSqlMapClientTemplate().update("bankAcct.updateBankAcct", bankAcct);
+	}
+
 }

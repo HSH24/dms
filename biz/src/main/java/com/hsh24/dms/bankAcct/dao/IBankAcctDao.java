@@ -16,4 +16,11 @@ public interface IBankAcctDao {
 	 */
 	BankAcct getBankAcct(BankAcct bankAcct);
 
+	/**
+	 * 
+	 * @param bankAcct
+	 * @return
+	 */
+	int updateBankAcct(BankAcct bankAcct);
+
 }

@@ -22,9 +22,13 @@ public class BankAcct implements Serializable {
 
 	private BigDecimal minDeposit;
 
+	private String modifyUser;
+
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
 
 	private String accCode;
+
+	private BigDecimal amount;
 
 	public Long getBankAcctId() {
 		return bankAcctId;
@@ -66,12 +70,28 @@ public class BankAcct implements Serializable {
 		this.minDeposit = minDeposit;
 	}
 
+	public String getModifyUser() {
+		return modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
+	}
+
 	public String getAccCode() {
 		return accCode;
 	}
 
 	public void setAccCode(String accCode) {
 		this.accCode = accCode;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 
 }

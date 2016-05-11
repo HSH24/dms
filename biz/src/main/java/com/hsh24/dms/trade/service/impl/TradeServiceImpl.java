@@ -102,8 +102,9 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
-		final String code[] = result.getCode().split("&");
+		String code[] = result.getCode().split("&");
 		final Long supId = Long.valueOf(code[0]);
+		final BigDecimal price = new BigDecimal(code[1]).multiply(new BigDecimal(quantity));
 
 		if (StringUtils.isEmpty(modifyUser)) {
 			result.setCode("操作人信息不能为空。");
@@ -113,6 +114,11 @@ public class TradeServiceImpl implements ITradeService {
 		final BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
 		if (bankAcct == null) {
 			result.setCode("资金账户信息不能为空。");
+			return result;
+		}
+
+		if (price.compareTo(bankAcct.getCurBal()) == 1) {
+			result.setCode("资金账户余额不足。");
 			return result;
 		}
 
@@ -129,7 +135,7 @@ public class TradeServiceImpl implements ITradeService {
 				trade.setShopId(shopId);
 				trade.setSupId(supId);
 				// 交易价格
-				trade.setTradePrice(new BigDecimal(code[1]).multiply(new BigDecimal(quantity)));
+				trade.setTradePrice(price);
 				trade.setChange(BigDecimal.ZERO);
 				// 亭主下单
 				trade.setType(ITradeService.TO_SEND);
@@ -160,6 +166,14 @@ public class TradeServiceImpl implements ITradeService {
 				// 3. 记录现金流水账
 				result =
 					createCashflow(shopId, bankAcct.getBankAcctId(), trade.getPrice(), trade.getTradeNo(), modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
+				// 4. 记录资金账户余额
+				result = bankAcctService.updateBankAcct(shopId, bankAcct.getBankAcctId(), price.negate(), modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -206,6 +220,8 @@ public class TradeServiceImpl implements ITradeService {
 		// 遍历 根据 supId 统计金额 -> 拆分订单
 		final Map<Long, List<Long>> map1 = new HashMap<Long, List<Long>>();
 		final Map<Long, BigDecimal> map2 = new HashMap<Long, BigDecimal>();
+		// 统计 总金额 用于 判断 是否 大于 账户余额
+		BigDecimal price = BigDecimal.ZERO;
 
 		for (Cart cart : cartList) {
 			Long cratId = cart.getCartId();
@@ -213,8 +229,7 @@ public class TradeServiceImpl implements ITradeService {
 			BigDecimal p = cart.getPrice().multiply(BigDecimal.valueOf(cart.getQuantity()));
 
 			if (map1.containsKey(supId)) {
-				List<Long> cid = map1.get(supId);
-				cid.add(cratId);
+				map1.get(supId).add(cratId);
 
 				map2.put(supId, map2.get(supId).add(p));
 			} else {
@@ -224,6 +239,8 @@ public class TradeServiceImpl implements ITradeService {
 
 				map2.put(supId, p);
 			}
+
+			price = price.add(p);
 		}
 
 		if (map1.size() == 0) {
@@ -241,6 +258,13 @@ public class TradeServiceImpl implements ITradeService {
 			result.setCode("资金账户信息不能为空。");
 			return result;
 		}
+
+		if (price.compareTo(bankAcct.getCurBal()) == 1) {
+			result.setCode("资金账户余额不足。");
+			return result;
+		}
+
+		final BigDecimal amount = price;
 
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
@@ -320,7 +344,15 @@ public class TradeServiceImpl implements ITradeService {
 					tradeNo.append(trade.getTradeNo());
 				}
 
-				// 修改购物车状态
+				// 4. 记录资金账户余额
+				result = bankAcctService.updateBankAcct(shopId, bankAcct.getBankAcctId(), amount.negate(), modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
+				// 5. 修改购物车状态
 				if (cartId != null && cartId.length > 0) {
 					result = cartService.finishCart(userId, shopId, cartId);
 					if (!result.getResult()) {
