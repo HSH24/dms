@@ -26,7 +26,7 @@
 							<div class="color-gray">支出</div>
                         </a>
 						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
-							<h3>$!formatUtil.getAmountFormat("0")</h3>
+							<h3>$!formatUtil.getAmountFormat($!{cashflow.curBal})</h3>
 							<div class="color-gray">余额</div>
                         </a>
 					</li>

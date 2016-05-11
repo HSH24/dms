@@ -15,5 +15,6 @@ function member_index_stats() {
 				var stats = data.split("&");
 				$$('#member/index/drAmount').html(stats[0]);
 				$$('#member/index/crAmount').html(stats[1]);
+				$$('#member/index/curBal').html(stats[2]);
 			});
 }

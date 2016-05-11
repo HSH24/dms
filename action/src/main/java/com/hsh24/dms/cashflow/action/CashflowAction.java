@@ -2,6 +2,8 @@ package com.hsh24.dms.cashflow.action;
 
 import java.util.List;
 
+import com.hsh24.dms.api.bankAcct.IBankAcctService;
+import com.hsh24.dms.api.bankAcct.bo.BankAcct;
 import com.hsh24.dms.api.cashflow.ICashflowService;
 import com.hsh24.dms.api.cashflow.bo.Cashflow;
 import com.hsh24.dms.framework.action.BaseAction;
@@ -18,6 +20,8 @@ public class CashflowAction extends BaseAction {
 
 	private ICashflowService cashflowService;
 
+	private IBankAcctService bankAcctService;
+
 	private Cashflow cashflow;
 
 	private List<Cashflow> cashflowList;
@@ -29,7 +33,7 @@ public class CashflowAction extends BaseAction {
 	public String index() {
 		Long shopId = this.getShop().getShopId();
 
-		cashflow = cashflowService.getCashflowStats(shopId);
+		stats();
 
 		cashflowList = cashflowService.getCashflowList(shopId, new Cashflow());
 
@@ -47,8 +51,12 @@ public class CashflowAction extends BaseAction {
 
 		cashflow = cashflowService.getCashflowStats(shopId);
 
+		BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
+		cashflow.setCurBal(bankAcct.getCurBal());
+
 		sb.append(FormatUtil.getAmountFormat(cashflow.getDrAmount())).append("&");
-		sb.append(FormatUtil.getAmountFormat(cashflow.getCrAmount()));
+		sb.append(FormatUtil.getAmountFormat(cashflow.getCrAmount())).append("&");
+		sb.append(FormatUtil.getAmountFormat(cashflow.getCurBal()));
 
 		this.setResourceResult(sb.toString());
 
@@ -61,6 +69,14 @@ public class CashflowAction extends BaseAction {
 
 	public void setCashflowService(ICashflowService cashflowService) {
 		this.cashflowService = cashflowService;
+	}
+
+	public IBankAcctService getBankAcctService() {
+		return bankAcctService;
+	}
+
+	public void setBankAcctService(IBankAcctService bankAcctService) {
+		this.bankAcctService = bankAcctService;
 	}
 
 	public Cashflow getCashflow() {

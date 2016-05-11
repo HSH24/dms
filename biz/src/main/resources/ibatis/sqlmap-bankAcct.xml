@@ -8,7 +8,8 @@
 	
 	<select id="getBankAcct" parameterClass="bankAcct" resultClass="bankAcct">
 	<![CDATA[
-		SELECT t.bank_acct_id AS bankAcctId
+		SELECT t.bank_acct_id AS bankAcctId,
+			   t.cur_bal AS curBal
 		  FROM dms_tb_bank_account t,
 			   dms_tb_account p
 		 WHERE t.acc_id = p.acc_id
