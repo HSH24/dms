@@ -17,16 +17,16 @@
 			<div class="list-block" style="font-size: 15px;">
 				<ul class="page-settings">
 					<li class="row" style="text-align: center;">
-						<a href="$!{env.appUrl}/trade/list.htm?type=tosend" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
-							<h3 id="member/index/tosend">$!formatUtil.getAmountFormat($!{cashflow.drAmount})</h3>
+						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
+							<h3>$!formatUtil.getAmountFormat($!{cashflow.drAmount})</h3>
 							<div class="color-gray">收入</div>
                         </a>
-						<a href="$!{env.appUrl}/trade/list.htm?type=send" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
-							<h3 id="member/index/send">$!formatUtil.getAmountFormat($!{cashflow.crAmount})</h3>
-							<div class="color-gray">支付</div>
+						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
+							<h3>$!formatUtil.getAmountFormat($!{cashflow.crAmount})</h3>
+							<div class="color-gray">支出</div>
                         </a>
-						<a href="$!{env.appUrl}/trade/list.htm?type=sign" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
-							<h3 id="member/index/sign">$!formatUtil.getAmountFormat("0")</h3>
+						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
+							<h3>$!formatUtil.getAmountFormat("0")</h3>
 							<div class="color-gray">余额</div>
                         </a>
 					</li>

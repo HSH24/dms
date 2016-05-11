@@ -18,7 +18,7 @@ public class BankAcct implements Serializable {
 
 	private Long accId;
 
-	private BigDecimal amount;
+	private BigDecimal curBal;
 
 	private BigDecimal minDeposit;
 
@@ -50,12 +50,12 @@ public class BankAcct implements Serializable {
 		this.accId = accId;
 	}
 
-	public BigDecimal getAmount() {
-		return amount;
+	public BigDecimal getCurBal() {
+		return curBal;
 	}
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
+	public void setCurBal(BigDecimal curBal) {
+		this.curBal = curBal;
 	}
 
 	public BigDecimal getMinDeposit() {

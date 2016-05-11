@@ -10,4 +10,10 @@ function member_index_stats() {
 				$$('#member/index/send').html(stats[2]);
 				$$('#member/index/sign').html(stats[3]);
 			});
+
+	$$.get(appUrl + '/cashflow/stats.htm', {}, function(data) {
+				var stats = data.split("&");
+				$$('#member/index/drAmount').html(stats[0]);
+				$$('#member/index/crAmount').html(stats[1]);
+			});
 }

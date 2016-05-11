@@ -51,8 +51,8 @@
 	
 	<select id="getCashflowStats" parameterClass="cashflow" resultClass="cashflow">
 	<![CDATA[
-		SELECT SUM(t.cr_amount) AS crAmount,
-			   SUM(t.dr_amount) AS drAmount
+		SELECT IFNULL(SUM(t.cr_amount), 0) AS crAmount,
+			   IFNULL(SUM(t.dr_amount), 0) AS drAmount
 		  FROM dms_tb_cashflow t
 		 WHERE t.state = 'U'
 		   AND t.shop_id = #shopId#
@@ -70,6 +70,7 @@
 			   t.trade_no AS tradeNo
 		  FROM dms_tb_cashflow t
 		 WHERE t.state = 'U'
+		   AND t.shop_id = #shopId#
 		 ORDER BY $sort$ $order$
 		 LIMIT $limit$ OFFSET $offset$
 	]]>

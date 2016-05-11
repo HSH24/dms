@@ -20,7 +20,7 @@
     				<div data-page="user.shop" class="page">
     					<div class="page-content login-screen-content">
 							<div class="login-screen-title">
-								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
+								<img src="$!{env.imgUrl}/image/portal/logo.png" style="width: 100px;"></img>
 							</div>
 							<div class="login-screen-title" style="font-size: 25px;">请选择您的店铺</div>
 							<div class="list-block">

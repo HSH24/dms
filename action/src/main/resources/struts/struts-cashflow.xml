@@ -10,5 +10,9 @@
 			<result name="success">/dms/cashflow/index.vm</result>
 		</action>
 		
+		<action name="stats" class="cashflowAction" method="stats">
+			<interceptor-ref name="authenticationStack" />
+		</action>
+		
 	</package>
 </struts>

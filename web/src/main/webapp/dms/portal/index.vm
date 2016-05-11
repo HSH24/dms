@@ -24,7 +24,7 @@
         					<!-- page-content has additional login-screen content -->
         					<div class="page-content login-screen-content">
         						<div class="login-screen-title" style="margin-top: 20%;">
-    								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
+    								<img src="$!{env.imgUrl}/image/portal/logo.png" style="width: 100px;"></img>
     							</div>
 								
         						<!-- Login form -->
