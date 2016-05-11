@@ -5,6 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
+	<bean id="cashflowAction" class="com.hsh24.dms.cashflow.action.CashflowAction" parent="baseAction" scope="request">
+		<property name="cashflowService" ref="cashflowService" />
+	</bean>
+	
 	<bean id="cashflowService" class="com.hsh24.dms.cashflow.service.impl.CashflowServiceImpl">
 		<property name="cashflowDao" ref="cashflowDao" />
 	</bean>

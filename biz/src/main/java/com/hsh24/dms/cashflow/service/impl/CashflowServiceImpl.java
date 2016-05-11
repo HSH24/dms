@@ -1,5 +1,7 @@
 package com.hsh24.dms.cashflow.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.hsh24.dms.api.cashflow.ICashflowService;
@@ -58,6 +60,35 @@ public class CashflowServiceImpl implements ICashflowService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public int getCashflowCount(Long shopId, Cashflow cashflow) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Cashflow> getCashflowList(Long shopId, Cashflow cashflow) {
+		if (shopId == null || cashflow == null) {
+			return null;
+		}
+
+		cashflow.setShopId(shopId);
+
+		// 暂不分页
+		cashflow.setLimit(10);
+		cashflow.setOffset(0);
+		cashflow.setSort("CREATE_DATE");
+		cashflow.setOrder("DESC");
+
+		try {
+			return cashflowDao.getCashflowList(cashflow);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(cashflow), e);
+		}
+
+		return null;
 	}
 
 	public ICashflowDao getCashflowDao() {

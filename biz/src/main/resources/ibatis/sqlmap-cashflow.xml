@@ -42,11 +42,26 @@
 			#modifyUser#
 		  )
 	]]>
-		<selectKey resultClass="java.lang.Long" keyProperty="cartId">
+		<selectKey resultClass="java.lang.Long" keyProperty="cashflowId">
 		<![CDATA[
 			SELECT LAST_INSERT_ID()
 		]]>
 		</selectKey>
 	</insert>
+	
+	<select id="getCashflowList" parameterClass="cashflow" resultClass="cashflow">
+	<![CDATA[
+		SELECT t.cashflow_id AS cashflowId,
+			   t.bank_acct_id AS bankAcctId,
+			   t.summary,
+			   t.cr_amount AS crAmount,
+			   t.dr_amount AS drAmount,
+			   DATE_FORMAT(t.trade_date, '%Y-%m-%d %T') AS tradeDate,
+			   t.trade_no AS tradeNo
+		  FROM dms_tb_cashflow t
+		 WHERE t.state = 'U'
+		 LIMIT $limit$ OFFSET $offset$
+	]]>		
+	</select>
 	
 </sqlMap>

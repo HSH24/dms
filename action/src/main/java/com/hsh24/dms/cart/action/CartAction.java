@@ -35,7 +35,8 @@ public class CartAction extends BaseAction {
 	private String quantity;
 
 	public String stats() {
-		this.setResourceResult(String.valueOf(cartService.getCartCount(this.getUser().getUserId(), this.getShopId())));
+		this.setResourceResult(String.valueOf(cartService.getCartCount(this.getUser().getUserId(), this.getShop()
+			.getShopId())));
 
 		return RESOURCE_RESULT;
 	}
@@ -45,7 +46,7 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String index() {
-		cartList = cartService.getCartList(this.getUser().getUserId(), this.getShopId());
+		cartList = cartService.getCartList(this.getUser().getUserId(), this.getShop().getShopId());
 
 		return SUCCESS;
 	}
@@ -56,7 +57,8 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String add() {
-		BooleanResult result = cartService.createCart(this.getUser().getUserId(), this.getShopId(), itemId, skuId, "1");
+		BooleanResult result =
+			cartService.createCart(this.getUser().getUserId(), this.getShop().getShopId(), itemId, skuId, "1");
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -74,7 +76,7 @@ public class CartAction extends BaseAction {
 	 * @return
 	 */
 	public String remove() {
-		BooleanResult result = cartService.removeCart(this.getUser().getUserId(), this.getShopId(), cartIds);
+		BooleanResult result = cartService.removeCart(this.getUser().getUserId(), this.getShop().getShopId(), cartIds);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -93,7 +95,7 @@ public class CartAction extends BaseAction {
 	 */
 	public String num() {
 		BooleanResult result =
-			cartService.updateQuantity(this.getUser().getUserId(), this.getShopId(), cartId, quantity);
+			cartService.updateQuantity(this.getUser().getUserId(), this.getShop().getShopId(), cartId, quantity);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());

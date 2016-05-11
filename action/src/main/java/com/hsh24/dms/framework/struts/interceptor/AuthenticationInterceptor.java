@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.hsh24.dms.api.ca.ICAService;
+import com.hsh24.dms.api.shop.bo.Shop;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -47,8 +48,8 @@ public class AuthenticationInterceptor implements Interceptor {
 			return LOGIN_TIMEOUT;
 		}
 
-		Long shopId = (Long) session.get("ACEGI_SECURITY_LAST_SHOP");
-		if (shopId == null) {
+		Shop shop = (Shop) session.get("ACEGI_SECURITY_LAST_SHOP");
+		if (shop == null) {
 			// TODO
 			return LOGIN_TIMEOUT;
 		}

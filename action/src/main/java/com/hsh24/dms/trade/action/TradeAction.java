@@ -60,9 +60,9 @@ public class TradeAction extends BaseAction {
 
 		// 直接购买
 		if (cartIds == null || cartIds.length == 0) {
-			result = tradeService.createTrade(this.getShopId(), itemId, skuId, quantity, userId.toString());
+			result = tradeService.createTrade(this.getShop().getShopId(), itemId, skuId, quantity, userId.toString());
 		} else {
-			result = tradeService.createTrade(this.getShopId(), userId, cartIds, userId.toString());
+			result = tradeService.createTrade(this.getShop().getShopId(), userId, cartIds, userId.toString());
 		}
 
 		if (result.getResult()) {
@@ -83,7 +83,7 @@ public class TradeAction extends BaseAction {
 	public String stats() {
 		StringBuilder sb = new StringBuilder();
 
-		Long shopId = this.getShopId();
+		Long shopId = this.getShop().getShopId();
 
 		sb.append(tradeService.getTradeCount(shopId, new String[] { "check", "topay" })).append("&");
 		sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" })).append("&");
@@ -101,7 +101,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String list() {
-		Long shopId = this.getShopId();
+		Long shopId = this.getShop().getShopId();
 
 		// 待付款
 		if ("topay".equals(type)) {
@@ -126,7 +126,7 @@ public class TradeAction extends BaseAction {
 	 */
 	public String cancel() {
 		BooleanResult result =
-			tradeService.cancelTrade(this.getShopId(), tradeNo, this.getUser().getUserId().toString());
+			tradeService.cancelTrade(this.getShop().getShopId(), tradeNo, this.getUser().getUserId().toString());
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -143,7 +143,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String detail() {
-		trade = tradeService.getTrade(this.getShopId(), tradeNo);
+		trade = tradeService.getTrade(this.getShop().getShopId(), tradeNo);
 
 		return SUCCESS;
 	}
@@ -154,7 +154,7 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String refund() {
-		trade = tradeService.getOrder(this.getShopId(), tradeNo, orderId);
+		trade = tradeService.getOrder(this.getShop().getShopId(), tradeNo, orderId);
 
 		return SUCCESS;
 	}
@@ -165,7 +165,8 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String sign() {
-		BooleanResult result = tradeService.signTrade(this.getShopId(), tradeNo, this.getUser().getUserId().toString());
+		BooleanResult result =
+			tradeService.signTrade(this.getShop().getShopId(), tradeNo, this.getUser().getUserId().toString());
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());

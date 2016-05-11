@@ -21,6 +21,7 @@ import com.hsh24.dms.api.cashflow.bo.Cashflow;
 import com.hsh24.dms.api.item.IItemService;
 import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.api.item.bo.ItemSku;
+import com.hsh24.dms.api.pay.IPayService;
 import com.hsh24.dms.api.supplier.ISupplierService;
 import com.hsh24.dms.api.supplier.bo.Supplier;
 import com.hsh24.dms.api.trade.IOrderRefundService;
@@ -134,6 +135,8 @@ public class TradeServiceImpl implements ITradeService {
 				trade.setType(ITradeService.TO_SEND);
 				// 14位日期 ＋ 11位随机数
 				trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
+				// 支付方式
+				trade.setPayType(IPayService.PAY_TYPE_AP);
 				trade.setModifyUser(modifyUser);
 
 				try {
@@ -155,14 +158,8 @@ public class TradeServiceImpl implements ITradeService {
 				}
 
 				// 3. 记录现金流水账
-				Cashflow cashflow = new Cashflow();
-				cashflow.setBankAcctId(bankAcct.getBankAcctId());
-				cashflow.setSummary("店铺上单：" + trade.getPrice());
-				cashflow.setCrAmount(trade.getPrice());
-				cashflow.setDrAmount(BigDecimal.ZERO);
-				cashflow.setTradeDate(trade.getPayDate());
-				cashflow.setTradeNo(trade.getTradeNo());
-				result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
+				result =
+					createCashflow(shopId, bankAcct.getBankAcctId(), trade.getPrice(), trade.getTradeNo(), modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -275,6 +272,8 @@ public class TradeServiceImpl implements ITradeService {
 					trade.setType(ITradeService.TO_SEND);
 					// 14位日期 ＋ 11位随机数
 					trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
+					// 支付方式
+					trade.setPayType(IPayService.PAY_TYPE_AP);
 					trade.setModifyUser(modifyUser);
 
 					// 交易订单 关联 购物车
@@ -306,14 +305,9 @@ public class TradeServiceImpl implements ITradeService {
 					}
 
 					// 3. 记录现金流水账
-					Cashflow cashflow = new Cashflow();
-					cashflow.setBankAcctId(bankAcct.getBankAcctId());
-					cashflow.setSummary("店铺上单：" + trade.getPrice());
-					cashflow.setCrAmount(trade.getPrice());
-					cashflow.setDrAmount(BigDecimal.ZERO);
-					cashflow.setTradeDate(trade.getPayDate());
-					cashflow.setTradeNo(trade.getTradeNo());
-					result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
+					result =
+						createCashflow(shopId, bankAcct.getBankAcctId(), trade.getPrice(), trade.getTradeNo(),
+							modifyUser);
 					if (!result.getResult()) {
 						ts.setRollbackOnly();
 
@@ -342,6 +336,29 @@ public class TradeServiceImpl implements ITradeService {
 		});
 
 		return res;
+	}
+
+	/**
+	 * 
+	 * @param shopId
+	 * @param bankAcctId
+	 * @param price
+	 * @param tradeDate
+	 * @param tradeNo
+	 * @param modifyUser
+	 * @return
+	 */
+	private BooleanResult createCashflow(Long shopId, Long bankAcctId, BigDecimal price, String tradeNo,
+		String modifyUser) {
+		Cashflow cashflow = new Cashflow();
+		cashflow.setBankAcctId(bankAcctId);
+		cashflow.setSummary("店铺上单：" + price);
+		cashflow.setCrAmount(price);
+		cashflow.setDrAmount(BigDecimal.ZERO);
+		cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
+		cashflow.setTradeNo(tradeNo);
+
+		return cashflowService.createCashflow(shopId, cashflow, modifyUser);
 	}
 
 	@Override

@@ -86,7 +86,8 @@ public class LoginAction extends BaseAction {
 		}
 
 		if (shopList.size() == 1) {
-			session.setAttribute("ACEGI_SECURITY_LAST_SHOP", shopList.get(0).getShopId());
+			Shop shop = shopList.get(0);
+			session.setAttribute("ACEGI_SECURITY_LAST_SHOP", shop);
 
 			this.setResourceResult(env.getProperty("appUrl") + "/home.htm");
 		} else {
@@ -116,6 +117,7 @@ public class LoginAction extends BaseAction {
 			// login
 			session.removeAttribute("ACEGI_SECURITY_LAST_PASSPORT");
 			session.removeAttribute("ACEGI_SECURITY_LAST_LOGINUSER");
+			session.removeAttribute("ACEGI_SECURITY_LAST_SHOP");
 
 			session.invalidate();
 		} catch (Exception e) {

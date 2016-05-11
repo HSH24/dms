@@ -1,14 +1,15 @@
 package com.hsh24.dms.api.cashflow.bo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
+
+import com.hsh24.dms.framework.bo.SearchInfo;
 
 /**
  * 
  * @author JiakunXu
  * 
  */
-public class Cashflow implements Serializable {
+public class Cashflow extends SearchInfo {
 
 	private static final long serialVersionUID = 3180297576056212732L;
 
