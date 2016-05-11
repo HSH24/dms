@@ -107,7 +107,7 @@
                         <i class="icon iconfont icon-cart" style="font-size: 25px;">
 							<span id="portal/home/cart"></span>
 						</i>
-						<span class="tabbar-label">购物车</span>
+						<span class="tabbar-label">进货车</span>
                     </a>
 					<a id="href-5" href="#view-5" class="tab-link">
                         <i class="icon iconfont icon-my" style="font-size: 25px;"></i>

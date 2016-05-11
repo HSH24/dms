@@ -44,7 +44,7 @@
 								<div class="item-title"></div>
 								<div class="item-after">
 									<a href="javascript:item_list_trade('1', '1');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('1', '1');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
+									<a href="javascript:item_list_cart('1', '1');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
 								</div>
     						</div>
                         </div>
@@ -81,7 +81,7 @@
 								<div class="item-title"></div>
 								<div class="item-after">
 									<a href="javascript:item_list_trade('2', '2');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('2', '2');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
+									<a href="javascript:item_list_cart('2', '2');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
 								</div>
     						</div>
                         </div>
@@ -118,7 +118,7 @@
 								<div class="item-title"></div>
 								<div class="item-after">
 									<a href="javascript:item_list_trade('3', '3');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('3', '3');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加购物车</a>
+									<a href="javascript:item_list_cart('3', '3');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
 								</div>
     						</div>
                         </div>
