@@ -19,4 +19,11 @@ public interface IUserShopDao {
 	 */
 	List<Shop> getShopList(User user);
 
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	Shop getShop(User user);
+
 }

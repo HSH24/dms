@@ -31,7 +31,7 @@ $$('form.ajax-submit').on('submitted', function(e) {
 			var xhr = e.detail.xhr;
 
 			if (portal_index_op == 'login') {
-				top.location.href = xhr.responseText;
+				top.location.href = appUrl + "/user/shop.htm";
 			} else if (portal_index_op == 'forgetPassword') {
 				mainView.router.load({
 							url : appUrl + "/user/setPassword.htm"

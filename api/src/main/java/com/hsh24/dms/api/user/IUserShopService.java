@@ -18,4 +18,12 @@ public interface IUserShopService {
 	 */
 	List<Shop> getShopList(Long userId);
 
+	/**
+	 * 
+	 * @param userId
+	 * @param shopId
+	 * @return
+	 */
+	Shop getShop(Long userId, String shopId);
+
 }

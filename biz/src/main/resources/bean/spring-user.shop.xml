@@ -5,6 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
+	<bean id="userShopAction" class="com.hsh24.dms.user.action.UserShopAction" parent="baseAction" scope="request">
+		<property name="userShopService" ref="userShopService" />
+	</bean>
+	
 	<bean id="userShopService" class="com.hsh24.dms.user.service.impl.UserShopServiceImpl">
 		<property name="userShopDao" ref="userShopDao" />
 	</bean>

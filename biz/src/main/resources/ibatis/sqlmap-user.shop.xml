@@ -23,4 +23,21 @@
 	]]>
 	</select>
 	
+	<select id="getShop" parameterClass="user" resultClass="shop">
+	<![CDATA[
+		SELECT q.shop_id AS shopId,
+			   q.shop_name AS shopName
+		  FROM dms_tb_user t,
+			   dms_tb_user_shop p,
+			   mdm.mdm_tb_shop q
+		 WHERE t.user_id = p.user_id
+		   AND p.shop_id = q.shop_id
+		   AND t.state = 'U'
+		   AND p.state = 'U'
+		   AND q.state = 'U'
+		   AND t.user_id = #userId#
+		   AND q.shop_id = #shopId#
+	]]>
+	</select>
+	
 </sqlMap>

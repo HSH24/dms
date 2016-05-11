@@ -20,4 +20,9 @@ public class UserShopDaoImpl extends BaseDaoImpl implements IUserShopDao {
 		return (List<Shop>) getSqlMapClientTemplate().queryForList("user.shop.getShopList", user);
 	}
 
+	@Override
+	public Shop getShop(User user) {
+		return (Shop) getSqlMapClientTemplate().queryForObject("user.shop.getShop", user);
+	}
+
 }

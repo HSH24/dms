@@ -2,6 +2,8 @@ package com.hsh24.dms.user.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.hsh24.dms.api.shop.bo.Shop;
 import com.hsh24.dms.api.user.IUserShopService;
 import com.hsh24.dms.api.user.bo.User;
@@ -32,6 +34,31 @@ public class UserShopServiceImpl implements IUserShopService {
 
 		try {
 			return userShopDao.getShopList(user);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(user), e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public Shop getShop(Long userId, String shopId) {
+		if (userId == null || StringUtils.isBlank(shopId)) {
+			return null;
+		}
+
+		User user = new User();
+		user.setUserId(userId);
+		try {
+			user.setShopId(Long.valueOf(shopId));
+		} catch (NumberFormatException e) {
+			logger.error(e);
+
+			return null;
+		}
+
+		try {
+			return userShopDao.getShop(user);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(user), e);
 		}

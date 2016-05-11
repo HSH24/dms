@@ -16,6 +16,18 @@
 		</action>
 		
 		<action name="updatePassword" class="userAccAction" method="updatePassword" />
+		
+		<!-- 店铺 -->
+		<action name="shop" class="userShopAction" method="index">
+			<result name="shop">/dms/user/shop.vm</result>
+			<result name="success" type="redirect">${env.appUrl}/home.htm</result>
+		</action>
+		
+		<!-- 选择 -->
+		<action name="select" class="userShopAction" method="select">
+			<result name="error">/dms/user/shop.vm</result>
+			<result name="success" type="redirect">${env.appUrl}/home.htm</result>
+		</action>
 
 	</package>
 </struts>
