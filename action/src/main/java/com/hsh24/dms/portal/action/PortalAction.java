@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.hsh24.dms.api.user.bo.User;
 import com.hsh24.dms.api.weixin.IWeixinService;
 import com.hsh24.dms.api.weixin.bo.Ticket;
 import com.hsh24.dms.framework.action.BaseAction;
@@ -27,6 +28,11 @@ public class PortalAction extends BaseAction {
 	 * @return
 	 */
 	public String index() {
+		User user = this.getUser();
+		if (user != null) {
+			return NONE;
+		}
+
 		return SUCCESS;
 	}
 
