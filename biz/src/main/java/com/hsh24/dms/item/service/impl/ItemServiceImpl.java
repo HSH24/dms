@@ -10,10 +10,14 @@ import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.hsh24.dms.api.item.IItemFileService;
+import com.hsh24.dms.api.item.IItemRegionService;
 import com.hsh24.dms.api.item.IItemService;
 import com.hsh24.dms.api.item.IItemSkuService;
 import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.api.item.bo.ItemSku;
+import com.hsh24.dms.api.region.IRegionService;
+import com.hsh24.dms.api.shop.IShopService;
+import com.hsh24.dms.api.shop.bo.Shop;
 import com.hsh24.dms.api.spec.ISpecService;
 import com.hsh24.dms.api.spec.bo.SpecCat;
 import com.hsh24.dms.api.spec.bo.SpecItem;
@@ -32,11 +36,17 @@ public class ItemServiceImpl implements IItemService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ItemServiceImpl.class);
 
+	private IItemRegionService itemRegionService;
+
 	private IItemFileService itemFileService;
 
 	private IItemSkuService itemSkuService;
 
 	private ISpecService specService;
+
+	private IShopService shopService;
+
+	private IRegionService regionService;
 
 	private IItemDao itemDao;
 
@@ -59,8 +69,38 @@ public class ItemServiceImpl implements IItemService {
 
 	@Override
 	public List<Item> getItemList(Long shopId, Item item) {
-		// TODO Auto-generated method stub
-		return null;
+		if (shopId == null || item == null) {
+			return null;
+		}
+
+		Shop shop = shopService.getShop(shopId);
+		if (shop == null) {
+			return null;
+		}
+
+		return getItems(shop.getRegionId(), item);
+	}
+
+	/**
+	 * 根据区域查询供应商投放商品信息.
+	 * 
+	 * @param regionId
+	 * @return
+	 */
+	private List<Item> getItems(Long regionId, Item item) {
+		String[] region = regionService.getRegion(regionId);
+		if (region == null || region.length == 0) {
+			return null;
+		}
+
+		List<Item> itemList = itemRegionService.getItemList(region);
+		if (itemList == null || itemList.size() == 0) {
+			return null;
+		}
+
+		// 获取商品价格
+
+		return itemList;
 	}
 
 	@Override
@@ -305,6 +345,14 @@ public class ItemServiceImpl implements IItemService {
 		return null;
 	}
 
+	public IItemRegionService getItemRegionService() {
+		return itemRegionService;
+	}
+
+	public void setItemRegionService(IItemRegionService itemRegionService) {
+		this.itemRegionService = itemRegionService;
+	}
+
 	public IItemFileService getItemFileService() {
 		return itemFileService;
 	}
@@ -327,6 +375,22 @@ public class ItemServiceImpl implements IItemService {
 
 	public void setSpecService(ISpecService specService) {
 		this.specService = specService;
+	}
+
+	public IShopService getShopService() {
+		return shopService;
+	}
+
+	public void setShopService(IShopService shopService) {
+		this.shopService = shopService;
+	}
+
+	public IRegionService getRegionService() {
+		return regionService;
+	}
+
+	public void setRegionService(IRegionService regionService) {
+		this.regionService = regionService;
 	}
 
 	public IItemDao getItemDao() {

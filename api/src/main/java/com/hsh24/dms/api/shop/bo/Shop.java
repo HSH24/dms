@@ -15,6 +15,11 @@ public class Shop extends SearchInfo {
 
 	private String shopName;
 
+	/**
+	 * 区域编号.
+	 */
+	private Long regionId;
+
 	public Long getShopId() {
 		return shopId;
 	}
@@ -29,6 +34,14 @@ public class Shop extends SearchInfo {
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+	public Long getRegionId() {
+		return regionId;
+	}
+
+	public void setRegionId(Long regionId) {
+		this.regionId = regionId;
 	}
 
 }
