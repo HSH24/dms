@@ -59,7 +59,7 @@ public class ItemSku extends SearchInfo {
 	/**
 	 * 商品编码.
 	 */
-	private String code;
+	private String barCode;
 
 	/**
 	 * 版本.
@@ -153,12 +153,12 @@ public class ItemSku extends SearchInfo {
 		this.deliveryTime = deliveryTime;
 	}
 
-	public String getCode() {
-		return code;
+	public String getBarCode() {
+		return barCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setBarCode(String barCode) {
+		this.barCode = barCode;
 	}
 
 	public String getVerId() {

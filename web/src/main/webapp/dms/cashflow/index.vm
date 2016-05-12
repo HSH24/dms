@@ -19,7 +19,7 @@
 					<li class="row" style="text-align: center;">
 						<div class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
 							<div style="margin: 0.6rem 0 0 0;">
-    							<select style="height: 100%; padding-left: 33%;">
+    							<select style="margin: 0 auto; width: 35px; height: 100%;">
 									<option>01月</option>
 									<option>02月</option>
 									<option>03月</option>

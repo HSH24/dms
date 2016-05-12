@@ -15,7 +15,7 @@
 		  t.stock,
 		  t.price,
 		  t.origin,
-		  t.code
+		  t.bar_code AS barCode
 		FROM dms_tb_item_sku t
 		WHERE t.state     = 'U'
 	]]>	
