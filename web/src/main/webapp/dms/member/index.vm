@@ -47,15 +47,15 @@
 					<li class="row" style="text-align: center;">
 						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/drAmount">0.00</h3>
-							<div class="color-gray">收入</div>
+							<div class="color-gray">收入(元)</div>
                         </a>
 						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/crAmount">0.00</h3>
-							<div class="color-gray">支出</div>
+							<div class="color-gray">支出(元)</div>
                         </a>
 						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/curBal">0.00</h3>
-							<div class="color-gray">余额</div>
+							<div class="color-gray">余额(元)</div>
                         </a>
 					</li>
                 </ul>
