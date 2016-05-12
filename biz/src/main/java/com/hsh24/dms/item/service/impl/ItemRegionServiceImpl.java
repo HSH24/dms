@@ -21,12 +21,11 @@ public class ItemRegionServiceImpl implements IItemRegionService {
 	private IItemRegionDao itemRegionDao;
 
 	@Override
-	public List<Item> getItemList(String[] region) {
-		if (region == null || region.length == 0) {
+	public List<Item> getItemList(String[] region, Item item) {
+		if (region == null || region.length == 0 || item == null) {
 			return null;
 		}
 
-		Item item = new Item();
 		item.setCodes(region);
 
 		try {

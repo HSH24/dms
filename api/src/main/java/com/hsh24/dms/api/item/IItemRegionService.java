@@ -14,8 +14,9 @@ public interface IItemRegionService {
 	/**
 	 * 
 	 * @param region
+	 * @param item
 	 * @return
 	 */
-	List<Item> getItemList(String[] region);
+	List<Item> getItemList(String[] region, Item item);
 
 }

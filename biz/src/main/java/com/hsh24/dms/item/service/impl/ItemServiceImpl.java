@@ -93,12 +93,15 @@ public class ItemServiceImpl implements IItemService {
 			return null;
 		}
 
-		List<Item> itemList = itemRegionService.getItemList(region);
+		List<Item> itemList = itemRegionService.getItemList(region, item);
 		if (itemList == null || itemList.size() == 0) {
 			return null;
 		}
 
 		// 获取商品价格
+		for (Item ietm : itemList) {
+
+		}
 
 		return itemList;
 	}
