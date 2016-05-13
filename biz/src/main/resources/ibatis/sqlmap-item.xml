@@ -17,7 +17,7 @@
 			   t.quota,
 			   t.origin,
 			   t.remark
-		  FROM dms_tb_item t
+		  FROM sup.sup_tb_item t
 		 WHERE t.state = 'U'
 	]]>	
 		<dynamic>
@@ -42,7 +42,7 @@
 		  t.quota,
 		  t.origin,
 		  t.remark
-		FROM dms_tb_item t
+		FROM sup.sup_tb_item t
 		WHERE t.state = 'U'
 		AND t.item_id = #itemId#
 	]]>		

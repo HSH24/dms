@@ -10,7 +10,7 @@
 	<![CDATA[
 		SELECT t.item_region_id AS itemRegionId,
 			   t.item_id AS itemId
-		  FROM dms_tb_item_region t
+		  FROM sup.sup_tb_item_region t
 		 WHERE t.state= 'U'
 		   AND t.region_id IN
 	]]>
