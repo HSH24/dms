@@ -16,6 +16,7 @@
 		<property name="specService" ref="specService" />
 		<property name="shopService" ref="shopService" />
 		<property name="regionService" ref="regionService" />
+		<property name="supplierService" ref="supplierService" />
 		<property name="itemDao" ref="itemDao" />
 	</bean>
 	

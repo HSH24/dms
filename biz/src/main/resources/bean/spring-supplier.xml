@@ -9,6 +9,7 @@
 	</bean>
 	
 	<bean id="supplierService" class="com.hsh24.dms.supplier.service.impl.SupplierServiceImpl">
+		<property name="memcachedCacheService" ref="memcachedCacheService" />
 		<property name="supplierDao" ref="supplierDao" />
 	</bean>
 	

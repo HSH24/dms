@@ -21,6 +21,8 @@ import com.hsh24.dms.api.shop.bo.Shop;
 import com.hsh24.dms.api.spec.ISpecService;
 import com.hsh24.dms.api.spec.bo.SpecCat;
 import com.hsh24.dms.api.spec.bo.SpecItem;
+import com.hsh24.dms.api.supplier.ISupplierService;
+import com.hsh24.dms.api.supplier.bo.Supplier;
 import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
@@ -47,6 +49,8 @@ public class ItemServiceImpl implements IItemService {
 	private IShopService shopService;
 
 	private IRegionService regionService;
+
+	private ISupplierService supplierService;
 
 	private IItemDao itemDao;
 
@@ -96,7 +100,16 @@ public class ItemServiceImpl implements IItemService {
 
 		// 获取商品价格
 		for (Item ietm : list) {
-			itemList.add(getItem(ietm.getItemId()));
+			Item it = getItem(ietm.getItemId());
+			if (it != null) {
+				// 获取供应商信息
+				Supplier sup = supplierService.getSupplier(it.getSupId());
+				if (sup != null) {
+					it.setSupName(sup.getSupName());
+				}
+
+				itemList.add(it);
+			}
 		}
 
 		return itemList;
@@ -396,6 +409,14 @@ public class ItemServiceImpl implements IItemService {
 
 	public void setRegionService(IRegionService regionService) {
 		this.regionService = regionService;
+	}
+
+	public ISupplierService getSupplierService() {
+		return supplierService;
+	}
+
+	public void setSupplierService(ISupplierService supplierService) {
+		this.supplierService = supplierService;
 	}
 
 	public IItemDao getItemDao() {
