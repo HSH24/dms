@@ -140,7 +140,7 @@ public class TradeServiceImpl implements ITradeService {
 				// 亭主下单
 				trade.setType(ITradeService.TO_SEND);
 				// 14位日期 ＋ 11位随机数
-				trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
+				trade.setTradeNo("PO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(7));
 				// 支付方式
 				trade.setPayType(IPayService.PAY_TYPE_AP);
 				trade.setModifyUser(modifyUser);
@@ -295,7 +295,7 @@ public class TradeServiceImpl implements ITradeService {
 					// 亭主下单
 					trade.setType(ITradeService.TO_SEND);
 					// 14位日期 ＋ 11位随机数
-					trade.setTradeNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
+					trade.setTradeNo("PO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(7));
 					// 支付方式
 					trade.setPayType(IPayService.PAY_TYPE_AP);
 					trade.setModifyUser(modifyUser);
@@ -384,7 +384,7 @@ public class TradeServiceImpl implements ITradeService {
 		String modifyUser) {
 		Cashflow cashflow = new Cashflow();
 		cashflow.setBankAcctId(bankAcctId);
-		cashflow.setSummary("店铺商品采购支出");
+		cashflow.setSummary("支出:商品采购,业务交易号:" + tradeNo);
 		cashflow.setCrAmount(price);
 		cashflow.setDrAmount(BigDecimal.ZERO);
 		cashflow.setTradeDate(DateUtil.getNowDatetimeStr());

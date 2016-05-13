@@ -62,7 +62,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 				Long receiptId = null;
 
 				Receipt receipt = new Receipt();
-				receipt.setReceiptNo(DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(9));
+				receipt.setReceiptNo("RO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(7));
 				receipt.setUserId(userId);
 				receipt.setTradeId(Long.valueOf(tradeId));
 				receipt.setType("P");
