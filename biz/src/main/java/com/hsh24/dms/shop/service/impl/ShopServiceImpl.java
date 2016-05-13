@@ -1,7 +1,9 @@
 package com.hsh24.dms.shop.service.impl;
 
+import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.shop.IShopService;
 import com.hsh24.dms.api.shop.bo.Shop;
+import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
 import com.hsh24.dms.framework.util.LogUtil;
@@ -16,6 +18,8 @@ public class ShopServiceImpl implements IShopService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ShopServiceImpl.class);
 
+	private IMemcachedCacheService memcachedCacheService;
+
 	private IShopDao shopDao;
 
 	@Override
@@ -24,16 +28,51 @@ public class ShopServiceImpl implements IShopService {
 			return null;
 		}
 
-		Shop shop = new Shop();
+		String key = shopId.toString();
+
+		Shop shop = null;
+
+		try {
+			shop = (Shop) memcachedCacheService.get(IMemcachedCacheService.CACHE_KEY_SHOP_ID + key);
+		} catch (ServiceException e) {
+			logger.error(IMemcachedCacheService.CACHE_KEY_SHOP_ID + key, e);
+		}
+
+		if (shop != null) {
+			return shop;
+		}
+
+		shop = new Shop();
 		shop.setShopId(shopId);
 
 		try {
-			return shopDao.getShop(shop);
+			shop = shopDao.getShop(shop);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(shop), e);
+
+			return null;
 		}
 
-		return null;
+		if (shop == null) {
+			return null;
+		}
+
+		// not null then set to cache
+		try {
+			memcachedCacheService.set(IMemcachedCacheService.CACHE_KEY_SHOP_ID + key, shop);
+		} catch (ServiceException e) {
+			logger.error(IMemcachedCacheService.CACHE_KEY_SHOP_ID + key, e);
+		}
+
+		return shop;
+	}
+
+	public IMemcachedCacheService getMemcachedCacheService() {
+		return memcachedCacheService;
+	}
+
+	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
+		this.memcachedCacheService = memcachedCacheService;
 	}
 
 	public IShopDao getShopDao() {
