@@ -1,0 +1,84 @@
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<!-- Top Navbar-->
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span></span></a></div>
+		<div class="center sliding">我的资金</div>
+		<div class="right">
+			<!-- Right link contains only icon - additional "icon-only" class-->
+		</div>
+	</div>
+</div>
+<div class="pages">
+	<!-- Page, data-page contains page name-->
+	<div data-page="cashflow.index" class="page no-tabbar">
+		<!-- Scrollable page content-->
+		<div class="page-content">
+			<div class="list-block" style="font-size: 15px;">
+				<ul class="page-settings">
+					<li class="row" style="text-align: center;">
+						<div class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+							<div style="margin: 0.6rem 0 0 0;">
+    							<select style="margin: 0 auto; width: 35px; height: 100%;">
+									<option>01月</option>
+									<option>02月</option>
+									<option>03月</option>
+    								<option>04月</option>
+									<option selected>05月</option>
+									<option>06月</option>
+									<option>07月</option>
+									<option>08月</option>
+									<option>09月</option>
+									<option>10月</option>
+									<option>11月</option>
+									<option>12月</option>
+    							</select>
+                            </div>
+							<div class="color-gray">2016年</div>
+                        </div>
+						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+							<h3>$!formatUtil.getAmountFormat($!{cashflow.drAmount})</h3>
+							<div class="color-gray">收入(元)</div>
+                        </a>
+						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+							<h3>$!formatUtil.getAmountFormat($!{cashflow.crAmount})</h3>
+							<div class="color-gray">支出(元)</div>
+                        </a>
+						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+							<h3>$!formatUtil.getAmountFormat($!{cashflow.curBal})</h3>
+							<div class="color-gray">余额(元)</div>
+                        </a>
+					</li>
+                </ul>
+            </div>
+			
+			#if($!{cashflowList.size()} > 0)
+			#set($d = '00')
+			<div class="list-block" style="font-size: 14px;">
+				#foreach($cashflow in $!{cashflowList})
+				#set($dd = $!stringUtil.substring($!{cashflow.tradeDate}, 8, 10))
+				#if($d != $dd)
+					#if($d != '00') </ul> #end
+				<div class="content-block-title" style="margin-top: 10px;">$dd日</div>
+				<ul>
+					#set($d = $dd)
+				#end
+					<li>
+						<div class="item-content">
+							<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
+							<div class="item-inner">
+								<div class="item-title"> $!{cashflow.summary}</div>
+								#if($!{cashflow.crAmount} != "0")
+								<div class="item-after">-$!formatUtil.getAmountFormat($!{cashflow.crAmount})</div>
+								#else
+								<div class="item-after">$!formatUtil.getAmountFormat($!{cashflow.drAmount})</div>
+								#end
+							</div>
+						</div>
+					</li>
+				#end
+            </div>
+			#end
+        </div>
+    </div>
+</div>

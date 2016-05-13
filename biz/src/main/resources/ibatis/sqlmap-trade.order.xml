@@ -34,25 +34,25 @@
 			   q.properties_name,
 			   CASE WHEN q.price IS NULL THEN t.price ELSE q.price END,
 			   0,
-			   1,
+			   #quantity#,
 			   'U',
 			   NOW(),
 			   #modifyUser#,
 			   NOW(),
 			   #modifyUser#
-		  FROM dms_tb_item t
+		  FROM sup.sup_tb_item t
 
 		  LEFT JOIN(
 		SELECT qq.item_id, qq.properties_name, qq.price
-		  FROM dms_tb_item_sku qq
+		  FROM sup.sup_tb_item_sku qq
 		 WHERE qq.state = 'U'
 		   AND qq.sku_id = #skuId#) q ON t.item_id = q.item_id
 
 		  LEFT JOIN(
 		SELECT kkk.item_id,
 			   max(kk.file_path) AS file_path
-		  FROM dms_tb_file kk,
-			   dms_tb_item_file kkk
+		  FROM sup.sup_tb_file kk,
+			   sup.sup_tb_item_file kkk
 		 WHERE kk.file_id= kkk.file_id
 		   AND kk.state = 'U'
 		   AND kkk.state = 'U'
@@ -108,18 +108,18 @@
 			   #modifyUser#
 		  FROM dms_tb_cart t
 
-		  LEFT JOIN dms_tb_item p ON t.item_id = p.item_id
+		  LEFT JOIN sup.sup_tb_item p ON t.item_id = p.item_id
 
 		  LEFT JOIN(
 		SELECT qq.item_id, qq.sku_id, qq.properties_name, qq.price
-		  FROM dms_tb_item_sku qq
+		  FROM sup.sup_tb_item_sku qq
 		 WHERE qq.state = 'U') q ON t.sku_id = q.sku_id
 
 		  LEFT JOIN(
 		SELECT kkk.item_id,
 			   max(kk.file_path) AS file_path
-		  FROM dms_tb_file kk,
-			   dms_tb_item_file kkk
+		  FROM sup.sup_tb_file kk,
+			   sup.sup_tb_item_file kkk
 		 WHERE kk.file_id= kkk.file_id
 		   AND kk.state = 'U'
 		   AND kkk.state = 'U'
@@ -151,10 +151,10 @@
 			   t.sku_id AS skuId,
 			   CASE WHEN q.stock IS NULL THEN p.stock ELSE q.stock END AS stock
 		  FROM dms_tb_order t
-		  LEFT JOIN dms_tb_item p ON t.item_id = p.item_id
+		  LEFT JOIN sup.sup_tb_item p ON t.item_id = p.item_id
 		  LEFT JOIN(
 		SELECT qq.sku_id, qq.stock
-		  FROM dms_tb_item_sku qq
+		  FROM sup.sup_tb_item_sku qq
 		 WHERE qq.state= 'U') q ON t.sku_id = q.sku_id
 		 WHERE p.item_id is not null
 		   AND t.state = 'U'

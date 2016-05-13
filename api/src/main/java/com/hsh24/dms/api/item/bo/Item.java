@@ -22,14 +22,14 @@ public class Item extends SearchInfo {
 	private Long itemId;
 
 	/**
-	 * 货号.
-	 */
-	private String itemNo;
-
-	/**
 	 * 商品名称.
 	 */
 	private String itemName;
+
+	/**
+	 * 货号.
+	 */
+	private String itemNo;
 
 	/**
 	 * 供应商ID.
@@ -50,11 +50,6 @@ public class Item extends SearchInfo {
 	 * 库存(合计).
 	 */
 	private int stock;
-
-	/**
-	 * 邮费.
-	 */
-	private BigDecimal postage;
 
 	/**
 	 * 限购：0 代表无限购.
@@ -114,6 +109,8 @@ public class Item extends SearchInfo {
 
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
 
+	private String supName;
+
 	/**
 	 * 查询商品 区别 出售中的商品 和 已售罄的商品(soldout) 或者 type == all 即查询所有商品信息.
 	 */
@@ -151,20 +148,20 @@ public class Item extends SearchInfo {
 		this.itemId = itemId;
 	}
 
-	public String getItemNo() {
-		return itemNo;
-	}
-
-	public void setItemNo(String itemNo) {
-		this.itemNo = itemNo;
-	}
-
 	public String getItemName() {
 		return itemName;
 	}
 
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+
+	public String getItemNo() {
+		return itemNo;
+	}
+
+	public void setItemNo(String itemNo) {
+		this.itemNo = itemNo;
 	}
 
 	public Long getSupId() {
@@ -197,14 +194,6 @@ public class Item extends SearchInfo {
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-
-	public BigDecimal getPostage() {
-		return postage;
-	}
-
-	public void setPostage(BigDecimal postage) {
-		this.postage = postage;
 	}
 
 	public int getQuota() {
@@ -311,6 +300,14 @@ public class Item extends SearchInfo {
 		if (createDate != null) {
 			this.createDate = (Date) createDate.clone();
 		}
+	}
+
+	public String getSupName() {
+		return supName;
+	}
+
+	public void setSupName(String supName) {
+		this.supName = supName;
 	}
 
 	public String getType() {

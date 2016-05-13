@@ -15,11 +15,10 @@ public interface IItemFileService {
 	/**
 	 * 获取商品文件.
 	 * 
-	 * @param supId
 	 * @param itemId
 	 * @return
 	 */
-	List<ItemFile> getItemFileList(Long supId, Long itemId);
+	List<ItemFile> getItemFileList(Long itemId);
 
 	/**
 	 * 获取商品文件.

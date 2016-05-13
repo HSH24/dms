@@ -12,6 +12,7 @@
 		INTO dms_tb_cart
 		  (
 			USER_ID,
+			SHOP_ID,
 			SUP_ID,
 			ITEM_ID,
 			SKU_ID,
@@ -25,6 +26,7 @@
 		  VALUES
 		  (
 			#userId#,
+			#shopId#,
 			#supId#,
 			#itemId#,
 			#skuId#,
@@ -51,6 +53,7 @@
 			   t.quantity = t.quantity + #quantity#
 		 WHERE t.state = 'U'
 		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 		   AND t.sup_id  = #supId#
 		   AND t.item_id = #itemId#
 		   AND t.sku_id  = #skuId#
@@ -63,6 +66,7 @@
 		  FROM dms_tb_cart t
 		 WHERE t.STATE = 'U'
 		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 	]]>
 	</select>
 	
@@ -76,6 +80,7 @@
 		  FROM dms_tb_cart t
 		 WHERE t.state = 'U'
 		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 	]]>
 		<dynamic>
 			<isNotEmpty property="codes" prepend="and">
@@ -96,6 +101,7 @@
 			   t.state = #state#
 		 WHERE t.state = 'U'
 		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 		   AND t.cart_id IN
 	]]>
 		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
@@ -109,6 +115,7 @@
 			   t.quantity = #quantity#
 		 WHERE t.state = 'U'
 		   AND t.user_id = #userId#
+		   AND t.shop_id = #shopId#
 		   AND t.cart_id = #cartId#
 	]]>
 	</update>

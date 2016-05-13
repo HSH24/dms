@@ -21,7 +21,7 @@
 				<div class="navbar" style="background: #ff5500;">
 					<div class="navbar-inner">
 						<!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-						<div class="center sliding" style="color: white;">好社惠－亭主终端管理系统</div>
+						<div class="center sliding" style="color: white;">好社惠－$!{shop.shopName}</div>
 					</div>
 				</div>
 				<!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -107,7 +107,7 @@
                         <i class="icon iconfont icon-cart" style="font-size: 25px;">
 							<span id="portal/home/cart"></span>
 						</i>
-						<span class="tabbar-label">购物车</span>
+						<span class="tabbar-label">进货车</span>
                     </a>
 					<a id="href-5" href="#view-5" class="tab-link">
                         <i class="icon iconfont icon-my" style="font-size: 25px;"></i>
@@ -138,4 +138,4 @@
         		});
         </script>
 	</body>
-</html>  
+</html>

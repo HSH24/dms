@@ -6,18 +6,11 @@
 		extends="{http://dms}dms$framework" namespace="/">
 
 		<!-- 登陆 -->
-		<action name="login" class="loginAction" method="login">
-			<result name="incorrect">/dms/portal/index.vm</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">home</param>
-			</result>
-		</action>
+		<action name="login" class="loginAction" method="login"></action>
 		
 		<!-- 退出 -->
 		<action name="logout" class="loginAction" method="logout">
-			<result name="logout" type="redirect">
-				/
-			</result>
+			<result name="logout" type="redirect">${env.appUrl}/</result>
 		</action>
 		
 	</package>

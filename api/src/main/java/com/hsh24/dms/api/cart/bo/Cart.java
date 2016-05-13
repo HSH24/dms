@@ -27,6 +27,11 @@ public class Cart extends SearchInfo {
 	private Long userId;
 
 	/**
+	 * 店铺ID.
+	 */
+	private Long shopId;
+
+	/**
 	 * 供应商ID.
 	 */
 	private Long supId;
@@ -97,6 +102,14 @@ public class Cart extends SearchInfo {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Long getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Long shopId) {
+		this.shopId = shopId;
 	}
 
 	public Long getSupId() {

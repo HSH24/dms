@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.hsh24.dms.api.ca.ICAService;
-import com.hsh24.dms.api.user.bo.User;
+import com.hsh24.dms.api.shop.bo.Shop;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -36,15 +36,21 @@ public class AuthenticationInterceptor implements Interceptor {
 
 		@SuppressWarnings("rawtypes")
 		Map session = invocation.getInvocationContext().getSession();
-		User user = (User) session.get("ACEGI_SECURITY_LAST_LOGINUSER");
+		String passport = (String) session.get("ACEGI_SECURITY_LAST_PASSPORT");
 
-		if (user == null) {
+		if (StringUtils.isBlank(passport)) {
 			String actionName = getActionName();
 			// 登录首页 不需要 goto
 			if (!"/home.htm".equals(actionName)) {
 				setAttribute("goto", getUrl());
 			}
 
+			return LOGIN_TIMEOUT;
+		}
+
+		Shop shop = (Shop) session.get("ACEGI_SECURITY_LAST_SHOP");
+		if (shop == null) {
+			// TODO
 			return LOGIN_TIMEOUT;
 		}
 

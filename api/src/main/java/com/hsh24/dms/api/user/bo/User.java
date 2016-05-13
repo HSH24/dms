@@ -30,6 +30,10 @@ public class User extends SearchInfo {
 
 	private String state;
 
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	private Long shopId;
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -68,6 +72,14 @@ public class User extends SearchInfo {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Long getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Long shopId) {
+		this.shopId = shopId;
 	}
 
 }

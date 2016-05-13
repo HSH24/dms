@@ -50,72 +50,76 @@ public interface ITradeService {
 	/**
 	 * 立即购买.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 * @param itemId
 	 * @param skuId
 	 * @param quantity
+	 * @param modifyUser
 	 * @return
 	 */
-	BooleanResult createTrade(Long userId, String itemId, String skuId, String quantity);
+	BooleanResult createTrade(Long shopId, String itemId, String skuId, String quantity, String modifyUser);
 
 	/**
 	 * 卖家下单交易.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 *            必填.
+	 * @param userId
 	 * @param cartId
 	 *            购物车id.
+	 * @param modifyUser
 	 * @return
 	 */
-	BooleanResult createTrade(Long userId, String[] cartId);
+	BooleanResult createTrade(Long shopId, Long userId, String[] cartId, String modifyUser);
 
 	/**
 	 * 卖家查询交易.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 *            必填.
 	 * @param type
 	 * @return
 	 */
-	int getTradeCount(Long userId, String[] type);
+	int getTradeCount(Long shopId, String[] type);
 
 	/**
 	 * 卖家查询某店铺交易.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 *            必填.
 	 * @param type
 	 * @return
 	 */
-	List<Trade> getTradeList(Long userId, String[] type);
+	List<Trade> getTradeList(Long shopId, String[] type);
 
 	/**
 	 * 卖家查看订单.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 * @param tradeNo
 	 * @return
 	 */
-	Trade getTrade(Long userId, String tradeNo);
+	Trade getTrade(Long shopId, String tradeNo);
 
 	/**
 	 * 取消订单.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 * @param tradeNo
+	 * @param modifyUser
 	 * @return
 	 */
-	BooleanResult cancelTrade(Long userId, String tradeNo);
+	BooleanResult cancelTrade(Long shopId, String tradeNo, String modifyUser);
 
 	/**
 	 * 获取某一交易某一订单明细信息(用于退款).
 	 * 
-	 * @param userId
+	 * @param shopId
 	 * @param tradeNo
 	 * @param orderId
 	 * @return
 	 */
-	Trade getOrder(Long userId, String tradeNo, String orderId);
+	Trade getOrder(Long shopId, String tradeNo, String orderId);
 
 	/**
 	 * 退款申请.
@@ -134,10 +138,11 @@ public interface ITradeService {
 	/**
 	 * 确认收货.
 	 * 
-	 * @param userId
+	 * @param shopId
 	 * @param tradeNo
+	 * @param modifyUser
 	 * @return
 	 */
-	BooleanResult signTrade(Long userId, String tradeNo);
+	BooleanResult signTrade(Long shopId, String tradeNo, String modifyUser);
 
 }

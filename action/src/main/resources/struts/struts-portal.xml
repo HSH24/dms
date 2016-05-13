@@ -8,6 +8,7 @@
 		<!-- 登陆首页 -->
 		<action name="index" class="portalAction" method="index">
 			<result name="success">/dms/portal/index.vm</result>
+			<result name="none" type="redirect">${env.appUrl}/user/shop.htm</result>
 		</action>
 		
 		<action name="home" class="portalAction" method="home">

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>好社惠 | 便民亭</title>
+		#ICON()
+		#CSSM(["framework7", "iconfont"])
+		<link rel="stylesheet" href="$!{env.imgUrl}/css/portal/index.css" />
+		#UA()
+	</head>
+	<body>
+		<!-- Views -->
+		<div class="views toolbar-through">
+			<div class="view view-main">
+				<div class="pages navbar-through">
+    				<div data-page="user.shop" class="page">
+    					<div class="page-content login-screen-content">
+							<div class="login-screen-title">
+								<img src="$!{env.imgUrl}/image/portal/logo.png" style="width: 100px;"></img>
+							</div>
+							<div class="login-screen-title" style="font-size: 25px;">请选择您的店铺</div>
+							<div class="list-block">
+								<ul>
+									#foreach($shop in $!{shopList})
+									<a href="$!{env.appUrl}/user/select.htm?shopId=$!{shop.shopId}" class="item-link item-content external">
+										<div class="item-media"><i class="iconfont icon-home" style="font-size: 20px;"></i></div>
+										<div class="item-inner">
+											<div class="item-title">$!{shop.shopName}</div>
+										</div>
+									</a>
+									#end
+								</ul>
+							</div>
+							<div class="list-block" style="margin-top: 15%;">
+                				<ul>
+                					<li>
+                						<a href="$!{env.appUrl}/logout.htm" class="item-content external" style="color: inherit;">
+                							<div class="item-inner">
+                								<div class="item-title" style="text-align: center; width: 100%;">退出登录</div>
+                							</div>
+                						</a>
+                					</li>
+                                </ul>
+                            </div>
+    					</div>
+    				</div>
+                </div>
+			</div>
+		</div>
+		
+		#JSM(["framework7"])
+		<script type="text/javascript" src="$!{env.imgUrl}/js/user/shop.js"></script>
+	</body>
+</html>

@@ -4,6 +4,30 @@
 <struts>
 	<package name="{http://dms}dms$user"
 		extends="{http://dms}dms$framework" namespace="/user">
+		
+		<!-- 发送验证码 -->
+		<action name="sendCheckCode" class="userAccAction" method="sendCheckCode"></action>
+		
+		<action name="validateCheckCode" class="userAccAction" method="validateCheckCode"></action>
+		
+		<!-- 重置密码 -->
+		<action name="setPassword" class="userAccAction" method="setPassword">
+			<result name="success">/dms/user/setPassword.vm</result>
+		</action>
+		
+		<action name="updatePassword" class="userAccAction" method="updatePassword" />
+		
+		<!-- 店铺 -->
+		<action name="shop" class="userShopAction" method="index">
+			<result name="shop">/dms/user/shop.vm</result>
+			<result name="success" type="redirect">${env.appUrl}/home.htm</result>
+		</action>
+		
+		<!-- 选择 -->
+		<action name="select" class="userShopAction" method="select">
+			<result name="error">/dms/user/shop.vm</result>
+			<result name="success" type="redirect">${env.appUrl}/home.htm</result>
+		</action>
 
 	</package>
 </struts>

@@ -45,9 +45,10 @@ public class LoginAction extends BaseAction {
 		// 验证失败
 		if (ICAService.RESULT_FAILED.equals(result.getResultCode())
 			|| ICAService.RESULT_ERROR.equals(result.getResultCode())) {
-			this.setFailMessage(result.getMessage());
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult(result.getMessage());
 
-			return "incorrect";
+			return RESOURCE_RESULT;
 		}
 
 		// 验证通过
@@ -66,7 +67,7 @@ public class LoginAction extends BaseAction {
 			response.addCookie(ps);
 		}
 
-		return SUCCESS;
+		return RESOURCE_RESULT;
 	}
 
 	/**
@@ -89,6 +90,7 @@ public class LoginAction extends BaseAction {
 			// login
 			session.removeAttribute("ACEGI_SECURITY_LAST_PASSPORT");
 			session.removeAttribute("ACEGI_SECURITY_LAST_LOGINUSER");
+			session.removeAttribute("ACEGI_SECURITY_LAST_SHOP");
 
 			session.invalidate();
 		} catch (Exception e) {

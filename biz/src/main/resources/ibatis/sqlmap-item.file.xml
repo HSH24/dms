@@ -12,9 +12,9 @@
 		  t.item_id   AS itemId,
 		  p.file_id   AS fileId,
 		  p.file_path AS filePath
-		FROM dms_tb_item t,
-		  dms_tb_file p,
-		  dms_tb_item_file q
+		FROM sup.sup_tb_item t,
+		  sup.sup_tb_file p,
+		  sup.sup_tb_item_file q
 		WHERE t.item_id = q.item_id
 		AND p.file_id   = q.file_id
 		AND t.state     = 'U'

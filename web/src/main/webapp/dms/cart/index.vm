@@ -3,7 +3,7 @@
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="left"></div>
-		<div class="center sliding">购物车</div>
+		<div class="center sliding">进货车</div>
 		<div class="right">
 			<!-- Right link contains only icon - additional "icon-only" class-->
 		</div>
@@ -31,17 +31,17 @@
     						</div>
     					</li>
     					#foreach($cart in $!{cartList})
-						#if($supId != $!{cart.supId})
-						#set($supId = $!{cart.supId})
-						<li>
-    						<div class="item-content">
-    							<div class="item-inner" style="display: inherit;">
-    								<div class="item-title" style="font-weight: 400;">供应商：$!{cart.supName}</div>
-    								<div class="item-after"></div>
-    							</div>
-    						</div>
-    					</li>
-						#end
+    						#if($supId != $!{cart.supId})
+    						#set($supId = $!{cart.supId})
+    						<li>
+        						<div class="item-content">
+        							<div class="item-inner" style="display: inherit;">
+        								<div class="item-title" style="font-weight: 400;">供应商：$!{cart.supName}</div>
+        								<div class="item-after"></div>
+        							</div>
+        						</div>
+        					</li>
+    						#end
     					<li>
     						<div class="item-content">
 								<label class="label-checkbox">

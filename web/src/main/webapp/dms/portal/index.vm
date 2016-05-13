@@ -24,11 +24,11 @@
         					<!-- page-content has additional login-screen content -->
         					<div class="page-content login-screen-content">
         						<div class="login-screen-title" style="margin-top: 20%;">
-    								<img src="$!{env.imgUrl}/image/portal/logo.jpg" style="width: 100px;"></img>
+    								<img src="$!{env.imgUrl}/image/portal/logo.png" style="width: 100px;"></img>
     							</div>
 								
         						<!-- Login form -->
-        						<form action="$!{env.appUrl}/login.htm" method="POST">
+								<form id="portal/index/login/form" method="POST" class="ajax-submit">
         							<div class="list-block">
         								<ul>
         									<li class="item-content">
@@ -83,7 +83,7 @@
     				<div data-page="portal.forgetPassword" class="page">
     					<div class="page-content login-screen-content">
     						<div class="login-screen-title" style="font-size: 25px;">通过短信找回密码</div>
-    						<form id="portal/forgetPassword/form" method="POST" class="ajax-submit">
+    						<form id="portal/index/forgetPassword/form" method="POST" class="ajax-submit">
     							<div class="list-block">
     								<ul>
     									<li class="item-content">
@@ -136,6 +136,6 @@
 		var domain = '$!{env.domain}';
         </script>
 		<script type="text/javascript" src="$!{env.imgUrl}/js/portal/index.js"></script>
-		<script type="text/javascript" src="$!{env.imgUrl}/js/account/setPassword.js"></script>
+		<script type="text/javascript" src="$!{env.imgUrl}/js/user/setPassword.js"></script>
 	</body>
 </html>

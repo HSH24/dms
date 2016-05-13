@@ -15,11 +15,14 @@
 		  t.stock,
 		  t.price,
 		  t.origin,
-		  t.code
-		FROM dms_tb_item_sku t
+		  t.bar_code AS barCode
+		FROM sup.sup_tb_item_sku t
 		WHERE t.state     = 'U'
 	]]>	
 		<dynamic>
+			<isNotEmpty property="itemId" prepend="and">
+			<![CDATA[ t.item_id = #itemId# ]]>
+			</isNotEmpty>
 			<isNotEmpty property="codes" prepend="and">
 			<![CDATA[ t.sku_id IN ]]>
 				<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>

@@ -13,8 +13,8 @@
 			   t.passport,
 			   t.password,
 			   t.state
-		  FROM basis_tb_user t
-		 WHERE t.state = 'U'
+		  FROM dms_tb_user t
+		 WHERE t.state IN ('U', 'F')
 		   AND t.passport = upper(#possport#)
 	]]>
 	</select>

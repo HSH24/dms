@@ -13,12 +13,12 @@ import com.hsh24.dms.api.item.bo.ItemSku;
 public interface IItemSkuService {
 
 	/**
+	 * 获得商品的所有SKU.
 	 * 
-	 * @param supId
 	 * @param itemId
 	 * @return
 	 */
-	List<ItemSku> getItemSkuList(Long supId, String itemId);
+	List<ItemSku> getItemSkuList(Long itemId);
 
 	/**
 	 * 

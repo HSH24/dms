@@ -30,8 +30,11 @@
 	<typeAlias alias="charaRplace" type="com.hsh24.dms.framework.ibatis.type.CharacterReplaceHanlderCallback" />
 
 	<sqlMap resource="ibatis/global.xml" />
+	<sqlMap resource="ibatis/sqlmap-bankAcct.xml" />
 	<sqlMap resource="ibatis/sqlmap-cart.xml" />
+	<sqlMap resource="ibatis/sqlmap-cashflow.xml" />
 	<sqlMap resource="ibatis/sqlmap-item.file.xml" />
+	<sqlMap resource="ibatis/sqlmap-item.region.xml" />
 	<sqlMap resource="ibatis/sqlmap-item.sku.xml" />
 	<sqlMap resource="ibatis/sqlmap-item.xml" />
 	<sqlMap resource="ibatis/sqlmap-monitor.action.xml" />
@@ -40,10 +43,13 @@
 	<sqlMap resource="ibatis/sqlmap-monitor.method.xml" />
 	<sqlMap resource="ibatis/sqlmap-receipt.detail.xml" />
 	<sqlMap resource="ibatis/sqlmap-receipt.xml" />
+	<sqlMap resource="ibatis/sqlmap-region.xml" />
+	<sqlMap resource="ibatis/sqlmap-shop.xml" />
 	<sqlMap resource="ibatis/sqlmap-supplier.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.order.refund.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.order.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.xml" />
+	<sqlMap resource="ibatis/sqlmap-user.shop.xml" />
 	<sqlMap resource="ibatis/sqlmap-user.xml" />
     
 </sqlMapConfig>

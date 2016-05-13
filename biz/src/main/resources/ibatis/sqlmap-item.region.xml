@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="item.region">
+	
+	<typeAlias alias="item" type="com.hsh24.dms.api.item.bo.Item" />
+	
+	<select id="getItemList" parameterClass="item" resultClass="item">
+	<![CDATA[
+		SELECT t.item_region_id AS itemRegionId,
+			   t.item_id AS itemId
+		  FROM sup.sup_tb_item_region t
+		 WHERE t.state= 'U'
+		   AND t.region_id IN
+	]]>
+		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+	</select>
+	
+</sqlMap>

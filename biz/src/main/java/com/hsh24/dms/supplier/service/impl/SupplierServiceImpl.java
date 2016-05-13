@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.supplier.ISupplierService;
 import com.hsh24.dms.api.supplier.bo.Supplier;
+import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
 import com.hsh24.dms.framework.util.LogUtil;
@@ -20,6 +22,8 @@ public class SupplierServiceImpl implements ISupplierService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(SupplierServiceImpl.class);
 
+	private IMemcachedCacheService memcachedCacheService;
+
 	private ISupplierDao supplierDao;
 
 	@Override
@@ -28,16 +32,43 @@ public class SupplierServiceImpl implements ISupplierService {
 			return null;
 		}
 
-		Supplier supplier = new Supplier();
+		String key = supId.toString();
+
+		Supplier supplier = null;
+
+		try {
+			supplier = (Supplier) memcachedCacheService.get(IMemcachedCacheService.CACHE_KEY_SUP_ID + key);
+		} catch (ServiceException e) {
+			logger.error(IMemcachedCacheService.CACHE_KEY_SUP_ID + key, e);
+		}
+
+		if (supplier != null) {
+			return supplier;
+		}
+
+		supplier = new Supplier();
 		supplier.setSupId(supId);
 
 		try {
-			return supplierDao.getSupplier(supplier);
+			supplier = supplierDao.getSupplier(supplier);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(supplier), e);
+
+			return null;
 		}
 
-		return null;
+		if (supplier == null) {
+			return null;
+		}
+
+		// not null then set to cache
+		try {
+			memcachedCacheService.set(IMemcachedCacheService.CACHE_KEY_SUP_ID + key, supplier);
+		} catch (ServiceException e) {
+			logger.error(IMemcachedCacheService.CACHE_KEY_SUP_ID + key, e);
+		}
+
+		return supplier;
 	}
 
 	@Override
@@ -77,6 +108,14 @@ public class SupplierServiceImpl implements ISupplierService {
 		}
 
 		return null;
+	}
+
+	public IMemcachedCacheService getMemcachedCacheService() {
+		return memcachedCacheService;
+	}
+
+	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
+		this.memcachedCacheService = memcachedCacheService;
 	}
 
 	public ISupplierDao getSupplierDao() {

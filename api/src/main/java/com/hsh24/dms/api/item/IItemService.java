@@ -14,31 +14,31 @@ import com.hsh24.dms.framework.bo.BooleanResult;
 public interface IItemService {
 
 	/**
+	 * 获取当前店铺可以购买的商品列表.
 	 * 
 	 * @param shopId
 	 *            门店编号.
 	 * @param item
 	 * @return
 	 */
-	int getItemCount(Long shopId, Item item);
+	int getItemSkuCount(Long shopId, Item item);
 
 	/**
+	 * 获取当前店铺可以购买的商品列表.
 	 * 
 	 * @param shopId
 	 *            门店编号.
 	 * @param item
 	 * @return
 	 */
-	List<Item> getItemList(Long shopId, Item item);
+	List<Item> getItemSkuList(Long shopId, Item item);
 
 	/**
 	 * 
-	 * @param shopId
-	 *            门店编号.
 	 * @param itemId
 	 * @return
 	 */
-	Item getItem(Long shopId, String itemId);
+	Item getItem(String itemId);
 
 	/**
 	 * 
