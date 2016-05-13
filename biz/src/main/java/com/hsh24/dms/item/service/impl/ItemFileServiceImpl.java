@@ -23,16 +23,15 @@ public class ItemFileServiceImpl implements IItemFileService {
 	private IItemFileDao itemFileDao;
 
 	@Override
-	public List<ItemFile> getItemFileList(Long supId, Long itemId) {
+	public List<ItemFile> getItemFileList(Long itemId) {
 		if (itemId == null) {
 			return null;
 		}
 
-		ItemFile itemFile = new ItemFile();
-		itemFile.setSupId(supId);
-		itemFile.setItemId(itemId);
+		ItemFile file = new ItemFile();
+		file.setItemId(itemId);
 
-		return getItemFileList(itemFile);
+		return getItemFileList(file);
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class ItemFileServiceImpl implements IItemFileService {
 				continue;
 			}
 
-			map.put(ietmId, getItemFileList(null, ietmId));
+			map.put(ietmId, getItemFileList(ietmId));
 		}
 
 		return map;
@@ -67,14 +66,14 @@ public class ItemFileServiceImpl implements IItemFileService {
 
 	/**
 	 * 
-	 * @param itemFile
+	 * @param file
 	 * @return
 	 */
-	private List<ItemFile> getItemFileList(ItemFile itemFile) {
+	private List<ItemFile> getItemFileList(ItemFile file) {
 		try {
-			return itemFileDao.getItemFileList(itemFile);
+			return itemFileDao.getItemFileList(file);
 		} catch (Exception e) {
-			logger.error(LogUtil.parserBean(itemFile), e);
+			logger.error(LogUtil.parserBean(file), e);
 		}
 
 		return null;

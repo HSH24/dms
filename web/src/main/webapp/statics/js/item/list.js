@@ -41,17 +41,17 @@ function scanFinished(str) {
 	alert(str);
 }
 
-function item_list_trade(itemId, skuId) {
+function item_list_trade(itemId, skuId, title, text) {
 	myApp.modal({
-		title : '特仑苏纯牛奶利乐苗条装',
-		text : '250ml×8盒×3提 共24盒 ￥10',
+		title : title,
+		text : text,
 		afterText : '<div class="list-block" style="margin: 0">'
 				+ '<div class="item-content">'
 				+ '<div class="item-inner page-settings">'
 				+ '<div class="item-title label" style="width: 50%;">采购数量：</div>'
 				+ '<div class="item-input">'
-				+ '<select><option>1</option><option>2</option><option>3</option></select>'
-				+ '</div>' + '</div>' + '</div>' + '</div>',
+				+ '<select><option>1</option></select>' + '</div>' + '</div>'
+				+ '</div>' + '</div>',
 		buttons : [{
 					text : '取消',
 					onClick : function() {
@@ -63,7 +63,7 @@ function item_list_trade(itemId, skuId) {
 
 						$$('#item_list_trade_itemId').val(itemId);
 						$$('#item_list_trade_skuId').val(skuId);
-						$$('#item_list_trade_quantity').val("3");
+						$$('#item_list_trade_quantity').val("1");
 						$$('#item/list/trade').trigger("submit");
 					}
 				}]

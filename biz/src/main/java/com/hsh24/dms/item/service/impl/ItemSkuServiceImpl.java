@@ -23,9 +23,17 @@ public class ItemSkuServiceImpl implements IItemSkuService {
 	private IItemSkuDao itemSkuDao;
 
 	@Override
-	public List<ItemSku> getItemSkuList(Long shopId, String itemId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ItemSku> getItemSkuList(Long itemId) {
+		if (itemId == null) {
+			return null;
+		}
+
+		ItemSku sku = new ItemSku();
+		sku.setItemId(itemId);
+		sku.setLimit(99);
+		sku.setOffset(0);
+
+		return getItemSkuList(sku);
 	}
 
 	@Override
@@ -54,6 +62,11 @@ public class ItemSkuServiceImpl implements IItemSkuService {
 		return map;
 	}
 
+	/**
+	 * 
+	 * @param item
+	 * @return
+	 */
 	private List<ItemSku> getItemSkuList(ItemSku item) {
 		try {
 			return itemSkuDao.getItemSkuList(item);

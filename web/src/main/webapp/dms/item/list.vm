@@ -27,116 +27,38 @@
 		<div class="page-content">
 			<div class="list-block accordion-list list-block-search searchbar-found" style="font-size: 15px;">
 				<ul>
-                    <li class="accordion-item">
-						<a href="#" class="item-content item-link">
-							<div class="item-media">
-								<img src="$!{env.imgUrl}/image/item/detail-3.jpg" style="width: 50px;"></img>
-							</div>
-							<div class="item-inner">
-								<div class="item-title">
-									特仑苏纯牛奶利乐苗条装 ￥10<br />
-                                    <span style="font-size: 12px; color: #8e8e93;">250ml×8盒×3提 共24盒</span>
-								</div>
+					#foreach($item in $!{itemList})
+						#foreach($sku in $!{item.skuList})
+                        <li class="accordion-item">
+    						<a href="#" class="item-content item-link">
+    							<div class="item-media">
+    								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
+    							</div>
+    							<div class="item-inner">
+    								<div class="item-title">
+    									$!{item.itemName} ￥$!formatUtil.getAmountFormat($!{sku.price})<br />
+                                        <span style="font-size: 12px; color: #8e8e93;">$!{sku.propertiesName}</span>
+    								</div>
+                                </div>
+    						</a>
+    						<div class="item-content">
+        						<div class="item-inner">
+    								<div class="item-title"></div>
+    								<div class="item-after">
+    									<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}', '$!{item.itemName}', '$!{sku.propertiesName} ￥$!formatUtil.getAmountFormat($!{sku.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
+    									<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
+    								</div>
+        						</div>
                             </div>
-						</a>
-						<div class="item-content">
-    						<div class="item-inner">
-								<div class="item-title"></div>
-								<div class="item-after">
-									<a href="javascript:item_list_trade('1', '1');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('1', '1');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
-								</div>
+    						<div class="accordion-item-content">
+    							<div class="content-block">
+    								<p style="font-size: 15px;">$!{item.itemName}|$!{sku.propertiesName}</p>
+    								<p>$!{item.remark}</p>
+    							</div>
     						</div>
-                        </div>
-						<div class="accordion-item-content">
-							<div class="content-block">
-								<p style="font-size: 15px;">特仑苏纯牛奶利乐苗条装250ml×8盒×3提 共24盒</p>
-								<p>
-        							生产许可证编号：QS1501 0501 0294<br />
-        							产品标准号：GB25190<br />
-        							厂名：内蒙古蒙牛乳业(集团)股份有限公司<br />
-        							配料表：生牛乳<br />
-        							储藏方法：常温密闭保存<br />
-        							保质期：180 天<br />
-        							净含量: 8x3x250ml
-        						</p>
-							</div>
-						</div>
-					</li>
-					
-					<li class="accordion-item">
-						<a href="#" class="item-content item-link">
-							<div class="item-media">
-								<img src="$!{env.imgUrl}/image/item/detail-3.jpg" style="width: 50px;"></img>
-							</div>
-							<div class="item-inner">
-								<div class="item-title">
-									特仑苏谷粒调制牛奶 ￥10<br />
-                                    <span style="font-size: 12px; color: #8e8e93;">250ml×12盒×2提</span>
-								</div>
-                            </div>
-						</a>
-						<div class="item-content">
-    						<div class="item-inner">
-								<div class="item-title"></div>
-								<div class="item-after">
-									<a href="javascript:item_list_trade('2', '2');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('2', '2');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
-								</div>
-    						</div>
-                        </div>
-						<div class="accordion-item-content">
-							<div class="content-block">
-								<p style="font-size: 15px;">特仑苏谷粒调制牛奶250ml×12盒×2提</p>
-								<p>
-        							生产许可证编号：QS1501 0501 0294<br />
-        							产品标准号：GB25190<br />
-        							厂名：内蒙古蒙牛乳业(集团)股份有限公司<br />
-        							配料表：生牛乳<br />
-        							储藏方法：常温密闭保存<br />
-        							保质期：180 天<br />
-        							净含量: 8x3x250ml
-        						</p>
-							</div>
-						</div>
-					</li>
-					
-					<li class="accordion-item">
-						<a href="#" class="item-content item-link">
-							<div class="item-media">
-								<img src="$!{env.imgUrl}/image/item/detail-3.jpg" style="width: 50px;"></img>
-							</div>
-							<div class="item-inner">
-								<div class="item-title">
-									谷粒调制牛奶 ￥10<br />
-                                    <span style="font-size: 12px; color: #8e8e93;">250ml×12盒×2提</span>
-								</div>
-                            </div>
-						</a>
-						<div class="item-content">
-    						<div class="item-inner">
-								<div class="item-title"></div>
-								<div class="item-after">
-									<a href="javascript:item_list_trade('3', '3');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-									<a href="javascript:item_list_cart('3', '3');" class="button color-gray" style="margin-left: 5px;" data-ignore-cache="true">添加进货车</a>
-								</div>
-    						</div>
-                        </div>
-						<div class="accordion-item-content">
-							<div class="content-block">
-								<p style="font-size: 15px;">特仑苏谷粒调制牛奶250ml×12盒×2提</p>
-								<p>
-        							生产许可证编号：QS1501 0501 0294<br />
-        							产品标准号：GB25190<br />
-        							厂名：内蒙古蒙牛乳业(集团)股份有限公司<br />
-        							配料表：生牛乳<br />
-        							储藏方法：常温密闭保存<br />
-        							保质期：180 天<br />
-        							净含量: 8x3x250ml
-        						</p>
-							</div>
-						</div>
-					</li>
+    					</li>
+						#end
+					#end
 				</ul>
 			</div>
         </div>

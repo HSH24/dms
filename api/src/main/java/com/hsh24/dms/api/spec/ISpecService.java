@@ -16,19 +16,17 @@ public interface ISpecService {
 	/**
 	 * 获取供应商规格类目信息.
 	 * 
-	 * @param supId
 	 * @param specCId
 	 * @return
 	 */
-	List<SpecCat> getSpecCatList(Long supId, String[] specCId);
+	List<SpecCat> getSpecCatList(String[] specCId);
 
 	/**
 	 * 获取店铺规格类目明细信息.
 	 * 
-	 * @param supId
 	 * @param specItemId
 	 * @return
 	 */
-	List<SpecItem> getSpecItemList(Long supId, String[] specItemId);
+	List<SpecItem> getSpecItemList(String[] specItemId);
 
 }

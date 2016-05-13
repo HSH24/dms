@@ -45,7 +45,6 @@
 		  t.remark
 		FROM dms_tb_item t
 		WHERE t.state = 'U'
-		AND t.sup_id = #supId#
 		AND t.item_id = #itemId#
 	]]>		
 	</select>

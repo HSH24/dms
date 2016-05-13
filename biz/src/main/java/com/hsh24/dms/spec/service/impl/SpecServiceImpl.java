@@ -14,13 +14,13 @@ import com.hsh24.dms.api.spec.bo.SpecItem;
 public class SpecServiceImpl implements ISpecService {
 
 	@Override
-	public List<SpecCat> getSpecCatList(Long supId, String[] specCId) {
+	public List<SpecCat> getSpecCatList(String[] specCId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SpecItem> getSpecItemList(Long supId, String[] specItemId) {
+	public List<SpecItem> getSpecItemList(String[] specItemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
