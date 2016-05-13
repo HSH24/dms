@@ -140,7 +140,7 @@ public class TradeServiceImpl implements ITradeService {
 				// 亭主下单
 				trade.setType(ITradeService.TO_SEND);
 				// 14位日期 ＋ 11位随机数
-				trade.setTradeNo("PO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(7));
+				trade.setTradeNo("PO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(11));
 				// 支付方式
 				trade.setPayType(IPayService.PAY_TYPE_AP);
 				trade.setModifyUser(modifyUser);
@@ -295,7 +295,7 @@ public class TradeServiceImpl implements ITradeService {
 					// 亭主下单
 					trade.setType(ITradeService.TO_SEND);
 					// 14位日期 ＋ 11位随机数
-					trade.setTradeNo("PO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(7));
+					trade.setTradeNo("PO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(11));
 					// 支付方式
 					trade.setPayType(IPayService.PAY_TYPE_AP);
 					trade.setModifyUser(modifyUser);
@@ -432,7 +432,7 @@ public class TradeServiceImpl implements ITradeService {
 		t.setCodes(type);
 
 		// 暂不分页
-		t.setLimit(10);
+		t.setLimit(99);
 		t.setOffset(0);
 		t.setSort("CREATE_DATE");
 		t.setOrder("DESC");

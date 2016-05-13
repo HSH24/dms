@@ -2,6 +2,8 @@ package com.hsh24.dms.trade.action;
 
 import java.util.List;
 
+import com.hsh24.dms.api.receipt.IReceiptService;
+import com.hsh24.dms.api.receipt.bo.Receipt;
 import com.hsh24.dms.api.trade.ITradeService;
 import com.hsh24.dms.api.trade.bo.Trade;
 import com.hsh24.dms.framework.action.BaseAction;
@@ -17,6 +19,8 @@ public class TradeAction extends BaseAction {
 	private static final long serialVersionUID = -912767004509511731L;
 
 	private ITradeService tradeService;
+
+	private IReceiptService receiptService;
 
 	private String itemId;
 
@@ -42,6 +46,8 @@ public class TradeAction extends BaseAction {
 	private List<Trade> tradeList;
 
 	private Trade trade;
+
+	private List<Receipt> receiptList;
 
 	/**
 	 * 订单明细编号.
@@ -143,7 +149,13 @@ public class TradeAction extends BaseAction {
 	 * @return
 	 */
 	public String detail() {
-		trade = tradeService.getTrade(this.getShop().getShopId(), tradeNo);
+		Long shopId = this.getShop().getShopId();
+
+		trade = tradeService.getTrade(shopId, tradeNo);
+
+		if (trade != null) {
+			receiptList = receiptService.getReceiptList(shopId, trade.getTradeId());
+		}
 
 		return SUCCESS;
 	}
@@ -159,31 +171,20 @@ public class TradeAction extends BaseAction {
 		return SUCCESS;
 	}
 
-	/**
-	 * 确认收货.
-	 * 
-	 * @return
-	 */
-	public String sign() {
-		BooleanResult result =
-			tradeService.signTrade(this.getShop().getShopId(), tradeNo, this.getUser().getUserId().toString());
-
-		if (result.getResult()) {
-			this.setResourceResult(result.getCode());
-		} else {
-			this.getServletResponse().setStatus(599);
-			this.setResourceResult(result.getCode());
-		}
-
-		return RESOURCE_RESULT;
-	}
-
 	public ITradeService getTradeService() {
 		return tradeService;
 	}
 
 	public void setTradeService(ITradeService tradeService) {
 		this.tradeService = tradeService;
+	}
+
+	public IReceiptService getReceiptService() {
+		return receiptService;
+	}
+
+	public void setReceiptService(IReceiptService receiptService) {
+		this.receiptService = receiptService;
 	}
 
 	public String getItemId() {
@@ -248,6 +249,14 @@ public class TradeAction extends BaseAction {
 
 	public void setTrade(Trade trade) {
 		this.trade = trade;
+	}
+
+	public List<Receipt> getReceiptList() {
+		return receiptList;
+	}
+
+	public void setReceiptList(List<Receipt> receiptList) {
+		this.receiptList = receiptList;
 	}
 
 	public String getOrderId() {

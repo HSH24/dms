@@ -27,7 +27,9 @@ public class ReceiptAction extends BaseAction {
 	 * @return
 	 */
 	public String part() {
-		BooleanResult result = receiptService.part(this.getUser().getUserId(), tradeId, receiptDetailList);
+		BooleanResult result =
+			receiptService.part(this.getShop().getShopId(), tradeId, receiptDetailList, this.getUser().getUserId()
+				.toString());
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());

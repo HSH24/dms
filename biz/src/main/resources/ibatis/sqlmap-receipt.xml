@@ -12,7 +12,7 @@
 		INTO dms_tb_receipt
 		  (
 			RECEIPT_NO,
-			USER_ID,
+			SHOP_ID,
 			TRADE_ID,
 			TYPE,
 			STATE,
@@ -24,14 +24,14 @@
 		  VALUES
 		  (
 			#receiptNo#,
-			#userId#,
+			#shopId#,
 			#tradeId#,
 			#type#,
 			'U',
 			NOW(),
-			#userId#,
+			#modifyUser#,
 			NOW(),
-			#userId#
+			#modifyUser#
 		  )
 	]]>
 		<selectKey resultClass="java.lang.Long" keyProperty="receiptId">
@@ -40,5 +40,18 @@
 		]]>
 		</selectKey>
 	</insert>
+	
+	<select id="getReceiptList" parameterClass="receipt" resultClass="receipt">
+	<![CDATA[
+		SELECT t.receipt_id AS receiptId,
+			   t.receipt_no AS receiptNo,
+			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate
+		  FROM dms_tb_receipt t
+		 WHERE t.state = 'U'
+		   AND t.shop_id = #shopId#
+		   AND t.trade_id = #tradeId#
+		 ORDER BY CREATE_DATE
+	]]>
+	</select>
 
 </sqlMap>

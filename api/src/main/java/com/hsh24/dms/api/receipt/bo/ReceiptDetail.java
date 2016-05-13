@@ -24,6 +24,12 @@ public class ReceiptDetail implements Serializable {
 
 	private String modifyUser;
 
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	private String itemName;
+
+	private String propertiesName;
+
 	public Long getDetailId() {
 		return detailId;
 	}
@@ -62,6 +68,22 @@ public class ReceiptDetail implements Serializable {
 
 	public void setModifyUser(String modifyUser) {
 		this.modifyUser = modifyUser;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public String getPropertiesName() {
+		return propertiesName;
+	}
+
+	public void setPropertiesName(String propertiesName) {
+		this.propertiesName = propertiesName;
 	}
 
 }

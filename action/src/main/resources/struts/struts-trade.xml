@@ -33,9 +33,5 @@
 			<result name="success">/dms/trade/refund.vm</result>
 		</action>
 		
-		<action name="sign" class="tradeAction" method="sign">
-			<interceptor-ref name="authenticationStack" />
-		</action>
-		
 	</package>
 </struts>

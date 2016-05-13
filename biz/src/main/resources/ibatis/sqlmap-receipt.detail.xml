@@ -38,5 +38,17 @@
 		]]>
 		</selectKey>
 	</insert>
+	
+	<select id="getReceiptDetailList" parameterClass="receiptDetail" resultClass="receiptDetail">
+	<![CDATA[
+		SELECT t.detail_id AS detailId,
+			   t.order_id AS orderId,
+			   t.quantity
+		  FROM dms_tb_receipt_detail t
+		 WHERE t.state = 'U'
+		   AND t.receipt_id = #receiptId#
+		 ORDER BY CREATE_DATE DESC
+	]]>
+	</select>
 
 </sqlMap>

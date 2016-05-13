@@ -38,4 +38,11 @@ public class ReceiptDetailDaoImpl extends BaseDaoImpl implements IReceiptDetailD
 		});
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReceiptDetail> getReceiptDetailList(ReceiptDetail receiptDetail) {
+		return (List<ReceiptDetail>) getSqlMapClientTemplate().queryForList("receipt.detail.getReceiptDetailList",
+			receiptDetail);
+	}
+
 }

@@ -22,7 +22,7 @@
 				<div class="navbar" style="background: #ff5500;">
 					<div class="navbar-inner">
 						<!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-						<div class="center sliding" style="color: white;">好社惠－$!{shop.shopName}</div>
+						<div class="center sliding" style="color: white;">$!{shop.shopName}</div>
 					</div>
 				</div>
 				<!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -32,7 +32,7 @@
 						<!-- Scrollable page content -->
 						<div class="page-content">
 							<section class="content">
-								<div class="row no-gutter">
+								<div class="row no-gutter" style="margin-bottom: 10px;">
 									<div class="col-50" style="padding-right: 5px;">
 										<div class="small-box" style="background-color: #F4D03F; color: #FFFFFF;">
 											<div class="inner">
@@ -42,7 +42,7 @@
 											<div class="icon">
 												<i class="icon iconfont icon-rank"></i>
 											</div>
-											<a href="#" class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
 										</div>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
@@ -54,9 +54,11 @@
 											<div class="icon">
 												<i class="icon iconfont icon-recharge"></i>
 											</div>
-											<a href="#" class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
 										</div>
 									</div>
+                                </div>
+								<div class="row no-gutter" style="margin-bottom: 10px;">
 									<div class="col-50" style="padding-right: 5px;">
 										<div class="small-box" style="background-color: #A6D17C; color: #FFFFFF;">
 											<div class="inner">
@@ -66,11 +68,11 @@
 											<div class="icon">
 												<i class="icon iconfont icon-cascades"></i>
 											</div>
-											<a href="#" class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
 										</div>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
-										<div class="small-box" style="background-color: #80DDB1; color: #FFFFFF;">
+										<a href="#view-3" id="view_3_click" class="small-box tab-link" style="background-color: #80DDB1; color: #FFFFFF;">
 											<div class="inner">
 												<h3>进货</h3>
 												<p>金额：0.00<br/>数量：0</p>
@@ -78,9 +80,11 @@
 											<div class="icon">
 												<i class="icon iconfont icon-cart"></i>
 											</div>
-											<a href="#" class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
-										</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
+										</a>
 									</div>
+                                </div>
+								<div class="row no-gutter">
 									<div class="col-50" style="padding-right: 5px;">
 										<div class="small-box" style="background-color: #E26A6A; color: #FFFFFF;">
 											<div class="inner">
@@ -90,7 +94,7 @@
 											<div class="icon">
 												<i class="icon iconfont icon-deliver"></i>
 											</div>
-											<a href="#" class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
 										</div>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
@@ -102,7 +106,7 @@
 											<div class="icon">
 												<i class="icon iconfont icon-sponsor"></i>
 											</div>
-											<a href="#" class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
 										</div>
 									</div>
 								</div>
