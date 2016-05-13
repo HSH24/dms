@@ -49,5 +49,5 @@
 		AND t.item_id = #itemId#
 	]]>		
 	</select>
-	
+		
 </sqlMap>

@@ -6,10 +6,10 @@
 		<artifactId>dms</artifactId>
 		<version>1.0</version>
 	</parent>
+	
 	<artifactId>dms-action</artifactId>
 	<name>action</name>
 	<packaging>jar</packaging>
-
 	<dependencies>
 		<!-- module biz -->
 		<dependency>
@@ -17,14 +17,12 @@
 			<artifactId>dms-biz</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- struts -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -34,7 +32,6 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 		</dependency>
-
 		<!-- velocity -->
 		<dependency>
 			<groupId>commons-digester</groupId>
