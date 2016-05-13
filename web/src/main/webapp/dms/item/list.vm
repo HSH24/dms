@@ -28,6 +28,9 @@
 			<div class="list-block accordion-list list-block-search searchbar-found" style="font-size: 15px;">
 				<ul>
 					#foreach($item in $!{itemList})
+						<!-- 不存在sku -->
+						
+						<!-- 存在sku -->
 						#foreach($sku in $!{item.skuList})
                         <li class="accordion-item">
     						<a href="#" class="item-content item-link">
@@ -54,6 +57,7 @@
     							<div class="content-block">
     								<p style="font-size: 15px;">$!{item.itemName}|$!{sku.propertiesName}</p>
     								<p>$!{item.remark}</p>
+									<p>条码：$!{sku.barCode}</p>
     							</div>
     						</div>
     					</li>

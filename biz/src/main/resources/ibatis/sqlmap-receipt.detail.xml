@@ -47,7 +47,7 @@
 		  FROM dms_tb_receipt_detail t
 		 WHERE t.state = 'U'
 		   AND t.receipt_id = #receiptId#
-		 ORDER BY CREATE_DATE DESC
+		 ORDER BY CREATE_DATE
 	]]>
 	</select>
 

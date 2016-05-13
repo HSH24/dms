@@ -50,7 +50,7 @@
 		 WHERE t.state = 'U'
 		   AND t.shop_id = #shopId#
 		   AND t.trade_id = #tradeId#
-		 ORDER BY CREATE_DATE
+		 ORDER BY CREATE_DATE DESC
 	]]>
 	</select>
 
