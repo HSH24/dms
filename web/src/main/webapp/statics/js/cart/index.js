@@ -10,15 +10,21 @@ myApp.onPageInit('cart.index', function(page) {
 					myApp.alert("下单成功，订单号：" + xhr.responseText, '信息',
 							function() {
 								view4.router.refreshPage();
+
+								// 更新首页购物车标记
+								portal_home_cart_stats();
 							});
 				} else if (cart_index_flag == "remove") {
 					myApp.alert(xhr.responseText, '信息', function() {
 								view4.router.refreshPage();
+
+								// 更新首页购物车标记
+								portal_home_cart_stats();
 							});
 				}
 
-				// 更新首页购物车标记
-				portal_home_cart_stats();
+				// 未知 bug
+				cart_index_flag = "";
 			});
 
 			$$('form.ajax-submit').on('submitError', function(e) {
