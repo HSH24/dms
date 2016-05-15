@@ -17,7 +17,7 @@
 			   t.quota,
 			   t.origin,
 			   t.remark
-		  FROM sup.sup_tb_item t
+		  FROM oms.dms_vw_goods t
 		 WHERE t.state = 'U'
 	]]>	
 		<dynamic>
@@ -42,7 +42,7 @@
 		  t.quota,
 		  t.origin,
 		  t.remark
-		FROM sup.sup_tb_item t
+		FROM oms.dms_vw_goods  t
 		WHERE t.state = 'U'
 		AND t.item_id = #itemId#
 	]]>		

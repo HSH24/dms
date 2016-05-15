@@ -10,7 +10,7 @@
 	<![CDATA[
 		SELECT t.sup_id AS supId,
 			   t.sup_name AS supName
-		  FROM mdm.mdm_tb_supplier t
+		  FROM oms.dms_vw_supplier t
 		 WHERE t.state = 'U'
 		   AND t.sup_id = #supId#
 	]]>
@@ -20,7 +20,7 @@
 	<![CDATA[
 		SELECT t.sup_id AS supId,
 			   t.sup_name AS supName
-		  FROM mdm.mdm_tb_supplier t
+		  FROM oms.dms_vw_supplier t
 		 WHERE t.state = 'U'
 		   AND t.sup_id IN
 	]]>
