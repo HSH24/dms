@@ -95,7 +95,7 @@ public class CashflowServiceImpl implements ICashflowService {
 		cashflow.setShopId(shopId);
 
 		// 暂不分页
-		cashflow.setLimit(10);
+		cashflow.setLimit(99);
 		cashflow.setOffset(0);
 		cashflow.setSort("CREATE_DATE");
 		cashflow.setOrder("DESC");

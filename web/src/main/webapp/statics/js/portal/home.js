@@ -23,48 +23,6 @@ var mainView = myApp.addView('.view-main', {
 
 // ==============================
 
-// 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('main'));
-
-// 指定图表的配置项和数据
-var option = {
-	radar : {
-		indicator : [{
-					name : '剩余预付款',
-					max : 20000
-				}, {
-					name : '销售金额',
-					max : 1000
-				}, {
-					name : '派送订单',
-					max : 100
-				}, {
-					name : '平均库存周转',
-					max : 7
-				}, {
-					name : '采购订单',
-					max : 100
-				}]
-	},
-	series : [{
-				type : 'radar',
-				label : {
-					normal : {
-						show : true
-					}
-				},
-				data : [{
-							value : [10000, 100, 50, 3, 30]
-						}]
-			}],
-	backgroundColor : '#FFFFFF'
-};
-
-// 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
-
-// ==============================
-
 var view2 = myApp.addView('#view-2', {
 			dynamicNavbar : true
 		});

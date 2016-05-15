@@ -52,9 +52,9 @@
                 </ul>
             </div>
 			
-			#if($!{cashflowList.size()} > 0)
+			#if($!{cashflowList})
 			#set($d = '00')
-			<div class="list-block" style="font-size: 14px;">
+			<div class="list-block accordion-list" style="font-size: 14px;">
 				#foreach($cashflow in $!{cashflowList})
 				#set($dd = $!stringUtil.substring($!{cashflow.tradeDate}, 8, 10))
 				#if($d != $dd)
@@ -63,8 +63,8 @@
 				<ul>
 					#set($d = $dd)
 				#end
-					<li>
-						<div class="item-content">
+					<li class="accordion-item">
+						<a href="#" class="item-content item-link">
 							<div class="item-media"><i class="icon iconfont icon-goods"></i></div>
 							<div class="item-inner">
 								<div class="item-title"> $!{cashflow.summary}</div>
@@ -73,6 +73,11 @@
 								#else
 								<div class="item-after">$!formatUtil.getAmountFormat($!{cashflow.drAmount})</div>
 								#end
+							</div>
+						</a>
+						<div class="accordion-item-content">
+							<div class="content-block">
+                                <p>$!{cashflow.summary}</p>
 							</div>
 						</div>
 					</li>

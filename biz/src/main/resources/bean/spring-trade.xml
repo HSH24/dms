@@ -8,6 +8,7 @@
 	<!-- 账单 -->
 	<bean id="tradeAction" class="com.hsh24.dms.trade.action.TradeAction" parent="baseAction" scope="request">
 		<property name="tradeService" ref="tradeService" />
+		<property name="receiptService" ref="receiptService" />
 	</bean>
 	<bean id="tradeService" class="com.hsh24.dms.trade.service.impl.TradeServiceImpl">
 		<property name="transactionTemplate" ref="transactionTemplate" />

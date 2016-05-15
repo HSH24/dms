@@ -20,4 +20,11 @@ public interface IReceiptDetailDao {
 	 */
 	int createReceiptDetail(Long receiptId, List<ReceiptDetail> receiptDetailList, String modifyUser);
 
+	/**
+	 * 
+	 * @param receiptDetail
+	 * @return
+	 */
+	List<ReceiptDetail> getReceiptDetailList(ReceiptDetail receiptDetail);
+
 }

@@ -28,6 +28,7 @@
 					#end
 				</ul>
             </div>
+			
 			<div class="list-block media-list" style="font-size: 15px;">
 				<ul>
 					<li>
@@ -90,6 +91,7 @@
 					</li>
 				</ul>
             </div>
+			
 			<div id="trade/detail/media/2" class="list-block media-list" style="font-size: 15px;">
 				<ul>
 					<li>
@@ -128,6 +130,35 @@
 			<div class="content-block">
 				<p><a id="trade/detail/btn/receipt" href="javascript:trade_detail_receipt();" class="button button-big button-fill weui_btn_primary" style="display: none;">确认部分收货</a></p>
             </div>
+			
+			#if($!{receiptList})
+			<div class="content-block-title">收货单</div>
+			<div class="list-block accordion-list" style="font-size: 15px;">
+				<ul>
+					#foreach($receipt in $!{receiptList})
+                    <li class="accordion-item">
+						<a href="#" class="item-content item-link">
+							<div class="item-inner">
+								<div class="item-title">
+									$!stringUtil.substring($!{receipt.createDate}, 0, 10)：$!{receipt.receiptNo}
+								</div>
+                            </div>
+						</a>
+						<div class="accordion-item-content">
+							<div class="content-block">
+								#foreach($detail in $!{receipt.receiptDetailList})
+								<div class="item-inner">
+                                    <div class="item-title">$!{detail.itemName} <span style="font-size: 13px; color: #8e8e93;">$!{detail.propertiesName}</span></div>
+                                    <div class="item-after">×$!{detail.quantity}</div>
+                                </div>
+								#end
+							</div>
+						</div>
+					</li>
+					#end
+				</ul>
+            </div>
+			#end
 			
 			<form id="trade/detail/form" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit">
             	<input type="hidden" name="tradeId" value="$!{trade.tradeId}"/>

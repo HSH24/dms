@@ -6,10 +6,6 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="orderAction" class="com.hsh24.dms.mall.action.OrderAction" parent="baseAction" scope="request">
-		<property name="orderService" ref="mallOrderService" />
-	</bean>
-	
-	<bean id="mallOrderService" class="com.hsh24.dms.mall.service.impl.OrderServiceImpl">
 	</bean>
 	
 </beans>

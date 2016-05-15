@@ -1,6 +1,8 @@
 package com.hsh24.dms.receipt.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.TransactionStatus;
@@ -10,6 +12,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.hsh24.dms.api.receipt.IReceiptService;
 import com.hsh24.dms.api.receipt.bo.Receipt;
 import com.hsh24.dms.api.receipt.bo.ReceiptDetail;
+import com.hsh24.dms.api.trade.IOrderService;
+import com.hsh24.dms.api.trade.bo.Order;
 import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
@@ -30,17 +34,20 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 	private TransactionTemplate transactionTemplate;
 
+	private IOrderService orderService;
+
 	private IReceiptDao receiptDao;
 
 	private IReceiptDetailDao receiptDetailDao;
 
 	@Override
-	public BooleanResult part(final Long userId, final String tradeId, final List<ReceiptDetail> receiptDetailList) {
+	public BooleanResult part(Long shopId, String tradeId, final List<ReceiptDetail> receiptDetailList,
+		final String modifyUser) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
 
-		if (userId == null) {
-			result.setCode("用户信息不能为空。");
+		if (shopId == null) {
+			result.setCode("店铺信息不能为空。");
 			return result;
 		}
 
@@ -54,18 +61,24 @@ public class ReceiptServiceImpl implements IReceiptService {
 			return result;
 		}
 
+		if (StringUtils.isEmpty(modifyUser)) {
+			result.setCode("操作人信息不能为空。");
+			return result;
+		}
+
+		final Receipt receipt = new Receipt();
+		receipt.setReceiptNo("RO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(11));
+		receipt.setShopId(shopId);
+		receipt.setTradeId(Long.valueOf(tradeId));
+		receipt.setType("P");
+		receipt.setModifyUser(modifyUser);
+
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
 				BooleanResult result = new BooleanResult();
 				result.setResult(false);
 
 				Long receiptId = null;
-
-				Receipt receipt = new Receipt();
-				receipt.setReceiptNo("RO" + DateUtil.getNowDateminStr() + UUIDUtil.generate().substring(7));
-				receipt.setUserId(userId);
-				receipt.setTradeId(Long.valueOf(tradeId));
-				receipt.setType("P");
 
 				try {
 					receiptId = receiptDao.createReceipt(receipt);
@@ -79,7 +92,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 				// 2. 创建收货明细
 				try {
-					receiptDetailDao.createReceiptDetail(receiptId, receiptDetailList, userId.toString());
+					receiptDetailDao.createReceiptDetail(receiptId, receiptDetailList, modifyUser);
 				} catch (Exception e) {
 					logger.error("receiptId:" + receiptId + LogUtil.parserBean(receiptDetailList), e);
 					ts.setRollbackOnly();
@@ -98,9 +111,87 @@ public class ReceiptServiceImpl implements IReceiptService {
 	}
 
 	@Override
-	public BooleanResult all(Long userId, String tradeId) {
-
+	public BooleanResult all(Long shop, String tradeId, String modifyUser) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Receipt> getReceiptList(Long shopId, Long tradeId) {
+		if (shopId == null || tradeId == null) {
+			return null;
+		}
+
+		Receipt receipt = new Receipt();
+		receipt.setShopId(shopId);
+		receipt.setTradeId(tradeId);
+
+		List<Receipt> receiptList = getReceiptList(receipt);
+
+		if (receiptList == null || receiptList.size() == 0) {
+			return null;
+		}
+
+		for (Receipt reciept : receiptList) {
+			reciept.setReceiptDetailList(getReceiptDetailList(reciept.getReceiptId(), shopId, tradeId));
+		}
+
+		return receiptList;
+	}
+
+	private List<Receipt> getReceiptList(Receipt receipt) {
+		try {
+			return receiptDao.getReceiptList(receipt);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(receipt), e);
+		}
+
+		return null;
+	}
+
+	/**
+	 * 收货明细，包含商品信息.
+	 * 
+	 * @param receiptId
+	 * @return
+	 */
+	private List<ReceiptDetail> getReceiptDetailList(Long receiptId, Long shopId, Long tradeId) {
+		ReceiptDetail receiptDetail = new ReceiptDetail();
+		receiptDetail.setReceiptId(receiptId);
+
+		List<ReceiptDetail> receiptDetailList = getReceiptDetailList(receiptDetail);
+
+		if (receiptDetailList == null || receiptDetailList.size() == 0) {
+			return null;
+		}
+
+		List<Order> orderList = orderService.getOrderList(shopId, tradeId);
+
+		if (orderList == null || orderList.size() == 0) {
+			return null;
+		}
+
+		Map<Long, Order> map = new HashMap<Long, Order>();
+		for (Order order : orderList) {
+			map.put(order.getOrderId(), order);
+		}
+
+		for (ReceiptDetail detail : receiptDetailList) {
+			Order order = map.get(detail.getOrderId());
+			detail.setItemName(order.getItemName());
+			detail.setPropertiesName(order.getPropertiesName());
+		}
+
+		return receiptDetailList;
+	}
+
+	private List<ReceiptDetail> getReceiptDetailList(ReceiptDetail receiptDetail) {
+		try {
+			return receiptDetailDao.getReceiptDetailList(receiptDetail);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(receiptDetail), e);
+		}
+
 		return null;
 	}
 
@@ -110,6 +201,14 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
 		this.transactionTemplate = transactionTemplate;
+	}
+
+	public IOrderService getOrderService() {
+		return orderService;
+	}
+
+	public void setOrderService(IOrderService orderService) {
+		this.orderService = orderService;
 	}
 
 	public IReceiptDao getReceiptDao() {

@@ -1,5 +1,7 @@
 package com.hsh24.dms.api.receipt.bo;
 
+import java.util.List;
+
 import com.hsh24.dms.framework.bo.SearchInfo;
 
 /**
@@ -15,13 +17,19 @@ public class Receipt extends SearchInfo {
 
 	private String receiptNo;
 
-	private Long userId;
+	private Long shopId;
 
 	private Long tradeId;
 
 	private String type;
 
+	private String createDate;
+
 	private String modifyUser;
+
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	private List<ReceiptDetail> receiptDetailList;
 
 	public Long getReceiptId() {
 		return receiptId;
@@ -39,12 +47,12 @@ public class Receipt extends SearchInfo {
 		this.receiptNo = receiptNo;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Long getShopId() {
+		return shopId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setShopId(Long shopId) {
+		this.shopId = shopId;
 	}
 
 	public Long getTradeId() {
@@ -63,12 +71,28 @@ public class Receipt extends SearchInfo {
 		this.type = type;
 	}
 
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
 	public String getModifyUser() {
 		return modifyUser;
 	}
 
 	public void setModifyUser(String modifyUser) {
 		this.modifyUser = modifyUser;
+	}
+
+	public List<ReceiptDetail> getReceiptDetailList() {
+		return receiptDetailList;
+	}
+
+	public void setReceiptDetailList(List<ReceiptDetail> receiptDetailList) {
+		this.receiptDetailList = receiptDetailList;
 	}
 
 }

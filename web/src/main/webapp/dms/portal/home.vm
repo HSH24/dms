@@ -10,6 +10,7 @@
 		#ICON()
 		#CSSM(["framework7", "iconfont"])
 		<link rel="stylesheet" href="$!{env.imgUrl}/css/portal/home.css" />
+		<link rel="stylesheet" href="$!{env.imgUrl}/css/portal/tile.css" />
 		#UA()
 	</head>
 	<body>
@@ -21,7 +22,7 @@
 				<div class="navbar" style="background: #ff5500;">
 					<div class="navbar-inner">
 						<!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-						<div class="center sliding" style="color: white;">好社惠－$!{shop.shopName}</div>
+						<div class="center sliding" style="color: white;">$!{shop.shopName}</div>
 					</div>
 				</div>
 				<!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -30,32 +31,86 @@
 					<div data-page="portal.home" class="page">
 						<!-- Scrollable page content -->
 						<div class="page-content">
-    						<div style="height: 200px;" id="main"></div>
-							
-							<div class="" style="background-color:#ffffff;">
-								<ul class="mui-flex" style="padding: 0;">
-									<li class="cell" style="">
-										<a class="component type3 tab-link" href="#view-2" id="view_2_click" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/lxsp.png" width="36" height="36"></img>需派送订单
+							<section class="content">
+								<div class="row no-gutter" style="margin-bottom: 10px;">
+									<div class="col-50" style="padding-right: 5px;">
+										<div class="small-box" style="background-color: #5BC39D; color: #FFFFFF;">
+											<div class="inner">
+												<h3>销售</h3>
+												<p>今天：0.00<br/>本月：0.00</p>
+											</div>
+											<div class="icon">
+												<i class="icon iconfont icon-rank"></i>
+											</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
+										</div>
+									</div>
+									<div class="col-50" style="padding-left: 5px;">
+										<div class="small-box" style="background-color: #F2784B; color: #FFFFFF;">
+											<div class="inner">
+												<h3>收入</h3>
+												<p>今天：0.00<br/>本月：0.00</p>
+											</div>
+											<div class="icon">
+												<i class="icon iconfont icon-recharge"></i>
+											</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
+										</div>
+									</div>
+                                </div>
+								<div class="row no-gutter" style="margin-bottom: 10px;">
+									<div class="col-50" style="padding-right: 5px;">
+										<div class="small-box" style="background-color: #B68FCC; color: #FFFFFF;">
+											<div class="inner">
+												<h3>库存</h3>
+												<p>金额：0.00<br/>&nbsp;</p>
+											</div>
+											<div class="icon">
+												<i class="icon iconfont icon-cascades"></i>
+											</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
+										</div>
+									</div>
+									<div class="col-50" style="padding-left: 5px;">
+										<a href="#view-3" id="view_3_click" class="small-box tab-link" style="background-color: #59ABE3; color: #FFFFFF;">
+											<div class="inner">
+												<h3>进货</h3>
+												<p>金额：0.00<br/>数量：0</p>
+											</div>
+											<div class="icon">
+												<i class="icon iconfont icon-cart"></i>
+											</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
 										</a>
-									</li>
-									<li class="cell" style="">
-										<a class="component type3 tab-link" href="#view-3" id="view_3_click" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/lyfs.png" width="36" height="36"></img>采购订单
-										</a>
-									</li>
-									<li class="cell" style="">
-                                        <a class="component type3 tab-link" href="#view-5" id="view_5_click" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/kdsf.png" width="36" height="36"></img>采购收货
-                                        </a>
-									</li>
-									<li class="cell" style="">
-                                        <a class="component type3 tab-link" href="#view-5" id="view_6_click" style="padding:4px" 0px="" 0px;="">
-                                            <img class="" src="$!{env.imgUrl}/image/portal/shjf.png" width="36" height="36"></img>我的资金
-                                        </a>
-									</li>
-								</ul>
-							</div>
+									</div>
+                                </div>
+								<div class="row no-gutter">
+									<div class="col-50" style="padding-right: 5px;">
+										<div class="small-box" style="background-color: #70A9B7; color: #FFFFFF;">
+											<div class="inner">
+												<h3>派送单</h3>
+												<p>今天：0<br/>本月：0</p>
+											</div>
+											<div class="icon">
+												<i class="icon iconfont icon-deliver"></i>
+											</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
+										</div>
+									</div>
+									<div class="col-50" style="padding-left: 5px;">
+										<div class="small-box" style="background-color: #B9C14D; color: #FFFFFF;">
+											<div class="inner">
+												<h3>资金</h3>
+												<p>保证金：0.00<br/>金额：0.00</p>
+											</div>
+											<div class="icon">
+												<i class="icon iconfont icon-sponsor"></i>
+											</div>
+											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
+										</div>
+									</div>
+								</div>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -119,8 +174,7 @@
 		
 		#JSM(["framework7", "weixin", "jquery", "common"])
 		#JS_ENV_VAL()
-		<script src="$!{env.imgUrl}/js/portal/echarts.min.js"></script>
-		<script src="$!{env.imgUrl}/js/portal/home.js"></script>
+		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160513"></script>
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/item/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
