@@ -269,13 +269,14 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 		for (Order order : orderList) {
 			Long orderId = order.getOrderId();
-			if (order.getQuantity() == map.get(orderId)) {
+			if (map.containsKey(orderId) && order.getQuantity() == map.get(orderId)) {
 				continue;
 			}
 
 			ReceiptDetail receiptDetail = new ReceiptDetail();
 			receiptDetail.setOrderId(orderId);
-			receiptDetail.setQuantity(order.getQuantity() - map.get(orderId));
+			receiptDetail.setQuantity(map.containsKey(orderId) ? order.getQuantity() - map.get(orderId) : order
+				.getQuantity());
 
 			receiptDetailList.add(receiptDetail);
 		}
