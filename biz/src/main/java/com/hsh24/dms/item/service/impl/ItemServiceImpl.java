@@ -98,10 +98,13 @@ public class ItemServiceImpl implements IItemService {
 
 		List<Item> itemList = new ArrayList<Item>();
 
-		// 获取商品价格
+		// 获取商品价格(item)
 		for (Item ietm : list) {
 			Item it = getItem(ietm.getItemId());
 			if (it != null) {
+				// 获取商品价格(item_price)
+				// TODO
+
 				// 获取供应商信息
 				Supplier sup = supplierService.getSupplier(it.getSupId());
 				if (sup != null) {
