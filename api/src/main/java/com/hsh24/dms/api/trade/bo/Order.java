@@ -82,10 +82,17 @@ public class Order extends SearchInfo {
 	 */
 	private String modifyUser;
 
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
 	/**
 	 * 供应商id 创建时权限控制.
 	 */
 	private Long supId;
+
+	/**
+	 * 已收货数量.
+	 */
+	private int receiptedQuantity;
 
 	public Long getOrderId() {
 		return orderId;
@@ -226,6 +233,23 @@ public class Order extends SearchInfo {
 
 	public void setSupId(Long supId) {
 		this.supId = supId;
+	}
+
+	public int getReceiptedQuantity() {
+		return receiptedQuantity;
+	}
+
+	public void setReceiptedQuantity(int receiptedQuantity) {
+		this.receiptedQuantity = receiptedQuantity;
+	}
+
+	/**
+	 * 可以收货数量.
+	 * 
+	 * @return
+	 */
+	public int getReceiptQuantity() {
+		return quantity - receiptedQuantity;
 	}
 
 }

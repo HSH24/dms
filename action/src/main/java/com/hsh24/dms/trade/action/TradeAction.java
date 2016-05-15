@@ -1,10 +1,14 @@
 package com.hsh24.dms.trade.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.hsh24.dms.api.receipt.IReceiptService;
 import com.hsh24.dms.api.receipt.bo.Receipt;
+import com.hsh24.dms.api.receipt.bo.ReceiptDetail;
 import com.hsh24.dms.api.trade.ITradeService;
+import com.hsh24.dms.api.trade.bo.Order;
 import com.hsh24.dms.api.trade.bo.Trade;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.bo.BooleanResult;
@@ -155,6 +159,40 @@ public class TradeAction extends BaseAction {
 
 		if (trade != null) {
 			receiptList = receiptService.getReceiptList(shopId, trade.getTradeId());
+		}
+
+		if (receiptList == null || receiptList.size() == 0) {
+			return SUCCESS;
+		}
+
+		Map<Long, Integer> map = new HashMap<Long, Integer>();
+
+		for (Receipt receipt : receiptList) {
+			List<ReceiptDetail> receiptDetailList = receipt.getReceiptDetailList();
+			if (receiptDetailList == null || receiptDetailList.size() == 0) {
+				continue;
+			}
+
+			for (ReceiptDetail receiptDetail : receiptDetailList) {
+				Long orderId = receiptDetail.getOrderId();
+				int quantity = receiptDetail.getQuantity();
+				if (map.containsKey(orderId)) {
+					map.put(orderId, map.get(orderId) + quantity);
+				} else {
+					map.put(orderId, quantity);
+				}
+			}
+		}
+
+		if (map.size() == 0) {
+			return SUCCESS;
+		}
+
+		for (Order order : trade.getOrderList()) {
+			Long orderId = order.getOrderId();
+			if (map.containsKey(orderId)) {
+				order.setReceiptedQuantity(map.get(orderId));
+			}
 		}
 
 		return SUCCESS;

@@ -58,11 +58,16 @@
 								</div>
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-subtitle" style="font-size: 13px; color: #8e8e93;">$!{order.propertiesName}</div>
-									<div id="trade/detail/quantity/edited/$!{order.orderId}" class="item-after">×$!{order.quantity}</div>
+									<div id="trade/detail/quantity/edited/$!{order.orderId}" class="item-after">
+										×$!{order.quantity}
+										#if($!{order.receiptedQuantity} > 0)
+										[已收 x$!{order.receiptedQuantity}]
+										#end
+									</div>
 									<div id="trade/detail/quantity/edit" class="item-after" style="display: none;">
 										<div class="quantity">
 											<button class="minus" type="button"></button>
-                                            <input id="trade/detail/quantity/$!{order.orderId}" type="text" class="txt" value="$!{order.quantity}"></input>
+                                            <input id="trade/detail/quantity/$!{order.orderId}" type="text" class="txt" value="$!{order.receiptQuantity}"></input>
 											<button class="plus" type="button"></button>
 											<div class="response-area response-area-minus" onclick="trade_detail_minus('$!{order.orderId}');"></div>
 											<div class="response-area response-area-plus" onclick="trade_detail_plus('$!{order.orderId}');"></div>
@@ -161,7 +166,7 @@
 			#end
 			
 			<form id="trade/detail/form" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit">
-            	<input type="hidden" name="tradeId" value="$!{trade.tradeId}"/>
+            	<input type="hidden" name="tradeNo" value="$!{trade.tradeNo}"/>
 				<input type="hidden" name="receiptDetailList" id="trade/detail/form/receiptDetailList"/>
             </form>
         </div>

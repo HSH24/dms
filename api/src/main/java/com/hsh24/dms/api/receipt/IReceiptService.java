@@ -16,19 +16,21 @@ public interface IReceiptService {
 	/**
 	 * 
 	 * @param shopId
-	 * @param tradeId
+	 * @param tradeNo
 	 * @param receiptDetailList
+	 * @param modifyUser
 	 * @return
 	 */
-	BooleanResult part(Long shopId, String tradeId, List<ReceiptDetail> receiptDetailList, String modifyUser);
+	BooleanResult part(Long shopId, String tradeNo, List<ReceiptDetail> receiptDetailList, String modifyUser);
 
 	/**
 	 * 
 	 * @param shopId
-	 * @param tradeId
+	 * @param tradeNo
+	 * @param modifyUser
 	 * @return
 	 */
-	BooleanResult all(Long shopId, String tradeId, String modifyUser);
+	BooleanResult all(Long shopId, String tradeNo, String modifyUser);
 
 	/**
 	 * 收货单 包含明细.

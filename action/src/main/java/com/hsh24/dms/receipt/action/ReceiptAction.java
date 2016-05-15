@@ -18,7 +18,7 @@ public class ReceiptAction extends BaseAction {
 
 	private IReceiptService receiptService;
 
-	private String tradeId;
+	private String tradeNo;
 
 	private List<ReceiptDetail> receiptDetailList;
 
@@ -28,8 +28,26 @@ public class ReceiptAction extends BaseAction {
 	 */
 	public String part() {
 		BooleanResult result =
-			receiptService.part(this.getShop().getShopId(), tradeId, receiptDetailList, this.getUser().getUserId()
+			receiptService.part(this.getShop().getShopId(), tradeNo, receiptDetailList, this.getUser().getUserId()
 				.toString());
+
+		if (result.getResult()) {
+			this.setResourceResult(result.getCode());
+		} else {
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult(result.getCode());
+		}
+
+		return RESOURCE_RESULT;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String all() {
+		BooleanResult result =
+			receiptService.all(this.getShop().getShopId(), tradeNo, this.getUser().getUserId().toString());
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -49,12 +67,12 @@ public class ReceiptAction extends BaseAction {
 		this.receiptService = receiptService;
 	}
 
-	public String getTradeId() {
-		return tradeId;
+	public String getTradeNo() {
+		return tradeNo;
 	}
 
-	public void setTradeId(String tradeId) {
-		this.tradeId = tradeId;
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
 	}
 
 	public List<ReceiptDetail> getReceiptDetailList() {
