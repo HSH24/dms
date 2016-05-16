@@ -28,39 +28,69 @@
 			<div class="list-block accordion-list list-block-search searchbar-found" style="font-size: 15px;">
 				<ul>
 					#foreach($item in $!{itemList})
-						<!-- 不存在sku -->
-						
-						<!-- 存在sku -->
-						#foreach($sku in $!{item.skuList})
-                        <li class="accordion-item">
-    						<a href="#" class="item-content item-link">
-    							<div class="item-media">
-    								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
-    							</div>
-    							<div class="item-inner">
-    								<div class="item-title">
-    									$!{item.itemName} ￥$!formatUtil.getAmountFormat($!{sku.price})<br />
-                                        <span style="font-size: 12px; color: #8e8e93;">$!{sku.propertiesName}</span>
-    								</div>
+						#if($!{item.skuList})
+							<!-- 存在sku -->
+    						#foreach($sku in $!{item.skuList})
+                            <li class="accordion-item">
+        						<a href="#" class="item-content item-link">
+        							<div class="item-media">
+        								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
+        							</div>
+        							<div class="item-inner">
+        								<div class="item-title">
+        									$!{item.itemName} ￥$!formatUtil.getAmountFormat($!{sku.price})<br />
+                                            <span style="font-size: 12px; color: #8e8e93;">$!{sku.propertiesName}</span>
+        								</div>
+                                    </div>
+        						</a>
+        						<div class="item-content">
+            						<div class="item-inner">
+                                        <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{sku.barCode}</div></div>
+        								<div class="item-after">
+        									<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}', '$!{item.itemName}', '$!{sku.propertiesName} ￥$!formatUtil.getAmountFormat($!{sku.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
+        									<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+        								</div>
+            						</div>
                                 </div>
-    						</a>
-    						<div class="item-content">
-        						<div class="item-inner">
-                                    <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{sku.barCode}</div></div>
-    								<div class="item-after">
-    									<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}', '$!{item.itemName}', '$!{sku.propertiesName} ￥$!formatUtil.getAmountFormat($!{sku.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-    									<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
-    								</div>
+        						<div class="accordion-item-content">
+        							<div class="content-block">
+        								<p style="font-size: 15px;">$!{item.itemName}|$!{sku.propertiesName}</p>
+        								<p>$!{item.remark}</p>
+    									<p>条码：$!{sku.barCode}</p>
+        							</div>
         						</div>
-                            </div>
-    						<div class="accordion-item-content">
-    							<div class="content-block">
-    								<p style="font-size: 15px;">$!{item.itemName}|$!{sku.propertiesName}</p>
-    								<p>$!{item.remark}</p>
-									<p>条码：$!{sku.barCode}</p>
-    							</div>
-    						</div>
-    					</li>
+        					</li>
+							#end
+						#else
+    						<!-- 不存在sku -->
+                            <li class="accordion-item">
+        						<a href="#" class="item-content item-link">
+        							<div class="item-media">
+        								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
+        							</div>
+        							<div class="item-inner">
+        								<div class="item-title">
+        									$!{item.itemName} ￥$!formatUtil.getAmountFormat($!{item.price})
+        								</div>
+                                    </div>
+        						</a>
+        						<div class="item-content">
+            						<div class="item-inner">
+                                        <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{item.barCode}</div></div>
+        								<div class="item-after">
+        									<a href="javascript:item_list_trade('$!{item.itemId}', '0', '$!{item.itemName}', '￥$!formatUtil.getAmountFormat($!{sku.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
+        									<a href="javascript:item_list_cart('$!{item.itemId}', '0');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+        								</div>
+            						</div>
+                                </div>
+        						<div class="accordion-item-content">
+        							<div class="content-block">
+        								<p style="font-size: 15px;">$!{item.itemName}</p>
+        								<p>$!{item.remark}</p>
+    									<p>条码：$!{item.barCode}</p>
+        							</div>
+        						</div>
+        					</li>
 						#end
 					#end
 				</ul>

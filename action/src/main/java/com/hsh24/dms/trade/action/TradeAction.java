@@ -76,7 +76,7 @@ public class TradeAction extends BaseAction {
 		}
 
 		if (result.getResult()) {
-			this.setResourceResult("下单成功！订单号："+result.getCode());
+			this.setResourceResult("下单成功！订单号：" + result.getCode());
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());
