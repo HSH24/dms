@@ -12,18 +12,28 @@ public class ItemPrice implements Serializable {
 
 	private static final long serialVersionUID = -6813198383731239434L;
 
-	private Long itemPriceId;
+	private Long id;
+
+	private Long itemRegionId;
 
 	private Long skuId;
 
 	private BigDecimal price;
 
-	public Long getItemPriceId() {
-		return itemPriceId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setItemPriceId(Long itemPriceId) {
-		this.itemPriceId = itemPriceId;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getItemRegionId() {
+		return itemRegionId;
+	}
+
+	public void setItemRegionId(Long itemRegionId) {
+		this.itemRegionId = itemRegionId;
 	}
 
 	public Long getSkuId() {

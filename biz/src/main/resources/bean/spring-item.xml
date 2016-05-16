@@ -13,6 +13,7 @@
 		<property name="itemRegionService" ref="itemRegionService" />
 		<property name="itemFileService" ref="itemFileService" />
 		<property name="itemSkuService" ref="itemSkuService" />
+		<property name="itemPriceService" ref="itemPriceService" />
 		<property name="specService" ref="specService" />
 		<property name="shopService" ref="shopService" />
 		<property name="regionService" ref="regionService" />
