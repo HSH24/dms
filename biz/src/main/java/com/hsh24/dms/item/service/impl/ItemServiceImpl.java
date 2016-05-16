@@ -191,6 +191,12 @@ public class ItemServiceImpl implements IItemService {
 		int i = 0;
 		for (String id : properties) {
 			String[] cid = id.split(":");
+
+			// 兼容
+			if (cid.length == 1) {
+				return item;
+			}
+
 			specCId[i++] = cid[0];
 		}
 

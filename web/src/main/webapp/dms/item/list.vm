@@ -34,7 +34,9 @@
                             <li class="accordion-item">
         						<a href="#" class="item-content item-link">
         							<div class="item-media">
+										#if($!{item.itemFileList.size()} > 0)
         								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
+										#end
         							</div>
         							<div class="item-inner">
         								<div class="item-title">
@@ -66,7 +68,9 @@
                             <li class="accordion-item">
         						<a href="#" class="item-content item-link">
         							<div class="item-media">
+										#if($!{item.itemFileList.size()} > 0)
         								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
+										#end
         							</div>
         							<div class="item-inner">
         								<div class="item-title">
