@@ -28,6 +28,12 @@
 			<result name="error">/dms/user/shop.vm</result>
 			<result name="success" type="redirect">${env.appUrl}/home.htm</result>
 		</action>
+		
+		<!-- 用户基本信息 -->
+		<action name="detail" class="userAction" method="detail">
+			<interceptor-ref name="authenticationStack" />
+			<result name="success">/dms/user/detail.vm</result>
+		</action>
 
 	</package>
 </struts>
