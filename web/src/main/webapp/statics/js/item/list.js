@@ -6,8 +6,17 @@ myApp.onPageInit('item.list', function(page) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '信息', function() {
-									// 更新首页购物车标记
-									portal_home_cart_stats();
+									if (item_list_flag == "cart") {
+										// 更新首页购物车标记
+										portal_home_cart_stats();
+									}
+
+									if (item_list_flag == "trade") {
+										// 更新我的中心资金统计
+										member_index_stats();
+									}
+
+									item_list_flag = "";
 								});
 					});
 
@@ -47,7 +56,11 @@ function scanFinished(str) {
 	alert(str);
 }
 
+var item_list_flag;
+
 function item_list_trade(itemId, skuId) {
+	item_list_flag = "trade";
+
 	myApp.showIndicator();
 
 	$$('#item_list_trade_itemId').val(itemId);
@@ -59,6 +72,8 @@ function item_list_trade(itemId, skuId) {
 }
 
 function item_list_cart(itemId, skuId) {
+	item_list_flag = "cart";
+
 	myApp.showIndicator();
 
 	$$('#item_list_cart_itemId').val(itemId);

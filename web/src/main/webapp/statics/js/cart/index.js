@@ -13,6 +13,11 @@ myApp.onPageInit('cart.index', function(page) {
 
 								// 更新首页购物车标记
 								portal_home_cart_stats();
+								// 更新我的中心资金统计
+								member_index_stats();
+
+								// 未知 bug
+								cart_index_flag = "";
 							});
 				} else if (cart_index_flag == "remove") {
 					myApp.alert(xhr.responseText, '信息', function() {
@@ -20,11 +25,11 @@ myApp.onPageInit('cart.index', function(page) {
 
 								// 更新首页购物车标记
 								portal_home_cart_stats();
+
+								// 未知 bug
+								cart_index_flag = "";
 							});
 				}
-
-				// 未知 bug
-				cart_index_flag = "";
 			});
 
 			$$('form.ajax-submit').on('submitError', function(e) {

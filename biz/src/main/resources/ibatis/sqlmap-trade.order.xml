@@ -40,7 +40,7 @@
 			   #modifyUser#,
 			   NOW(),
 			   #modifyUser#
-		  FROM sup.sup_tb_item t
+		  FROM oms.dms_vw_goods t
 
 		  LEFT JOIN(
 		SELECT qq.item_id, qq.properties_name, qq.price
@@ -108,7 +108,7 @@
 			   #modifyUser#
 		  FROM dms_tb_cart t
 
-		  LEFT JOIN sup.sup_tb_item p ON t.item_id = p.item_id
+		  LEFT JOIN oms.dms_vw_goods p ON t.item_id = p.item_id
 
 		  LEFT JOIN(
 		SELECT qq.item_id, qq.sku_id, qq.properties_name, qq.price
@@ -151,7 +151,7 @@
 			   t.sku_id AS skuId,
 			   CASE WHEN q.stock IS NULL THEN p.stock ELSE q.stock END AS stock
 		  FROM dms_tb_order t
-		  LEFT JOIN sup.sup_tb_item p ON t.item_id = p.item_id
+		  LEFT JOIN oms.dms_vw_goods p ON t.item_id = p.item_id
 		  LEFT JOIN(
 		SELECT qq.sku_id, qq.stock
 		  FROM sup.sup_tb_item_sku qq
