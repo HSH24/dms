@@ -59,7 +59,7 @@
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-subtitle" style="font-size: 13px; color: #8e8e93;">$!{order.propertiesName}</div>
 									<div id="trade/detail/quantity/edited/$!{order.orderId}" class="item-after">
-										×$!{order.quantity}
+										共×$!{order.quantity}
 										#if($!{order.receiptedQuantity} > 0)
 										[已收 x$!{order.receiptedQuantity}]
 										#end
