@@ -6,7 +6,7 @@
 		<div class="center sliding">派送订单</div>
 		<div class="right">
 			<!-- Right link contains only icon - additional "icon-only" class-->
-			<a href="javascript:item_list_scan();" class="link icon-only"> <i class="icon iconfont icon-scan" style="font-size: 21px;"></i><span></span></a>
+			<a href="javascript:item_list_scan();" class="link icon-only"> <i class="iconfont icon-scan" style="font-size: 21px;"></i><span></span></a>
 		</div>
 	</div>
 </div>

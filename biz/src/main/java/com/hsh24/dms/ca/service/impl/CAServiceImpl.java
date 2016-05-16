@@ -51,7 +51,7 @@ public class CAServiceImpl implements ICAService {
 
 		// 3. 验证账号密码
 		try {
-			if (EncryptUtil.encryptHMAC(password).equals(user.getPassword())) {
+			if (((EncryptUtil.encryptMD5(password)).toUpperCase()).equals(user.getPassword())) {
 				// 用户和密码正确
 				return setSuccessResult(result, user);
 			}

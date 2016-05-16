@@ -10,12 +10,11 @@
 	<![CDATA[
 		SELECT t.user_id AS userId,
 			   t.user_name AS userName,
-			   t.passport,
+			   t.user_code AS passport,
 			   t.password,
-			   t.state
-		  FROM dms_tb_user t
-		 WHERE t.state IN ('U', 'F')
-		   AND t.passport = upper(#possport#)
+			   (case when (t.state=1) then 'U' else 'F' END ) AS  state
+		  FROM  oms.auth_user_t t
+		 WHERE  t.user_code = upper(#possport#)
 	]]>
 	</select>
 	

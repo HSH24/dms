@@ -11,12 +11,12 @@
 	<![CDATA[
 		SELECT q.shop_id AS shopId,
 			   q.shop_name AS shopName
-		  FROM dms_tb_user t,
+		  FROM oms.auth_user_t t,
 			   dms_tb_user_shop p,
 			   mdm.mdm_tb_shop q
 		 WHERE t.user_id = p.user_id
 		   AND p.shop_id = q.shop_id
-		   AND t.state = 'U'
+		   AND t.state = '1'
 		   AND p.state = 'U'
 		   AND q.state = 'U'
 		   AND t.user_id = #userId#
@@ -27,12 +27,12 @@
 	<![CDATA[
 		SELECT q.shop_id AS shopId,
 			   q.shop_name AS shopName
-		  FROM dms_tb_user t,
+		  FROM oms.auth_user_t t,
 			   dms_tb_user_shop p,
 			   mdm.mdm_tb_shop q
 		 WHERE t.user_id = p.user_id
 		   AND p.shop_id = q.shop_id
-		   AND t.state = 'U'
+		   AND t.state = '1'
 		   AND p.state = 'U'
 		   AND q.state = 'U'
 		   AND t.user_id = #userId#

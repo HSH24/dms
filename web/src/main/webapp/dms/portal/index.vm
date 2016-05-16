@@ -76,7 +76,7 @@
 				<!-- Top Navbar-->
 				<div class="navbar" style="background: #FFFFFF;">
 					<div class="navbar-inner">
-						<div class="left"><a href="#" class="close-popup link"> <i class="icon iconfont icon-unfold" style="font-size: 21px;"></i><span></span></a></div>
+						<div class="left"><a href="#" class="close-popup link"> <i class="iconfont icon-unfold" style="font-size: 21px;"></i><span></span></a></div>
 					</div>
 				</div>
 				<div class="pages navbar-through">
