@@ -12,7 +12,7 @@
 </div>
 <div class="pages">
 	<!-- Page, data-page contains page name-->
-	<div data-page="item.list" class="page navbar-fixed">
+	<div data-page="item.list" class="page">
 		<!-- Search bar -->
 		<form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
 			<div class="searchbar-input">
@@ -90,7 +90,7 @@
     			<!-- 存在sku -->
     			#foreach($sku in $!{item.skuList})
                 <!-- Picker -->
-                <div class="picker-modal picker-$!{item.itemId}-$!{sku.skuId}" style="background: #FFFFFF;">
+                <div class="picker-modal picker-$!{item.itemId}-$!{sku.skuId}" style="background: #FFFFFF; margin-bottom: 50px;">
                     <div class="toolbar" style="background: #FFFFFF;">
                     	<div class="toolbar-inner">
                     		<div class="left">$!{item.itemName}</div>
@@ -106,6 +106,12 @@
 							#end
                     	</div>
 						<div class="list-block" style="margin-top: 0; margin-bottom: 0;">
+							<div class="item-content">
+    							<div class="item-inner">
+    								<div class="item-title"></div>
+    								<div class="item-after">￥$!formatUtil.getAmountFormat($!{sku.price})</div>
+    							</div>
+                            </div>
 							<div class="item-content">
     							<div class="item-inner">
     								<div class="item-title">购买数量：</div>
@@ -136,7 +142,7 @@
 			#else
 				<!-- 不存在sku -->
 				<!-- Picker -->
-                <div class="picker-modal picker-$!{item.itemId}-0" style="background: #FFFFFF;">
+                <div class="picker-modal picker-$!{item.itemId}-0" style="background: #FFFFFF; margin-bottom: 50px;">
                     <div class="toolbar" style="background: #FFFFFF;">
                     	<div class="toolbar-inner">
                     		<div class="left">$!{item.itemName}</div>
@@ -151,6 +157,12 @@
 							#end
                     	</div>
 						<div class="list-block" style="margin-top: 0; margin-bottom: 0;">
+							<div class="item-content">
+    							<div class="item-inner">
+    								<div class="item-title"></div>
+    								<div class="item-after">￥$!formatUtil.getAmountFormat($!{item.price})</div>
+    							</div>
+                            </div>
 							<div class="item-content">
     							<div class="item-inner">
     								<div class="item-title">购买数量：</div>
