@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hsh24.dms.api.item.IItemRegionService;
 import com.hsh24.dms.api.item.bo.Item;
+import com.hsh24.dms.api.item.bo.ItemRegion;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
 import com.hsh24.dms.item.dao.IItemRegionDao;
@@ -21,7 +22,7 @@ public class ItemRegionServiceImpl implements IItemRegionService {
 	private IItemRegionDao itemRegionDao;
 
 	@Override
-	public List<Item> getItemList(String[] region, Item item) {
+	public List<ItemRegion> getItemRegionList(String[] region, Item item) {
 		if (region == null || region.length == 0 || item == null) {
 			return null;
 		}
@@ -29,7 +30,7 @@ public class ItemRegionServiceImpl implements IItemRegionService {
 		item.setCodes(region);
 
 		try {
-			return itemRegionDao.getItemList(item);
+			return itemRegionDao.getItemRegionList(item);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(item), e);
 		}

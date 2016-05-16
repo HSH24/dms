@@ -10,10 +10,13 @@ import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.hsh24.dms.api.item.IItemFileService;
+import com.hsh24.dms.api.item.IItemPriceService;
 import com.hsh24.dms.api.item.IItemRegionService;
 import com.hsh24.dms.api.item.IItemService;
 import com.hsh24.dms.api.item.IItemSkuService;
 import com.hsh24.dms.api.item.bo.Item;
+import com.hsh24.dms.api.item.bo.ItemPrice;
+import com.hsh24.dms.api.item.bo.ItemRegion;
 import com.hsh24.dms.api.item.bo.ItemSku;
 import com.hsh24.dms.api.region.IRegionService;
 import com.hsh24.dms.api.shop.IShopService;
@@ -43,6 +46,8 @@ public class ItemServiceImpl implements IItemService {
 	private IItemFileService itemFileService;
 
 	private IItemSkuService itemSkuService;
+
+	private IItemPriceService itemPriceService;
 
 	private ISpecService specService;
 
@@ -91,7 +96,7 @@ public class ItemServiceImpl implements IItemService {
 			return null;
 		}
 
-		List<Item> list = itemRegionService.getItemList(region, item);
+		List<ItemRegion> list = itemRegionService.getItemRegionList(region, item);
 		if (list == null || list.size() == 0) {
 			return null;
 		}
@@ -99,11 +104,26 @@ public class ItemServiceImpl implements IItemService {
 		List<Item> itemList = new ArrayList<Item>();
 
 		// 获取商品价格(item)
-		for (Item ietm : list) {
-			Item it = getItem(ietm.getItemId());
+		for (ItemRegion itemRegion : list) {
+			Item it = getItem(itemRegion.getItemId());
 			if (it != null) {
 				// 获取商品价格(item_price)
-				// TODO
+				List<ItemSku> skuList = it.getSkuList();
+				if (skuList != null && skuList.size() > 0) {
+					for (ItemSku sku : skuList) {
+						ItemPrice itemPrice =
+							itemPriceService.getItemPrice(itemRegion.getItemRegionId(), sku.getSkuId());
+						if (itemPrice != null) {
+							sku.setPrice(itemPrice.getPrice());
+						}
+					}
+				} else {
+					// sku = 0 维护的价格
+					ItemPrice itemPrice = itemPriceService.getItemPrice(itemRegion.getItemRegionId(), 0L);
+					if (itemPrice != null) {
+						it.setPrice(itemPrice.getPrice());
+					}
+				}
 
 				// 获取供应商信息
 				Supplier sup = supplierService.getSupplier(it.getSupId());
@@ -388,6 +408,14 @@ public class ItemServiceImpl implements IItemService {
 
 	public void setItemSkuService(IItemSkuService itemSkuService) {
 		this.itemSkuService = itemSkuService;
+	}
+
+	public IItemPriceService getItemPriceService() {
+		return itemPriceService;
+	}
+
+	public void setItemPriceService(IItemPriceService itemPriceService) {
+		this.itemPriceService = itemPriceService;
 	}
 
 	public ISpecService getSpecService() {
