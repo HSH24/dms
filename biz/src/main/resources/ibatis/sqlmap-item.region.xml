@@ -9,13 +9,22 @@
 	
 	<select id="getItemRegionList" parameterClass="item" resultClass="itemRegion">
 	<![CDATA[
-		SELECT t.item_region_id AS itemRegionId,
-			   t.item_id AS itemId
+		SELECT distinct t.item_id AS itemId
 		  FROM sup.sup_tb_item_region t
 		 WHERE t.state= 'U'
 		   AND t.region_id IN
 	]]>
 		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+	</select>
+	
+	<select id="getItemRegion" parameterClass="itemRegion" resultClass="itemRegion">
+	<![CDATA[
+		SELECT t.item_region_id AS itemRegionId
+		FROM sup.sup_tb_item_region t
+		WHERE t.state = 'U'
+		AND t.item_id = #itemId#
+		AND t.region_id = #regionId#
+	]]>		
 	</select>
 	
 </sqlMap>

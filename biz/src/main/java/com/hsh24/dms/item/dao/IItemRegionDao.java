@@ -19,4 +19,11 @@ public interface IItemRegionDao {
 	 */
 	List<ItemRegion> getItemRegionList(Item item);
 
+	/**
+	 * 
+	 * @param itemRegion
+	 * @return
+	 */
+	ItemRegion getItemRegion(ItemRegion itemRegion);
+
 }

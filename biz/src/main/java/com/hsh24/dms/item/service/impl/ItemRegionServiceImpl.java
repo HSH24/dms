@@ -38,6 +38,25 @@ public class ItemRegionServiceImpl implements IItemRegionService {
 		return null;
 	}
 
+	@Override
+	public ItemRegion getItemRegion(Long itemId, Long regionId) {
+		if (itemId == null || regionId == null) {
+			return null;
+		}
+
+		ItemRegion itemRegion = new ItemRegion();
+		itemRegion.setItemId(itemId);
+		itemRegion.setRegionId(regionId);
+
+		try {
+			return itemRegionDao.getItemRegion(itemRegion);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(itemRegion), e);
+		}
+
+		return null;
+	}
+
 	public IItemRegionDao getItemRegionDao() {
 		return itemRegionDao;
 	}

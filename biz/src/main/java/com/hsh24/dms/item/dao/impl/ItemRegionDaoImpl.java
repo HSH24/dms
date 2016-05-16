@@ -20,4 +20,9 @@ public class ItemRegionDaoImpl extends BaseDaoImpl implements IItemRegionDao {
 		return (List<ItemRegion>) getSqlMapClientTemplate().queryForList("item.region.getItemRegionList", item);
 	}
 
+	@Override
+	public ItemRegion getItemRegion(ItemRegion itemRegion) {
+		return (ItemRegion) getSqlMapClientTemplate().queryForObject("item.region.getItemRegion", itemRegion);
+	}
+
 }

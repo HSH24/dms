@@ -106,36 +106,60 @@ public class ItemServiceImpl implements IItemService {
 		// 获取商品价格(item)
 		for (ItemRegion itemRegion : list) {
 			Item it = getItem(itemRegion.getItemId());
-			if (it != null) {
-				// 获取商品价格(item_price)
-				List<ItemSku> skuList = it.getSkuList();
-				if (skuList != null && skuList.size() > 0) {
-					for (ItemSku sku : skuList) {
-						ItemPrice itemPrice =
-							itemPriceService.getItemPrice(itemRegion.getItemRegionId(), sku.getSkuId());
-						if (itemPrice != null) {
-							sku.setPrice(itemPrice.getPrice());
-						}
-					}
-				} else {
-					// sku = 0 维护的价格
-					ItemPrice itemPrice = itemPriceService.getItemPrice(itemRegion.getItemRegionId(), 0L);
-					if (itemPrice != null) {
-						it.setPrice(itemPrice.getPrice());
-					}
-				}
-
-				// 获取供应商信息
-				Supplier sup = supplierService.getSupplier(it.getSupId());
-				if (sup != null) {
-					it.setSupName(sup.getSupName());
-				}
-
-				itemList.add(it);
+			if (it == null) {
+				continue;
 			}
+
+			// 获得 itemRegionId 因为 存在 不同 regionId 维护 相同 itemId
+			Long itemRegionId = getItemRegionId(itemRegion.getItemId(), region);
+			if (itemRegionId == null) {
+				continue;
+			}
+
+			// 获取商品价格(item_price)
+			List<ItemSku> skuList = it.getSkuList();
+			if (skuList != null && skuList.size() > 0) {
+				for (ItemSku sku : skuList) {
+					ItemPrice itemPrice = itemPriceService.getItemPrice(itemRegionId, sku.getSkuId());
+					if (itemPrice != null) {
+						sku.setPrice(itemPrice.getPrice());
+					}
+				}
+			} else {
+				// sku = 0 维护的价格
+				ItemPrice itemPrice = itemPriceService.getItemPrice(itemRegionId, 0L);
+				if (itemPrice != null) {
+					it.setPrice(itemPrice.getPrice());
+				}
+			}
+
+			// 获取供应商信息
+			Supplier sup = supplierService.getSupplier(it.getSupId());
+			if (sup != null) {
+				it.setSupName(sup.getSupName());
+			}
+
+			itemList.add(it);
 		}
 
 		return itemList;
+	}
+
+	/**
+	 * 
+	 * @param itemId
+	 * @param region
+	 * @return
+	 */
+	private Long getItemRegionId(Long itemId, String[] region) {
+		for (String regionId : region) {
+			ItemRegion itemRegion = itemRegionService.getItemRegion(itemId, Long.valueOf(regionId));
+			if (itemRegion != null) {
+				return itemRegion.getItemRegionId();
+			}
+		}
+
+		return null;
 	}
 
 	@Override
