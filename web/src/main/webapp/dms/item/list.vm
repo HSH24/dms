@@ -82,7 +82,7 @@
             						<div class="item-inner">
                                         <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{item.barCode}</div></div>
         								<div class="item-after">
-        									<a href="javascript:item_list_trade('$!{item.itemId}', '0', '$!{item.itemName}', '￥$!formatUtil.getAmountFormat($!{sku.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
+        									<a href="javascript:item_list_trade('$!{item.itemId}', '0', '$!{item.itemName}', '￥$!formatUtil.getAmountFormat($!{item.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
         									<a href="javascript:item_list_cart('$!{item.itemId}', '0');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
         								</div>
             						</div>

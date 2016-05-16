@@ -192,8 +192,9 @@ public class ItemServiceImpl implements IItemService {
 		for (String id : properties) {
 			String[] cid = id.split(":");
 
-			// 兼容
+			// 兼容 正常不会执行
 			if (cid.length == 1) {
+				item.setSkuList(skuList);
 				return item;
 			}
 
@@ -332,7 +333,7 @@ public class ItemServiceImpl implements IItemService {
 		// 某一商品价格
 		BigDecimal price = null;
 
-		if (skuId.equals(0L)) {
+		if (!skuId.equals(0L)) {
 			// 根据 skuId 获得 item 并 验证
 			Map<Long, ItemSku> map = itemSkuService.getItemSku(new String[] { skuId.toString() });
 			if (map == null || map.size() == 0) {
@@ -367,7 +368,7 @@ public class ItemServiceImpl implements IItemService {
 			return result;
 		}
 
-		result.setCode(item.getSupId().toString() + "&" + (skuId.equals(0L) ? price : item.getPrice()));
+		result.setCode(item.getSupId().toString() + "&" + (skuId.equals(0L) ? item.getPrice() : price));
 		result.setResult(true);
 		return result;
 	}
