@@ -38,7 +38,7 @@ public class Trade extends SearchInfo {
 	/**
 	 * 涨价或减价.
 	 */
-	private BigDecimal change;
+	private BigDecimal change = BigDecimal.ZERO;
 
 	/**
 	 * 星星级别，店小儿分类交易.

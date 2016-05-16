@@ -19,8 +19,6 @@ import com.hsh24.dms.api.cart.bo.Cart;
 import com.hsh24.dms.api.cashflow.ICashflowService;
 import com.hsh24.dms.api.cashflow.bo.Cashflow;
 import com.hsh24.dms.api.item.IItemService;
-import com.hsh24.dms.api.item.bo.Item;
-import com.hsh24.dms.api.item.bo.ItemSku;
 import com.hsh24.dms.api.pay.IPayService;
 import com.hsh24.dms.api.supplier.ISupplierService;
 import com.hsh24.dms.api.supplier.bo.Supplier;
@@ -384,7 +382,7 @@ public class TradeServiceImpl implements ITradeService {
 		String modifyUser) {
 		Cashflow cashflow = new Cashflow();
 		cashflow.setBankAcctId(bankAcctId);
-		cashflow.setSummary("支出:商品采购,业务交易号:" + tradeNo);
+		cashflow.setSummary("[支出]商品采购,业务交易号:" + tradeNo);
 		cashflow.setCrAmount(price);
 		cashflow.setDrAmount(BigDecimal.ZERO);
 		cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
@@ -544,8 +542,15 @@ public class TradeServiceImpl implements ITradeService {
 
 		// 处理 订单明细数据 需要用到
 		trade.setTradeId(t.getTradeId());
+		trade.setTradePrice(t.getPrice());
 
-		return cancelTrade(trade, t.getType(), shopId.toString());
+		BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
+		if (bankAcct == null) {
+			result.setCode("资金账户信息不能为空。");
+			return result;
+		}
+
+		return cancelTrade(shopId, trade, bankAcct.getBankAcctId(), modifyUser);
 	}
 
 	@Override
@@ -660,34 +665,41 @@ public class TradeServiceImpl implements ITradeService {
 	 * 
 	 * @param trade
 	 * @param type
+	 *            用来 判断 是否 需要退还资金.
 	 * @param modifyUser
 	 * @return
 	 */
-	private BooleanResult cancelTrade(final Trade trade, String type, String modifyUser) {
-		// 是否需要释放库存
-		boolean f = false;
-		// item sku 表库存
-		List<ItemSku> skus = null;
-		// item 表库存 即不存在 sku
-		List<Item> items = null;
-		// 用于统计 还有 sku 的商品的合计库存数
-		String[] itemIds = null;
-
-		// type 取消
+	private BooleanResult cancelTrade(final Long shopId, final Trade trade, final Long bankAcctId,
+		final String modifyUser) {
 		trade.setType(ITradeService.CANCEL);
-		// 是否需要释放库存
-		final boolean flag = f;
-		// item sku 表库存
-		final List<ItemSku> skuList = skus;
-		// item 表库存 即不存在 sku
-		final List<Item> itemList = items;
-		// 用于统计 还有 sku 的商品的合计库存数
-		final String[] itemId = itemIds;
 
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
 				// 1. 订单状态取消
 				BooleanResult result = updateTrade(trade);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
+				// 2. 记录现金流水账
+				Cashflow cashflow = new Cashflow();
+				cashflow.setBankAcctId(bankAcctId);
+				cashflow.setSummary("[退款]采购订单:" + trade.getTradeNo() + "取消。");
+				cashflow.setCrAmount(BigDecimal.ZERO);
+				cashflow.setDrAmount(trade.getPrice());
+				cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
+
+				result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
+				// 3. 记录资金账户余额
+				result = bankAcctService.updateBankAcct(shopId, bankAcctId, trade.getPrice(), modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 

@@ -59,9 +59,11 @@
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-subtitle" style="font-size: 13px; color: #8e8e93;">$!{order.propertiesName}</div>
 									<div id="trade/detail/quantity/edited/$!{order.orderId}" class="item-after">
-										×$!{order.quantity}
 										#if($!{order.receiptedQuantity} > 0)
+										共 ×$!{order.quantity}
 										[已收 x$!{order.receiptedQuantity}]
+										#else
+										×$!{order.quantity}
 										#end
 									</div>
 									<div id="trade/detail/quantity/edit" class="item-after" style="display: none;">
@@ -78,7 +80,7 @@
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-title"></div>
 									<div class="item-after">
-										<a href="$!{env.appUrl}/trade/refund.htm?tradeNo=$!{trade.tradeNo}&orderId=$!{order.orderId}" class="button color-red" data-ignore-cache="true">申请退款</a>
+										<a href="javascript:trade_detail_cancel('$!{trade.tradeNo}', '$!{order.orderId}')" class="button color-red" data-ignore-cache="true">取消明细</a>
 									</div>
 								</div>
 								#end
