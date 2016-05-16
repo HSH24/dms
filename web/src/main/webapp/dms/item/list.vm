@@ -12,7 +12,7 @@
 </div>
 <div class="pages">
 	<!-- Page, data-page contains page name-->
-	<div data-page="item.list" class="page">
+	<div data-page="item.list" class="page navbar-fixed">
 		<!-- Search bar -->
 		<form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
 			<div class="searchbar-input">
@@ -25,14 +25,14 @@
 			
 		<!-- Scrollable page content-->
 		<div class="page-content">
-			<div class="list-block accordion-list list-block-search searchbar-found" style="font-size: 15px;">
+			<div class="list-block list-block-search searchbar-found" style="font-size: 15px;">
 				<ul>
 					#foreach($item in $!{itemList})
 						#if($!{item.skuList})
 							<!-- 存在sku -->
     						#foreach($sku in $!{item.skuList})
-                            <li class="accordion-item">
-        						<a href="#" class="item-content item-link">
+                            <li>
+        						<div class="item-content">
         							<div class="item-media">
 										#if($!{item.itemFileList.size()} > 0)
         								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
@@ -44,29 +44,21 @@
                                             <span style="font-size: 12px; color: #8e8e93;">$!{sku.propertiesName}</span>
         								</div>
                                     </div>
-        						</a>
+        						</div>
         						<div class="item-content">
             						<div class="item-inner">
                                         <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{sku.barCode}</div></div>
         								<div class="item-after">
-        									<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}', '$!{item.itemName}', '$!{sku.propertiesName} ￥$!formatUtil.getAmountFormat($!{sku.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-        									<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+											<a href="#" data-picker=".picker-$!{item.itemId}-$!{sku.skuId}" class="open-picker"><i class="iconfont icon-cart" style="font-size: 20px; color: #FF5500;"></i></a>
         								</div>
             						</div>
                                 </div>
-        						<div class="accordion-item-content">
-        							<div class="content-block">
-        								<p style="font-size: 15px;">$!{item.itemName}|$!{sku.propertiesName}</p>
-        								<p>$!{item.remark}</p>
-    									<p>条码：$!{sku.barCode}</p>
-        							</div>
-        						</div>
         					</li>
 							#end
 						#else
     						<!-- 不存在sku -->
-                            <li class="accordion-item">
-        						<a href="#" class="item-content item-link">
+                            <li>
+        						<div class="item-content">
         							<div class="item-media">
 										#if($!{item.itemFileList.size()} > 0)
         								<img src="$!{item.itemFileList.get(0).filePath}" style="width: 50px;"></img>
@@ -77,23 +69,15 @@
         									$!{item.itemName} ￥$!formatUtil.getAmountFormat($!{item.price})
         								</div>
                                     </div>
-        						</a>
+        						</div>
         						<div class="item-content">
             						<div class="item-inner">
                                         <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{item.barCode}</div></div>
         								<div class="item-after">
-        									<a href="javascript:item_list_trade('$!{item.itemId}', '0', '$!{item.itemName}', '￥$!formatUtil.getAmountFormat($!{item.price})');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-        									<a href="javascript:item_list_cart('$!{item.itemId}', '0');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+											<a href="#" data-picker=".picker-$!{item.itemId}-0" class="open-picker"><i class="iconfont icon-cart" style="font-size: 20px; color: #FF5500;"></i></a>
         								</div>
             						</div>
                                 </div>
-        						<div class="accordion-item-content">
-        							<div class="content-block">
-        								<p style="font-size: 15px;">$!{item.itemName}</p>
-        								<p>$!{item.remark}</p>
-    									<p>条码：$!{item.barCode}</p>
-        							</div>
-        						</div>
         					</li>
 						#end
 					#end
@@ -101,6 +85,101 @@
 			</div>
         </div>
 		
+		#foreach($item in $!{itemList})
+			#if($!{item.skuList})
+    			<!-- 存在sku -->
+    			#foreach($sku in $!{item.skuList})
+                <!-- Picker -->
+                <div class="picker-modal picker-$!{item.itemId}-$!{sku.skuId}" style="background: #FFFFFF;">
+                    <div class="toolbar" style="background: #FFFFFF;">
+                    	<div class="toolbar-inner">
+                    		<div class="left">$!{item.itemName}</div>
+                    		<div class="right"><a href="#" class="close-picker"><i class="iconfont icon-close"></i></a></div>
+                    	</div>
+                    </div>
+                    <div class="picker-modal-inner">
+                    	<div class="content-block" style="margin-top: 0; margin-bottom: 0;">
+                    		<p style="font-size: 15px;">$!{sku.propertiesName}</p>
+							<p>$!{item.remark}</p>
+							#if($!{sku.barCode})
+							<p>条码：$!{sku.barCode}</p>
+							#end
+                    	</div>
+						<div class="list-block" style="margin-top: 0; margin-bottom: 0;">
+							<div class="item-content">
+    							<div class="item-inner">
+    								<div class="item-title">购买数量：</div>
+    								<div class="item-after">
+    									<div class="quantity">
+    										<button class="minus" type="button"></button>
+                                            <input id="item/list/quantity/$!{item.itemId}/$!{sku.skuId}" type="text" class="txt" value="1"></input>
+    										<button class="plus" type="button"></button>
+    										<div class="response-area response-area-minus" onclick="item_list_minus('$!{item.itemId}/$!{sku.skuId}');"></div>
+    										<div class="response-area response-area-plus" onclick="item_list_plus('$!{item.itemId}/$!{sku.skuId}');"></div>
+    									</div>
+    								</div>
+    							</div>
+                            </div>
+							<div class="item-content">
+        						<div class="item-inner item-height-0">
+									<div class="item-title"></div>
+    								<div class="item-after">
+    									<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}');" class="button color-orange" data-ignore-cache="true">立即下单</a>
+    									<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+    								</div>
+        						</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				#end
+			#else
+				<!-- 不存在sku -->
+				<!-- Picker -->
+                <div class="picker-modal picker-$!{item.itemId}-0" style="background: #FFFFFF;">
+                    <div class="toolbar" style="background: #FFFFFF;">
+                    	<div class="toolbar-inner">
+                    		<div class="left">$!{item.itemName}</div>
+                    		<div class="right"><a href="#" class="close-picker"><i class="iconfont icon-close"></i></a></div>
+                    	</div>
+                    </div>
+                    <div class="picker-modal-inner">
+                    	<div class="content-block" style="margin-top: 0; margin-bottom: 0;">
+							<p>$!{item.remark}</p>
+							#if($!{sku.barCode})
+							<p>条码：$!{item.barCode}</p>
+							#end
+                    	</div>
+						<div class="list-block" style="margin-top: 0; margin-bottom: 0;">
+							<div class="item-content">
+    							<div class="item-inner">
+    								<div class="item-title">购买数量：</div>
+    								<div class="item-after">
+    									<div class="quantity">
+    										<button class="minus" type="button"></button>
+                                            <input id="item/list/quantity/$!{item.itemId}/0" type="text" class="txt" value="1"></input>
+    										<button class="plus" type="button"></button>
+    										<div class="response-area response-area-minus" onclick="item_list_minus('$!{item.itemId}/0');"></div>
+    										<div class="response-area response-area-plus" onclick="item_list_plus('$!{item.itemId}/0');"></div>
+    									</div>
+    								</div>
+    							</div>
+                            </div>
+							<div class="item-content">
+        						<div class="item-inner item-height-0">
+									<div class="item-title"></div>
+    								<div class="item-after">
+    									<a href="javascript:item_list_trade('$!{item.itemId}', '0');" class="button color-orange" data-ignore-cache="true">立即下单</a>
+    									<a href="javascript:item_list_cart('$!{item.itemId}', '0');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+    								</div>
+        						</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			#end
+		#end
+				
 		<form id="item/list/trade" action="$!{env.appUrl}/trade/create.htm" method="POST" class="ajax-submit">
 			<input type="hidden" id="item_list_trade_itemId" name="itemId"></input>
 			<input type="hidden" id="item_list_trade_skuId" name="skuId"></input>
@@ -110,6 +189,9 @@
 		<form id="item/list/cart" action="$!{env.appUrl}/cart/add.htm" method="POST" class="ajax-submit">
 			<input type="hidden" id="item_list_cart_itemId" name="itemId"></input>
 			<input type="hidden" id="item_list_cart_skuId" name="skuId"></input>
+			<input type="hidden" id="item_list_cart_quantity" name="quantity"></input>
         </form>
     </div>
 </div>
+
+

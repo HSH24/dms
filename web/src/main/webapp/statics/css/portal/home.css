@@ -542,3 +542,9 @@ a.component.type3 img {
 .list-block .page-settings:after {
 	height: 0;
 }
+
+
+
+.list-block .item-height-0:after {
+	height: 0;
+}
