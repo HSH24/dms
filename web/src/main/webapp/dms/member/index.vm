@@ -15,6 +15,18 @@
 		<!-- Scrollable page content-->
 		<div class="page-content">
 			<div class="list-block" style="font-size: 15px;">
+				<ul>
+					<li>
+						<a href="" class="item-link item-content external">
+							<div class="item-media"><i class="iconfont icon-home"></i></div>
+							<div class="item-inner">
+								<div class="item-title">我的账号:    $!{user.userName}   $!{user.passport}</div> 
+							</div>
+						</a>
+					</li>
+				</ul>
+            </div>
+			<div class="list-block" style="font-size: 15px;">
 				<ul class="page-settings">
 					<li class="row" style="text-align: center;">
 						<a href="$!{env.appUrl}/trade/list.htm?type=tosend" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
