@@ -84,7 +84,7 @@
 				</ul>
 			</div>
 			
-			<div class="item-list-overlay modal-overlay"></div>
+			<div class="item-list-overlay"></div>
         </div>
 		
 		#foreach($item in $!{itemList})
