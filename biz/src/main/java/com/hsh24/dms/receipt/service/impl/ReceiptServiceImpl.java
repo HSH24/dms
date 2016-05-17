@@ -10,6 +10,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.hsh24.dms.api.receipt.IReceiptLogService;
 import com.hsh24.dms.api.receipt.IReceiptService;
 import com.hsh24.dms.api.receipt.bo.Receipt;
 import com.hsh24.dms.api.receipt.bo.ReceiptDetail;
@@ -40,6 +41,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 	private ITradeService tradeService;
 
 	private IOrderService orderService;
+
+	private IReceiptLogService receiptLogService;
 
 	private IReceiptDao receiptDao;
 
@@ -183,8 +186,15 @@ public class ReceiptServiceImpl implements IReceiptService {
 					return result;
 				}
 
+				// 3. 记录收货日志
+				result = receiptLogService.createReceiptLog(receiptId, receipt.getType(), modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
 				result.setCode(receipt.getReceiptNo());
-				result.setResult(true);
 				return result;
 			}
 		});
@@ -309,9 +319,17 @@ public class ReceiptServiceImpl implements IReceiptService {
 						result.setCode("创建收货明细失败。");
 						return result;
 					}
+
+					// 3. 记录收货日志
+					result = receiptLogService.createReceiptLog(receiptId, receipt.getType(), modifyUser);
+					if (!result.getResult()) {
+						ts.setRollbackOnly();
+
+						return result;
+					}
 				}
 
-				// 3. 订单总单 状态 修改
+				// 4. 订单总单 状态 修改
 				result = tradeService.signTrade(shopId, tradeNo, modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
@@ -319,8 +337,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 					return result;
 				}
 
-				result.setCode(receipt.getReceiptNo());
-				result.setResult(true);
+				result.setCode("完成收货。");
 				return result;
 			}
 		});
@@ -431,6 +448,14 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 	public void setOrderService(IOrderService orderService) {
 		this.orderService = orderService;
+	}
+
+	public IReceiptLogService getReceiptLogService() {
+		return receiptLogService;
+	}
+
+	public void setReceiptLogService(IReceiptLogService receiptLogService) {
+		this.receiptLogService = receiptLogService;
 	}
 
 	public IReceiptDao getReceiptDao() {

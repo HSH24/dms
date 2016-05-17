@@ -43,10 +43,12 @@
 	<sqlMap resource="ibatis/sqlmap-monitor.log.xml" />
 	<sqlMap resource="ibatis/sqlmap-monitor.method.xml" />
 	<sqlMap resource="ibatis/sqlmap-receipt.detail.xml" />
+	<sqlMap resource="ibatis/sqlmap-receipt.log.xml" />
 	<sqlMap resource="ibatis/sqlmap-receipt.xml" />
 	<sqlMap resource="ibatis/sqlmap-region.xml" />
 	<sqlMap resource="ibatis/sqlmap-shop.xml" />
 	<sqlMap resource="ibatis/sqlmap-supplier.xml" />
+	<sqlMap resource="ibatis/sqlmap-trade.log.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.order.refund.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.order.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.xml" />

@@ -24,6 +24,7 @@ import com.hsh24.dms.api.supplier.ISupplierService;
 import com.hsh24.dms.api.supplier.bo.Supplier;
 import com.hsh24.dms.api.trade.IOrderRefundService;
 import com.hsh24.dms.api.trade.IOrderService;
+import com.hsh24.dms.api.trade.ITradeLogService;
 import com.hsh24.dms.api.trade.ITradeService;
 import com.hsh24.dms.api.trade.bo.Order;
 import com.hsh24.dms.api.trade.bo.OrderRefund;
@@ -63,6 +64,8 @@ public class TradeServiceImpl implements ITradeService {
 	private IBankAcctService bankAcctService;
 
 	private ICashflowService cashflowService;
+
+	private ITradeLogService tradeLogService;
 
 	private ITradeDao tradeDao;
 
@@ -172,6 +175,14 @@ public class TradeServiceImpl implements ITradeService {
 
 				// 4. 记录资金账户余额
 				result = bankAcctService.updateBankAcct(shopId, bankAcct.getBankAcctId(), price.negate(), modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
+				// 5. 记录交易日志
+				result = tradeLogService.createTradeLog(tradeId, trade.getType(), modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -336,13 +347,21 @@ public class TradeServiceImpl implements ITradeService {
 						return result;
 					}
 
+					// 4. 记录交易日志
+					result = tradeLogService.createTradeLog(tradeId, trade.getType(), modifyUser);
+					if (!result.getResult()) {
+						ts.setRollbackOnly();
+
+						return result;
+					}
+
 					if (tradeNo.length() > 0) {
 						tradeNo.append(",");
 					}
 					tradeNo.append(trade.getTradeNo());
 				}
 
-				// 4. 记录资金账户余额
+				// 5. 记录资金账户余额
 				result = bankAcctService.updateBankAcct(shopId, bankAcct.getBankAcctId(), amount.negate(), modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
@@ -350,7 +369,7 @@ public class TradeServiceImpl implements ITradeService {
 					return result;
 				}
 
-				// 5. 修改购物车状态
+				// 6. 修改购物车状态
 				if (cartId != null && cartId.length > 0) {
 					result = cartService.finishCart(userId, shopId, cartId);
 					if (!result.getResult()) {
@@ -706,6 +725,14 @@ public class TradeServiceImpl implements ITradeService {
 					return result;
 				}
 
+				// 4. 记录交易日志
+				result = tradeLogService.createTradeLog(trade.getTradeId(), trade.getType(), modifyUser);
+				if (!result.getResult()) {
+					ts.setRollbackOnly();
+
+					return result;
+				}
+
 				return result;
 			}
 		});
@@ -786,6 +813,14 @@ public class TradeServiceImpl implements ITradeService {
 
 	public void setCashflowService(ICashflowService cashflowService) {
 		this.cashflowService = cashflowService;
+	}
+
+	public ITradeLogService getTradeLogService() {
+		return tradeLogService;
+	}
+
+	public void setTradeLogService(ITradeLogService tradeLogService) {
+		this.tradeLogService = tradeLogService;
 	}
 
 	public ITradeDao getTradeDao() {
