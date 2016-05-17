@@ -27,13 +27,12 @@ myApp.onPageInit('item.list', function(page) {
 					});
 
 			$$('.open-picker').on('click', function() {
-				$('.page-content .item-list-overlay').addClass('modal-overlay')
-						.addClass('modal-overlay-visible');
+				$('.page-content .item-list-overlay')
+						.addClass('item-list-overlay-visible');
 			});
 			$$('.close-picker').on('click', function() {
 				$('.page-content .item-list-overlay')
-						.removeClass('modal-overlay')
-						.removeClass('modal-overlay-visible');
+						.removeClass('item-list-overlay-visible');
 			});
 		});
 
@@ -63,8 +62,8 @@ var item_list_flag;
 
 function item_list_trade(itemId, skuId) {
 	myApp.closeModal('.picker-' + itemId + '-' + skuId);
-	$('.page-content .item-list-overlay').removeClass('modal-overlay')
-			.removeClass('modal-overlay-visible');
+	$('.page-content .item-list-overlay')
+			.removeClass('item-list-overlay-visible');
 
 	item_list_flag = "trade";
 
@@ -80,8 +79,8 @@ function item_list_trade(itemId, skuId) {
 
 function item_list_cart(itemId, skuId) {
 	myApp.closeModal('.picker-' + itemId + '-' + skuId);
-	$('.page-content .item-list-overlay').removeClass('modal-overlay')
-			.removeClass('modal-overlay-visible');
+	$('.page-content .item-list-overlay')
+			.removeClass('item-list-overlay-visible');
 
 	item_list_flag = "cart";
 
