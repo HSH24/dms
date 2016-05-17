@@ -80,7 +80,7 @@
 								<div class="item-title-row" style="margin-top: 3px;">
 									<div class="item-title"></div>
 									<div class="item-after">
-										<a href="javascript:trade_detail_cancel('$!{trade.tradeNo}', '$!{order.orderId}')" class="button color-red" data-ignore-cache="true">取消明细</a>
+										<!-- <a href="javascript:trade_detail_cancel('$!{trade.tradeNo}', '$!{order.orderId}')" class="button color-red" data-ignore-cache="true">取消明细</a> -->
 									</div>
 								</div>
 								#end
