@@ -66,13 +66,14 @@ public class TradeAction extends BaseAction {
 	public String create() {
 		BooleanResult result = null;
 
-		Long userId = this.getUser().getUserId();
+		String passport = this.getUser().getPassport();
 
 		// 直接购买
 		if (cartIds == null || cartIds.length == 0) {
-			result = tradeService.createTrade(this.getShop().getShopId(), itemId, skuId, quantity, userId.toString());
+			result = tradeService.createTrade(this.getShop().getShopId(), itemId, skuId, quantity, passport);
 		} else {
-			result = tradeService.createTrade(this.getShop().getShopId(), userId, cartIds, userId.toString());
+			result =
+				tradeService.createTrade(this.getShop().getShopId(), this.getUser().getUserId(), cartIds, passport);
 		}
 
 		if (result.getResult()) {
