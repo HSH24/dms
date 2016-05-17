@@ -1,38 +1,39 @@
 myApp.onPageInit('item.list', function(page) {
-			$$('form.ajax-submit').on('beforeSubmit', function(e) {
-					});
+	$$('form.ajax-submit').on('beforeSubmit', function(e) {
+			});
 
-			$$('form.ajax-submit').on('submitted', function(e) {
-						myApp.hideIndicator();
-						var xhr = e.detail.xhr;
-						myApp.alert(xhr.responseText, '信息', function() {
-									if (item_list_flag == "cart") {
-										// 更新首页购物车标记
-										portal_home_cart_stats();
-									}
+	$$('form.ajax-submit').on('submitted', function(e) {
+				myApp.hideIndicator();
+				var xhr = e.detail.xhr;
+				myApp.alert(xhr.responseText, '信息', function() {
+							if (item_list_flag == "cart") {
+								// 更新首页购物车标记
+								portal_home_cart_stats();
+							}
 
-									if (item_list_flag == "trade") {
-										// 更新我的中心资金统计
-										member_index_stats();
-									}
+							if (item_list_flag == "trade") {
+								// 更新我的中心资金统计
+								member_index_stats();
+							}
 
-									item_list_flag = "";
-								});
-					});
+							item_list_flag = "";
+						});
+			});
 
-			$$('form.ajax-submit').on('submitError', function(e) {
-						myApp.hideIndicator();
-						var xhr = e.detail.xhr;
-						myApp.alert(xhr.responseText, '错误');
-					});
+	$$('form.ajax-submit').on('submitError', function(e) {
+				myApp.hideIndicator();
+				var xhr = e.detail.xhr;
+				myApp.alert(xhr.responseText, '错误');
+			});
 
-			$$('.open-picker').on('click', function() {
-
-					});
-			$$('.close-picker').on('click', function() {
-
-					});
-		});
+	$$('.open-picker').on('click', function() {
+		$('.page-content .item-list-overlay').addClass('modal-overlay-visible');
+	});
+	$$('.close-picker').on('click', function() {
+		$('.page-content .item-list-overlay')
+				.removeClass('modal-overlay-visible');
+	});
+});
 
 function item_list_scan() {
 	try {

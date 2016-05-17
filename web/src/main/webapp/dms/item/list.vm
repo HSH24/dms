@@ -83,6 +83,8 @@
 					#end
 				</ul>
 			</div>
+			
+			<div class="item-list-overlay modal-overlay"></div>
         </div>
 		
 		#foreach($item in $!{itemList})
