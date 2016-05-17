@@ -96,7 +96,7 @@
                     <div class="toolbar" style="background: #FFFFFF;">
                     	<div class="toolbar-inner">
                     		<div class="left">$!{item.itemName}</div>
-                    		<div class="right"><a href="#" class="close-picker"><i class="iconfont icon-close"></i></a></div>
+                    		<div class="right"><a href="#" class="close-picker"><i class="iconfont icon-close" style="font-size: 20px; color: #8e8e93;"></i></a></div>
                     	</div>
                     </div>
                     <div class="picker-modal-inner">
@@ -148,7 +148,7 @@
                     <div class="toolbar" style="background: #FFFFFF;">
                     	<div class="toolbar-inner">
                     		<div class="left">$!{item.itemName}</div>
-                    		<div class="right"><a href="#" class="close-picker"><i class="iconfont icon-close"></i></a></div>
+                    		<div class="right"><a href="#" class="close-picker"><i class="iconfont icon-close" style="font-size: 20px; color: #8e8e93;"></i></a></div>
                     	</div>
                     </div>
                     <div class="picker-modal-inner">
