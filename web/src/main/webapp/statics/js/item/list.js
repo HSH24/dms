@@ -60,6 +60,8 @@ function scanFinished(str) {
 var item_list_flag;
 
 function item_list_trade(itemId, skuId) {
+	myApp.closeModal('.picker-' + itemId + '-' + skuId);
+
 	item_list_flag = "trade";
 
 	myApp.showIndicator();
@@ -73,6 +75,8 @@ function item_list_trade(itemId, skuId) {
 }
 
 function item_list_cart(itemId, skuId) {
+	myApp.closeModal('.picker-' + itemId + '-' + skuId);
+
 	item_list_flag = "cart";
 
 	myApp.showIndicator();
