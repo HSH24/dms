@@ -14,7 +14,22 @@
 		 WHERE g.goods_id = t.goods_id
 		   AND g.goods_spec_id = t.goods_spec_id
 		   AND g.goods_mode = t.goods_mode
-		   and t.org_id = #shopId#
+		   AND t.org_id = #shopId#
+	]]>
+	</select>
+	
+	<select id="getStockList" parameterClass="stock" resultClass="stock">
+	<![CDATA[
+		SELECT g.goods_nm AS itemName,
+		       t.goods_num AS stock,
+		       g.sales_price AS price,
+		       (t.goods_num*g.sales_price) AS amount
+		  FROM oms.wm_account_t t,
+			   oms.main_goods_v g
+		 WHERE g.goods_id = t.goods_id
+		   AND g.goods_spec_id = t.goods_spec_id
+		   AND g.goods_mode = t.goods_mode
+		   AND t.org_id = #shopId#
 	]]>
 	</select>
 	

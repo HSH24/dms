@@ -1,5 +1,7 @@
 package com.hsh24.dms.stock.service.impl;
 
+import java.util.List;
+
 import com.hsh24.dms.api.stock.IStockService;
 import com.hsh24.dms.api.stock.bo.Stock;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -32,6 +34,23 @@ public class StockServiceImpl implements IStockService {
 			stock = stockDao.getStats(stock);
 
 			return stock == null ? "0.00" : FormatUtil.getAmountFormat(stock.getAmount());
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(stock), e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Stock> getStockList(Long shopId, Stock stock) {
+		if (shopId == null || stock == null) {
+			return null;
+		}
+
+		stock.setShopId(shopId);
+
+		try {
+			return stockDao.getStockList(stock);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(stock), e);
 		}

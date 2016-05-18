@@ -67,7 +67,7 @@
 						<a href="#" class="item-content item-link">
 							<div class="item-media"><i class="iconfont icon-goods"></i></div>
 							<div class="item-inner">
-								<div class="item-title"> $!{cashflow.summary}</div>
+								<div class="item-title">$!{cashflow.summary}</div>
 								#if($!{cashflow.crAmount} != "0")
 								<div class="item-after">-$!formatUtil.getAmountFormat($!{cashflow.crAmount})</div>
 								#else

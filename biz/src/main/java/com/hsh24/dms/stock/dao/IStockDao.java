@@ -1,5 +1,7 @@
 package com.hsh24.dms.stock.dao;
 
+import java.util.List;
+
 import com.hsh24.dms.api.stock.bo.Stock;
 
 /**
@@ -15,5 +17,12 @@ public interface IStockDao {
 	 * @return
 	 */
 	Stock getStats(Stock stock);
+
+	/**
+	 * 
+	 * @param stock
+	 * @return
+	 */
+	List<Stock> getStockList(Stock stock);
 
 }
