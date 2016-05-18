@@ -48,13 +48,6 @@ public interface IMemcachedCacheService extends ICacheService<String, Object> {
 	int CACHE_KEY_CHECK_CODE_DEFAULT_EXP = 30 * 60;
 
 	/**
-	 * user id.
-	 */
-	String CACHE_KEY_USER_ID = "key_user_id_";
-
-	int CACHE_KEY_LOCKED_USER_ID_DEFAULT_EXP = 1 * 3;
-
-	/**
 	 * passport.
 	 */
 	String CACHE_KEY_PASSPORT = "key_passport_";
