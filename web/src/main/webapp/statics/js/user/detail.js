@@ -16,9 +16,17 @@ myApp.onPageInit('user.setPassword', function(page) {
 
 function user_detail_password() {
 	myApp.prompt('为保障你的数据安全，修改密码前请填写原密码。', '验证原密码', function(value) {
-				$$.get(appUrl + '/user/validatePassword.htm', {},
-						function(data) {
-							alert(data);
-						});
+				$$.ajax({
+							url : appUrl + '/user/validatePassword.htm',
+							data : {
+								password : value
+							},
+							success : function(data, status, xhr) {
+								alert(1);
+							},
+							error : function(xhr, status) {
+								myApp.alert(xhr.responseText, '错误');
+							}
+						})
 			});
 }

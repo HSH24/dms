@@ -108,6 +108,7 @@ public class UserAcctAction extends BaseAction {
 		if (user == null) {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult("用户信息不存在。");
+
 			return RESULT_MESSAGE;
 		}
 

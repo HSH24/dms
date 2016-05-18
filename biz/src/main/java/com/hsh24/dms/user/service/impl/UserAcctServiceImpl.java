@@ -129,6 +129,9 @@ public class UserAcctServiceImpl implements IUserAcctService {
 			return result;
 		}
 
+		// TODO
+		// 验证令牌 修改密码必须 1.验证密码 2.验证短信
+
 		return userService.setPassword(passport.trim(), password, passport.toString());
 	}
 
