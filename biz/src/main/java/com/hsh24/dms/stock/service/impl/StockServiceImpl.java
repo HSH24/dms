@@ -6,7 +6,6 @@ import com.hsh24.dms.api.stock.IStockService;
 import com.hsh24.dms.api.stock.bo.Stock;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
-import com.hsh24.dms.framework.util.FormatUtil;
 import com.hsh24.dms.stock.dao.IStockDao;
 import com.wideka.weixin.framework.util.LogUtil;
 
@@ -22,7 +21,7 @@ public class StockServiceImpl implements IStockService {
 	private IStockDao stockDao;
 
 	@Override
-	public String getStats(Long shopId) {
+	public Stock getStats(Long shopId) {
 		if (shopId == null) {
 			return null;
 		}
@@ -31,9 +30,7 @@ public class StockServiceImpl implements IStockService {
 		stock.setShopId(shopId);
 
 		try {
-			stock = stockDao.getStats(stock);
-
-			return stock == null ? "0.00" : FormatUtil.getAmountFormat(stock.getAmount());
+			return stockDao.getStats(stock);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(stock), e);
 		}

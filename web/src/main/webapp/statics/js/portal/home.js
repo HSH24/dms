@@ -131,6 +131,12 @@ function portal_home_cart_stats() {
 
 portal_home_cart_stats();
 
+$$.get(appUrl + '/sale/stats.htm', {}, function(data) {
+			var stats = data.split("&");
+			$$('#portal/home/sale').html('今天：' + stats[0] + '<br/>本月：'
+					+ stats[1]);
+		});
+
 $$.get(appUrl + '/stock/stats.htm', {}, function(data) {
 			$$('#portal/home/stock').html('金额：' + data + '<br/>&nbsp;');
 		});

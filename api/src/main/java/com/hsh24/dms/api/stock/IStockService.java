@@ -16,7 +16,7 @@ public interface IStockService {
 	 * @param shopId
 	 * @return
 	 */
-	String getStats(Long shopId);
+	Stock getStats(Long shopId);
 
 	/**
 	 * 

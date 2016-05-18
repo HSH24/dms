@@ -6,6 +6,13 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="saleAction" class="com.hsh24.dms.sale.action.SaleAction" parent="baseAction" scope="request">
+		<property name="saleService" ref="saleService" />
 	</bean>
+	
+	<bean id="saleService" class="com.hsh24.dms.sale.service.impl.SaleServiceImpl">
+		<property name="saleDao" ref="saleDao" />
+	</bean>
+	
+	<bean id="saleDao" class="com.hsh24.dms.sale.dao.impl.SaleDaoImpl" parent="baseDao" />
 	
 </beans>
