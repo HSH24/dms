@@ -52,38 +52,21 @@
                 </ul>
             </div>
 			
-			#if($!{cashflowList})
-			#set($d = '00')
-			<div class="list-block accordion-list" style="font-size: 14px;">
-				#foreach($cashflow in $!{cashflowList})
-				#set($dd = $!stringUtil.substring($!{cashflow.tradeDate}, 8, 10))
-				#if($d != $dd)
-					#if($d != '00') </ul> #end
-				<div class="content-block-title" style="margin-top: 10px;">$dd日</div>
+			<div class="list-block" style="font-size: 14px;">
 				<ul>
-					#set($d = $dd)
-				#end
-					<li class="accordion-item">
-						<a href="#" class="item-content item-link">
+					#foreach($sale in $!{saleList})
+					<li>
+						<div class="item-content">
 							<div class="item-media"><i class="iconfont icon-goods"></i></div>
 							<div class="item-inner">
-								<div class="item-title"> $!{cashflow.summary}</div>
-								#if($!{cashflow.crAmount} != "0")
-								<div class="item-after">-$!formatUtil.getAmountFormat($!{cashflow.crAmount})</div>
-								#else
-								<div class="item-after">$!formatUtil.getAmountFormat($!{cashflow.drAmount})</div>
-								#end
-							</div>
-						</a>
-						<div class="accordion-item-content">
-							<div class="content-block">
-                                <p>$!{cashflow.summary}</p>
+								<div class="item-title"> $!{sale.itemName}[$!{sale.unit}]</div>
+								<div class="item-after">$!formatUtil.getAmountFormat($!{sale.amount})</div>
 							</div>
 						</div>
 					</li>
-				#end
+					#end
+                </ul>
             </div>
-			#end
         </div>
     </div>
 </div>

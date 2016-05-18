@@ -16,7 +16,7 @@
 		   AND og.goods_id = gv.goods_id
 		   AND og.goods_mode = gv.goods_mode
 		   AND (og.goods_spec_id = '' OR og.goods_spec_id = gv.goods_spec_id)
-		AND og.order_id = #shopId#
+		AND og.org_id = #shopId#
 	]]>
 	</select>
 	
@@ -30,7 +30,7 @@
 		 WHERE og.goods_id = gv.goods_id
 		   AND og.goods_mode = gv.goods_mode
 		   AND (og.goods_spec_id = '' OR og.goods_spec_id = gv.goods_spec_id)
-		   AND og.order_id = #shopId#
+		   AND og.org_id = #shopId#
 	]]>
 	</select>
 	
