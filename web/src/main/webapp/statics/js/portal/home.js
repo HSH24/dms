@@ -113,6 +113,10 @@ $$('#view_6_click').on('click', function() {
 			$$('#href-5').addClass("active");
 		});
 
+// ==============================
+
+// 异步统计
+
 function portal_home_cart_stats() {
 	$$.get(appUrl + '/cart/stats.htm', {}, function(data) {
 				if (data > 0) {
@@ -126,3 +130,7 @@ function portal_home_cart_stats() {
 }
 
 portal_home_cart_stats();
+
+$$.get(appUrl + '/stock/stats.htm', {}, function(data) {
+			$$('#portal/home/stock').html('金额：' + data + '<br/>&nbsp;');
+		});

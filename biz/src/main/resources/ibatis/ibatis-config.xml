@@ -47,6 +47,7 @@
 	<sqlMap resource="ibatis/sqlmap-receipt.xml" />
 	<sqlMap resource="ibatis/sqlmap-region.xml" />
 	<sqlMap resource="ibatis/sqlmap-shop.xml" />
+	<sqlMap resource="ibatis/sqlmap-stock.xml" />
 	<sqlMap resource="ibatis/sqlmap-supplier.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.log.xml" />
 	<sqlMap resource="ibatis/sqlmap-trade.order.refund.xml" />

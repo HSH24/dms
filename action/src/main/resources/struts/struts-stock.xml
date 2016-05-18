@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="{http://dms}dms$stock"
+		extends="{http://dms}dms$framework" namespace="/stock">
+		
+		<action name="stats" class="stockAction" method="stats">
+			<interceptor-ref name="authenticationStack" />
+		</action>
+		
+		<action name="index" class="stockAction" method="index">
+			<interceptor-ref name="authenticationStack" />
+			<result name="success">/dms/stock/index.vm</result>
+		</action>
+		
+	</package>
+</struts>

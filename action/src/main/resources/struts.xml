@@ -16,6 +16,7 @@
 	<include file="struts/struts-portal.xml" />
 	<include file="struts/struts-receipt.xml" />
 	<include file="struts/struts-sale.xml" />
+	<include file="struts/struts-stock.xml" />
 	<include file="struts/struts-sup.xml" />
 	<include file="struts/struts-trade.xml" />
 	<include file="struts/struts-user.xml" />

@@ -60,16 +60,16 @@
                                 </div>
 								<div class="row no-gutter" style="margin-bottom: 10px;">
 									<div class="col-50" style="padding-right: 5px;">
-										<div class="small-box" style="background-color: #B68FCC; color: #FFFFFF;">
+										<a href="$!{env.appUrl}/stock/index.htm" class="small-box" style="background-color: #B68FCC; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>库存</h3>
-												<p>金额：0.00<br/>&nbsp;</p>
+												<p id="portal/home/stock">金额：0.00<br/>&nbsp;</p>
 											</div>
 											<div class="icon">
 												<i class="icon iconfont icon-cascades"></i>
 											</div>
 											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
-										</div>
+										</a>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
 										<a href="#view-3" id="view_3_click" class="small-box tab-link" style="background-color: #59ABE3; color: #FFFFFF;">

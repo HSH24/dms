@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="stock">
+	
+	<typeAlias alias="stock" type="com.hsh24.dms.api.stock.bo.Stock" />
+	
+	<select id="getStats" parameterClass="stock" resultClass="stock">
+	<![CDATA[
+		SELECT SUM(t.goods_num*g.sales_price) AS amount
+		  FROM oms.wm_account_t t,
+			   oms.main_goods_v g
+		 WHERE g.goods_id = t.goods_id
+		   AND g.goods_spec_id = t.goods_spec_id
+		   AND g.goods_mode = t.goods_mode
+		   and t.org_id = #shopId#
+	]]>
+	</select>
+	
+</sqlMap>
