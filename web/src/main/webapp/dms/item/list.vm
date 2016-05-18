@@ -49,7 +49,7 @@
             						<div class="item-inner">
                                         <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{sku.barCode}</div></div>
         								<div class="item-after">
-											<a href="#" data-picker=".picker-$!{item.itemId}-$!{sku.skuId}" class="open-picker"><i class="iconfont icon-cart" style="font-size: 20px; color: #FF5500;"></i></a>
+											<a href="#" data-picker=".picker-$!{item.itemId}-$!{sku.skuId}" class="open-picker"><i class="iconfont icon-cart" style="font-size: 23px; color: #FF5500;"></i></a>
         								</div>
             						</div>
                                 </div>
@@ -74,7 +74,7 @@
             						<div class="item-inner">
                                         <div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{item.barCode}</div></div>
         								<div class="item-after">
-											<a href="#" data-picker=".picker-$!{item.itemId}-0" class="open-picker"><i class="iconfont icon-cart" style="font-size: 20px; color: #FF5500;"></i></a>
+											<a href="#" data-picker=".picker-$!{item.itemId}-0" class="open-picker"><i class="iconfont icon-cart" style="font-size: 23px; color: #FF5500;"></i></a>
         								</div>
             						</div>
                                 </div>
@@ -130,11 +130,14 @@
                             </div>
 							<div class="item-content" style="margin-top: 20px;">
         						<div class="item-inner item-height-0">
-									<div class="item-title"></div>
-    								<div class="item-after">
-    									<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-    									<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
-    								</div>
+									<div class="row" style="width: 100%;">
+										<div class="col-50">
+											<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}');" class="button button-big color-orange" data-ignore-cache="true">立即下单</a>
+                                        </div>
+										<div class="col-50">
+											<a href="javascript:item_list_cart('$!{item.itemId}', '$!{sku.skuId}');" class="button button-big color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+                                        </div>
+									</div>
         						</div>
                             </div>
                         </div>
@@ -181,12 +184,15 @@
                             </div>
 							<div class="item-content" style="margin-top: 20px;">
         						<div class="item-inner item-height-0">
-									<div class="item-title"></div>
-    								<div class="item-after">
-    									<a href="javascript:item_list_trade('$!{item.itemId}', '0');" class="button color-orange" data-ignore-cache="true">立即下单</a>
-    									<a href="javascript:item_list_cart('$!{item.itemId}', '0');" class="button color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
-    								</div>
-        						</div>
+									<div class="row" style="width: 100%;">
+										<div class="col-50">
+											<a href="javascript:item_list_trade('$!{item.itemId}', '0');" class="button button-big color-orange" data-ignore-cache="true">立即下单</a>
+                                        </div>
+										<div class="col-50">
+											<a href="javascript:item_list_cart('$!{item.itemId}', '0');" class="button button-big color-gray" style="margin-left: 10px;" data-ignore-cache="true">添加进货车</a>
+                                        </div>
+									</div>
+								</div>
                             </div>
                         </div>
                     </div>
