@@ -29,10 +29,10 @@ public interface IUserAcctService {
 	/**
 	 * 忘记密码.
 	 * 
-	 * @param checkCode
+	 * @param passport
 	 * @param password
 	 * @return
 	 */
-	BooleanResult setPassword(String checkCode, String password);
+	BooleanResult setPassword(String passport, String password);
 
 }

@@ -75,12 +75,16 @@ function forgetPassword() {
 			.val());
 
 	myApp.popup('.popup-forgetPassword');
+
+	setPassportCookies();
 }
 
 function sendCheckCode() {
 	if (disabled) {
 		return;
 	}
+
+	$('#portal_index_forgetPassword_checkCode').val('');
 
 	$.ajax({
 				type : "post",

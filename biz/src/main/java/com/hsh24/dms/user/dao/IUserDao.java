@@ -16,4 +16,11 @@ public interface IUserDao {
 	 */
 	User getUserByPassport(String passport);
 
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	int updateUser(User user);
+
 }

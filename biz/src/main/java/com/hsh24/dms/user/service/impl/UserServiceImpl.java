@@ -1,14 +1,19 @@
 package com.hsh24.dms.user.service.impl;
 
+import java.io.IOException;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.user.IUserService;
 import com.hsh24.dms.api.user.bo.User;
+import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
+import com.hsh24.dms.framework.util.LogUtil;
 import com.hsh24.dms.user.dao.IUserDao;
+import com.wideka.weixin.framework.util.EncryptUtil;
 
 /**
  * 
@@ -70,6 +75,70 @@ public class UserServiceImpl implements IUserService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public BooleanResult setPassword(String passport, String password, String modifyUser) {
+		BooleanResult result = new BooleanResult();
+		result.setResult(false);
+
+		if (StringUtils.isBlank(passport)) {
+			result.setCode("账号信息不能为空。");
+			return result;
+		}
+
+		if (StringUtils.isEmpty(password)) {
+			result.setCode("密码信息不能为空。");
+			return result;
+		}
+
+		if (StringUtils.isEmpty(modifyUser)) {
+			result.setCode("操作人信息不能为空。");
+			return result;
+		}
+
+		User user = new User();
+		user.setPassport(passport.trim());
+
+		try {
+			user.setPassword(EncryptUtil.encryptMD5(password).toUpperCase());
+		} catch (IOException e) {
+			logger.error("password:" + password, e);
+
+			result.setCode("密码加密失败！");
+			return result;
+		}
+
+		user.setModifyUser(modifyUser);
+
+		try {
+			int c = userDao.updateUser(user);
+			if (c == 1) {
+				result.setResult(true);
+
+				// remove cache
+				remove(passport.trim());
+			}
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(user), e);
+
+			result.setCode("修改用户信息失败！");
+		}
+
+		return result;
+	}
+
+	/**
+	 * remove cache.
+	 * 
+	 * @param userId
+	 */
+	private void remove(String passport) {
+		try {
+			memcachedCacheService.remove(IMemcachedCacheService.CACHE_KEY_PASSPORT + passport);
+		} catch (ServiceException e) {
+			logger.error(e);
+		}
 	}
 
 	public IMemcachedCacheService getMemcachedCacheService() {

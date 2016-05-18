@@ -18,4 +18,21 @@
 	]]>
 	</select>
 	
+	<update id="updateUser" parameterClass="user">
+	<![CDATA[
+		UPDATE oms.auth_user_t t
+		SET t.UPDATE_DATE = NOW(),
+		  t.UPDATE_BY = #modifyUser#
+	]]>
+		<dynamic>
+			<isNotEmpty property="password" prepend=",">
+			<![CDATA[ t.password = #password# ]]>
+			</isNotEmpty>
+		</dynamic>
+	<![CDATA[
+		WHERE t.state = '1'
+		AND t.user_code = upper(#passport#)
+	]]>
+	</update>
+	
 </sqlMap>

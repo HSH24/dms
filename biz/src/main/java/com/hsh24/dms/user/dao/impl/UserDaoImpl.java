@@ -16,4 +16,9 @@ public class UserDaoImpl extends BaseDaoImpl implements IUserDao {
 		return (User) getSqlMapClientTemplate().queryForObject("user.getUserByPassport", passport);
 	}
 
+	@Override
+	public int updateUser(User user) {
+		return getSqlMapClientTemplate().update("user.updateUser", user);
+	}
+
 }

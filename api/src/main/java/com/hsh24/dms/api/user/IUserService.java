@@ -1,6 +1,7 @@
 package com.hsh24.dms.api.user;
 
 import com.hsh24.dms.api.user.bo.User;
+import com.hsh24.dms.framework.bo.BooleanResult;
 
 /**
  * 
@@ -36,5 +37,14 @@ public interface IUserService {
 	 * @return
 	 */
 	User getUser4Validate(String passport);
+
+	/**
+	 * 
+	 * @param passport
+	 * @param password
+	 * @param modifyUser
+	 * @return
+	 */
+	BooleanResult setPassword(String passport, String password, String modifyUser);
 
 }

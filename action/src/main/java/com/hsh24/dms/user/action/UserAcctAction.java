@@ -1,11 +1,15 @@
 package com.hsh24.dms.user.action;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.hsh24.dms.api.user.IUserAcctService;
+import com.hsh24.dms.api.user.IUserService;
+import com.hsh24.dms.api.user.bo.User;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.annotation.ActionMonitor;
 import com.hsh24.dms.framework.bo.BooleanResult;
-import com.hsh24.dms.framework.log.Logger4jCollection;
-import com.hsh24.dms.framework.log.Logger4jExtend;
 
 /**
  * 
@@ -16,9 +20,9 @@ public class UserAcctAction extends BaseAction {
 
 	private static final long serialVersionUID = 8267298257804000897L;
 
-	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAcctAction.class);
+	private IUserAcctService userAcctService;
 
-	private IUserAcctService userAccService;
+	private IUserService userService;
 
 	private String passport;
 
@@ -35,7 +39,7 @@ public class UserAcctAction extends BaseAction {
 	 * @return
 	 */
 	public String sendCheckCode() {
-		BooleanResult result = userAccService.generateCheckCode(passport);
+		BooleanResult result = userAcctService.generateCheckCode(passport);
 
 		if (result.getResult()) {
 			this.setResourceResult(result.getCode());
@@ -53,10 +57,24 @@ public class UserAcctAction extends BaseAction {
 	 * @return
 	 */
 	public String validateCheckCode() {
-		BooleanResult result = userAccService.validateCheckCode(passport, checkCode);
+		BooleanResult result = userAcctService.validateCheckCode(passport, checkCode);
 
 		if (result.getResult()) {
-			this.setResourceResult(result.getCode());
+			// 登录成功
+			User u = userService.getUserByPassport(passport);
+
+			HttpSession session = this.getSession();
+			session.setAttribute("ACEGI_SECURITY_LAST_PASSPORT", u.getPassport());
+			session.setAttribute("ACEGI_SECURITY_LAST_LOGINUSER", u);
+
+			HttpServletResponse response = getServletResponse();
+			if (response != null) {
+				Cookie ps = new Cookie("PS", u.getPassport());
+				// ps.setMaxAge(-1);
+				ps.setPath("/");
+				ps.setDomain(env.getProperty("domain"));
+				response.addCookie(ps);
+			}
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());
@@ -71,29 +89,44 @@ public class UserAcctAction extends BaseAction {
 	 * @return
 	 */
 	public String setPassword() {
-
 		return SUCCESS;
 	}
 
 	@ActionMonitor(actionName = "密码重置")
 	public String updatePassword() {
-		BooleanResult result = userAccService.setPassword(checkCode, password);
+		User user = this.getUser();
+		if (user == null) {
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult("用户信息不存在。");
+			return RESULT_MESSAGE;
+		}
+
+		BooleanResult result = userAcctService.setPassword(user.getPassport(), password);
 
 		if (result.getResult()) {
-			this.setSuccessMessage("成功修改密码！");
+			this.setResourceResult("成功修改密码。");
 		} else {
-			this.setFailMessage(result.getCode());
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult(result.getCode());
 		}
 
 		return RESULT_MESSAGE;
 	}
 
-	public IUserAcctService getUserAccService() {
-		return userAccService;
+	public IUserAcctService getUserAcctService() {
+		return userAcctService;
 	}
 
-	public void setUserAccService(IUserAcctService userAccService) {
-		this.userAccService = userAccService;
+	public void setUserAcctService(IUserAcctService userAcctService) {
+		this.userAcctService = userAcctService;
+	}
+
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 
 	public String getPassport() {

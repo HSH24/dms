@@ -6,16 +6,16 @@
 		extends="{http://dms}dms$framework" namespace="/user">
 		
 		<!-- 发送验证码 -->
-		<action name="sendCheckCode" class="userAccAction" method="sendCheckCode"></action>
+		<action name="sendCheckCode" class="userAcctAction" method="sendCheckCode"></action>
 		
-		<action name="validateCheckCode" class="userAccAction" method="validateCheckCode"></action>
+		<action name="validateCheckCode" class="userAcctAction" method="validateCheckCode"></action>
 		
 		<!-- 重置密码 -->
-		<action name="setPassword" class="userAccAction" method="setPassword">
+		<action name="setPassword" class="userAcctAction" method="setPassword">
 			<result name="success">/dms/user/setPassword.vm</result>
 		</action>
 		
-		<action name="updatePassword" class="userAccAction" method="updatePassword" />
+		<action name="updatePassword" class="userAcctAction" method="updatePassword"></action>
 		
 		<!-- 店铺 -->
 		<action name="shop" class="userShopAction" method="index">

@@ -7,6 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.sms.ISMSService;
 import com.hsh24.dms.api.user.IUserAcctService;
+import com.hsh24.dms.api.user.IUserService;
+import com.hsh24.dms.api.user.bo.User;
 import com.hsh24.dms.framework.bo.BooleanResult;
 import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -23,6 +25,8 @@ public class UserAcctServiceImpl implements IUserAcctService {
 
 	private IMemcachedCacheService memcachedCacheService;
 
+	private IUserService userService;
+
 	private ISMSService smsService;
 
 	@Override
@@ -35,8 +39,12 @@ public class UserAcctServiceImpl implements IUserAcctService {
 			return result;
 		}
 
-		// TODO
 		// 验证登录账号是否存在
+		User user = userService.getUserByPassport(passport);
+		if (user == null) {
+			result.setCode("当前登录帐号在系统中不存在。");
+			return result;
+		}
 
 		String token = String.valueOf(new Random().nextInt(999999));
 
@@ -46,10 +54,14 @@ public class UserAcctServiceImpl implements IUserAcctService {
 			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key, token,
 				IMemcachedCacheService.CACHE_KEY_CHECK_CODE_DEFAULT_EXP);
 		} catch (ServiceException e) {
-			logger.error(e);
+			try {
+				token = (String) memcachedCacheService.get(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key);
+			} catch (ServiceException se) {
+				logger.error(se);
 
-			result.setCode("系统正忙，请稍后再试。");
-			return result;
+				result.setCode("系统正忙，请稍后再试。");
+				return result;
+			}
 		}
 
 		result = smsService.send("好社惠", "SMS_8550784", "{\"code\":\"" + token + "\"}", passport, null);
@@ -95,14 +107,41 @@ public class UserAcctServiceImpl implements IUserAcctService {
 			return result;
 		}
 
+		// invalid
+		invalidCheckCode(key);
+
 		result.setResult(true);
 		return result;
 	}
 
 	@Override
-	public BooleanResult setPassword(String checkCode, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public BooleanResult setPassword(String passport, String password) {
+		BooleanResult result = new BooleanResult();
+		result.setResult(false);
+
+		if (StringUtils.isBlank(passport)) {
+			result.setCode("账号信息不能为空。");
+			return result;
+		}
+
+		if (StringUtils.isEmpty(password)) {
+			result.setCode("密码信息不能为空。");
+			return result;
+		}
+
+		return userService.setPassword(passport.trim(), password, passport.toString());
+	}
+
+	/**
+	 * 
+	 * @param key
+	 */
+	private void invalidCheckCode(String key) {
+		try {
+			memcachedCacheService.remove(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key);
+		} catch (Exception e) {
+			logger.error(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key, e);
+		}
 	}
 
 	public IMemcachedCacheService getMemcachedCacheService() {
@@ -111,6 +150,14 @@ public class UserAcctServiceImpl implements IUserAcctService {
 
 	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
 		this.memcachedCacheService = memcachedCacheService;
+	}
+
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 
 	public ISMSService getSmsService() {

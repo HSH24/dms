@@ -7,11 +7,13 @@
 	
 	<bean id="userAcctAction" class="com.hsh24.dms.user.action.UserAcctAction" parent="baseAction" scope="request">
 		<property name="userAcctService" ref="userAcctService" />
+		<property name="userService" ref="userService" />
 	</bean>
 	
 	<!-- 账号管理 -->
 	<bean id="userAcctService" class="com.hsh24.dms.user.service.impl.UserAcctServiceImpl">
 		<property name="memcachedCacheService" ref="memcachedCacheService" />
+		<property name="userService" ref="userService" />
 		<property name="smsService" ref="smsService" />
 	</bean>
 	
