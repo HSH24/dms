@@ -174,9 +174,9 @@
 		
 		#JSM(["framework7", "weixin", "jquery", "common"])
 		#JS_ENV_VAL()
-		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160513"></script>
+		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160519"></script>
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/item/list.js?t=20160517" async="async"></script>
+		<script src="$!{env.imgUrl}/js/item/list.js?t=20160519" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/detail.js" async="async"></script>
