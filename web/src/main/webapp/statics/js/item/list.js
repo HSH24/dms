@@ -37,14 +37,6 @@ myApp.onPageInit('item.list', function(page) {
 		});
 
 function item_list_scan() {
-	try {
-		window.scaner.scanContent();
-	} catch (e) {
-		alert(e);
-	}
-
-	return;
-
 	wx.scanQRCode({
 				needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
 				scanType : ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
@@ -52,10 +44,6 @@ function item_list_scan() {
 					var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
 				}
 			});
-}
-
-function scanFinished(str) {
-	alert(str);
 }
 
 var item_list_flag;
