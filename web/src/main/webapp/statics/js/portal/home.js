@@ -3,6 +3,7 @@ var myApp = new Framework7({
 			animateNavBackIcon : true,
 			animatePages : Framework7.prototype.device.ios,
 			swipePanel : 'left',
+			imagesLazyLoadPlaceholder : imgUrl + '/image/loading.png',
 			// Hide and show indicator during ajax requests
 			onAjaxStart : function(xhr) {
 				myApp.showIndicator();
