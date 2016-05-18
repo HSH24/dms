@@ -10,6 +10,10 @@
 		
 		<action name="validateCheckCode" class="userAcctAction" method="validateCheckCode"></action>
 		
+		<action name="validatePassword" class="userAcctAction" method="validatePassword">
+			<interceptor-ref name="authenticationStack" />
+		</action>
+		
 		<!-- 重置密码 -->
 		<action name="setPassword" class="userAcctAction" method="setPassword">
 			<result name="success">/dms/user/setPassword.vm</result>

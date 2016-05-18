@@ -19,24 +19,36 @@
 					<li>
 						<a href="#" class="item-link item-content">
 							<div class="item-inner">
-								<div class="item-title">账号</div>
+								<div class="item-title">名字</div>
+								<div class="item-after">$!{user.userName}</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+            </div>
+			<div class="list-block" style="font-size: 15px;">
+				<ul>
+					<li>
+						<a href="#" class="item-link item-content">
+							<div class="item-inner">
+								<div class="item-title">登录账号</div>
 								<div class="item-after">$!{user.passport}</div>
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="#" class="item-link item-content">
+						<a href="javascript:user_detail_password();" class="item-link item-content">
 							<div class="item-inner">
-								<div class="item-title">姓名</div>
-								<div class="item-after">$!{user.userName}</div>
+								<div class="item-title">账号密码</div>
+								<div class="item-after"></div>
 							</div>
 						</a>
 					</li>
 					<li>
 						<a href="#" class="item-link item-content">
 							<div class="item-inner">
-								<div class="item-title">微信号</div>
-								<div class="item-after"></div>
+								<div class="item-title">微信</div>
+								<div class="item-after">未绑定</div>
 							</div>
 						</a>
 					</li>
@@ -57,6 +69,14 @@
 							<div class="item-inner">
 								<div class="item-title">地区</div>
 								<div class="item-after"></div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="item-link item-content">
+							<div class="item-inner">
+								<div class="item-title">个性签名</div>
+								<div class="item-after">未填写</div>
 							</div>
 						</a>
 					</li>

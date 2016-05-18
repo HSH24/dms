@@ -44,7 +44,7 @@
     						#end
     					<li>
     						<div class="item-content">
-								<label class="label-checkbox" style="width: 30px;">
+								<label class="label-checkbox" style="padding-right: 5px;">
                                     <input type="checkbox" name="cartIds" value="$!{cart.cartId}"></input>
 									<div class="item-media" style="width: 28px;"><i class="icon icon-form-checkbox"></i></div>
 								</label>

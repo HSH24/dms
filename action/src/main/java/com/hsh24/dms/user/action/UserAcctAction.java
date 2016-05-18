@@ -84,6 +84,16 @@ public class UserAcctAction extends BaseAction {
 	}
 
 	/**
+	 * 验证密码.
+	 * 
+	 * @return
+	 */
+	public String validatePassword() {
+
+		return RESOURCE_RESULT;
+	}
+
+	/**
 	 * 修改密码.
 	 * 
 	 * @return
