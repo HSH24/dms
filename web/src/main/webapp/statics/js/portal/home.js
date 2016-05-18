@@ -93,26 +93,6 @@ $$('#view_3_click').on('click', function() {
 			$$('#href-3').addClass("active");
 		});
 
-$$('#view_5_click').on('click', function() {
-			if (view5.history.length == 1) {
-				view5.router.load({
-							url : appUrl + "/member/index.htm"
-						});
-			}
-
-			$$('#href-5').addClass("active");
-		});
-
-$$('#view_6_click').on('click', function() {
-			if (view5.history.length == 1) {
-				view5.router.load({
-							url : appUrl + "/member/index.htm"
-						});
-			}
-
-			$$('#href-5').addClass("active");
-		});
-
 // ==============================
 
 // 异步统计

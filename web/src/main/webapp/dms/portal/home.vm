@@ -86,7 +86,7 @@
                                 </div>
 								<div class="row no-gutter">
 									<div class="col-50" style="padding-right: 5px;">
-										<div class="small-box" style="background-color: #70A9B7; color: #FFFFFF;">
+										<a href="#view-2" id="view_2_click"  class="small-box tab-link" style="background-color: #70A9B7; color: #FFFFFF;">
 											<div class="inner">
 												<h3>派送单</h3>
 												<p>今天：0<br/>本月：0</p>
@@ -95,7 +95,7 @@
 												<i class="icon iconfont icon-deliver"></i>
 											</div>
 											<div class="small-box-footer">&nbsp;<i class="fa fa-arrow-circle-right"></i></div>
-										</div>
+										</a>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
 										<a href="$!{env.appUrl}/trade/list.htm?type=send" class="small-box" style="background-color: #B9C14D; color: #FFFFFF;" data-ignore-cache="true">
