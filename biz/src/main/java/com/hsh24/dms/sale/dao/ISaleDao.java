@@ -1,5 +1,7 @@
 package com.hsh24.dms.sale.dao;
 
+import java.util.List;
+
 import com.hsh24.dms.api.sale.bo.Sale;
 
 /**
@@ -15,5 +17,12 @@ public interface ISaleDao {
 	 * @return
 	 */
 	Sale getStats(Sale sale);
+
+	/**
+	 * 
+	 * @param sale
+	 * @return
+	 */
+	List<Sale> getSaleList(Sale sale);
 
 }

@@ -1,5 +1,7 @@
 package com.hsh24.dms.sale.service.impl;
 
+import java.util.List;
+
 import com.hsh24.dms.api.sale.ISaleService;
 import com.hsh24.dms.api.sale.bo.Sale;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -28,6 +30,23 @@ public class SaleServiceImpl implements ISaleService {
 
 		try {
 			return saleDao.getStats(sale);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(sale), e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Sale> getSaleList(Long shopId, Sale sale) {
+		if (shopId == null || sale == null) {
+			return null;
+		}
+
+		sale.setShopId(shopId);
+
+		try {
+			return saleDao.getSaleList(sale);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(sale), e);
 		}

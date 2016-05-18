@@ -8,7 +8,7 @@
 	
 	<select id="getStats" parameterClass="sale" resultClass="sale">
 	<![CDATA[
-		SELECT SUM(og.goods_num*og.goods_fact_price) AS amount
+		SELECT SUM(og.goods_num * og.goods_fact_price) AS amount
 		  FROM oms.ord_order_goods_t og,
 			   oms.main_goods_v gv
 		 WHERE og.create_dt >= date_format(#gmtStart#, '%Y-%m-%d %T')
@@ -17,6 +17,20 @@
 		   AND og.goods_mode = gv.goods_mode
 		   AND (og.goods_spec_id = '' OR og.goods_spec_id = gv.goods_spec_id)
 		AND og.order_id = #shopId#
+	]]>
+	</select>
+	
+	<select id="getSaleList" parameterClass="sale" resultClass="sale">
+	<![CDATA[
+		SELECT (og.goods_num * og.goods_fact_price) AS amount,
+			   gv.goods_nm AS itemName,
+			   gv.goods_unit_nm AS unit
+		  FROM oms.ord_order_goods_t og,
+			   oms.main_goods_v gv
+		 WHERE og.goods_id = gv.goods_id
+		   AND og.goods_mode = gv.goods_mode
+		   AND (og.goods_spec_id = '' OR og.goods_spec_id = gv.goods_spec_id)
+		   AND og.order_id = #shopId#
 	]]>
 	</select>
 	

@@ -1,5 +1,7 @@
 package com.hsh24.dms.sale.action;
 
+import java.util.List;
+
 import com.hsh24.dms.api.sale.ISaleService;
 import com.hsh24.dms.api.sale.bo.Sale;
 import com.hsh24.dms.framework.action.BaseAction;
@@ -16,6 +18,8 @@ public class SaleAction extends BaseAction {
 	private static final long serialVersionUID = -486178851207623062L;
 
 	private ISaleService saleService;
+
+	private List<Sale> saleList;
 
 	/**
 	 * 首页 销售统计.
@@ -52,6 +56,8 @@ public class SaleAction extends BaseAction {
 	 * @return
 	 */
 	public String index() {
+		saleList = saleService.getSaleList(this.getShop().getShopId(), new Sale());
+
 		return SUCCESS;
 	}
 
@@ -61,6 +67,14 @@ public class SaleAction extends BaseAction {
 
 	public void setSaleService(ISaleService saleService) {
 		this.saleService = saleService;
+	}
+
+	public List<Sale> getSaleList() {
+		return saleList;
+	}
+
+	public void setSaleList(List<Sale> saleList) {
+		this.saleList = saleList;
 	}
 
 }
