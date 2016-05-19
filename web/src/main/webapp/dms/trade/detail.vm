@@ -167,7 +167,7 @@
             </div>
 			#end
 			
-			<form id="trade/detail/form" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit">
+			<form id="trade/detail/form" action="$!{env.appUrl}/receipt/part.htm" method="POST" class="ajax-submit trade-detail-form">
             	<input type="hidden" name="tradeNo" value="$!{trade.tradeNo}"/>
 				<input type="hidden" name="receiptDetailList" id="trade/detail/form/receiptDetailList"/>
             </form>

@@ -119,5 +119,5 @@ $$.get(appUrl + '/sale/stats.htm', {}, function(data) {
 		});
 
 $$.get(appUrl + '/stock/stats.htm', {}, function(data) {
-			$$('#portal/home/stock').html('金额：' + data + '<br/>&nbsp;');
+			$$('#portal/home/stock').html('金额：<br/>' + data);
 		});

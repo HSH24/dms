@@ -200,13 +200,13 @@
 			#end
 		#end
 				
-		<form id="item/list/trade" action="$!{env.appUrl}/trade/create.htm" method="POST" class="ajax-submit">
+		<form id="item/list/trade" action="$!{env.appUrl}/trade/create.htm" method="POST" class="ajax-submit item-list-trade">
 			<input type="hidden" id="item_list_trade_itemId" name="itemId"></input>
 			<input type="hidden" id="item_list_trade_skuId" name="skuId"></input>
 			<input type="hidden" id="item_list_trade_quantity" name="quantity"></input>
         </form>
 		
-		<form id="item/list/cart" action="$!{env.appUrl}/cart/add.htm" method="POST" class="ajax-submit">
+		<form id="item/list/cart" action="$!{env.appUrl}/cart/add.htm" method="POST" class="ajax-submit item-list-cart">
 			<input type="hidden" id="item_list_cart_itemId" name="itemId"></input>
 			<input type="hidden" id="item_list_cart_skuId" name="skuId"></input>
 			<input type="hidden" id="item_list_cart_quantity" name="quantity"></input>

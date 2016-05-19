@@ -63,7 +63,7 @@
 										<a href="$!{env.appUrl}/stock/index.htm" class="small-box" style="background-color: #B68FCC; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>库存</h3>
-												<p id="portal/home/stock">金额：0.00<br/>&nbsp;</p>
+												<p id="portal/home/stock">金额：<br/>0.00</p>
 											</div>
 											<div class="icon">
 												<i class="icon iconfont icon-cascades"></i>

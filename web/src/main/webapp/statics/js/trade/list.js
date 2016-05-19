@@ -18,7 +18,17 @@ myApp.onPageInit('trade.list', function(page) {
 			$$('form.ajax-submit').on('beforeSubmit', function(e) {
 					});
 
-			$$('form.ajax-submit').on('submitted', function(e) {
+			$$('form.ajax-submit.trade-list-cancel').on('submitted',
+					function(e) {
+						myApp.hideIndicator();
+						var xhr = e.detail.xhr;
+						myApp.alert(xhr.responseText, '信息', function() {
+									member_index_stats();
+									myApp.getCurrentView().router.back();
+								});
+					});
+
+			$$('form.ajax-submit.trade-list-sign').on('submitted', function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '信息', function() {
