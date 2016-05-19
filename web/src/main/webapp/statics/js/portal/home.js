@@ -121,3 +121,11 @@ $$.get(appUrl + '/sale/stats.htm', {}, function(data) {
 $$.get(appUrl + '/stock/stats.htm', {}, function(data) {
 			$$('#portal/home/stock').html('金额：<br/>' + data);
 		});
+
+$$.get(appUrl + '/trade/stats.htm', {
+			type : 'tosend'
+		}, function(data) {
+			var stats = data.split("&");
+			$$('#portal/home/trade/tosend').html('金额：' + stats[0] + '<br/>订单：'
+					+ stats[1]);
+		});

@@ -96,12 +96,21 @@ public class TradeAction extends BaseAction {
 
 		Long shopId = this.getShop().getShopId();
 
-		sb.append(tradeService.getTradeCount(shopId, new String[] { "check", "topay" })).append("&");
-		sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" })).append("&");
-		sb.append(tradeService.getTradeCount(shopId, new String[] { "send" })).append("&");
-		sb.append(tradeService.getTradeCount(shopId, new String[] { "sign" }));
+		if ("tosend".equals(type)) {
+			sb.append("0.00").append("&");
+			sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" }));
 
-		this.setResourceResult(sb.toString());
+			this.setResourceResult(sb.toString());
+		} else if ("send".equals(type)) {
+
+		} else {
+			sb.append(tradeService.getTradeCount(shopId, new String[] { "check", "topay" })).append("&");
+			sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" })).append("&");
+			sb.append(tradeService.getTradeCount(shopId, new String[] { "send" })).append("&");
+			sb.append(tradeService.getTradeCount(shopId, new String[] { "sign" }));
+
+			this.setResourceResult(sb.toString());
+		}
 
 		return RESOURCE_RESULT;
 	}

@@ -72,10 +72,10 @@
 										</a>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
-										<a href="#view-3" id="view_3_click" class="small-box tab-link" style="background-color: #59ABE3; color: #FFFFFF;">
+										<a href="$!{env.appUrl}/trade/list.htm?type=tosend" class="small-box" style="background-color: #59ABE3; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>进货</h3>
-												<p>金额：0.00<br/>数量：0</p>
+												<p id="portal/home/trade/tosend">金额：0.00<br/>订单：0</p>
 											</div>
 											<div class="icon">
 												<i class="icon iconfont icon-cart"></i>
@@ -101,7 +101,7 @@
 										<a href="$!{env.appUrl}/trade/list.htm?type=send" class="small-box" style="background-color: #B9C14D; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>收货单</h3>
-												<p>今天：0<br/>本月：0</p>
+												<p id="portal/home/trade/send">今天：0<br/>本月：0</p>
 											</div>
 											<div class="icon">
 												<i class="icon iconfont icon-list"></i>
