@@ -460,7 +460,22 @@ public class TradeServiceImpl implements ITradeService {
 			return null;
 		}
 
+		String[] supId = new String[tradeList.size()];
+		int i = 0;
+
 		for (Trade trade : tradeList) {
+			supId[i++] = trade.getSupId().toString();
+		}
+
+		// 获取供应商信息
+		Map<Long, Supplier> map = supplierService.getSupplier(supId);
+
+		for (Trade trade : tradeList) {
+			Supplier supplier = map.get(trade.getSupId());
+			if (supplier != null) {
+				trade.setSupName(supplier.getSupName());
+			}
+
 			trade.setOrderList(orderService.getOrderList(shopId, trade.getTradeId()));
 		}
 

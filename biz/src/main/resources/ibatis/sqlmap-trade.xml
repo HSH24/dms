@@ -70,6 +70,7 @@
 	<![CDATA[
 		SELECT t.trade_id AS tradeId,
 			   t.trade_no AS tradeNo,
+			   t.sup_id AS supId,
 			   t.trade_price AS tradePrice,
 			   t.change,
 			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate,

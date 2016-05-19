@@ -27,10 +27,17 @@
 					<li>
 						<div class="item-content">
 							<div class="item-inner" style="display: inherit;">
-								<div class="item-title" style="font-weight: 400;">订单号：$!{trade.tradeNo}</div>
+								<div class="item-title" style="font-weight: 400;">
+									供应商：$!{trade.supName}
+									<div style="font-size: 13px; color: #8e8e93;">订单编号：$!{trade.tradeNo}</div>
+								</div>
 								<div class="item-after">
 									#if($!{trade.type} == 'check' || $!{trade.type} == 'topay' || $!{trade.type} == 'tosend')
 									<a href="javascript:trade_list_cancel('$!{trade.tradeNo}');">取消订单</a>
+									#elseif($!{trade.type} == 'sign')
+									交易完成
+									#elseif($!{trade.type} == 'cancel')
+									交易关闭
 									#end
 								</div>
 							</div>
