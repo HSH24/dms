@@ -129,3 +129,11 @@ $$.get(appUrl + '/trade/stats.htm', {
 			$$('#portal/home/trade/tosend').html('金额：' + stats[0] + '<br/>订单：'
 					+ stats[1]);
 		});
+
+$$.get(appUrl + '/trade/stats.htm', {
+			type : 'send'
+		}, function(data) {
+			var stats = data.split("&");
+			$$('#portal/home/trade/send').html('金额：' + stats[0] + '<br/>订单：'
+					+ stats[1]);
+		});
