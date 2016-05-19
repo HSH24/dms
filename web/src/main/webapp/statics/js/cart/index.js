@@ -1,5 +1,6 @@
 myApp.onPageInit('cart.index', function(page) {
-			$$('form.ajax-submit').on('beforeSubmit', function(e) {
+			$$('form.ajax-submit.cart-index-form').on('beforeSubmit',
+					function(e) {
 					});
 
 			$$('form.ajax-submit.cart-index-form').on('submitted', function(e) {
@@ -15,9 +16,6 @@ myApp.onPageInit('cart.index', function(page) {
 								portal_home_cart_stats();
 								// 更新我的中心资金统计
 								member_index_stats();
-
-								// 未知 bug
-								cart_index_flag = "";
 							});
 				} else if (cart_index_flag == "remove") {
 					myApp.alert(xhr.responseText, '信息', function() {
@@ -25,14 +23,12 @@ myApp.onPageInit('cart.index', function(page) {
 
 								// 更新首页购物车标记
 								portal_home_cart_stats();
-
-								// 未知 bug
-								cart_index_flag = "";
 							});
 				}
 			});
 
-			$$('form.ajax-submit').on('submitError', function(e) {
+			$$('form.ajax-submit.cart-index-form').on('submitError',
+					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '错误');

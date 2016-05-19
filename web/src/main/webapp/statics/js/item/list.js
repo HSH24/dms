@@ -1,5 +1,10 @@
 myApp.onPageInit('item.list', function(page) {
-			$$('form.ajax-submit').on('beforeSubmit', function(e) {
+			$$('form.ajax-submit.item-list-trade').on('beforeSubmit',
+					function(e) {
+					});
+
+			$$('form.ajax-submit.item-list-cart').on('beforeSubmit',
+					function(e) {
 					});
 
 			$$('form.ajax-submit.item-list-trade').on('submitted', function(e) {
@@ -20,7 +25,15 @@ myApp.onPageInit('item.list', function(page) {
 								});
 					});
 
-			$$('form.ajax-submit').on('submitError', function(e) {
+			$$('form.ajax-submit.item-list-trade').on('submitError',
+					function(e) {
+						myApp.hideIndicator();
+						var xhr = e.detail.xhr;
+						myApp.alert(xhr.responseText, '错误');
+					});
+
+			$$('form.ajax-submit.item-list-cart').on('submitError',
+					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '错误');

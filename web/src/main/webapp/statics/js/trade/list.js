@@ -15,7 +15,12 @@ myApp.onPageInit('trade.list', function(page) {
 								}, 1000);
 					});
 
-			$$('form.ajax-submit').on('beforeSubmit', function(e) {
+			$$('form.ajax-submit.trade-list-cancel').on('beforeSubmit',
+					function(e) {
+					});
+
+			$$('form.ajax-submit.trade-list-sign').on('beforeSubmit',
+					function(e) {
 					});
 
 			$$('form.ajax-submit.trade-list-cancel').on('submitted',
@@ -37,7 +42,15 @@ myApp.onPageInit('trade.list', function(page) {
 								});
 					});
 
-			$$('form.ajax-submit').on('submitError', function(e) {
+			$$('form.ajax-submit.trade-list-cancel').on('submitError',
+					function(e) {
+						myApp.hideIndicator();
+						var xhr = e.detail.xhr;
+						myApp.alert(xhr.responseText, '错误');
+					});
+
+			$$('form.ajax-submit.trade-list-sign').on('submitError',
+					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '错误');

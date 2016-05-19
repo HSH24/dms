@@ -1,14 +1,17 @@
 myApp.onPageInit('user.setPassword', function(page) {
-			$$('form.ajax-submit').on('beforeSubmit', function(e) {
+			$$('form.ajax-submit.user-setPassword-form').on('beforeSubmit',
+					function(e) {
 					});
 
-			$$('form.ajax-submit').on('submitted', function(e) {
+			$$('form.ajax-submit.user-setPassword-form').on('submitted',
+					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						top.location.href = appUrl + "/user/shop.htm";
 					});
 
-			$$('form.ajax-submit').on('submitError', function(e) {
+			$$('form.ajax-submit.user-setPassword-form').on('submitError',
+					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '错误');

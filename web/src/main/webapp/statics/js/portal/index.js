@@ -23,23 +23,38 @@ var mainView = myApp.addView('.view-main', {
 
 var portal_index_op;
 
-$$('form.ajax-submit').on('beforeSubmit', function(e) {
+$$('form.ajax-submit.portal-index-login-form').on('beforeSubmit', function(e) {
 		});
 
-$$('form.ajax-submit').on('submitted', function(e) {
+$$('form.ajax-submit.portal-index-forgetPassword-form').on('beforeSubmit',
+		function(e) {
+		});
+
+$$('form.ajax-submit.portal-index-login-form').on('submitted', function(e) {
 			myApp.hideIndicator();
 			var xhr = e.detail.xhr;
 
-			if (portal_index_op == 'login') {
-				top.location.href = appUrl + "/user/shop.htm";
-			} else if (portal_index_op == 'forgetPassword') {
-				mainView.router.load({
-							url : appUrl + "/user/setPassword.htm"
-						});
-			}
+			top.location.href = appUrl + "/user/shop.htm";
 		});
 
-$$('form.ajax-submit').on('submitError', function(e) {
+$$('form.ajax-submit.portal-index-forgetPassword-form').on('submitted',
+		function(e) {
+			myApp.hideIndicator();
+			var xhr = e.detail.xhr;
+
+			mainView.router.load({
+						url : appUrl + "/user/setPassword.htm"
+					});
+		});
+
+$$('form.ajax-submit.portal-index-login-form').on('submitError', function(e) {
+			myApp.hideIndicator();
+			var xhr = e.detail.xhr;
+			myApp.alert(xhr.responseText, '错误');
+		});
+
+$$('form.ajax-submit.portal-index-forgetPassword-form').on('submitError',
+		function(e) {
 			myApp.hideIndicator();
 			var xhr = e.detail.xhr;
 			myApp.alert(xhr.responseText, '错误');
