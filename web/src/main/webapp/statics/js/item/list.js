@@ -59,14 +59,10 @@ function item_list_scan() {
 			});
 }
 
-var item_list_flag;
-
 function item_list_trade(itemId, skuId) {
 	myApp.closeModal('.picker-' + itemId + '-' + skuId);
 	$('.page-content .item-list-overlay')
 			.removeClass('item-list-overlay-visible');
-
-	item_list_flag = "trade";
 
 	myApp.showIndicator();
 
@@ -82,8 +78,6 @@ function item_list_cart(itemId, skuId) {
 	myApp.closeModal('.picker-' + itemId + '-' + skuId);
 	$('.page-content .item-list-overlay')
 			.removeClass('item-list-overlay-visible');
-
-	item_list_flag = "cart";
 
 	myApp.showIndicator();
 
