@@ -15,6 +15,7 @@
 		<property name="memcachedCacheService" ref="memcachedCacheService" />
 		<property name="userService" ref="userService" />
 		<property name="smsService" ref="smsService" />
+		<property name="caService" ref="caService" />
 	</bean>
 	
 </beans>

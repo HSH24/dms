@@ -182,6 +182,7 @@
 		<script src="$!{env.imgUrl}/js/trade/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/detail.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/user/setPassword.js" async="async"></script>
 		<script>
         wx.config({
         			debug : false,

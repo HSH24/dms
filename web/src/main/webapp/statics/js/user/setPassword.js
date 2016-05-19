@@ -7,7 +7,10 @@ myApp.onPageInit('user.setPassword', function(page) {
 					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
-						top.location.href = appUrl + "/user/shop.htm";
+						myApp.alert('成功设置密码。', '信息', function() {
+									top.location.href = appUrl
+											+ "/user/shop.htm";
+								});
 					});
 
 			$$('form.ajax-submit.user-setPassword-form').on('submitError',

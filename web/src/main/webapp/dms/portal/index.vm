@@ -135,7 +135,7 @@
     	var appName = '$!{env.appName}';
 		var domain = '$!{env.domain}';
         </script>
-		<script type="text/javascript" src="$!{env.imgUrl}/js/portal/index.js"></script>
-		<script type="text/javascript" src="$!{env.imgUrl}/js/user/setPassword.js"></script>
+		<script src="$!{env.imgUrl}/js/portal/index.js"></script>
+		<script src="$!{env.imgUrl}/js/user/setPassword.js"></script>
 	</body>
 </html>

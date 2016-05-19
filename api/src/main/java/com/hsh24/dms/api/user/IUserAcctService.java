@@ -27,6 +27,15 @@ public interface IUserAcctService {
 	BooleanResult validateCheckCode(String passport, String checkCode);
 
 	/**
+	 * 验证密码.
+	 * 
+	 * @param passport
+	 * @param password
+	 * @return
+	 */
+	BooleanResult validatePassword(String passport, String password);
+
+	/**
 	 * 忘记密码.
 	 * 
 	 * @param passport

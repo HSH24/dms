@@ -60,7 +60,7 @@ public class UserAcctAction extends BaseAction {
 		BooleanResult result = userAcctService.validateCheckCode(passport, checkCode);
 
 		if (result.getResult()) {
-			// 登录成功
+			// 验证成功
 			User u = userService.getUserByPassport(passport);
 
 			HttpSession session = this.getSession();
@@ -75,6 +75,9 @@ public class UserAcctAction extends BaseAction {
 				ps.setDomain(env.getProperty("domain"));
 				response.addCookie(ps);
 			}
+
+			// set
+			session.setAttribute("ACEGI_SECURITY_SET_PASSWORD", Boolean.TRUE);
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());
@@ -89,6 +92,16 @@ public class UserAcctAction extends BaseAction {
 	 * @return
 	 */
 	public String validatePassword() {
+		BooleanResult result = userAcctService.validatePassword(this.getUser().getPassport(), password);
+
+		if (result.getResult()) {
+			// 验证成功
+			HttpSession session = this.getSession();
+			session.setAttribute("ACEGI_SECURITY_SET_PASSWORD", Boolean.TRUE);
+		} else {
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult(result.getCode());
+		}
 
 		return RESOURCE_RESULT;
 	}
@@ -112,9 +125,20 @@ public class UserAcctAction extends BaseAction {
 			return RESULT_MESSAGE;
 		}
 
+		HttpSession session = this.getSession();
+		Boolean token = (Boolean) session.getAttribute("ACEGI_SECURITY_SET_PASSWORD");
+		if (token == null || !token.booleanValue()) {
+			this.getServletResponse().setStatus(599);
+			this.setResourceResult("请先验证原密码或手机短信。");
+
+			return RESULT_MESSAGE;
+		}
+
 		BooleanResult result = userAcctService.setPassword(user.getPassport(), password);
 
 		if (result.getResult()) {
+			session.removeAttribute("ACEGI_SECURITY_SET_PASSWORD");
+
 			this.setResourceResult("成功修改密码。");
 		} else {
 			this.getServletResponse().setStatus(599);

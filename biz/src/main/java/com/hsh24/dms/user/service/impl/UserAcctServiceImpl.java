@@ -4,6 +4,8 @@ import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.hsh24.dms.api.ca.ICAService;
+import com.hsh24.dms.api.ca.bo.ValidateResult;
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.sms.ISMSService;
 import com.hsh24.dms.api.user.IUserAcctService;
@@ -28,6 +30,8 @@ public class UserAcctServiceImpl implements IUserAcctService {
 	private IUserService userService;
 
 	private ISMSService smsService;
+
+	private ICAService caService;
 
 	@Override
 	public BooleanResult generateCheckCode(String passport) {
@@ -115,6 +119,23 @@ public class UserAcctServiceImpl implements IUserAcctService {
 	}
 
 	@Override
+	public BooleanResult validatePassword(String passport, String password) {
+		BooleanResult result = new BooleanResult();
+		result.setResult(false);
+
+		ValidateResult res = caService.validateUser(passport, password);
+
+		// 验证失败
+		if (ICAService.RESULT_FAILED.equals(res.getResultCode()) || ICAService.RESULT_ERROR.equals(res.getResultCode())) {
+			result.setCode(res.getMessage());
+			return result;
+		}
+
+		result.setResult(true);
+		return result;
+	}
+
+	@Override
 	public BooleanResult setPassword(String passport, String password) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
@@ -169,6 +190,14 @@ public class UserAcctServiceImpl implements IUserAcctService {
 
 	public void setSmsService(ISMSService smsService) {
 		this.smsService = smsService;
+	}
+
+	public ICAService getCaService() {
+		return caService;
+	}
+
+	public void setCaService(ICAService caService) {
+		this.caService = caService;
 	}
 
 }
