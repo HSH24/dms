@@ -12,6 +12,7 @@ import com.hsh24.dms.api.trade.bo.Order;
 import com.hsh24.dms.api.trade.bo.Trade;
 import com.hsh24.dms.framework.action.BaseAction;
 import com.hsh24.dms.framework.bo.BooleanResult;
+import com.hsh24.dms.framework.util.FormatUtil;
 
 /**
  * 
@@ -97,12 +98,14 @@ public class TradeAction extends BaseAction {
 		Long shopId = this.getShop().getShopId();
 
 		if ("tosend".equals(type)) {
-			sb.append("0.00").append("&");
+			sb.append(FormatUtil.getAmountFormat(tradeService.getTradePrice(shopId, new String[] { "tosend" })))
+				.append("&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" }));
 
 			this.setResourceResult(sb.toString());
 		} else if ("send".equals(type)) {
-			sb.append("0.00").append("&");
+			sb.append(FormatUtil.getAmountFormat(tradeService.getTradePrice(shopId, new String[] { "send" }))).append(
+				"&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "send" }));
 
 			this.setResourceResult(sb.toString());

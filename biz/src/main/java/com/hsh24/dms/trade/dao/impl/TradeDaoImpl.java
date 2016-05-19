@@ -1,5 +1,6 @@
 package com.hsh24.dms.trade.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.hsh24.dms.api.trade.bo.Trade;
@@ -16,6 +17,11 @@ public class TradeDaoImpl extends BaseDaoImpl implements ITradeDao {
 	@Override
 	public Long createTrade(Trade trade) {
 		return (Long) getSqlMapClientTemplate().insert("trade.createTrade", trade);
+	}
+
+	@Override
+	public BigDecimal getTradePrice(Trade trade) {
+		return (BigDecimal) getSqlMapClientTemplate().queryForObject("trade.getTradePrice", trade);
 	}
 
 	@Override

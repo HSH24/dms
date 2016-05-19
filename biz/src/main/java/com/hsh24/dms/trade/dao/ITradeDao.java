@@ -1,5 +1,6 @@
 package com.hsh24.dms.trade.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.hsh24.dms.api.trade.bo.Trade;
@@ -17,6 +18,13 @@ public interface ITradeDao {
 	 * @return
 	 */
 	Long createTrade(Trade trade);
+
+	/**
+	 * 
+	 * @param trade
+	 * @return
+	 */
+	BigDecimal getTradePrice(Trade trade);
 
 	/**
 	 * 

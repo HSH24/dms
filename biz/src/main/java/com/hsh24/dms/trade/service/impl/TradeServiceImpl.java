@@ -411,6 +411,25 @@ public class TradeServiceImpl implements ITradeService {
 	}
 
 	@Override
+	public BigDecimal getTradePrice(Long shopId, String[] type) {
+		if (shopId == null) {
+			return BigDecimal.ZERO;
+		}
+
+		Trade trade = new Trade();
+		trade.setShopId(shopId);
+		trade.setCodes(type);
+
+		try {
+			return tradeDao.getTradePrice(trade);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(trade), e);
+		}
+
+		return BigDecimal.ZERO;
+	}
+
+	@Override
 	public int getTradeCount(Long shopId, String[] type) {
 		if (shopId == null) {
 			return 0;

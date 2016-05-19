@@ -50,6 +50,21 @@
 		]]>
 		</selectKey>
 	</insert>
+	
+	<select id="getTradePrice" parameterClass="trade" resultClass="java.math.BigDecimal">
+	<![CDATA[
+		SELECT SUM(t.trade_price + t.change)
+		  FROM dms_tb_trade t
+		 WHERE t.STATE = 'U'
+		   AND t.shop_id = #shopId#
+	]]>
+		<dynamic>
+			<isNotEmpty property="codes" prepend="and">
+			<![CDATA[ t.type IN ]]>
+				<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+			</isNotEmpty>
+		</dynamic>
+	</select>
 
 	<select id="getTradeCount" parameterClass="trade" resultClass="java.lang.Integer">
 	<![CDATA[

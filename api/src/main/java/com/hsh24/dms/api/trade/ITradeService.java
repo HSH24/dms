@@ -1,5 +1,6 @@
 package com.hsh24.dms.api.trade;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.hsh24.dms.api.trade.bo.OrderRefund;
@@ -71,6 +72,15 @@ public interface ITradeService {
 	 * @return
 	 */
 	BooleanResult createTrade(Long shopId, Long userId, String[] cartId, String modifyUser);
+
+	/**
+	 * 获取交易合计金额.
+	 * 
+	 * @param shopId
+	 * @param type
+	 * @return
+	 */
+	BigDecimal getTradePrice(Long shopId, String[] type);
 
 	/**
 	 * 卖家查询交易.
