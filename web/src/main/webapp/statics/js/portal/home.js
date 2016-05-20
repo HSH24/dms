@@ -118,6 +118,11 @@ $$.get(appUrl + '/sale/stats.htm', {}, function(data) {
 					+ stats[1]);
 		});
 
+$$.get(appUrl + '/cashflow/stats.htm', {}, function(data) {
+			var stats = data.split("&");
+			$$('#portal/home/cashflow').html('保证金：50,000<br/>金额：' + stats[2]);
+		});
+
 $$.get(appUrl + '/stock/stats.htm', {}, function(data) {
 			$$('#portal/home/stock').html('金额：<br/>' + data);
 		});
