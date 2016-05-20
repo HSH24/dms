@@ -49,7 +49,7 @@
 										<a href="$!{env.appUrl}/cashflow/index.htm" class="small-box" style="background-color: #F2784B; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>资金</h3>
-												<p id="portal/home/cashflow">保证金：50,000<br/>金额：0.00</p>
+												<p id="portal/home/cashflow">保证金：50,000<br/>余额：0.00</p>
 											</div>
 											<div class="icon">
 												<i class="icon iconfont icon-recharge"></i>
