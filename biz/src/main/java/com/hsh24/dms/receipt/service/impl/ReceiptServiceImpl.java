@@ -140,8 +140,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 			Long orderId = receiptDetail.getOrderId();
 			int quantity = receiptDetail.getQuantity();
 
-			if (quantity <= 0) {
-				result.setCode("[订单明细]收货数量不能小于或等于0。");
+			if (quantity < 0) {
+				result.setCode("[订单明细]收货数量不能小于0。");
 				return result;
 			}
 
