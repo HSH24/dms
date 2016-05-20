@@ -724,7 +724,7 @@ public class TradeServiceImpl implements ITradeService {
 	 */
 	private BooleanResult cancelTrade(final Long shopId, final Trade trade, final Long bankAcctId,
 		final String modifyUser) {
-		trade.setType(ITradeService.CANCEL);
+		trade.setType(ITradeService.TO_CANCEL);
 
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {

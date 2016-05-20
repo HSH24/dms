@@ -36,6 +36,8 @@
 									<a href="javascript:trade_list_cancel('$!{trade.tradeNo}');">取消订单</a>
 									#elseif($!{trade.type} == 'sign')
 									交易完成
+									#elseif($!{trade.type} == 'tocancel')
+									交易正在取消
 									#elseif($!{trade.type} == 'cancel')
 									交易关闭
 									#end

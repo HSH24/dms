@@ -46,6 +46,11 @@ public interface ITradeService {
 	 */
 	String REFUND = "refund";
 
+	/**
+	 * 取消中.
+	 */
+	String TO_CANCEL = "tocancel";
+
 	String CANCEL = "cancel";
 
 	/**
