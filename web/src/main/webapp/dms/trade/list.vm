@@ -37,7 +37,7 @@
 									#elseif($!{trade.type} == 'sign')
 									交易完成
 									#elseif($!{trade.type} == 'tocancel')
-									交易正在取消
+									交易取消中
 									#elseif($!{trade.type} == 'cancel')
 									交易关闭
 									#end
