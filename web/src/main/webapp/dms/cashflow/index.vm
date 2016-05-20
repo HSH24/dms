@@ -68,7 +68,7 @@
 							<div class="item-media"><i class="iconfont icon-recharge"></i></div>
 							<div class="item-inner">
 								<div class="item-title">$!{cashflow.summary}</div>
-								#if($!{cashflow.crAmount} != "0")
+								#if($!{cashflow.crAmount} != "0.00")
 								<div class="item-after">-$!formatUtil.getAmountFormat($!{cashflow.crAmount})</div>
 								#else
 								<div class="item-after">$!formatUtil.getAmountFormat($!{cashflow.drAmount})</div>
