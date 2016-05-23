@@ -8,7 +8,7 @@
 	
 	<select id="getStats" parameterClass="stock" resultClass="stock">
 	<![CDATA[
-		SELECT SUM(t.goods_num * g.sales_price) AS amount
+		SELECT SUM(t.goods_num) AS stock
 		  FROM oms.wm_account_t t
 		  LEFT JOIN oms.main_goods_v g ON g.goods_id= t.goods_id
 		   AND g.goods_spec_id = t.goods_spec_id
@@ -21,9 +21,7 @@
 	<select id="getStockList" parameterClass="stock" resultClass="stock">
 	<![CDATA[
 		SELECT g.goods_nm AS itemName,
-			   t.goods_num AS stock,
-			   g.sales_price AS price,
-			   (t.goods_num * g.sales_price) AS amount
+			   t.goods_num AS stock
 		  FROM oms.wm_account_t t
 		  LEFT JOIN oms.main_goods_v g ON g.goods_id = t.goods_id
 		   AND g.goods_spec_id = t.goods_spec_id

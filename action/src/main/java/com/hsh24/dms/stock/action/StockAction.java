@@ -5,7 +5,6 @@ import java.util.List;
 import com.hsh24.dms.api.stock.IStockService;
 import com.hsh24.dms.api.stock.bo.Stock;
 import com.hsh24.dms.framework.action.BaseAction;
-import com.hsh24.dms.framework.util.FormatUtil;
 
 /**
  * 
@@ -27,7 +26,7 @@ public class StockAction extends BaseAction {
 	 */
 	public String stats() {
 		Stock stock = stockService.getStats(this.getShop().getShopId());
-		this.setResourceResult(stock == null ? "0.00" : FormatUtil.getAmountFormat(stock.getAmount()));
+		this.setResourceResult(stock == null ? "0" : String.valueOf(stock.getStock()));
 
 		return RESOURCE_RESULT;
 	}

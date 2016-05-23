@@ -1,7 +1,5 @@
 package com.hsh24.dms.api.stock.bo;
 
-import java.math.BigDecimal;
-
 import com.hsh24.dms.framework.bo.SearchInfo;
 
 /**
@@ -18,10 +16,6 @@ public class Stock extends SearchInfo {
 	private String itemName;
 
 	private int stock;
-
-	private BigDecimal price;
-
-	private BigDecimal amount;
 
 	public Long getShopId() {
 		return shopId;
@@ -45,22 +39,6 @@ public class Stock extends SearchInfo {
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
 	}
 
 }

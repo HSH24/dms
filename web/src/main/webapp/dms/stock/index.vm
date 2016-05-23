@@ -22,13 +22,12 @@
 							<div class="item-media"><i class="iconfont icon-goods"></i></div>
 							<div class="item-inner">
 								<div class="item-title">$!{stock.itemName}</div>
-								<div class="item-after">$!formatUtil.getAmountFormat($!{stock.amount})</div>
+								<div class="item-after">$!{stock.stock}</div>
 							</div>
 						</a>
 						<div class="accordion-item-content">
 							<div class="content-block">
                                 <p>数量：$!{stock.stock}</p>
-								<p>单价：￥$!formatUtil.getAmountFormat($!{stock.price})</p>
 							</div>
 						</div>
 					</li>
