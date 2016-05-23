@@ -28,6 +28,9 @@ myApp.onPageInit('trade.list', function(page) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '信息', function() {
+									// 刷新
+									member_index_stats('2');
+
 									myApp.getCurrentView().router.back();
 								});
 					});
