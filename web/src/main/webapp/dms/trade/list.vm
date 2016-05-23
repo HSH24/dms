@@ -118,7 +118,7 @@
                                 <div class="item-title" style="font-weight: 400;">总价：<span style="color: #FF5500;">￥$!formatUtil.getAmountFormat($!{trade.price})</span></div>
 								<div class="item-after">
 									#if($!{trade.type} == 'send')
-									<a href="javascript:trade_list_sign('$!{trade.tradeNo}');" class="button color-gray">全部收货</a>
+									<a href="javascript:trade_list_receipt('$!{trade.tradeNo}');" class="button color-gray">全部收货</a>
 									#end
 								</div>
 							</div>
@@ -136,8 +136,8 @@
 			<form id="trade/list/cancel" action="$!{env.appUrl}/trade/cancel.htm" method="POST" class="ajax-submit trade-list-cancel">
             	<input type="hidden" name="tradeNo" id="trade_list_cancel_tradeNo"/>
             </form>
-			<form id="trade/list/sign" action="$!{env.appUrl}/receipt/all.htm" method="POST" class="ajax-submit trade-list-sign">
-            	<input type="hidden" name="tradeNo" id="trade_list_sign_tradeNo"/>
+			<form id="trade/list/receipt" action="$!{env.appUrl}/receipt/all.htm" method="POST" class="ajax-submit trade-list-sign">
+            	<input type="hidden" name="tradeNo" id="trade_list_receipt_tradeNo"/>
             </form>
 		</div>
     </div>

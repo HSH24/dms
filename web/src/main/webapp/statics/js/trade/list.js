@@ -74,12 +74,12 @@ function trade_list_cancel(tradeNo) {
 			});
 }
 
-function trade_list_sign(tradeNo) {
+function trade_list_receipt(tradeNo) {
 	myApp.confirm('确定收货？', '订单管理', function() {
 				myApp.showIndicator();
 
-				$$('#trade_list_sign_tradeNo').val(tradeNo);
-				$$('#trade/list/sign').trigger("submit");
+				$$('#trade_list_receipt_tradeNo').val(tradeNo);
+				$$('#trade/list/receipt').trigger("submit");
 			});
 }
 
