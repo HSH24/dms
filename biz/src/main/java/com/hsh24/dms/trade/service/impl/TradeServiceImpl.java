@@ -747,7 +747,8 @@ public class TradeServiceImpl implements ITradeService {
 				cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
 				cashflow.setTradeNo(trade.getTradeNo());
 
-				result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
+				// TODO
+				// result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
@@ -755,7 +756,8 @@ public class TradeServiceImpl implements ITradeService {
 				}
 
 				// 3. 记录资金账户余额
-				result = bankAcctService.updateBankAcct(shopId, bankAcctId, trade.getPrice(), modifyUser);
+				// result = bankAcctService.updateBankAcct(shopId, bankAcctId,
+				// trade.getPrice(), modifyUser);
 				if (!result.getResult()) {
 					ts.setRollbackOnly();
 
