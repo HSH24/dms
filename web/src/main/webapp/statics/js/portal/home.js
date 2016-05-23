@@ -132,7 +132,7 @@ function portal_home_stats() {
 			});
 
 	$$.get(appUrl + '/stock/stats.htm', {}, function(data) {
-				$$('#portal/home/stock').html('金额：<br/>' + data);
+				$$('#portal/home/stock').html('数量：<br/>' + data);
 			});
 
 	$$.get(appUrl + '/trade/stats.htm', {
