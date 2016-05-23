@@ -17,7 +17,7 @@
 			<div class="list-block" style="font-size: 15px;">
 				<ul class="page-settings">
 					<li class="row" style="text-align: center;">
-						<div class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+						<div class="col-25 item-link" style="width: 25%;">
 							<div style="margin: 0.6rem 0 0 0;">
     							<select style="margin: 0 auto; width: 35px; height: 100%;">
 									<option>01月</option>

@@ -539,14 +539,10 @@ a.component.type3 img {
     border-left-style: dashed;
 }
 
-.list-block .page-settings:after {
-	height: 0;
-}
-
 
 
 /* 去掉下划线 */
-.list-block .item-height-0:after {
+.list-block .after-height-0:after {
 	height: 0;
 }
 

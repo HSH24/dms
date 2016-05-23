@@ -27,7 +27,7 @@
 				</ul>
             </div>
 			<div class="list-block" style="font-size: 15px;">
-				<ul class="page-settings">
+				<ul class="page-settings after-height-0">
 					<li class="row" style="text-align: center;">
 						<a href="$!{env.appUrl}/trade/list.htm?type=tosend" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/tosend">0</h3>
@@ -55,7 +55,7 @@
 				</ul>
             </div>
 			<div class="list-block" style="font-size: 15px;">
-				<ul class="page-settings">
+				<ul class="page-settings after-height-0">
 					<li class="row" style="text-align: center;">
 						<a href="#" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/drAmount">0.00</h3>

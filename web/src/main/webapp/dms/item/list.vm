@@ -129,7 +129,7 @@
     							</div>
                             </div>
 							<div class="item-content" style="margin-top: 20px;">
-        						<div class="item-inner item-height-0">
+        						<div class="item-inner after-height-0">
 									<div class="row no-gutter" style="width: 100%;">
 										<div class="col-50">
 											<a href="javascript:item_list_trade('$!{item.itemId}', '$!{sku.skuId}');" class="button button-big color-orange" data-ignore-cache="true">立即下单</a>
@@ -183,7 +183,7 @@
     							</div>
                             </div>
 							<div class="item-content" style="margin-top: 20px;">
-        						<div class="item-inner item-height-0">
+        						<div class="item-inner after-height-0">
 									<div class="row no-gutter" style="width: 100%;">
 										<div class="col-50">
 											<a href="javascript:item_list_trade('$!{item.itemId}', '0');" class="button button-big color-orange" data-ignore-cache="true">立即下单</a>

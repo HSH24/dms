@@ -110,7 +110,7 @@ public class TradeAction extends BaseAction {
 
 			this.setResourceResult(sb.toString());
 		} else {
-			sb.append(tradeService.getTradeCount(shopId, new String[] { "check", "topay" })).append("&");
+			sb.append(tradeService.getTradeCount(shopId, null)).append("&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" })).append("&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "send" })).append("&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "sign" }));
