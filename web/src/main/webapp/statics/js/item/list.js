@@ -11,8 +11,6 @@ myApp.onPageInit('item.list', function(page) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
 						myApp.alert(xhr.responseText, '信息', function() {
-									// 更新我的中心资金统计
-									member_index_stats();
 								});
 					});
 

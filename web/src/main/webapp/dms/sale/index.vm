@@ -17,7 +17,7 @@
 			<div class="list-block" style="font-size: 15px;">
 				<ul class="page-settings">
 					<li class="row" style="text-align: center;">
-						<div class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+						<div class="col-33" style="width: 33%;">
 							<div style="margin: 0.6rem 0 0 0;">
     							<select style="margin: 0 auto; width: 35px; height: 100%;">
 									<option>01月</option>
@@ -36,18 +36,14 @@
                             </div>
 							<div class="color-gray">2016年</div>
                         </div>
-						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+						<div class="col-33" style="width: 33%;">
 							<h3>$!formatUtil.getAmountFormat($!{cashflow.drAmount})</h3>
-							<div class="color-gray">收入(元)</div>
-                        </a>
-						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
+							<div class="color-gray">今天(元)</div>
+                        </div>
+						<div class="col-33" style="width: 33%;">
 							<h3>$!formatUtil.getAmountFormat($!{cashflow.crAmount})</h3>
-							<div class="color-gray">支出(元)</div>
-                        </a>
-						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
-							<h3>$!formatUtil.getAmountFormat($!{cashflow.curBal})</h3>
-							<div class="color-gray">余额(元)</div>
-                        </a>
+							<div class="color-gray">本月(元)</div>
+                        </div>
 					</li>
                 </ul>
             </div>
@@ -59,7 +55,7 @@
 						<div class="item-content">
 							<div class="item-media"><i class="iconfont icon-goods"></i></div>
 							<div class="item-inner">
-								<div class="item-title"> $!{sale.itemName}[$!{sale.unit}]</div>
+								<div class="item-title"> $!{sale.itemName} [$!{sale.unit}]</div>
 								<div class="item-after">$!formatUtil.getAmountFormat($!{sale.amount})</div>
 							</div>
 						</div>

@@ -14,8 +14,6 @@ myApp.onPageInit('cart.index', function(page) {
 
 								// 更新首页购物车标记
 								portal_home_cart_stats();
-								// 更新我的中心资金统计
-								member_index_stats();
 							});
 				} else if (cart_index_flag == "remove") {
 					myApp.alert(xhr.responseText, '信息', function() {
