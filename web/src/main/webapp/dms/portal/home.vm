@@ -175,12 +175,12 @@
 		#JSM(["framework7", "weixin", "jquery", "common"])
 		#JS_ENV_VAL()
 		<!-- 打包合并 -->
-		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160519"></script>
+		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160523"></script>
 		<script src="$!{env.imgUrl}/js/sale/index.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/item/list.js?t=20160519" async="async"></script>
+		<script src="$!{env.imgUrl}/js/item/list.js?t=20160523" async="async"></script>
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/trade/list.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/trade/list.js?t=20160523" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/detail.js" async="async"></script>
