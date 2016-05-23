@@ -56,6 +56,7 @@
 		  FROM dms_tb_cashflow t, dms_tb_cashflow_cat p
 		 WHERE t.cashflow_cid = p.cashflow_cid
 		   AND t.state = 'U'
+		   AND p.state = 'U'
 		   AND t.shop_id = #shopId#
 	]]>
 		<dynamic>

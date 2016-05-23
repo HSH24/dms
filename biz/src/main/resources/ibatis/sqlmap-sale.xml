@@ -18,7 +18,7 @@
 		   AND og.goods_mode = gv.goods_mode
 		   AND(og.goods_spec_id = '' OR og.goods_spec_id = gv.goods_spec_id)
 		   AND og.`order_id` = qq.order_id
-		   AND qq.order_status = '0004'
+		   AND qq.order_status = '0005'
 		   AND qq.org_id = #shopId#
 	]]>
 	</select>
@@ -35,7 +35,7 @@
 		   AND og.goods_mode = gv.goods_mode
 		   AND (og.goods_spec_id = '' OR og.goods_spec_id = gv.goods_spec_id)
 		   AND og.`order_id` = qq.order_id
-		   AND qq.order_status = '0004'
+		   AND qq.order_status = '0005'
 		   AND qq.org_id = #shopId#
 	]]>
 	</select>
