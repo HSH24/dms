@@ -27,7 +27,7 @@
 		  )
 		  VALUES
 		  (
-			1,
+			#cashflowCId#,
 			#shopId#,
 			#bankAcctId#,
 			#summary#,
@@ -53,10 +53,16 @@
 	<![CDATA[
 		SELECT IFNULL(SUM(t.cr_amount), 0) AS crAmount,
 			   IFNULL(SUM(t.dr_amount), 0) AS drAmount
-		  FROM dms_tb_cashflow t
-		 WHERE t.state = 'U'
+		  FROM dms_tb_cashflow t, dms_tb_cashflow_cat p
+		 WHERE t.cashflow_cid = p.cashflow_cid
+		   AND t.state = 'U'
 		   AND t.shop_id = #shopId#
 	]]>
+		<dynamic>
+			<isNotEmpty property="code" prepend="and">
+			<![CDATA[ p.cashflow_code = #code# ]]>
+			</isNotEmpty>
+		</dynamic>
 	</select>
 	
 	<select id="getCashflowList" parameterClass="cashflow" resultClass="cashflow">

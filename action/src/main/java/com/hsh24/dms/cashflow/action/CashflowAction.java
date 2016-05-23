@@ -1,6 +1,9 @@
 package com.hsh24.dms.cashflow.action;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.hsh24.dms.api.bankAcct.IBankAcctService;
 import com.hsh24.dms.api.bankAcct.bo.BankAcct;
@@ -22,23 +25,9 @@ public class CashflowAction extends BaseAction {
 
 	private IBankAcctService bankAcctService;
 
-	private Cashflow cashflow;
-
 	private List<Cashflow> cashflowList;
 
-	/**
-	 * 
-	 * @return
-	 */
-	public String index() {
-		Long shopId = this.getShop().getShopId();
-
-		stats();
-
-		cashflowList = cashflowService.getCashflowList(shopId, new Cashflow());
-
-		return SUCCESS;
-	}
+	private String type;
 
 	/**
 	 * 
@@ -49,18 +38,48 @@ public class CashflowAction extends BaseAction {
 
 		Long shopId = this.getShop().getShopId();
 
-		cashflow = cashflowService.getCashflowStats(shopId);
+		if (StringUtils.isBlank(type)) {
+			Cashflow cashflow = cashflowService.getCashflowStats(shopId);
+			sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount())).append(
+				"&");
+			sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getCrAmount())).append(
+				"&");
+
+			BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
+			sb.append(FormatUtil.getAmountFormat(bankAcct == null ? BigDecimal.ZERO : bankAcct.getCurBal()));
+
+			this.setResourceResult(sb.toString());
+
+			return RESOURCE_RESULT;
+		}
+
+		Cashflow cashflow = cashflowService.getCashflowStats(shopId, "A");
+		sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount())).append("&");
+
+		cashflow = cashflowService.getCashflowStats(shopId, "C");
+		sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount())).append("&");
+
+		cashflow = cashflowService.getCashflowStats(shopId, "B");
+		sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getCrAmount())).append("&");
 
 		BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
-		cashflow.setCurBal(bankAcct.getCurBal());
-
-		sb.append(FormatUtil.getAmountFormat(cashflow.getDrAmount())).append("&");
-		sb.append(FormatUtil.getAmountFormat(cashflow.getCrAmount())).append("&");
-		sb.append(FormatUtil.getAmountFormat(cashflow.getCurBal()));
+		sb.append(FormatUtil.getAmountFormat(bankAcct == null ? BigDecimal.ZERO : bankAcct.getCurBal()));
 
 		this.setResourceResult(sb.toString());
 
 		return RESOURCE_RESULT;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String index() {
+		Long shopId = this.getShop().getShopId();
+
+		cashflowList = cashflowService.getCashflowList(shopId, new Cashflow());
+
+		return SUCCESS;
 	}
 
 	public ICashflowService getCashflowService() {
@@ -79,20 +98,20 @@ public class CashflowAction extends BaseAction {
 		this.bankAcctService = bankAcctService;
 	}
 
-	public Cashflow getCashflow() {
-		return cashflow;
-	}
-
-	public void setCashflow(Cashflow cashflow) {
-		this.cashflow = cashflow;
-	}
-
 	public List<Cashflow> getCashflowList() {
 		return cashflowList;
 	}
 
 	public void setCashflowList(List<Cashflow> cashflowList) {
 		this.cashflowList = cashflowList;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

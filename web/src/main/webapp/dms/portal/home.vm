@@ -183,6 +183,7 @@
 		<script src="$!{env.imgUrl}/js/trade/list.js?t=20160523" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/cashflow/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/setPassword.js" async="async"></script>
 		<!-- 打包合并 -->

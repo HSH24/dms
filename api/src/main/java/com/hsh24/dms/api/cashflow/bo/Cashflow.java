@@ -15,6 +15,8 @@ public class Cashflow extends SearchInfo {
 
 	private Long cashflowId;
 
+	private Long cashflowCId;
+
 	private Long shopId;
 
 	/**
@@ -42,14 +44,20 @@ public class Cashflow extends SearchInfo {
 
 	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
 
-	private BigDecimal curBal;
-
 	public Long getCashflowId() {
 		return cashflowId;
 	}
 
 	public void setCashflowId(Long cashflowId) {
 		this.cashflowId = cashflowId;
+	}
+
+	public Long getCashflowCId() {
+		return cashflowCId;
+	}
+
+	public void setCashflowCId(Long cashflowCId) {
+		this.cashflowCId = cashflowCId;
 	}
 
 	public Long getShopId() {
@@ -114,14 +122,6 @@ public class Cashflow extends SearchInfo {
 
 	public void setModifyUser(String modifyUser) {
 		this.modifyUser = modifyUser;
-	}
-
-	public BigDecimal getCurBal() {
-		return curBal;
-	}
-
-	public void setCurBal(BigDecimal curBal) {
-		this.curBal = curBal;
 	}
 
 }

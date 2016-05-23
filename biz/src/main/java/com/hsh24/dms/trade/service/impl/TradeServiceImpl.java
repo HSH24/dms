@@ -400,8 +400,9 @@ public class TradeServiceImpl implements ITradeService {
 	private BooleanResult createCashflow(Long shopId, Long bankAcctId, BigDecimal price, String tradeNo,
 		String modifyUser) {
 		Cashflow cashflow = new Cashflow();
+		cashflow.setCashflowCId(2L);
 		cashflow.setBankAcctId(bankAcctId);
-		cashflow.setSummary("[支出]商品采购,业务交易号:" + tradeNo);
+		cashflow.setSummary("[支出] 商品采购,业务交易号:" + tradeNo);
 		cashflow.setCrAmount(price);
 		cashflow.setDrAmount(BigDecimal.ZERO);
 		cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
@@ -738,11 +739,13 @@ public class TradeServiceImpl implements ITradeService {
 
 				// 2. 记录现金流水账
 				Cashflow cashflow = new Cashflow();
+				cashflow.setCashflowCId(3L);
 				cashflow.setBankAcctId(bankAcctId);
-				cashflow.setSummary("[退款]采购订单:" + trade.getTradeNo() + "取消。");
+				cashflow.setSummary("[退款] 采购订单:" + trade.getTradeNo() + "取消。");
 				cashflow.setCrAmount(BigDecimal.ZERO);
 				cashflow.setDrAmount(trade.getPrice());
 				cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
+				cashflow.setTradeNo(trade.getTradeNo());
 
 				result = cashflowService.createCashflow(shopId, cashflow, modifyUser);
 				if (!result.getResult()) {

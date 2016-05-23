@@ -15,9 +15,25 @@
 		<!-- Scrollable page content-->
 		<div class="page-content">
 			<div class="list-block" style="font-size: 15px;">
+				<ul class="page-settings after-height-0">
+					<li class="row" style="text-align: center;">
+						<div class="col-33" style="width: 33%;">
+							<h3>50,000</h3>
+							<div class="color-gray">保证金(元)</div>
+                        </div>
+						<div class="col-33" style="width: 33%;">
+							<h3 id="cashflow/index/a">0.00</h3>
+							<div class="color-gray">收入(元)</div>
+                        </div>
+						<div class="col-33" style="width: 33%;">
+							<h3 id="cashflow/index/c">0.00</h3>
+							<div class="color-gray">退款收入(元)</div>
+                        </div>
+					</li>
+                </ul>
 				<ul class="page-settings">
 					<li class="row" style="text-align: center;">
-						<div class="col-25 item-link" style="width: 25%;">
+						<div class="col-33" style="width: 33%;">
 							<div style="margin: 0.6rem 0 0 0;">
     							<select style="margin: 0 auto; width: 35px; height: 100%;">
 									<option>01月</option>
@@ -36,19 +52,15 @@
                             </div>
 							<div class="color-gray">2016年</div>
                         </div>
-						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
-							<h3>$!formatUtil.getAmountFormat($!{cashflow.drAmount})</h3>
-							<div class="color-gray">收入(元)</div>
-                        </a>
-						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
-							<h3>$!formatUtil.getAmountFormat($!{cashflow.crAmount})</h3>
+						<div class="col-33" style="width: 33%;">
+							<h3 id="cashflow/index/b">0.00</h3>
 							<div class="color-gray">支出(元)</div>
-                        </a>
-						<a href="#" class="col-25 item-link" style="width: 25%;" data-ignore-cache="true">
-							<h3>$!formatUtil.getAmountFormat($!{cashflow.curBal})</h3>
+                        </div>
+						<div class="col-33" style="width: 33%;">
+							<h3 id="cashflow/index/curBal">0.00</h3>
 							<div class="color-gray">余额(元)</div>
-                        </a>
-					</li>
+                        </div>
+                    </li>
                 </ul>
             </div>
 			

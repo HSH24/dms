@@ -64,12 +64,18 @@ public class CashflowServiceImpl implements ICashflowService {
 
 	@Override
 	public Cashflow getCashflowStats(Long shopId) {
+		return getCashflowStats(shopId, null);
+	}
+
+	@Override
+	public Cashflow getCashflowStats(Long shopId, String code) {
 		if (shopId == null) {
 			return null;
 		}
 
 		Cashflow cashflow = new Cashflow();
 		cashflow.setShopId(shopId);
+		cashflow.setCode(code);
 
 		try {
 			return cashflowDao.getCashflowStats(cashflow);
