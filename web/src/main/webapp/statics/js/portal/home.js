@@ -21,6 +21,9 @@ var mainView = myApp.addView('.view-main', {
 			// Because we use fixed-through navbar we can enable dynamic navbar
 			dynamicNavbar : true
 		});
+$$('#href-1').on('click', function() {
+			portal_home_stats();
+		});
 
 // ==============================
 
@@ -69,6 +72,9 @@ $$('#href-5').on('click', function() {
 				view5.router.load({
 							url : appUrl + "/member/index.htm"
 						});
+			} else {
+				// 刷新
+				member_index_stats();
 			}
 		});
 
@@ -112,33 +118,38 @@ function portal_home_cart_stats() {
 
 portal_home_cart_stats();
 
-$$.get(appUrl + '/sale/stats.htm', {}, function(data) {
-			var stats = data.split("&");
-			$$('#portal/home/sale').html('今天：' + stats[0] + '<br/>本月：'
-					+ stats[1]);
-		});
+function portal_home_stats() {
+	$$.get(appUrl + '/sale/stats.htm', {}, function(data) {
+				var stats = data.split("&");
+				$$('#portal/home/sale').html('今天：' + stats[0] + '<br/>本月：'
+						+ stats[1]);
+			});
 
-$$.get(appUrl + '/cashflow/stats.htm', {}, function(data) {
-			var stats = data.split("&");
-			$$('#portal/home/cashflow').html('保证金：50,000<br/>余额：' + stats[2]);
-		});
+	$$.get(appUrl + '/cashflow/stats.htm', {}, function(data) {
+				var stats = data.split("&");
+				$$('#portal/home/cashflow').html('保证金：50,000<br/>余额：'
+						+ stats[2]);
+			});
 
-$$.get(appUrl + '/stock/stats.htm', {}, function(data) {
-			$$('#portal/home/stock').html('金额：<br/>' + data);
-		});
+	$$.get(appUrl + '/stock/stats.htm', {}, function(data) {
+				$$('#portal/home/stock').html('金额：<br/>' + data);
+			});
 
-$$.get(appUrl + '/trade/stats.htm', {
-			type : 'tosend'
-		}, function(data) {
-			var stats = data.split("&");
-			$$('#portal/home/trade/tosend').html('金额：' + stats[0] + '<br/>订单：'
-					+ stats[1]);
-		});
+	$$.get(appUrl + '/trade/stats.htm', {
+				type : 'tosend'
+			}, function(data) {
+				var stats = data.split("&");
+				$$('#portal/home/trade/tosend').html('金额：' + stats[0]
+						+ '<br/>订单：' + stats[1]);
+			});
 
-$$.get(appUrl + '/trade/stats.htm', {
-			type : 'send'
-		}, function(data) {
-			var stats = data.split("&");
-			$$('#portal/home/trade/send').html('金额：' + stats[0] + '<br/>订单：'
-					+ stats[1]);
-		});
+	$$.get(appUrl + '/trade/stats.htm', {
+				type : 'send'
+			}, function(data) {
+				var stats = data.split("&");
+				$$('#portal/home/trade/send').html('金额：' + stats[0]
+						+ '<br/>订单：' + stats[1]);
+			});
+}
+
+portal_home_stats();
