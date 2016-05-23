@@ -11,7 +11,7 @@
 		INSERT
 		INTO dms_tb_cashflow
 		  (
-			CASEFLOW_CID,
+			CASHFLOW_CID,
 			SHOP_ID,
 			BANK_ACCT_ID,
 			SUMMARY,
