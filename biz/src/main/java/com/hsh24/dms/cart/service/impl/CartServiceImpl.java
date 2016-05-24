@@ -117,14 +117,14 @@ public class CartServiceImpl implements ICartService {
 
 		cart.setQuantity(q);
 
-		// 1. 更新购物车(相同规格商品 只增加数量)
+		// 1. 更新进货车(相同规格商品 只增加数量)
 		if (checkCart(cart) == 1) {
 			result.setCode("添加进货车成功");
 			result.setResult(true);
 			return result;
 		}
 
-		// 2. 创建购物车
+		// 2. 创建进货车
 		try {
 			cartDao.createCart(cart);
 			result.setResult(true);
@@ -291,7 +291,7 @@ public class CartServiceImpl implements ICartService {
 		cart.setShopId(shopId);
 
 		if (cartId == null || cartId.length == 0) {
-			result.setCode("购物车商品信息不能为空");
+			result.setCode("进货车商品信息不能为空");
 			return result;
 		}
 		cart.setCodes(cartId);
@@ -300,11 +300,11 @@ public class CartServiceImpl implements ICartService {
 
 		int n = updateCart(cart);
 		if (n == -1) {
-			result.setCode("购物车更新失败");
+			result.setCode("进货车更新失败");
 			return result;
 		}
 
-		result.setCode("删除成功");
+		result.setCode("删除进货车成功");
 		result.setResult(true);
 
 		return result;
@@ -413,7 +413,7 @@ public class CartServiceImpl implements ICartService {
 		cart.setShopId(shopId);
 
 		if (cartId == null || cartId.length == 0) {
-			result.setCode("购物车商品信息不能为空");
+			result.setCode("进货车商品信息不能为空");
 			return result;
 		}
 		cart.setCodes(cartId);
@@ -422,7 +422,7 @@ public class CartServiceImpl implements ICartService {
 
 		int n = updateCart(cart);
 		if (n == -1) {
-			result.setCode("购物车更新失败");
+			result.setCode("进货车更新失败");
 			return result;
 		}
 
