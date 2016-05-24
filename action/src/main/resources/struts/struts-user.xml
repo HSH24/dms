@@ -19,6 +19,7 @@
 			<result name="success">/dms/user/setPassword.vm</result>
 		</action>
 		
+		<!-- 可能 不存在 店铺 -->
 		<action name="updatePassword" class="userAcctAction" method="updatePassword"></action>
 		
 		<!-- 店铺 -->
@@ -37,6 +38,15 @@
 		<action name="detail" class="userAction" method="detail">
 			<interceptor-ref name="authenticationStack" />
 			<result name="success">/dms/user/detail.vm</result>
+		</action>
+		
+		<action name="setUserName" class="userAction" method="setUserName">
+			<interceptor-ref name="authenticationStack" />
+			<result name="success">/dms/user/setUserName.vm</result>
+		</action>
+		
+		<action name="updateUserName" class="userAction" method="updateUserName">
+			<interceptor-ref name="authenticationStack" />
 		</action>
 
 	</package>
