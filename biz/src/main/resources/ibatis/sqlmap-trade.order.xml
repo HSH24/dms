@@ -148,17 +148,9 @@
 			   t.price,
 			   t.change,
 			   t.item_id AS itemId,
-			   t.sku_id AS skuId,
-			   CASE WHEN q.stock IS NULL THEN p.stock ELSE q.stock END AS stock
+			   t.sku_id AS skuId
 		  FROM dms_tb_order t
-		  LEFT JOIN oms.dms_vw_goods p ON t.item_id = p.item_id
-		  LEFT JOIN(
-		SELECT qq.sku_id, qq.stock
-		  FROM sup.sup_tb_item_sku qq
-		 WHERE qq.state= 'U') q ON t.sku_id = q.sku_id
-		 WHERE p.item_id is not null
-		   AND t.state = 'U'
-		   AND p.state = 'U'
+		 WHERE t.state = 'U'
 		   AND t.trade_id = #tradeId#
 	]]>
 	</select>

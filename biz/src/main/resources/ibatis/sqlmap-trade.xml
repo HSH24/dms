@@ -137,13 +137,10 @@
 			   DATE_FORMAT(t.feedback_date, '%Y-%m-%d %T') AS feedbackDate,
 			   DATE_FORMAT(t.feedbacked_date, '%Y-%m-%d %T') AS feedbackedDate
 		  FROM dms_tb_trade t
-		 WHERE t.trade_no = #tradeNo#
+		 WHERE t.state = 'U'
+		   AND t.trade_no = #tradeNo#
+		   AND t.shop_id = #shopId#
 	]]>
-		<dynamic>
-			<isNotEmpty property="shopId" prepend="and">
-			<![CDATA[ t.shop_id = #shopId# ]]>
-			</isNotEmpty>
-		</dynamic>
 	</select>
 	
 	<update id="updateTrade" parameterClass="trade">

@@ -16,20 +16,11 @@
 		  sup.sup_tb_file p,
 		  sup.sup_tb_item_file q
 		WHERE t.item_id = q.item_id
+		AND t.sup_id    = p.sup_id
 		AND p.file_id   = q.file_id
 		AND t.state     = 'U'
 		AND p.state     = 'U'
 		AND q.state     = 'U'
-	]]>
-		<dynamic>
-			<isNotEmpty property="supId">
-			<![CDATA[
-				AND t.sup_id    = #supId#
-				AND p.sup_id    = #supId#
-			]]>
-			</isNotEmpty>
-		</dynamic>
-	<![CDATA[
 		AND t.item_id   = #itemId#
 	]]>
 	</select>
