@@ -6,13 +6,13 @@
 		<div class="center sliding">派送订单</div>
 		<div class="right">
 			<!-- Right link contains only icon - additional "icon-only" class-->
-			<a href="javascript:item_list_scan();" class="link icon-only"> <i class="iconfont icon-scan" style="font-size: 21px;"></i><span></span></a>
+			<a href="#" class="link icon-only"> <i class="iconfont icon-scan" style="font-size: 21px;"></i><span></span></a>
 		</div>
 	</div>
 </div>
 <div class="pages">
 	<!-- Page, data-page contains page name-->
-	<div data-page="item.list" class="page">
+	<div data-page="mall.list" class="page">
 		<!-- Search bar -->
 		<form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
 			<div class="searchbar-input">
@@ -70,15 +70,5 @@
 				</ul>
 			</div>
         </div>
-		
-		<form id="item/list/trade" action="$!{env.appUrl}/trade/create.htm" method="POST" class="ajax-submit">
-			<input type="hidden" id="item_list_trade_itemId" name="itemId"></input>
-			<input type="hidden" id="item_list_trade_skuId" name="skuId"></input>
-        </form>
-		
-		<form id="item/list/cart" action="$!{env.appUrl}/cart/add.htm" method="POST" class="ajax-submit">
-			<input type="hidden" id="item_list_cart_itemId" name="itemId"></input>
-			<input type="hidden" id="item_list_cart_skuId" name="skuId"></input>
-        </form>
     </div>
 </div>
