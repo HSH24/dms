@@ -122,7 +122,7 @@ public class UserAcctAction extends BaseAction {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult("用户信息不存在");
 
-			return RESULT_MESSAGE;
+			return RESOURCE_RESULT;
 		}
 
 		HttpSession session = this.getSession();
@@ -131,7 +131,7 @@ public class UserAcctAction extends BaseAction {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult("请先验证原密码或手机短信");
 
-			return RESULT_MESSAGE;
+			return RESOURCE_RESULT;
 		}
 
 		BooleanResult result = userAcctService.setPassword(user.getPassport(), password);
@@ -139,13 +139,13 @@ public class UserAcctAction extends BaseAction {
 		if (result.getResult()) {
 			session.removeAttribute("ACEGI_SECURITY_SET_PASSWORD");
 
-			this.setResourceResult("成功设置密码");
+			this.setResourceResult("设置密码成功");
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());
 		}
 
-		return RESULT_MESSAGE;
+		return RESOURCE_RESULT;
 	}
 
 	public IUserAcctService getUserAcctService() {
