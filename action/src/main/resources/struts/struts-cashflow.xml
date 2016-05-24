@@ -5,9 +5,9 @@
 	<package name="{http://dms}dms$cashflow"
 		extends="{http://dms}dms$framework" namespace="/cashflow">
 
-		<action name="index" class="cashflowAction" method="index">
+		<action name="list" class="cashflowAction" method="list">
 			<interceptor-ref name="authenticationStack" />
-			<result name="success">/dms/cashflow/index.vm</result>
+			<result name="success">/dms/cashflow/list.vm</result>
 		</action>
 		
 		<action name="stats" class="cashflowAction" method="stats">

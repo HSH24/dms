@@ -74,7 +74,7 @@ public class CashflowAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String index() {
+	public String list() {
 		Long shopId = this.getShop().getShopId();
 
 		cashflowList = cashflowService.getCashflowList(shopId, new Cashflow());

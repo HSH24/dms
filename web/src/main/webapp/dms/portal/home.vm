@@ -34,7 +34,7 @@
 							<section class="content">
 								<div class="row no-gutter" style="margin-bottom: 10px;">
 									<div class="col-50" style="padding-right: 5px;">
-										<a href="$!{env.appUrl}/sale/index.htm" class="small-box" style="background-color: #5BC39D; color: #FFFFFF;" data-ignore-cache="true">
+										<a href="$!{env.appUrl}/sale/list.htm" class="small-box" style="background-color: #5BC39D; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>销售</h3>
 												<p id="portal/home/sale">今天：0.00<br/>本月：0.00</p>
@@ -46,7 +46,7 @@
 										</a>
 									</div>
 									<div class="col-50" style="padding-left: 5px;">
-										<a href="$!{env.appUrl}/cashflow/index.htm" class="small-box" style="background-color: #F2784B; color: #FFFFFF;" data-ignore-cache="true">
+										<a href="$!{env.appUrl}/cashflow/list.htm" class="small-box" style="background-color: #F2784B; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>资金</h3>
 												<p id="portal/home/cashflow">保证金：50,000<br/>余额：0.00</p>
@@ -60,7 +60,7 @@
                                 </div>
 								<div class="row no-gutter" style="margin-bottom: 10px;">
 									<div class="col-50" style="padding-right: 5px;">
-										<a href="$!{env.appUrl}/stock/index.htm" class="small-box" style="background-color: #B68FCC; color: #FFFFFF;" data-ignore-cache="true">
+										<a href="$!{env.appUrl}/stock/list.htm" class="small-box" style="background-color: #B68FCC; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
 												<h3>库存</h3>
 												<p id="portal/home/stock">数量：<br/>0</p>
@@ -176,14 +176,14 @@
 		#JS_ENV_VAL()
 		<!-- 打包合并 -->
 		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160524"></script>
-		<script src="$!{env.imgUrl}/js/sale/index.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/sale/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/item/list.js?t=20160524" async="async"></script>
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/list.js?t=20160523" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/refund.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/cashflow/index.js" async="async"></script>
+		<script src="$!{env.imgUrl}/js/cashflow/list.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/detail.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/setPassword.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/user/setUserName.js" async="async"></script>

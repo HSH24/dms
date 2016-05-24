@@ -36,7 +36,7 @@ public class StockAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String index() {
+	public String list() {
 		stockList = stockService.getStockList(this.getShop().getShopId(), new Stock());
 
 		return SUCCESS;

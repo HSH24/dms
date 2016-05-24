@@ -11,8 +11,10 @@
 	
 	<bean id="saleService" class="com.hsh24.dms.sale.service.impl.SaleServiceImpl">
 		<property name="saleDao" ref="saleDao" />
+		<property name="saleDetailDao" ref="saleDetailDao" />
 	</bean>
 	
 	<bean id="saleDao" class="com.hsh24.dms.sale.dao.impl.SaleDaoImpl" parent="baseDao" />
+	<bean id="saleDetailDao" class="com.hsh24.dms.sale.dao.impl.SaleDetailDaoImpl" parent="baseDao" />
 	
 </beans>

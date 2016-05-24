@@ -94,6 +94,7 @@
 						</div>
 					</li>
 				#end
+				</ul>
             </div>
 			#end
         </div>

@@ -9,9 +9,9 @@
 			<interceptor-ref name="authenticationStack" />
 		</action>
 		
-		<action name="index" class="stockAction" method="index">
+		<action name="list" class="stockAction" method="list">
 			<interceptor-ref name="authenticationStack" />
-			<result name="success">/dms/stock/index.vm</result>
+			<result name="success">/dms/stock/list.vm</result>
 		</action>
 		
 	</package>

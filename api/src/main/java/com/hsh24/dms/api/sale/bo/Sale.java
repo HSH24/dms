@@ -15,13 +15,11 @@ public class Sale extends SearchInfo {
 
 	private Long shopId;
 
-	private String itemName;
-
-	private String unit;
-
-	private int quantity;
+	private String tradeNo;
 
 	private BigDecimal amount;
+
+	private String tradeDate;
 
 	public Long getShopId() {
 		return shopId;
@@ -31,28 +29,12 @@ public class Sale extends SearchInfo {
 		this.shopId = shopId;
 	}
 
-	public String getItemName() {
-		return itemName;
+	public String getTradeNo() {
+		return tradeNo;
 	}
 
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	public String getUnit() {
-		return unit;
-	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
 	}
 
 	public BigDecimal getAmount() {
@@ -61,6 +43,14 @@ public class Sale extends SearchInfo {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+
+	public String getTradeDate() {
+		return tradeDate;
+	}
+
+	public void setTradeDate(String tradeDate) {
+		this.tradeDate = tradeDate;
 	}
 
 }
