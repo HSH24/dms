@@ -60,7 +60,7 @@ public class ItemServiceImpl implements IItemService {
 	private IItemDao itemDao;
 
 	@Override
-	public int getItemSkuCount(Long shopId, Item item) {
+	public int getItemCount(Long shopId, Item item) {
 		if (shopId == null || item == null) {
 			return 0;
 		}
@@ -71,7 +71,7 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public List<Item> getItemSkuList(Long shopId, Item item) {
+	public List<Item> getItemList(Long shopId, Item item) {
 		if (shopId == null || item == null) {
 			return null;
 		}
@@ -81,7 +81,7 @@ public class ItemServiceImpl implements IItemService {
 			return null;
 		}
 
-		return getItemList(shop.getRegionId(), item);
+		return getItem(shop.getRegionId(), item);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ItemServiceImpl implements IItemService {
 	 * @param regionId
 	 * @return
 	 */
-	private List<Item> getItemList(Long regionId, Item item) {
+	private List<Item> getItem(Long regionId, Item item) {
 		String[] region = regionService.getRegion(regionId);
 		if (region == null || region.length == 0) {
 			return null;

@@ -24,7 +24,7 @@ public class ItemAction extends BaseAction {
 	 * @return
 	 */
 	public String list() {
-		itemList = itemService.getItemSkuList(this.getShop().getShopId(), new Item());
+		itemList = itemService.getItemList(this.getShop().getShopId(), new Item());
 
 		return SUCCESS;
 	}

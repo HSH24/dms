@@ -21,7 +21,7 @@ public interface IItemService {
 	 * @param item
 	 * @return
 	 */
-	int getItemSkuCount(Long shopId, Item item);
+	int getItemCount(Long shopId, Item item);
 
 	/**
 	 * 获取当前店铺可以购买的商品列表.
@@ -31,7 +31,7 @@ public interface IItemService {
 	 * @param item
 	 * @return
 	 */
-	List<Item> getItemSkuList(Long shopId, Item item);
+	List<Item> getItemList(Long shopId, Item item);
 
 	/**
 	 * 
