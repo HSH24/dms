@@ -177,7 +177,7 @@
 		<!-- 打包合并 -->
 		<script src="$!{env.imgUrl}/js/portal/home.js?t=20160524"></script>
 		<script src="$!{env.imgUrl}/js/sale/index.js" async="async"></script>
-		<script src="$!{env.imgUrl}/js/item/list.js?t=20160523" async="async"></script>
+		<script src="$!{env.imgUrl}/js/item/list.js?t=20160524" async="async"></script>
 		<script src="$!{env.imgUrl}/js/cart/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/member/index.js" async="async"></script>
 		<script src="$!{env.imgUrl}/js/trade/list.js?t=20160523" async="async"></script>

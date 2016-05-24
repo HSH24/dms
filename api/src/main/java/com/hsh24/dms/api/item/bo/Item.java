@@ -27,14 +27,26 @@ public class Item extends SearchInfo {
 	private String itemName;
 
 	/**
+	 * 供应商ID.
+	 */
+	private Long supId;
+
+	/**
+	 * 商品所属类目ID.
+	 */
+	private String itemCid;
+
+	private String barCode;
+
+	/**
 	 * 货号.
 	 */
 	private String itemNo;
 
 	/**
-	 * 供应商ID.
+	 * 是否需要物流 Y or N.
 	 */
-	private Long supId;
+	private String shipment;
 
 	/**
 	 * 价格(10.00).
@@ -42,9 +54,9 @@ public class Item extends SearchInfo {
 	private BigDecimal price;
 
 	/**
-	 * 是否需要物流 Y or N.
+	 * 原价格区间.
 	 */
-	private String shipment;
+	private BigDecimal origin;
 
 	/**
 	 * 库存(合计).
@@ -57,19 +69,14 @@ public class Item extends SearchInfo {
 	private int quota;
 
 	/**
-	 * 商品所属类目ID.
-	 */
-	private String itemCid;
-
-	/**
-	 * 原价格区间.
-	 */
-	private BigDecimal origin;
-
-	/**
 	 * 是否上架下架 Y or N.
 	 */
 	private String isDisplay;
+
+	/**
+	 * 商品描述.
+	 */
+	private String remark;
 
 	/**
 	 * json.
@@ -89,11 +96,6 @@ public class Item extends SearchInfo {
 	 * 商品文件.
 	 */
 	private List<ItemFile> itemFileList;
-
-	/**
-	 * 商品描述.
-	 */
-	private String remark;
 
 	/**
 	 * 状态 D:删除 U:正常.
@@ -156,6 +158,30 @@ public class Item extends SearchInfo {
 		this.itemName = itemName;
 	}
 
+	public Long getSupId() {
+		return supId;
+	}
+
+	public void setSupId(Long supId) {
+		this.supId = supId;
+	}
+
+	public String getItemCid() {
+		return itemCid;
+	}
+
+	public void setItemCid(String itemCid) {
+		this.itemCid = itemCid;
+	}
+
+	public String getBarCode() {
+		return barCode;
+	}
+
+	public void setBarCode(String barCode) {
+		this.barCode = barCode;
+	}
+
 	public String getItemNo() {
 		return itemNo;
 	}
@@ -164,12 +190,12 @@ public class Item extends SearchInfo {
 		this.itemNo = itemNo;
 	}
 
-	public Long getSupId() {
-		return supId;
+	public String getShipment() {
+		return shipment;
 	}
 
-	public void setSupId(Long supId) {
-		this.supId = supId;
+	public void setShipment(String shipment) {
+		this.shipment = shipment;
 	}
 
 	public BigDecimal getPrice() {
@@ -180,12 +206,12 @@ public class Item extends SearchInfo {
 		this.price = price;
 	}
 
-	public String getShipment() {
-		return shipment;
+	public BigDecimal getOrigin() {
+		return origin;
 	}
 
-	public void setShipment(String shipment) {
-		this.shipment = shipment;
+	public void setOrigin(BigDecimal origin) {
+		this.origin = origin;
 	}
 
 	public int getStock() {
@@ -204,28 +230,20 @@ public class Item extends SearchInfo {
 		this.quota = quota;
 	}
 
-	public String getItemCid() {
-		return itemCid;
-	}
-
-	public void setItemCid(String itemCid) {
-		this.itemCid = itemCid;
-	}
-
-	public BigDecimal getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(BigDecimal origin) {
-		this.origin = origin;
-	}
-
 	public String getIsDisplay() {
 		return isDisplay;
 	}
 
 	public void setIsDisplay(String isDisplay) {
 		this.isDisplay = isDisplay;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getSpecCat() {
@@ -266,14 +284,6 @@ public class Item extends SearchInfo {
 
 	public void setItemFileList(List<ItemFile> itemFileList) {
 		this.itemFileList = itemFileList;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
 	}
 
 	public String getState() {

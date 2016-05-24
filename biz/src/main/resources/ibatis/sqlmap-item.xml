@@ -36,6 +36,7 @@
 		SELECT t.item_id AS itemId,
 		  t.item_name    AS itemName,
 		  t.sup_id       AS supId,
+		  t.bar_code	 AS barCode,
 		  t.item_no      AS itemNo,
 		  t.price,
 		  t.stock,
