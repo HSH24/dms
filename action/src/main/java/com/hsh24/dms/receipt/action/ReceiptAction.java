@@ -32,7 +32,7 @@ public class ReceiptAction extends BaseAction {
 				.toString());
 
 		if (result.getResult()) {
-			this.setResourceResult(result.getCode());
+			this.setResourceResult("创建收货单成功");
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());

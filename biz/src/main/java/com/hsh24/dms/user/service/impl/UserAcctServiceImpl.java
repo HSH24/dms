@@ -39,14 +39,14 @@ public class UserAcctServiceImpl implements IUserAcctService {
 		result.setResult(false);
 
 		if (StringUtils.isBlank(passport)) {
-			result.setCode("登录帐号不能为空。");
+			result.setCode("登录帐号不能为空");
 			return result;
 		}
 
 		// 验证登录账号是否存在
 		User user = userService.getUserByPassport(passport);
 		if (user == null) {
-			result.setCode("当前登录帐号在系统中不存在。");
+			result.setCode("当前登录帐号在系统中不存在");
 			return result;
 		}
 
@@ -63,7 +63,7 @@ public class UserAcctServiceImpl implements IUserAcctService {
 			} catch (ServiceException se) {
 				logger.error(se);
 
-				result.setCode("系统正忙，请稍后再试。");
+				result.setCode("系统正忙，请稍后再试");
 				return result;
 			}
 		}
@@ -79,12 +79,12 @@ public class UserAcctServiceImpl implements IUserAcctService {
 		result.setResult(false);
 
 		if (StringUtils.isBlank(passport)) {
-			result.setCode("登录帐号不能为空。");
+			result.setCode("登录帐号不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(checkCode)) {
-			result.setCode("验证码不能为空。");
+			result.setCode("验证码不能为空");
 			return result;
 		}
 
@@ -97,17 +97,17 @@ public class UserAcctServiceImpl implements IUserAcctService {
 		} catch (ServiceException e) {
 			logger.error(e);
 
-			result.setCode("系统正忙，请稍后再试。");
+			result.setCode("系统正忙，请稍后再试");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(value)) {
-			result.setCode("验证码已失效，请稍后再试。");
+			result.setCode("验证码已失效，请稍后再试");
 			return result;
 		}
 
 		if (!value.equals(checkCode.trim())) {
-			result.setCode("验证码不正确，请稍后再试。");
+			result.setCode("验证码不正确，请稍后再试");
 			return result;
 		}
 
@@ -141,12 +141,12 @@ public class UserAcctServiceImpl implements IUserAcctService {
 		result.setResult(false);
 
 		if (StringUtils.isBlank(passport)) {
-			result.setCode("账号信息不能为空。");
+			result.setCode("账号信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(password)) {
-			result.setCode("密码信息不能为空。");
+			result.setCode("密码信息不能为空");
 			return result;
 		}
 

@@ -78,7 +78,7 @@ public class TradeAction extends BaseAction {
 		}
 
 		if (result.getResult()) {
-			this.setResourceResult(result.getCode());
+			this.setResourceResult("创建采购单成功");
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());

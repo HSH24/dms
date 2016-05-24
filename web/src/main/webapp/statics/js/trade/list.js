@@ -78,7 +78,7 @@ function trade_list_cancel(tradeNo) {
 }
 
 function trade_list_receipt(tradeNo) {
-	myApp.confirm('确定收货？', '订单管理', function() {
+	myApp.confirm('确定全部收货？', '订单管理', function() {
 				myApp.showIndicator();
 
 				$$('#trade_list_receipt_tradeNo').val(tradeNo);

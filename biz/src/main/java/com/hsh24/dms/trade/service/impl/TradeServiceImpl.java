@@ -76,17 +76,17 @@ public class TradeServiceImpl implements ITradeService {
 		result.setResult(false);
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(itemId)) {
-			result.setCode("商品信息不能为空。");
+			result.setCode("商品信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(skuId)) {
-			result.setCode("商品SKU信息不能为空。");
+			result.setCode("商品SKU信息不能为空");
 			return result;
 		}
 
@@ -95,7 +95,7 @@ public class TradeServiceImpl implements ITradeService {
 		} catch (NumberFormatException e) {
 			logger.error(e);
 
-			result.setCode("商品，SKU信息不存在。");
+			result.setCode("商品，SKU信息不存在");
 			return result;
 		}
 
@@ -108,18 +108,18 @@ public class TradeServiceImpl implements ITradeService {
 		final BigDecimal price = new BigDecimal(code[1]).multiply(new BigDecimal(quantity));
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
 		final BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
 		if (bankAcct == null) {
-			result.setCode("资金账户信息不能为空。");
+			result.setCode("资金账户信息不能为空");
 			return result;
 		}
 
 		if (price.compareTo(bankAcct.getCurBal()) == 1) {
-			result.setCode("资金账户余额不足。");
+			result.setCode("资金账户余额不足");
 			return result;
 		}
 
@@ -152,7 +152,7 @@ public class TradeServiceImpl implements ITradeService {
 					logger.error(LogUtil.parserBean(trade), e);
 					ts.setRollbackOnly();
 
-					result.setCode("创建交易失败。");
+					result.setCode("创建采购单失败");
 					return result;
 				}
 
@@ -204,17 +204,17 @@ public class TradeServiceImpl implements ITradeService {
 		result.setResult(false);
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 
 		if (userId == null) {
-			result.setCode("用户信息不能为空。");
+			result.setCode("用户信息不能为空");
 			return result;
 		}
 
 		if (cartId == null || cartId.length == 0) {
-			result.setCode("购物车不能为空。");
+			result.setCode("购物车不能为空");
 			return result;
 		}
 
@@ -222,7 +222,7 @@ public class TradeServiceImpl implements ITradeService {
 		List<Cart> cartList = cartService.getCartList(userId, shopId, cartId);
 
 		if (cartList == null || cartList.size() == 0) {
-			result.setCode("购物车信息不存在。");
+			result.setCode("购物车信息不存在");
 			return result;
 		}
 
@@ -253,23 +253,23 @@ public class TradeServiceImpl implements ITradeService {
 		}
 
 		if (map1.size() == 0) {
-			result.setCode("购物车商品总价为空。");
+			result.setCode("购物车商品总价为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
 		final BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
 		if (bankAcct == null) {
-			result.setCode("资金账户信息不能为空。");
+			result.setCode("资金账户信息不能为空");
 			return result;
 		}
 
 		if (price.compareTo(bankAcct.getCurBal()) == 1) {
-			result.setCode("资金账户余额不足。");
+			result.setCode("资金账户余额不足");
 			return result;
 		}
 
@@ -325,7 +325,7 @@ public class TradeServiceImpl implements ITradeService {
 						logger.error(LogUtil.parserBean(trade), e);
 						ts.setRollbackOnly();
 
-						result.setCode("创建交易失败。");
+						result.setCode("创建采购单失败");
 						return result;
 					}
 
@@ -556,19 +556,19 @@ public class TradeServiceImpl implements ITradeService {
 		final Trade trade = new Trade();
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 		trade.setShopId(shopId);
 
 		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("订单信息不能为空。");
+			result.setCode("订单信息不能为空");
 			return result;
 		}
 		trade.setTradeNo(tradeNo.trim());
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 		trade.setModifyUser(modifyUser);
@@ -578,19 +578,19 @@ public class TradeServiceImpl implements ITradeService {
 			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_TRADE_NO + tradeNo.trim(), tradeNo,
 				IMemcachedCacheService.CACHE_KEY_TRADE_NO_DEFAULT_EXP);
 		} catch (ServiceException e) {
-			result.setCode("当前订单已被锁定，请稍后再试。");
+			result.setCode("当前订单已被锁定，请稍后再试");
 			return result;
 		}
 
 		// 0. 查询 未付款交易订单
 		Trade t = getTrade(trade);
 		if (t == null) {
-			result.setCode("当前订单不存在。");
+			result.setCode("当前订单不存在");
 			return result;
 		}
 
 		if (!ITradeService.TO_SEND.equals(t.getType())) {
-			result.setCode("当前订单已发货或取消。");
+			result.setCode("当前订单已发货或取消");
 			return result;
 		}
 
@@ -600,7 +600,7 @@ public class TradeServiceImpl implements ITradeService {
 
 		BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
 		if (bankAcct == null) {
-			result.setCode("资金账户信息不能为空。");
+			result.setCode("资金账户信息不能为空");
 			return result;
 		}
 
@@ -660,13 +660,13 @@ public class TradeServiceImpl implements ITradeService {
 		trade.setType(ITradeService.SIGN);
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 		trade.setShopId(shopId);
 
 		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("交易订单不能为空。");
+			result.setCode("采购单不能为空");
 			return result;
 		}
 		trade.setTradeNo(tradeNo.trim());
@@ -676,7 +676,7 @@ public class TradeServiceImpl implements ITradeService {
 		result = updateTrade(trade);
 
 		if (result.getResult()) {
-			result.setCode("操作成功。");
+			result.setCode("操作成功");
 		}
 		return result;
 	}
@@ -705,11 +705,11 @@ public class TradeServiceImpl implements ITradeService {
 			if (c == 1) {
 				result.setResult(true);
 			} else {
-				result.setCode("更新交易失败。");
+				result.setCode("更新交易失败");
 			}
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(trade), e);
-			result.setCode("更新交易表失败。");
+			result.setCode("更新交易表失败");
 		}
 
 		return result;
@@ -741,7 +741,7 @@ public class TradeServiceImpl implements ITradeService {
 				Cashflow cashflow = new Cashflow();
 				cashflow.setCashflowCId(3L);
 				cashflow.setBankAcctId(bankAcctId);
-				cashflow.setSummary("[退款] 采购订单:" + trade.getTradeNo() + "取消。");
+				cashflow.setSummary("[退款] 采购订单:" + trade.getTradeNo() + "取消");
 				cashflow.setCrAmount(BigDecimal.ZERO);
 				cashflow.setDrAmount(trade.getPrice());
 				cashflow.setTradeDate(DateUtil.getNowDatetimeStr());
@@ -777,7 +777,7 @@ public class TradeServiceImpl implements ITradeService {
 		});
 
 		if (res.getResult()) {
-			res.setCode("取消成功。");
+			res.setCode("取消采购单成功");
 		}
 		return res;
 	}

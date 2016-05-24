@@ -7,7 +7,7 @@ myApp.onPageInit('user.setPassword', function(page) {
 					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
-						myApp.alert('成功设置密码。', '信息', function() {
+						myApp.alert(xhr.responseText, '信息', function() {
 									top.location.href = appUrl
 											+ "/user/shop.htm";
 								});
@@ -26,7 +26,7 @@ function updatePassword() {
 	var J_RePwd = $$('#J_RePwd').val();
 
 	if (J_Pwd != J_RePwd) {
-		myApp.alert("两次输入密码不一致。", '错误');
+		myApp.alert("两次输入密码不一致", '错误');
 		return;
 	}
 

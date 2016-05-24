@@ -115,12 +115,12 @@ public class UserAcctAction extends BaseAction {
 		return SUCCESS;
 	}
 
-	@ActionMonitor(actionName = "密码重置")
+	@ActionMonitor(actionName = "密码设置")
 	public String updatePassword() {
 		User user = this.getUser();
 		if (user == null) {
 			this.getServletResponse().setStatus(599);
-			this.setResourceResult("用户信息不存在。");
+			this.setResourceResult("用户信息不存在");
 
 			return RESULT_MESSAGE;
 		}
@@ -129,7 +129,7 @@ public class UserAcctAction extends BaseAction {
 		Boolean token = (Boolean) session.getAttribute("ACEGI_SECURITY_SET_PASSWORD");
 		if (token == null || !token.booleanValue()) {
 			this.getServletResponse().setStatus(599);
-			this.setResourceResult("请先验证原密码或手机短信。");
+			this.setResourceResult("请先验证原密码或手机短信");
 
 			return RESULT_MESSAGE;
 		}
@@ -139,7 +139,7 @@ public class UserAcctAction extends BaseAction {
 		if (result.getResult()) {
 			session.removeAttribute("ACEGI_SECURITY_SET_PASSWORD");
 
-			this.setResourceResult("成功修改密码。");
+			this.setResourceResult("成功设置密码");
 		} else {
 			this.getServletResponse().setStatus(599);
 			this.setResourceResult(result.getCode());

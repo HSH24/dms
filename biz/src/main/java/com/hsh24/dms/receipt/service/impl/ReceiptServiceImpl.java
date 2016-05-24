@@ -55,22 +55,22 @@ public class ReceiptServiceImpl implements IReceiptService {
 		result.setResult(false);
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("订单信息不能为空。");
+			result.setCode("采购单信息不能为空");
 			return result;
 		}
 
 		if (receiptDetailList == null || receiptDetailList.size() == 0) {
-			result.setCode("收货明细信息不能为空。");
+			result.setCode("收货明细信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
@@ -78,12 +78,12 @@ public class ReceiptServiceImpl implements IReceiptService {
 		Trade trade = tradeService.getTrade(shopId, tradeNo);
 
 		if (trade == null) {
-			result.setCode("当前订单不存在。");
+			result.setCode("当前采购单不存在");
 			return result;
 		}
 
 		if (!ITradeService.SEND.equals(trade.getType())) {
-			result.setCode("当前订单未发货或已完成收货。");
+			result.setCode("当前采购单未发货或已完成收货");
 			return result;
 		}
 
@@ -100,7 +100,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 		List<Order> orderList = trade.getOrderList();
 
 		if (orderList == null || orderList.size() == 0) {
-			result.setCode("订单明细信息不存在。");
+			result.setCode("采购单明细信息不存在");
 			return result;
 		}
 
@@ -136,26 +136,36 @@ public class ReceiptServiceImpl implements IReceiptService {
 			}
 		}
 
+		// 判断 收货明细 数量不能全为 0
+		int total = 0;
+
 		for (ReceiptDetail receiptDetail : receiptDetailList) {
 			Long orderId = receiptDetail.getOrderId();
 			int quantity = receiptDetail.getQuantity();
 
 			if (quantity < 0) {
-				result.setCode("[订单明细]收货数量不能小于0。");
+				result.setCode("[收货明细]收货数量不能小于0");
 				return result;
 			}
 
 			if (receiptedMap.containsKey(orderId)) {
 				if (quantity > (orderMap.get(orderId) - receiptedMap.get(orderId))) {
-					result.setCode("[订单明细]收货数量不能大于可收货数量。");
+					result.setCode("[收货明细]收货数量不能大于可收货数量");
 					return result;
 				}
 			} else {
 				if (quantity > (orderMap.get(orderId))) {
-					result.setCode("[订单明细]收货数量不能大于可收货数量。");
+					result.setCode("[收货明细]收货数量不能大于可收货数量");
 					return result;
 				}
 			}
+
+			total += quantity;
+		}
+
+		if (total == 0) {
+			result.setCode("[收货明细]收货数量不能全为0");
+			return result;
 		}
 
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
@@ -171,7 +181,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 					logger.error(LogUtil.parserBean(receipt), e);
 					ts.setRollbackOnly();
 
-					result.setCode("创建收货失败。");
+					result.setCode("创建收货单失败");
 					return result;
 				}
 
@@ -182,7 +192,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 					logger.error("receiptId:" + receiptId + LogUtil.parserBean(receiptDetailList), e);
 					ts.setRollbackOnly();
 
-					result.setCode("创建收货明细失败。");
+					result.setCode("创建收货单明细失败");
 					return result;
 				}
 
@@ -208,17 +218,17 @@ public class ReceiptServiceImpl implements IReceiptService {
 		result.setResult(false);
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("订单信息不能为空。");
+			result.setCode("采购单信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
@@ -226,12 +236,12 @@ public class ReceiptServiceImpl implements IReceiptService {
 		Trade trade = tradeService.getTrade(shopId, tradeNo);
 
 		if (trade == null) {
-			result.setCode("当前订单不存在。");
+			result.setCode("当前采购单不存在");
 			return result;
 		}
 
 		if (!ITradeService.SEND.equals(trade.getType())) {
-			result.setCode("当前订单未发货或已完成收货。");
+			result.setCode("当前采购单未发货或已完成收货");
 			return result;
 		}
 
@@ -246,7 +256,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 		List<Order> orderList = trade.getOrderList();
 
 		if (orderList == null || orderList.size() == 0) {
-			result.setCode("订单明细信息不存在。");
+			result.setCode("采购单明细信息不存在");
 			return result;
 		}
 
@@ -305,7 +315,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 						logger.error(LogUtil.parserBean(receipt), e);
 						ts.setRollbackOnly();
 
-						result.setCode("创建收货失败。");
+						result.setCode("创建收货单失败");
 						return result;
 					}
 
@@ -316,7 +326,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 						logger.error("receiptId:" + receiptId + LogUtil.parserBean(receiptDetailList), e);
 						ts.setRollbackOnly();
 
-						result.setCode("创建收货明细失败。");
+						result.setCode("创建收货单明细失败");
 						return result;
 					}
 
@@ -337,7 +347,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 					return result;
 				}
 
-				result.setCode("完成收货。");
+				result.setCode("采购单完成收货");
 				return result;
 			}
 		});

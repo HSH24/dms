@@ -4,26 +4,25 @@ myApp.onPageInit('cart.index', function(page) {
 					});
 
 			$$('form.ajax-submit.cart-index-form').on('submitted', function(e) {
-				myApp.hideIndicator();
-				var xhr = e.detail.xhr;
+						myApp.hideIndicator();
+						var xhr = e.detail.xhr;
 
-				if (cart_index_flag == "create") {
-					myApp.alert("下单成功，订单号：" + xhr.responseText, '信息',
-							function() {
-								view4.router.refreshPage();
+						if (cart_index_flag == "create") {
+							myApp.alert(xhr.responseText, '信息', function() {
+										view4.router.refreshPage();
 
-								// 更新首页购物车标记
-								portal_home_cart_stats();
-							});
-				} else if (cart_index_flag == "remove") {
-					myApp.alert(xhr.responseText, '信息', function() {
-								view4.router.refreshPage();
+										// 更新首页购物车标记
+										portal_home_cart_stats();
+									});
+						} else if (cart_index_flag == "remove") {
+							myApp.alert(xhr.responseText, '信息', function() {
+										view4.router.refreshPage();
 
-								// 更新首页购物车标记
-								portal_home_cart_stats();
-							});
-				}
-			});
+										// 更新首页购物车标记
+										portal_home_cart_stats();
+									});
+						}
+					});
 
 			$$('form.ajax-submit.cart-index-form').on('submitError',
 					function(e) {

@@ -7,7 +7,9 @@ myApp.onPageInit('trade.detail', function(page) {
 					function(e) {
 						myApp.hideIndicator();
 						var xhr = e.detail.xhr;
-						myApp.alert(xhr.responseText, '信息');
+						myApp.alert(xhr.responseText, '信息', function() {
+									view5.router.refreshPage();
+								});
 					});
 
 			$$('form.ajax-submit.trade-detail-form').on('submitError',
