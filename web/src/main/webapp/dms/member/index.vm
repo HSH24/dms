@@ -57,15 +57,15 @@
 			<div class="list-block" style="font-size: 15px;">
 				<ul class="page-settings after-height-0">
 					<li class="row" style="text-align: center;">
-						<a href="$!{env.appUrl}/cashflow/index.htm" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
+						<a href="$!{env.appUrl}/cashflow/list.htm" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/drAmount">0.00</h3>
 							<div class="color-gray">收入(元)</div>
                         </a>
-						<a href="$!{env.appUrl}/cashflow/index.htm" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
+						<a href="$!{env.appUrl}/cashflow/list.htm" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/crAmount">0.00</h3>
 							<div class="color-gray">支出(元)</div>
                         </a>
-						<a href="$!{env.appUrl}/cashflow/index.htm" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
+						<a href="$!{env.appUrl}/cashflow/list.htm" class="col-33 item-link" style="width: 33%;" data-ignore-cache="true">
 							<h3 id="member/index/curBal">0.00</h3>
 							<div class="color-gray">余额(元)</div>
                         </a>
@@ -73,7 +73,7 @@
                 </ul>
 				<ul>
 					<li>
-						<a href="$!{env.appUrl}/cashflow/index.htm" class="item-link item-content" data-ignore-cache="true">
+						<a href="$!{env.appUrl}/cashflow/list.htm" class="item-link item-content" data-ignore-cache="true">
 							<div class="item-media"><i class="iconfont icon-redpacket"></i></div>
 							<div class="item-inner">
 								<div class="item-title">我的资金</div>
