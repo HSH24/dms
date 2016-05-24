@@ -83,17 +83,17 @@ public class UserServiceImpl implements IUserService {
 		result.setResult(false);
 
 		if (StringUtils.isBlank(passport)) {
-			result.setCode("账号信息不能为空。");
+			result.setCode("账号信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(password)) {
-			result.setCode("密码信息不能为空。");
+			result.setCode("密码信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
@@ -109,6 +109,48 @@ public class UserServiceImpl implements IUserService {
 			return result;
 		}
 
+		user.setModifyUser(modifyUser);
+
+		try {
+			int c = userDao.updateUser(user);
+			if (c == 1) {
+				result.setResult(true);
+
+				// remove cache
+				remove(passport.trim());
+			}
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(user), e);
+
+			result.setCode("修改用户信息失败！");
+		}
+
+		return result;
+	}
+
+	@Override
+	public BooleanResult setUserName(String passport, String userName, String modifyUser) {
+		BooleanResult result = new BooleanResult();
+		result.setResult(false);
+
+		if (StringUtils.isBlank(passport)) {
+			result.setCode("账号信息不能为空");
+			return result;
+		}
+
+		if (StringUtils.isBlank(userName)) {
+			result.setCode("名字信息不能为空");
+			return result;
+		}
+
+		if (StringUtils.isEmpty(modifyUser)) {
+			result.setCode("操作人信息不能为空");
+			return result;
+		}
+
+		User user = new User();
+		user.setPassport(passport.trim());
+		user.setUserName(userName.trim());
 		user.setModifyUser(modifyUser);
 
 		try {

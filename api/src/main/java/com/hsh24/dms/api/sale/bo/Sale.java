@@ -15,11 +15,13 @@ public class Sale extends SearchInfo {
 
 	private Long shopId;
 
-	private BigDecimal amount;
-
 	private String itemName;
 
 	private String unit;
+
+	private int quantity;
+
+	private BigDecimal amount;
 
 	public Long getShopId() {
 		return shopId;
@@ -27,14 +29,6 @@ public class Sale extends SearchInfo {
 
 	public void setShopId(Long shopId) {
 		this.shopId = shopId;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
 	}
 
 	public String getItemName() {
@@ -51,6 +45,22 @@ public class Sale extends SearchInfo {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 
 }

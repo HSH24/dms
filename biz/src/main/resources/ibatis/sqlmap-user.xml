@@ -28,6 +28,9 @@
 			<isNotEmpty property="password" prepend=",">
 			<![CDATA[ t.password = #password# ]]>
 			</isNotEmpty>
+			<isNotEmpty property="userName" prepend=",">
+			<![CDATA[ t.user_name = #userName# ]]>
+			</isNotEmpty>
 		</dynamic>
 	<![CDATA[
 		WHERE t.state = '1'

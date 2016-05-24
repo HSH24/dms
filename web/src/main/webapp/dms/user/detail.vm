@@ -17,10 +17,10 @@
 			<div class="list-block" style="font-size: 15px;">
 				<ul>
 					<li>
-						<a href="#" class="item-link item-content">
+						<a href="$!{env.appUrl}/user/setUserName.htm" class="item-link item-content" data-ignore-cache="true">
 							<div class="item-inner">
 								<div class="item-title">名字</div>
-								<div class="item-after">$!{user.userName}</div>
+								<div class="item-after" id="user/detail/userName">$!{user.userName}</div>
 							</div>
 						</a>
 					</li>

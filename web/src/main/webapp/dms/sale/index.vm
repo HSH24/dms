@@ -55,7 +55,7 @@
 						<div class="item-content">
 							<div class="item-media"><i class="iconfont icon-goods"></i></div>
 							<div class="item-inner">
-								<div class="item-title"> $!{sale.itemName} [$!{sale.unit}]</div>
+								<div class="item-title"> $!{sale.itemName} [$!{sale.unit}] ×$!{sale.quantity}</div>
 								<div class="item-after">$!formatUtil.getAmountFormat($!{sale.amount})</div>
 							</div>
 						</div>

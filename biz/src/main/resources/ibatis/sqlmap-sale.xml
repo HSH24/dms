@@ -27,7 +27,8 @@
 	<![CDATA[
 		SELECT (og.goods_num * og.goods_fact_price) AS amount,
 			   gv.goods_nm AS itemName,
-			   gv.goods_unit_nm AS unit
+			   gv.goods_unit_nm AS unit,
+			   og.goods_num AS quantity
 		  FROM oms.ord_order_goods_t og,
 			   oms.main_goods_v gv,
 			   oms.`ord_order_t` qq
@@ -37,6 +38,7 @@
 		   AND og.`order_id` = qq.order_id
 		   AND qq.order_status = '0005'
 		   AND qq.org_id = #shopId#
+		  ORDER BY qq.`order_dt` DESC
 	]]>
 	</select>
 	

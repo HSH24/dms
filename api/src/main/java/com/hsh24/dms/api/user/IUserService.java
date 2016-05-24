@@ -47,4 +47,13 @@ public interface IUserService {
 	 */
 	BooleanResult setPassword(String passport, String password, String modifyUser);
 
+	/**
+	 * 
+	 * @param passport
+	 * @param userName
+	 * @param modifyUser
+	 * @return
+	 */
+	BooleanResult setUserName(String passport, String userName, String modifyUser);
+
 }
