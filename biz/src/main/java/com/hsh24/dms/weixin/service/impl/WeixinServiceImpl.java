@@ -68,6 +68,42 @@ public class WeixinServiceImpl implements IWeixinService {
 		return ticket;
 	}
 
+	@Override
+	public Ticket getTicket4Corp(String url) {
+		if (StringUtils.isBlank(url)) {
+			return null;
+		}
+
+		BooleanResult result = ticketService.getTicket4Corp(corpId, corpSecret);
+		if (!result.getResult()) {
+			return null;
+		}
+
+		String t = result.getCode();
+		String nonceStr = UUIDUtil.generate();
+		String timestamp = Long.toString(System.currentTimeMillis() / 1000);
+		String signature;
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("jsapi_ticket=").append(t).append("&noncestr=").append(nonceStr).append("&timestamp=")
+			.append(timestamp).append("&url=").append(url.trim());
+
+		try {
+			signature = EncryptUtil.encryptSHA(sb.toString());
+		} catch (IOException e) {
+			logger.error(e);
+			return null;
+		}
+
+		Ticket ticket = new Ticket();
+		ticket.setAppId(corpId);
+		ticket.setNonceStr(nonceStr);
+		ticket.setTimestamp(timestamp);
+		ticket.setSignature(signature);
+
+		return ticket;
+	}
+
 	public ITicketService getTicketService() {
 		return ticketService;
 	}

@@ -16,4 +16,11 @@ public interface IWeixinService {
 	 */
 	Ticket getTicket(String url);
 
+	/**
+	 * 
+	 * @param url
+	 * @return
+	 */
+	Ticket getTicket4Corp(String url);
+
 }
