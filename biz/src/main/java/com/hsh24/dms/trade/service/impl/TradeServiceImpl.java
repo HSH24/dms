@@ -562,7 +562,7 @@ public class TradeServiceImpl implements ITradeService {
 		trade.setShopId(shopId);
 
 		if (StringUtils.isBlank(tradeNo)) {
-			result.setCode("订单信息不能为空");
+			result.setCode("采购单信息不能为空");
 			return result;
 		}
 		trade.setTradeNo(tradeNo.trim());
@@ -578,19 +578,19 @@ public class TradeServiceImpl implements ITradeService {
 			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_TRADE_NO + tradeNo.trim(), tradeNo,
 				IMemcachedCacheService.CACHE_KEY_TRADE_NO_DEFAULT_EXP);
 		} catch (ServiceException e) {
-			result.setCode("当前订单已被锁定，请稍后再试");
+			result.setCode("当前采购单已被锁定，请稍后再试");
 			return result;
 		}
 
 		// 0. 查询 未付款交易订单
 		Trade t = getTrade(trade);
 		if (t == null) {
-			result.setCode("当前订单不存在");
+			result.setCode("当前采购单不存在");
 			return result;
 		}
 
 		if (!ITradeService.TO_SEND.equals(t.getType())) {
-			result.setCode("当前订单已发货或取消");
+			result.setCode("当前采购单已发货或取消");
 			return result;
 		}
 

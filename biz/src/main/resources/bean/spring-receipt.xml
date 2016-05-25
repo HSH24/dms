@@ -11,6 +11,7 @@
 	
 	<bean id="receiptService" class="com.hsh24.dms.receipt.service.impl.ReceiptServiceImpl">
 		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="memcachedCacheService" ref="memcachedCacheService" />
 		<property name="tradeService" ref="tradeService" />
 		<property name="orderService" ref="orderService" />
 		<property name="receiptLogService" ref="receiptLogService" />

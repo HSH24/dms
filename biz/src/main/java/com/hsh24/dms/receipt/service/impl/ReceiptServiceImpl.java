@@ -10,6 +10,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.receipt.IReceiptLogService;
 import com.hsh24.dms.api.receipt.IReceiptService;
 import com.hsh24.dms.api.receipt.bo.Receipt;
@@ -19,6 +20,7 @@ import com.hsh24.dms.api.trade.ITradeService;
 import com.hsh24.dms.api.trade.bo.Order;
 import com.hsh24.dms.api.trade.bo.Trade;
 import com.hsh24.dms.framework.bo.BooleanResult;
+import com.hsh24.dms.framework.exception.ServiceException;
 import com.hsh24.dms.framework.log.Logger4jCollection;
 import com.hsh24.dms.framework.log.Logger4jExtend;
 import com.hsh24.dms.framework.util.DateUtil;
@@ -38,6 +40,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 	private TransactionTemplate transactionTemplate;
 
+	private IMemcachedCacheService memcachedCacheService;
+
 	private ITradeService tradeService;
 
 	private IOrderService orderService;
@@ -49,7 +53,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 	private IReceiptDetailDao receiptDetailDao;
 
 	@Override
-	public BooleanResult part(Long shopId, String tradeNo, final List<ReceiptDetail> receiptDetailList,
+	public BooleanResult part(final Long shopId, final String tradeNo, final List<ReceiptDetail> receiptDetailList,
 		final String modifyUser) {
 		BooleanResult result = new BooleanResult();
 		result.setResult(false);
@@ -71,6 +75,15 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 		if (StringUtils.isEmpty(modifyUser)) {
 			result.setCode("操作人信息不能为空");
+			return result;
+		}
+
+		// 锁定当前订单
+		try {
+			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_RECEIPT_NO + tradeNo.trim(), tradeNo,
+				IMemcachedCacheService.CACHE_KEY_RECEIPT_NO_DEFAULT_EXP);
+		} catch (ServiceException e) {
+			result.setCode("当前采购单已被锁定，请稍后再试");
 			return result;
 		}
 
@@ -136,6 +149,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 			}
 		}
 
+		// 判断 是否 完全收货
+		boolean f = true;
 		// 判断 收货明细 数量不能全为 0
 		int total = 0;
 
@@ -149,14 +164,26 @@ public class ReceiptServiceImpl implements IReceiptService {
 			}
 
 			if (receiptedMap.containsKey(orderId)) {
-				if (quantity > (orderMap.get(orderId) - receiptedMap.get(orderId))) {
+				int q = orderMap.get(orderId) - receiptedMap.get(orderId);
+
+				if (quantity > q) {
 					result.setCode("[收货明细]收货数量不能大于可收货数量");
 					return result;
 				}
+
+				if (quantity < q) {
+					f = false;
+				}
 			} else {
-				if (quantity > (orderMap.get(orderId))) {
+				int q = orderMap.get(orderId);
+
+				if (quantity > q) {
 					result.setCode("[收货明细]收货数量不能大于可收货数量");
 					return result;
+				}
+
+				if (quantity < q) {
+					f = false;
 				}
 			}
 
@@ -167,6 +194,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 			result.setCode("[收货明细]收货数量不能全为0");
 			return result;
 		}
+
+		final boolean flag = f;
 
 		BooleanResult res = transactionTemplate.execute(new TransactionCallback<BooleanResult>() {
 			public BooleanResult doInTransaction(TransactionStatus ts) {
@@ -204,6 +233,16 @@ public class ReceiptServiceImpl implements IReceiptService {
 					return result;
 				}
 
+				if (flag) {
+					// 4. 订单总单 状态 修改
+					result = tradeService.signTrade(shopId, tradeNo, modifyUser);
+					if (!result.getResult()) {
+						ts.setRollbackOnly();
+
+						return result;
+					}
+				}
+
 				result.setCode(receipt.getReceiptNo());
 				return result;
 			}
@@ -229,6 +268,15 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 		if (StringUtils.isEmpty(modifyUser)) {
 			result.setCode("操作人信息不能为空");
+			return result;
+		}
+
+		// 锁定当前订单
+		try {
+			memcachedCacheService.add(IMemcachedCacheService.CACHE_KEY_RECEIPT_NO + tradeNo.trim(), tradeNo,
+				IMemcachedCacheService.CACHE_KEY_RECEIPT_NO_DEFAULT_EXP);
+		} catch (ServiceException e) {
+			result.setCode("当前采购单已被锁定，请稍后再试");
 			return result;
 		}
 
@@ -442,6 +490,14 @@ public class ReceiptServiceImpl implements IReceiptService {
 
 	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
 		this.transactionTemplate = transactionTemplate;
+	}
+
+	public IMemcachedCacheService getMemcachedCacheService() {
+		return memcachedCacheService;
+	}
+
+	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
+		this.memcachedCacheService = memcachedCacheService;
 	}
 
 	public ITradeService getTradeService() {
