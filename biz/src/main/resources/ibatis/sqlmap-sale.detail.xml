@@ -20,7 +20,7 @@
 		   AND og.order_id= qq.order_id
 		   AND qq.order_status = '0005'
 		   AND qq.org_id = #shopId#
-		   and qq.order_cd = #tradeNo#
+		   AND qq.order_cd = #tradeNo#
 	]]>
 	</select>
 	
