@@ -157,5 +157,28 @@ function portal_home_stats() {
 portal_home_stats();
 
 myApp.onPageInit('portal.home', function(page) {
+			$$('#view_2_click').on('click', function() {
+						if (view2.history.length == 1) {
+							view2.router.load({
+										url : appUrl + "/mall/list.htm",
+										ignoreCache : true,
+										reload : true
+									});
+						}
+
+						$$('#href-2').addClass("active");
+					});
+
+			$$('#view_3_click').on('click', function() {
+						if (view3.history.length == 1) {
+							view3.router.load({
+										url : appUrl + "/item/list.htm"
+									});
+						}
+
+						$$('#href-3').addClass("active");
+					});
+
+			portal_home_cart_stats();
 			portal_home_stats();
 		})
