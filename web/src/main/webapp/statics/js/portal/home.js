@@ -179,6 +179,5 @@ myApp.onPageInit('portal.home', function(page) {
 						$$('#href-3').addClass("active");
 					});
 
-			portal_home_cart_stats();
 			portal_home_stats();
 		})
