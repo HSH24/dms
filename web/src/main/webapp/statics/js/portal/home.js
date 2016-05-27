@@ -155,3 +155,7 @@ function portal_home_stats() {
 }
 
 portal_home_stats();
+
+myApp.onPageInit('portal.home', function(page) {
+			portal_home_stats();
+		})
