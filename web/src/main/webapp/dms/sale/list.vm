@@ -37,11 +37,11 @@
 							<div class="color-gray">2016年</div>
                         </div>
 						<div class="col-33" style="width: 33%;">
-							<h3 id="sale/index/a">0.00</h3>
+							<h3 id="sale/list/a">0.00</h3>
 							<div class="color-gray">今天(元)</div>
                         </div>
 						<div class="col-33" style="width: 33%;">
-							<h3 id="sale/index/b">0.00</h3>
+							<h3 id="sale/list/b">0.00</h3>
 							<div class="color-gray">本月(元)</div>
                         </div>
 					</li>
