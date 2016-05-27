@@ -8,20 +8,20 @@
 	
 	<select id="getStats" parameterClass="sale" resultClass="sale">
 	<![CDATA[
-		SELECT SUM(case when t.order_status = '0006' then -1 * p.pay_money else p.pay_money end)  AS amount
+		SELECT SUM(p.pay_money) AS amount
 		  FROM oms.ord_order_t t,
 			   oms.ord_order_pay_t p
 		 WHERE t.order_dt >= date_format(#gmtStart#, '%Y-%m-%d %T')
 		   AND t.order_dt <= date_format(#gmtEnd#, '%Y-%m-%d %T')
 		   AND t.order_id = p.order_id
-		   AND t.order_status in ('0005','0006')
+		   AND t.order_status = '0005'
 		   AND t.org_id = #shopId#
 	]]>
 	</select>
 	
 	<select id="getSaleList" parameterClass="sale" resultClass="sale">
 	<![CDATA[
-		SELECT case when t.order_status = '0006' then -1 * p.pay_money else p.pay_money end AS amount,
+		SELECT p.pay_money AS amount,
 			   t.order_cd AS tradeNo,
 			   DATE_FORMAT(t.order_dt, '%Y-%m-%d %T') AS tradeDate
 		  FROM oms.ord_order_t t,
@@ -29,7 +29,7 @@
 		 WHERE t.order_dt >= date_format(#gmtStart#, '%Y-%m-%d %T')
 		   AND t.order_dt <= date_format(#gmtEnd#, '%Y-%m-%d %T')
 		   AND t.order_id = p.order_id
-		   AND t.order_status in ('0005','0006')
+		   AND t.order_status = '0005'
 		   AND t.org_id = #shopId#
 		  ORDER BY t.order_dt DESC
 	]]>
