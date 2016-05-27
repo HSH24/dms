@@ -35,7 +35,7 @@ public class CAServiceImpl implements ICAService {
 		}
 
 		// 根据passport查找用户信息
-		User user = userService.getUserByPassport(passport);
+		User user = userService.getUser(passport);
 
 		// 1. 判断登录用户是否在系统中
 		if (user == null) {

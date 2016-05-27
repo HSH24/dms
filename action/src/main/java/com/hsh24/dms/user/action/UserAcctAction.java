@@ -61,7 +61,7 @@ public class UserAcctAction extends BaseAction {
 
 		if (result.getResult()) {
 			// 验证成功
-			User u = userService.getUserByPassport(passport);
+			User u = userService.getUser(passport);
 
 			HttpSession session = this.getSession();
 			session.setAttribute("ACEGI_SECURITY_LAST_PASSPORT", u.getPassport());

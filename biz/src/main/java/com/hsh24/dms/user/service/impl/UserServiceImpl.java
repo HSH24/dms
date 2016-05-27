@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 
 	@Override
-	public User getUserByPassport(String passport) {
+	public User getUser(String passport) {
 		if (StringUtils.isBlank(passport)) {
 			return null;
 		}

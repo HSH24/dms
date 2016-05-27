@@ -28,7 +28,7 @@ public interface IUserService {
 	 * @param passport
 	 * @return
 	 */
-	User getUserByPassport(String passport);
+	User getUser(String passport);
 
 	/**
 	 * 根据登陆帐号获取用户信息(不存在缓存).

@@ -44,7 +44,7 @@ public class UserAcctServiceImpl implements IUserAcctService {
 		}
 
 		// 验证登录账号是否存在
-		User user = userService.getUserByPassport(passport);
+		User user = userService.getUser(passport);
 		if (user == null) {
 			result.setCode("当前登录帐号在系统中不存在");
 			return result;
