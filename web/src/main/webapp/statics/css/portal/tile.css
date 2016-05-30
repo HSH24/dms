@@ -35,7 +35,7 @@ body {
 }
 
 .small-box h3, .small-box p {
-    z-index: 5px;
+    z-index: 5;
 }
 
 .small-box p {
