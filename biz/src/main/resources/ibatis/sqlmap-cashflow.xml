@@ -76,7 +76,9 @@
 			   DATE_FORMAT(t.trade_date, '%Y-%m-%d %T') AS tradeDate,
 			   t.trade_no AS tradeNo
 		  FROM dms_tb_cashflow t
-		 WHERE t.state = 'U'
+		 WHERE t.trade_date >= date_format(#gmtStart#, '%Y-%m-%d %T')
+		   AND t.trade_date <= date_format(#gmtEnd#, '%Y-%m-%d %T')
+		   AND t.state = 'U'
 		   AND t.shop_id = #shopId#
 		 ORDER BY $sort$ $order$
 		 LIMIT $limit$ OFFSET $offset$

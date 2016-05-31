@@ -35,22 +35,10 @@
 					<li class="row" style="text-align: center;">
 						<div class="col-33" style="width: 33%;">
 							<div style="margin: 0.6rem 0 0 0;">
-    							<select style="margin: 0 auto; width: 35px; height: 100%;">
-									<option>01月</option>
-									<option>02月</option>
-									<option>03月</option>
-    								<option>04月</option>
-									<option selected>05月</option>
-									<option>06月</option>
-									<option>07月</option>
-									<option>08月</option>
-									<option>09月</option>
-									<option>10月</option>
-									<option>11月</option>
-									<option>12月</option>
-    							</select>
+								<input type="text" style="text-align: center; font-size: 15px;" id="cashflow/list/date" value="$!{year}年$!{month}月"></input>
+								<input type="hidden" id="cashflow/list/year" value="$!{year}"/>
+								<input type="hidden" id="cashflow/list/month" value="$!{month}"/>
                             </div>
-							<div class="color-gray">2016年</div>
                         </div>
 						<div class="col-33" style="width: 33%;">
 							<h3 id="cashflow/list/b">0.00</h3>

@@ -10,6 +10,7 @@ import com.hsh24.dms.api.bankAcct.bo.BankAcct;
 import com.hsh24.dms.api.cashflow.ICashflowService;
 import com.hsh24.dms.api.cashflow.bo.Cashflow;
 import com.hsh24.dms.framework.action.BaseAction;
+import com.hsh24.dms.framework.util.DateUtil;
 import com.hsh24.dms.framework.util.FormatUtil;
 
 /**
@@ -28,6 +29,10 @@ public class CashflowAction extends BaseAction {
 	private List<Cashflow> cashflowList;
 
 	private String type;
+
+	private String year;
+
+	private String month;
 
 	/**
 	 * 
@@ -72,12 +77,35 @@ public class CashflowAction extends BaseAction {
 
 	/**
 	 * 
+	 * @param cashflow
+	 * @return
+	 */
+	private Cashflow init(Cashflow cashflow) {
+		int yyyy = DateUtil.getYear();
+		int mm = DateUtil.getMonth();
+
+		if (StringUtils.isBlank(year)) {
+			year = String.valueOf(yyyy);
+		}
+
+		if (StringUtils.isBlank(month)) {
+			month = String.valueOf(mm);
+		}
+
+		cashflow.setGmtStart(year + "-" + month + "-01 00:00:00");
+		cashflow.setGmtEnd(year + "-" + month + "-31 23:59:59");
+
+		return cashflow;
+	}
+
+	/**
+	 * 
 	 * @return
 	 */
 	public String list() {
 		Long shopId = this.getShop().getShopId();
 
-		cashflowList = cashflowService.getCashflowList(shopId, new Cashflow());
+		cashflowList = cashflowService.getCashflowList(shopId, init(new Cashflow()));
 
 		return SUCCESS;
 	}
@@ -112,6 +140,22 @@ public class CashflowAction extends BaseAction {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
 }
