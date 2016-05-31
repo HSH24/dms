@@ -68,7 +68,7 @@ public class ReceiptServiceImpl implements IReceiptService {
 			return result;
 		}
 
-		if (receiptDetailList == null || receiptDetailList.size() == 0) {
+		if (receiptDetailList == null || receiptDetailList.isEmpty()) {
 			result.setCode("收货明细信息不能为空");
 			return result;
 		}

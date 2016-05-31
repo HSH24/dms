@@ -70,7 +70,7 @@ public class UserAcctAction extends BaseAction {
 			HttpServletResponse response = getServletResponse();
 			if (response != null) {
 				Cookie ps = new Cookie("PS", u.getPassport());
-				// ps.setMaxAge(-1);
+				ps.setMaxAge(-1);
 				ps.setPath("/");
 				ps.setDomain(env.getProperty("domain"));
 				response.addCookie(ps);

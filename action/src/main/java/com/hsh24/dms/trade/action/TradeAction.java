@@ -97,10 +97,11 @@ public class TradeAction extends BaseAction {
 
 		Long shopId = this.getShop().getShopId();
 
-		if ("tosend".equals(type)) {
-			sb.append(FormatUtil.getAmountFormat(tradeService.getTradePrice(shopId, new String[] { "tosend" })))
+		if (ITradeService.TO_SEND.equals(type)) {
+			sb.append(
+				FormatUtil.getAmountFormat(tradeService.getTradePrice(shopId, new String[] { ITradeService.TO_SEND })))
 				.append("&");
-			sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" }));
+			sb.append(tradeService.getTradeCount(shopId, new String[] { ITradeService.TO_SEND }));
 
 			this.setResourceResult(sb.toString());
 		} else if ("send".equals(type)) {
@@ -111,7 +112,7 @@ public class TradeAction extends BaseAction {
 			this.setResourceResult(sb.toString());
 		} else {
 			sb.append(tradeService.getTradeCount(shopId, null)).append("&");
-			sb.append(tradeService.getTradeCount(shopId, new String[] { "tosend" })).append("&");
+			sb.append(tradeService.getTradeCount(shopId, new String[] { ITradeService.TO_SEND })).append("&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "send" })).append("&");
 			sb.append(tradeService.getTradeCount(shopId, new String[] { "sign" }));
 
@@ -132,8 +133,8 @@ public class TradeAction extends BaseAction {
 		// 待付款
 		if ("topay".equals(type)) {
 			tradeList = tradeService.getTradeList(shopId, new String[] { "check", "topay" });
-		} else if ("tosend".equals(type)) {
-			tradeList = tradeService.getTradeList(shopId, new String[] { "tosend" });
+		} else if (ITradeService.TO_SEND.equals(type)) {
+			tradeList = tradeService.getTradeList(shopId, new String[] { ITradeService.TO_SEND });
 		} else if ("send".equals(type)) {
 			tradeList = tradeService.getTradeList(shopId, new String[] { "send" });
 		} else if ("sign".equals(type)) {
@@ -177,7 +178,7 @@ public class TradeAction extends BaseAction {
 			receiptList = receiptService.getReceiptList(shopId, trade.getTradeId());
 		}
 
-		if (receiptList == null || receiptList.size() == 0) {
+		if (receiptList == null || receiptList.isEmpty()) {
 			return SUCCESS;
 		}
 
@@ -185,7 +186,7 @@ public class TradeAction extends BaseAction {
 
 		for (Receipt receipt : receiptList) {
 			List<ReceiptDetail> receiptDetailList = receipt.getReceiptDetailList();
-			if (receiptDetailList == null || receiptDetailList.size() == 0) {
+			if (receiptDetailList == null || receiptDetailList.isEmpty()) {
 				continue;
 			}
 

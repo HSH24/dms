@@ -118,7 +118,7 @@ public class ItemServiceImpl implements IItemService {
 
 			// 获取商品价格(item_price)
 			List<ItemSku> skuList = it.getSkuList();
-			if (skuList != null && skuList.size() > 0) {
+			if (skuList != null && !skuList.isEmpty()) {
 				for (ItemSku sku : skuList) {
 					ItemPrice itemPrice = itemPriceService.getItemPrice(itemRegionId, sku.getSkuId());
 					if (itemPrice != null) {
@@ -199,7 +199,7 @@ public class ItemServiceImpl implements IItemService {
 		List<ItemSku> skuList = itemSkuService.getItemSkuList(itemId);
 
 		// 不存在 sku 信息 直接返回
-		if (skuList == null || skuList.size() == 0) {
+		if (skuList == null || skuList.isEmpty()) {
 			// 设置价格区间 = item 总表价格
 			item.setOriginRange(item.getOrigin().toString());
 			item.setPriceRange(item.getPrice().toString());
@@ -227,7 +227,7 @@ public class ItemServiceImpl implements IItemService {
 
 		List<SpecCat> specCatList = specService.getSpecCatList(specCId);
 		// 根据 specCId[] 重新排序
-		if (specCatList != null && specCatList.size() > 0) {
+		if (specCatList != null && !specCatList.isEmpty()) {
 			Map<Long, SpecCat> map = new HashMap<Long, SpecCat>();
 			for (SpecCat sc : specCatList) {
 				map.put(sc.getSpecCId(), sc);
@@ -282,7 +282,7 @@ public class ItemServiceImpl implements IItemService {
 		List<SpecItem> specItemList = specService.getSpecItemList(specItemId);
 
 		// 规格组合 黑色 大 ／ 红色 大
-		if (specItemList != null && specItemList.size() > 0) {
+		if (specItemList != null && !specItemList.isEmpty()) {
 			Map<Long, String> map = new HashMap<Long, String>();
 
 			for (SpecItem specItem : specItemList) {
@@ -326,7 +326,7 @@ public class ItemServiceImpl implements IItemService {
 
 		List<Item> itemList = getItemList(item);
 
-		if (itemList == null || itemList.size() == 0) {
+		if (itemList == null || itemList.isEmpty()) {
 			return null;
 		}
 
