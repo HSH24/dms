@@ -200,7 +200,7 @@ public class TradeAction extends BaseAction {
 			}
 		}
 
-		if (map.size() == 0) {
+		if (map.size() == 0 || trade == null) {
 			return SUCCESS;
 		}
 
