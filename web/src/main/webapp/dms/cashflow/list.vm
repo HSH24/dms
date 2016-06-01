@@ -52,7 +52,7 @@
                 </ul>
             </div>
 			
-			#if($!{cashflowList})
+			#if($!{cashflowList} && $!{cashflowList.size()} > 0)
 			#set($d = '00')
 			<div class="list-block accordion-list" style="font-size: 14px;">
 				#foreach($cashflow in $!{cashflowList})
@@ -84,6 +84,15 @@
 				#end
 				</ul>
             </div>
+			#else
+			<div class="empty-list">
+				<div class="empty-list-header">
+					<h4>居然还没有订单</h4>
+					<span></span>
+				</div>
+				<div class="empty-list-content">
+				</div>
+			</div>
 			#end
         </div>
     </div>
