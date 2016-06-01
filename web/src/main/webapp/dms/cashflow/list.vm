@@ -35,7 +35,7 @@
 					<li class="row" style="text-align: center;">
 						<div class="col-33" style="width: 33%;">
 							<div style="margin: 0.6rem 0 0 0;">
-								<input type="text" style="text-align: center; font-size: 15px;" id="cashflow/list/date" value="$!{year}年$!{month}月"></input>
+								<input type="text" style="text-align: center; font-size: 16px;" id="cashflow/list/date" value="$!{year}年$!{month}月"></input>
 								<input type="hidden" id="cashflow/list/year" value="$!{year}"/>
 								<input type="hidden" id="cashflow/list/month" value="$!{month}"/>
                             </div>
