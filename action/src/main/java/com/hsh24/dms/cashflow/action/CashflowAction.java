@@ -81,19 +81,18 @@ public class CashflowAction extends BaseAction {
 	 * @return
 	 */
 	private Cashflow init(Cashflow cashflow) {
-		int yyyy = DateUtil.getYear();
-		int mm = DateUtil.getMonth();
-
 		if (StringUtils.isBlank(year)) {
-			year = String.valueOf(yyyy);
+			year = String.valueOf(DateUtil.getYear());
 		}
 
 		if (StringUtils.isBlank(month)) {
-			month = String.valueOf(mm);
+			month = String.valueOf(DateUtil.getMonth());
 		}
 
 		cashflow.setGmtStart(year + "-" + month + "-01 00:00:00");
-		cashflow.setGmtEnd(year + "-" + month + "-31 23:59:59");
+		cashflow.setGmtEnd(DateUtil.datetime(
+			DateUtil.getLastDayOfLastMonth(Integer.parseInt(year), Integer.parseInt(month)),
+			DateUtil.DEFAULT_DATE_FORMAT) + " 23:59:59");
 
 		return cashflow;
 	}
