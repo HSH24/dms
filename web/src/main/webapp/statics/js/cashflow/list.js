@@ -25,7 +25,7 @@ myApp.onPageInit('cashflow.list', function(page) {
 				onClose : function(p) {
 					myApp.getCurrentView().router.reloadPage(appUrl
 							+ '/cashflow/list.htm?year=' + p.value[0]
-							+ '&month=' + p.value[1])
+							+ '&month=' + p.value[1]);
 				}
 			});
 
