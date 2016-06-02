@@ -53,7 +53,8 @@ public class SaleAction extends BaseAction {
 		String yyyy = String.valueOf(DateUtil.getYear());
 		String mm = String.valueOf(DateUtil.getMonth());
 		sale.setGmtStart(yyyy + "-" + mm + "-01 00:00:00");
-		sale.setGmtEnd(yyyy + "-" + mm + "-31 23:59:59");
+		sale.setGmtEnd(DateUtil.datetime(DateUtil.getLastDayOfLastMonth(Integer.parseInt(yyyy), Integer.parseInt(mm)),
+			DateUtil.DEFAULT_DATE_FORMAT) + " 23:59:59");
 		sale = saleService.getStats(this.getShop().getShopId(), sale);
 		sb.append(sale == null ? "0.00" : FormatUtil.getAmountFormat(sale.getAmount()));
 
