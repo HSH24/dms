@@ -14,6 +14,7 @@
 	<div data-page="stock.list" class="page no-tabbar">
 		<!-- Scrollable page content-->
 		<div class="page-content">
+			#if($!{stockList} && $!{stockList.size()} > 0)
 			<div class="list-block accordion-list" style="font-size: 14px;">
 				<ul>
 					#foreach($stock in $!{stockList})
@@ -34,6 +35,16 @@
 					#end
                 </ul>
             </div>
+			#else
+			<div class="empty-list">
+				<div class="empty-list-header">
+					<h4>没有库存数据</h4>
+					<span></span>
+				</div>
+				<div class="empty-list-content">
+				</div>
+			</div>
+			#end
         </div>
     </div>
 </div>
