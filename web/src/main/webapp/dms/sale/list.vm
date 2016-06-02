@@ -17,22 +17,33 @@
 			<div class="list-block" style="font-size: 15px;">
 				<ul class="page-settings">
 					<li class="row" style="text-align: center;">
-						<div class="col-33" style="width: 33%;">
-							<div style="margin: 0.6rem 0 0 0;">
-								<input type="text" style="text-align: center; font-size: 16px;" id="sale/list/date" value="$!{year}年$!{month}月"></input>
-								<input type="hidden" id="sale/list/year" value="$!{year}"/>
-								<input type="hidden" id="sale/list/month" value="$!{month}"/>
-                            </div>
-                        </div>
-						<div class="col-33" style="width: 33%;">
+						<div class="col-50" style="width: 50%;">
 							<h3 id="sale/list/a">0.00</h3>
 							<div class="color-gray">今天(元)</div>
                         </div>
-						<div class="col-33" style="width: 33%;">
+						<div class="col-50" style="width: 50%;">
 							<h3 id="sale/list/b">0.00</h3>
 							<div class="color-gray">本月(元)</div>
                         </div>
 					</li>
+                </ul>
+            </div>
+			
+			<div class="list-block" style="font-size: 14px;">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-media"><i class="iconfont icon-calendar"></i></div>
+							<div class="item-inner">
+								<div class="item-title label">统计时间</div>
+								<div class="item-input">
+									<input type="text" style="font-size: 14px;" id="sale/list/date" value="$!{year}年$!{month}月"></input>
+									<input type="hidden" id="sale/list/year" value="$!{year}"/>
+									<input type="hidden" id="sale/list/month" value="$!{month}"/>
+								</div>
+							</div>
+                        </div>
+                    </li>
                 </ul>
             </div>
 			

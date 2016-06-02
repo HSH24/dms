@@ -539,6 +539,11 @@ a.component.type3 img {
     border-left-style: dashed;
 }
 
+.page-settings .col-50 + .col-50 {
+    border-left: 1px solid #ccc;
+    border-left-style: dashed;
+}
+
 
 
 /* 去掉下划线 */
