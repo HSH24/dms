@@ -130,7 +130,7 @@ function portal_home_stats() {
 	$$.get(appUrl + '/cashflow/stats.htm', {}, function(data) {
 				var stats = data.split("&");
 				$$('#portal/home/cashflow').html('保证金：50,000<br/>余额：'
-						+ stats[2]);
+						+ stats[1]);
 			});
 
 	$$.get(appUrl + '/stock/stats.htm', {}, function(data) {

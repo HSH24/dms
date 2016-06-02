@@ -28,8 +28,6 @@ public class CashflowAction extends BaseAction {
 
 	private List<Cashflow> cashflowList;
 
-	private String type;
-
 	private String year;
 
 	private String month;
@@ -43,29 +41,13 @@ public class CashflowAction extends BaseAction {
 
 		Long shopId = this.getShop().getShopId();
 
-		if (StringUtils.isBlank(type)) {
-			Cashflow cashflow = cashflowService.getCashflowStats(shopId);
-			sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount())).append(
-				"&");
-			sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getCrAmount())).append(
-				"&");
-
-			BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
-			sb.append(FormatUtil.getAmountFormat(bankAcct == null ? BigDecimal.ZERO : bankAcct.getCurBal()));
-
-			this.setResourceResult(sb.toString());
-
-			return RESOURCE_RESULT;
-		}
-
-		Cashflow cashflow = cashflowService.getCashflowStats(shopId, "A");
-		sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount())).append("&");
-
-		cashflow = cashflowService.getCashflowStats(shopId, "C");
-		sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount())).append("&");
+		Cashflow cashflow = cashflowService.getCashflowStats(shopId, "C");
+		BigDecimal crAmount = cashflow == null ? BigDecimal.ZERO : cashflow.getDrAmount();
 
 		cashflow = cashflowService.getCashflowStats(shopId, "B");
-		sb.append(FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getCrAmount())).append("&");
+		sb.append(
+			FormatUtil.getAmountFormat(cashflow == null ? BigDecimal.ZERO : cashflow.getCrAmount().add(
+				crAmount.negate()))).append("&");
 
 		BankAcct bankAcct = bankAcctService.getBankAcct(shopId, "1001");
 		sb.append(FormatUtil.getAmountFormat(bankAcct == null ? BigDecimal.ZERO : bankAcct.getCurBal()));
@@ -131,14 +113,6 @@ public class CashflowAction extends BaseAction {
 
 	public void setCashflowList(List<Cashflow> cashflowList) {
 		this.cashflowList = cashflowList;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getYear() {

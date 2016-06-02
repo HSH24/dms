@@ -58,8 +58,8 @@
 				<ul class="page-settings after-height-0">
 					<li class="row" style="text-align: center;">
 						<div class="col-33" style="width: 33%;">
-							<h3 id="member/index/drAmount">0.00</h3>
-							<div class="color-gray">收入(元)</div>
+							<h3>50,000</h3>
+							<div class="color-gray">保证金(元)</div>
                         </div>
 						<div class="col-33" style="width: 33%;">
 							<h3 id="member/index/crAmount">0.00</h3>
