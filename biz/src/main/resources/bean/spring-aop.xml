@@ -17,7 +17,7 @@
 		<aop:aspect ref="methodProfiler">
 			
 			<aop:pointcut id="theExecutionOfServiceMethod"
-				expression="(execution(* com.hsh24.dms.*.task.*.*(..))
+				expression="(execution(* com.hsh24.dms.*.service.impl.*.*(..))
 				)"/>
 				
 			<aop:around pointcut-ref="theExecutionOfServiceMethod"
