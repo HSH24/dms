@@ -53,6 +53,7 @@
 		</div>
 		
 		#JSM(["framework7"])
+		#JS_ENV_VAL()
 		<script type="text/javascript" src="$!{env.imgUrl}/js/user/shop.js"></script>
 	</body>
 </html>
