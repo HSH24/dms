@@ -82,11 +82,11 @@ public class OrderServiceImpl implements IOrderService {
 			return result;
 		}
 
-		if (StringUtils.isBlank(modifyUser)) {
+		if (StringUtils.isEmpty(modifyUser)) {
 			result.setCode("操作人信息不能为空！");
 			return result;
 		}
-		order.setModifyUser(modifyUser.trim());
+		order.setModifyUser(modifyUser);
 
 		try {
 			orderDao.createOrder4Item(order);
