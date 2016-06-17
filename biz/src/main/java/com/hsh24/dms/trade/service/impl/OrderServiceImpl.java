@@ -63,7 +63,7 @@ public class OrderServiceImpl implements IOrderService {
 		try {
 			order.setSkuId(Long.valueOf(skuId));
 		} catch (NumberFormatException e) {
-			logger.error(itemId, e);
+			logger.error(skuId, e);
 
 			result.setCode("SKU信息不正确！");
 			return result;
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements IOrderService {
 		try {
 			order.setQuantity(Integer.valueOf(quantity));
 		} catch (NumberFormatException e) {
-			logger.error(itemId, e);
+			logger.error(quantity, e);
 
 			result.setCode("数量信息不正确！");
 			return result;

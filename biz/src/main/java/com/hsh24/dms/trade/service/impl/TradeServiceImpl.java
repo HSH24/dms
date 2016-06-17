@@ -90,6 +90,19 @@ public class TradeServiceImpl implements ITradeService {
 			return result;
 		}
 
+		if (StringUtils.isBlank(quantity)) {
+			result.setCode("数量信息不能为空！");
+			return result;
+		}
+		try {
+			Integer.valueOf(quantity);
+		} catch (NumberFormatException e) {
+			logger.error(e);
+
+			result.setCode("数量信息不正确！");
+			return result;
+		}
+
 		try {
 			result = itemService.validate(Long.valueOf(itemId), Long.valueOf(skuId));
 		} catch (NumberFormatException e) {
