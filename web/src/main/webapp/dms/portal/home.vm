@@ -88,7 +88,7 @@
 									<div class="col-50" style="padding-right: 5px;">
 										<a href="#view-2" id="view_2_click" class="small-box tab-link" style="background-color: #70A9B7; color: #FFFFFF;">
 											<div class="inner">
-												<h3>派送单</h3>
+												<h3>派送</h3>
 												<p>今天：1<br/>本月：1</p>
 											</div>
 											<div class="icon">
@@ -100,7 +100,7 @@
 									<div class="col-50" style="padding-left: 5px;">
 										<a href="$!{env.appUrl}/trade/list.htm?type=send" class="small-box" style="background-color: #B9C14D; color: #FFFFFF;" data-ignore-cache="true">
 											<div class="inner">
-												<h3>收货单</h3>
+												<h3>收货</h3>
 												<p id="portal/home/trade/send">金额：0.00<br/>订单：0</p>
 											</div>
 											<div class="icon">
