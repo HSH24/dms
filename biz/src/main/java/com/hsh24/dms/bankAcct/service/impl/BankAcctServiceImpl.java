@@ -50,25 +50,25 @@ public class BankAcctServiceImpl implements IBankAcctService {
 		BankAcct bankAcct = new BankAcct();
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 		bankAcct.setShopId(shopId);
 
 		if (bankAcctId == null) {
-			result.setCode("资金账户信息不能为空。");
+			result.setCode("资金账户信息不能为空");
 			return result;
 		}
 		bankAcct.setBankAcctId(bankAcctId);
 
 		if (amount == null) {
-			result.setCode("金额信息不能为空。");
+			result.setCode("金额信息不能为空");
 			return result;
 		}
 		bankAcct.setAmount(amount);
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 		bankAcct.setModifyUser(modifyUser);
@@ -78,11 +78,11 @@ public class BankAcctServiceImpl implements IBankAcctService {
 			if (c == 1) {
 				result.setResult(true);
 			} else {
-				result.setCode("更新账户信息失败。");
+				result.setCode("更新账户信息失败");
 			}
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(bankAcct), e);
-			result.setCode("更新账户信息表失败。");
+			result.setCode("更新账户信息表失败");
 		}
 
 		return result;

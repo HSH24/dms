@@ -29,17 +29,17 @@ public class CashflowServiceImpl implements ICashflowService {
 		result.setResult(false);
 
 		if (shopId == null) {
-			result.setCode("店铺信息不能为空。");
+			result.setCode("店铺信息不能为空");
 			return result;
 		}
 
 		if (cashflow == null) {
-			result.setCode("资金流水信息不能为空。");
+			result.setCode("资金流水信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
@@ -52,11 +52,11 @@ public class CashflowServiceImpl implements ICashflowService {
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(cashflow), e);
 
-			result.setCode("添加资金流水信息失败，请稍后再试。");
+			result.setCode("添加资金流水信息失败，请稍后再试");
 		}
 
 		if (result.getResult()) {
-			result.setCode("添加成功。");
+			result.setCode("添加成功");
 		}
 
 		return result;

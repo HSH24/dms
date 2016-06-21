@@ -345,12 +345,12 @@ public class ItemServiceImpl implements IItemService {
 		result.setResult(false);
 
 		if (itemId == null) {
-			result.setCode("商品信息不能为空。");
+			result.setCode("商品信息不能为空");
 			return result;
 		}
 
 		if (skuId == null) {
-			result.setCode("商品SKU信息不能为空。");
+			result.setCode("商品SKU信息不能为空");
 			return result;
 		}
 
@@ -363,18 +363,18 @@ public class ItemServiceImpl implements IItemService {
 			// 根据 skuId 获得 item 并 验证
 			Map<Long, ItemSku> map = itemSkuService.getItemSku(new String[] { skuId.toString() });
 			if (map == null || map.size() == 0) {
-				result.setCode("SKU信息不存在。");
+				result.setCode("SKU信息不存在");
 				return result;
 			}
 
 			ItemSku itemSku = map.get(skuId);
 			if (itemSku == null) {
-				result.setCode("SKU信息不存在。");
+				result.setCode("SKU信息不存在");
 				return result;
 			}
 
 			if (!itemId.equals(itemSku.getItemId())) {
-				result.setCode("商品和SKU信息不匹配。");
+				result.setCode("商品和SKU信息不匹配");
 				return result;
 			}
 
@@ -386,13 +386,13 @@ public class ItemServiceImpl implements IItemService {
 		// 根据 itemId 获得 item
 		Map<Long, Item> map = getItem(new String[] { itemId.toString() });
 		if (map == null || map.size() == 0) {
-			result.setCode("商品信息不存在。");
+			result.setCode("商品信息不存在");
 			return result;
 		}
 
 		Item item = map.get(itemId);
 		if (item == null) {
-			result.setCode("商品信息不存在。");
+			result.setCode("商品信息不存在");
 			return result;
 		}
 

@@ -27,17 +27,17 @@ public class TradeLogServiceImpl implements ITradeLogService {
 		result.setResult(false);
 
 		if (tradeId == null) {
-			result.setCode("交易信息不能为空。");
+			result.setCode("交易信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(type)) {
-			result.setCode("交易类型不能为空。");
+			result.setCode("交易类型不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
@@ -52,11 +52,11 @@ public class TradeLogServiceImpl implements ITradeLogService {
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(tradeLog), e);
 
-			result.setCode("记录交易日志信息失败，请稍后再试。");
+			result.setCode("记录交易日志信息失败，请稍后再试");
 		}
 
 		if (result.getResult()) {
-			result.setCode("操作成功。");
+			result.setCode("操作成功");
 		}
 
 		return result;

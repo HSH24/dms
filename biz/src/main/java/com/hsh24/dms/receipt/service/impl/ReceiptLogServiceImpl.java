@@ -27,17 +27,17 @@ public class ReceiptLogServiceImpl implements IReceiptLogService {
 		result.setResult(false);
 
 		if (receiptId == null) {
-			result.setCode("收货信息不能为空。");
+			result.setCode("收货信息不能为空");
 			return result;
 		}
 
 		if (StringUtils.isBlank(type)) {
-			result.setCode("收货类型不能为空。");
+			result.setCode("收货类型不能为空");
 			return result;
 		}
 
 		if (StringUtils.isEmpty(modifyUser)) {
-			result.setCode("操作人信息不能为空。");
+			result.setCode("操作人信息不能为空");
 			return result;
 		}
 
@@ -52,11 +52,11 @@ public class ReceiptLogServiceImpl implements IReceiptLogService {
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(receiptLog), e);
 
-			result.setCode("记录收货日志信息失败，请稍后再试。");
+			result.setCode("记录收货日志信息失败，请稍后再试");
 		}
 
 		if (result.getResult()) {
-			result.setCode("操作成功。");
+			result.setCode("操作成功");
 		}
 
 		return result;
