@@ -12,7 +12,7 @@ import com.hsh24.dms.api.monitor.bo.LogMonitor;
  */
 public interface ILogMonitorService {
 
-	String ERROR_MESSAGE = "操作失败！";
+	String ERROR_MESSAGE = "操作失败";
 
 	/**
 	 * 

@@ -105,7 +105,7 @@ public class UserServiceImpl implements IUserService {
 		} catch (IOException e) {
 			logger.error("password:" + password, e);
 
-			result.setCode("密码加密失败！");
+			result.setCode("密码加密失败");
 			return result;
 		}
 
@@ -122,7 +122,7 @@ public class UserServiceImpl implements IUserService {
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(user), e);
 
-			result.setCode("修改用户信息失败！");
+			result.setCode("修改用户信息失败");
 		}
 
 		return result;
@@ -164,7 +164,7 @@ public class UserServiceImpl implements IUserService {
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(user), e);
 
-			result.setCode("修改用户信息失败！");
+			result.setCode("修改用户信息失败");
 		}
 
 		return result;

@@ -13,7 +13,7 @@ import com.hsh24.dms.framework.bo.BooleanResult;
  */
 public interface IMethodMonitorService {
 
-	String ERROR_MESSAGE = "操作失败！";
+	String ERROR_MESSAGE = "操作失败";
 
 	/**
 	 * 

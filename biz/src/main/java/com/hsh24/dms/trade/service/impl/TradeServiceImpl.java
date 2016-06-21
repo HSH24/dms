@@ -91,7 +91,7 @@ public class TradeServiceImpl implements ITradeService {
 		}
 
 		if (StringUtils.isBlank(quantity)) {
-			result.setCode("数量信息不能为空！");
+			result.setCode("数量信息不能为空");
 			return result;
 		}
 		try {
@@ -99,7 +99,7 @@ public class TradeServiceImpl implements ITradeService {
 		} catch (NumberFormatException e) {
 			logger.error(e);
 
-			result.setCode("数量信息不正确！");
+			result.setCode("数量信息不正确");
 			return result;
 		}
 
