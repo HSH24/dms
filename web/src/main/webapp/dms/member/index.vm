@@ -46,7 +46,7 @@
 				<ul>
 					<li>
 						<a href="$!{env.appUrl}/trade/list.htm" class="item-link item-content" data-ignore-cache="true">
-							<div class="item-media"><i class="iconfont icon-text"></i></div>
+							<div class="item-media"><i class="iconfont icon-text" style="color: #f4c600;"></i></div>
 							<div class="item-inner">
 								<div class="item-title">全部订单</div>
 							</div>
@@ -74,7 +74,7 @@
 				<ul>
 					<li>
 						<a href="$!{env.appUrl}/cashflow/list.htm" class="item-link item-content" data-ignore-cache="true">
-							<div class="item-media"><i class="iconfont icon-redpacket"></i></div>
+							<div class="item-media"><i class="iconfont icon-redpacket" style="color: #eb4f38;"></i></div>
 							<div class="item-inner">
 								<div class="item-title">我的资金</div>
 							</div>
@@ -82,7 +82,7 @@
 					</li>
 					<li>
 						<a href="#" class="item-link item-content">
-							<div class="item-media"><i class="iconfont icon-refund"></i></div>
+							<div class="item-media"><i class="iconfont icon-refund" style="color: #eb4f38;"></i></div>
 							<div class="item-inner">
 								<div class="item-title">我的返现</div>
 							</div>
