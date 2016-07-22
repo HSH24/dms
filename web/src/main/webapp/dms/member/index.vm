@@ -18,7 +18,7 @@
 				<ul>
 					<li>
 						<a href="$!{env.appUrl}/user/detail.htm" class="item-link item-content" data-ignore-cache="true">
-							<div class="item-media"><i class="iconfont icon-my" style="color: #eb4f38;"></i></div>
+							<div class="item-media"><i class="iconfont icon-my" style="color: #8e8e93;"></i></div>
 							<div class="item-inner">
 								<div class="item-title">$!{user.userName}</div>
 							</div>
@@ -100,7 +100,7 @@
 				<ul>
 					<li>
 						<a href="$!{env.appUrl}/user/shop.htm" class="item-link item-content external">
-							<div class="item-media"><i class="iconfont icon-home" style="color: #f4c600;"></i></div>
+							<div class="item-media"><i class="iconfont icon-home" style="color: #11cd6e;"></i></div>
 							<div class="item-inner">
 								<div class="item-title">我的店铺</div>
 							</div>
