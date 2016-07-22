@@ -25,7 +25,7 @@
 			
 		<!-- Scrollable page content-->
 		<div class="page-content">
-			<div class="list-block cards-list list-block-search searchbar-found" style="font-size: 15px;">
+			<div class="list-block list-block-search searchbar-found" style="font-size: 15px;">
 				<ul>
 					#foreach($item in $!{itemList})
 						#if($!{item.skuList})
@@ -57,7 +57,7 @@
 							#end
 						#else
     						<!-- 不存在sku -->
-                            <!--li>
+                            <li>
         						<div class="item-content">
         							<div class="item-media">
 										#if($!{item.itemFileList.size()} > 0)
@@ -78,24 +78,7 @@
         								</div>
             						</div>
                                 </div>
-        					</li-->
-							
-							<li class="card">
-								<div class="card-content">
-									<div class="card-content-inner">
-										#if($!{item.itemFileList.size()} > 0)
-        								<img data-src="$!{item.itemFileList.get(0).filePath}" class="lazy" style="width: 100%;"></img>
-										#end
-                                        <p>$!{item.itemName} ￥$!formatUtil.getAmountFormat($!{item.price})</p>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="item-title" style="font-size: 13px; color: #8e8e93;">供应商：$!{item.supName} <div style="display: none;">$!{item.barCode}</div></div>
-    								<div class="item-after">
-										<a href="#" data-picker=".picker-$!{item.itemId}-0" class="open-picker"><i class="iconfont icon-cart" style="font-size: 23px; color: #FF5500;"></i></a>
-    								</div>
-								</div>
-							</li>
+        					</li>
 						#end
 					#end
 				</ul>
