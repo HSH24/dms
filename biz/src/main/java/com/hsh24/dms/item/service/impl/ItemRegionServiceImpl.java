@@ -2,6 +2,10 @@ package com.hsh24.dms.item.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.hsh24.dms.api.item.IItemRegionService;
 import com.hsh24.dms.api.item.bo.Item;
 import com.hsh24.dms.api.item.bo.ItemRegion;
@@ -15,10 +19,12 @@ import com.wideka.weixin.framework.util.LogUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class ItemRegionServiceImpl implements IItemRegionService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ItemRegionServiceImpl.class);
 
+	@Resource
 	private IItemRegionDao itemRegionDao;
 
 	@Override
@@ -55,14 +61,6 @@ public class ItemRegionServiceImpl implements IItemRegionService {
 		}
 
 		return null;
-	}
-
-	public IItemRegionDao getItemRegionDao() {
-		return itemRegionDao;
-	}
-
-	public void setItemRegionDao(IItemRegionDao itemRegionDao) {
-		this.itemRegionDao = itemRegionDao;
 	}
 
 }

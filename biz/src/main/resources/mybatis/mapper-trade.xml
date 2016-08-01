@@ -1,0 +1,185 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.trade.dao.ITradeDao">
+	
+	<insert id="createTrade" parameterType="trade" useGeneratedKeys="true" keyProperty="tradeId">
+	<![CDATA[
+		INSERT
+		INTO dms_tb_trade
+		  (
+			TRADE_NO,
+			SHOP_ID,
+			SUP_ID,
+			TYPE,
+			TRADE_PRICE,
+			`CHANGE`,
+			CART_ID,
+			CREATE_DATE,
+			PAY_TYPE,
+			PAY_DATE,
+			STATE,
+			CREATE_USER,
+			MODIFY_DATE,
+			MODIFY_USER
+		  )
+		  VALUES
+		  (
+			#{tradeNo},
+			#{shopId},
+			#{supId},
+			#{type},
+			#{tradePrice},
+			#{change},
+			#{cartId},
+			NOW(),
+			#{payType},
+			NOW(),
+			'U',
+			#{modifyUser},
+			NOW(),
+			#{modifyUser}
+		  )
+	]]>
+	</insert>
+	
+	<select id="getTradePrice" parameterType="trade" resultType="java.math.BigDecimal">
+	<![CDATA[
+		SELECT SUM(t.trade_price + t.change)
+		  FROM dms_tb_trade t
+		 WHERE t.STATE = 'U'
+		   AND t.shop_id = #{shopId}
+	]]>
+		<isNotEmpty property="codes" prepend="and">
+		<![CDATA[ t.type IN ]]>
+			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		</isNotEmpty>
+	</select>
+
+	<select id="getTradeCount" parameterType="trade" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(1)
+		  FROM dms_tb_trade t
+		 WHERE t.STATE = 'U'
+		   AND t.shop_id = #{shopId}
+	]]>
+		<isNotEmpty property="codes" prepend="and">
+		<![CDATA[ t.type IN ]]>
+			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		</isNotEmpty>
+	</select>
+	
+	<select id="getTradeList" parameterType="trade" resultType="trade">
+	<![CDATA[
+		SELECT t.trade_id AS tradeId,
+			   t.trade_no AS tradeNo,
+			   t.sup_id AS supId,
+			   t.trade_price AS tradePrice,
+			   t.change,
+			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate,
+			   DATE_FORMAT(t.modify_date, '%Y-%m-%d %T') AS modifyDate,
+			   DATE_FORMAT(t.pay_date, '%Y-%m-%d %T') AS payDate,
+			   DATE_FORMAT(t.send_date, '%Y-%m-%d %T') AS sendDate,
+			   DATE_FORMAT(t.sign_date, '%Y-%m-%d %T') AS signDate,
+			   DATE_FORMAT(t.feedback_date, '%Y-%m-%d %T') AS feedbackDate,
+			   DATE_FORMAT(t.feedbacked_date, '%Y-%m-%d %T') AS feedbackedDate,
+			   t.type,
+			   IFNULL(t.score, 0),
+			   t.feedback_type AS feedbackType
+		  FROM dms_tb_trade t
+		 WHERE t.state = 'U'
+		   AND t.shop_id = #{shopId}
+	]]>
+		<isNotEmpty property="codes" prepend="and">
+		<![CDATA[ t.type IN ]]>
+			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		</isNotEmpty>
+		<isEmpty property="sort">
+		<![CDATA[ ORDER BY TRADE_ID DESC ]]>
+		</isEmpty>
+		<isNotEmpty property="sort">
+		<![CDATA[ ORDER BY ${sort} ${order}, TRADE_ID DESC ]]>
+		</isNotEmpty>
+	<![CDATA[
+		LIMIT ${limit} OFFSET ${offset}
+	]]>
+	</select>
+	
+	<select id="getTrade" parameterType="trade" resultType="trade">
+	<![CDATA[
+		SELECT t.trade_id AS tradeId,
+			   t.trade_no AS tradeNo,
+			   t.sup_id AS supId,
+			   t.type,
+			   t.pay_type AS payType,
+			   t.trade_price AS tradePrice,
+			   t.change,
+			   t.cart_id AS cartId,
+			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate,
+			   DATE_FORMAT(t.modify_date, '%Y-%m-%d %T') AS modifyDate,
+			   DATE_FORMAT(t.pay_date, '%Y-%m-%d %T') AS payDate,
+			   DATE_FORMAT(t.send_date, '%Y-%m-%d %T') AS sendDate,
+			   DATE_FORMAT(t.sign_date, '%Y-%m-%d %T') AS signDate,
+			   DATE_FORMAT(t.feedback_date, '%Y-%m-%d %T') AS feedbackDate,
+			   DATE_FORMAT(t.feedbacked_date, '%Y-%m-%d %T') AS feedbackedDate
+		  FROM dms_tb_trade t
+		 WHERE t.state = 'U'
+		   AND t.trade_no = #{tradeNo}
+		   AND t.shop_id = #{shopId}
+	]]>
+	</select>
+	
+	<update id="updateTrade" parameterType="trade">
+	<![CDATA[
+		UPDATE dms_tb_trade t
+		SET t.modify_date = NOW(),
+		  t.modify_user   = #{modifyUser}
+	]]>
+		<isNotEmpty property="type" prepend=",">
+		<![CDATA[ t.type          = #{type} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="type">
+			<isEqual property="type" compareValue="tosend" prepend=",">
+			<![CDATA[ t.PAY_DATE = STR_TO_DATE( #payDate#, '%Y%m%d%H%i%s') ]]>
+			</isEqual>
+			<isEqual property="type" compareValue="send" prepend=",">
+			<![CDATA[ t.SEND_DATE = NOW() ]]>
+			</isEqual>
+			<isEqual property="type" compareValue="sign" prepend=",">
+			<![CDATA[ t.SIGN_DATE = NOW() ]]>
+			</isEqual>
+			<isEqual property="type" compareValue="feedback" prepend=",">
+			<![CDATA[ t.FEEDBACK_DATE = NOW() ]]>
+			</isEqual>
+			<isEqual property="type" compareValue="feedbacked" prepend=",">
+			<![CDATA[ t.FEEDBACKED_DATE = NOW() ]]>
+			</isEqual>
+		</isNotEmpty>
+		<isNotEmpty property="payType" prepend=",">
+		<![CDATA[ t.pay_type = #{payType} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="feedbackType" prepend=",">
+		<![CDATA[ t.feedback_type = #feedbackType# ]]>
+		</isNotEmpty>
+		<isNotEmpty property="score" prepend=",">
+		<![CDATA[ t.score         = #score# ]]>
+		</isNotEmpty>
+	<![CDATA[
+		WHERE t.state       = 'U'
+	]]>
+		<isNotEmpty property="tradeId" prepend="and">
+		<![CDATA[ t.trade_id = #{tradeId} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="tradeNo" prepend="and">
+		<![CDATA[ t.trade_no = #{tradeNo} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="shopId" prepend="and">
+		<![CDATA[ t.shop_id = #{shopId} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="type" prepend="and">
+		<![CDATA[ t.type <> #{type} ]]>
+		</isNotEmpty>
+	</update>
+		
+</mapper>

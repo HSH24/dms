@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.receipt.dao.IReceiptDao">
+	
+	<insert id="createReceipt" parameterType="receipt" useGeneratedKeys="true" keyProperty="receiptId">
+	<![CDATA[
+		INSERT
+		INTO dms_tb_receipt
+		  (
+			RECEIPT_NO,
+			SHOP_ID,
+			TRADE_ID,
+			TYPE,
+			STATE,
+			CREATE_DATE,
+			CREATE_USER,
+			MODIFY_DATE,
+			MODIFY_USER
+		  )
+		  VALUES
+		  (
+			#{receiptNo},
+			#{shopId},
+			#{tradeId},
+			#{type},
+			'U',
+			NOW(),
+			#{modifyUser},
+			NOW(),
+			#{modifyUser}
+		  )
+	]]>
+	</insert>
+	
+	<select id="getReceiptList" parameterType="receipt" resultType="receipt">
+	<![CDATA[
+		SELECT t.receipt_id AS receiptId,
+			   t.receipt_no AS receiptNo,
+			   DATE_FORMAT(t.create_date, '%Y-%m-%d %T') AS createDate
+		  FROM dms_tb_receipt t
+		 WHERE t.state = 'U'
+		   AND t.shop_id = #{shopId}
+		   AND t.trade_id = #{tradeId}
+		 ORDER BY CREATE_DATE DESC
+	]]>
+	</select>
+
+</mapper>

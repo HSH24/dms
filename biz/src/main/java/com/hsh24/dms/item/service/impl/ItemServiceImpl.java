@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.hsh24.dms.api.item.IItemFileService;
@@ -37,26 +40,36 @@ import com.hsh24.dms.item.dao.IItemDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class ItemServiceImpl implements IItemService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ItemServiceImpl.class);
 
+	@Resource
 	private IItemRegionService itemRegionService;
 
+	@Resource
 	private IItemFileService itemFileService;
 
+	@Resource
 	private IItemSkuService itemSkuService;
 
+	@Resource
 	private IItemPriceService itemPriceService;
 
+	@Resource
 	private ISpecService specService;
 
+	@Resource
 	private IShopService shopService;
 
+	@Resource
 	private IRegionService regionService;
 
+	@Resource
 	private ISupplierService supplierService;
 
+	@Resource
 	private IItemDao itemDao;
 
 	@Override
@@ -419,78 +432,6 @@ public class ItemServiceImpl implements IItemService {
 		}
 
 		return null;
-	}
-
-	public IItemRegionService getItemRegionService() {
-		return itemRegionService;
-	}
-
-	public void setItemRegionService(IItemRegionService itemRegionService) {
-		this.itemRegionService = itemRegionService;
-	}
-
-	public IItemFileService getItemFileService() {
-		return itemFileService;
-	}
-
-	public void setItemFileService(IItemFileService itemFileService) {
-		this.itemFileService = itemFileService;
-	}
-
-	public IItemSkuService getItemSkuService() {
-		return itemSkuService;
-	}
-
-	public void setItemSkuService(IItemSkuService itemSkuService) {
-		this.itemSkuService = itemSkuService;
-	}
-
-	public IItemPriceService getItemPriceService() {
-		return itemPriceService;
-	}
-
-	public void setItemPriceService(IItemPriceService itemPriceService) {
-		this.itemPriceService = itemPriceService;
-	}
-
-	public ISpecService getSpecService() {
-		return specService;
-	}
-
-	public void setSpecService(ISpecService specService) {
-		this.specService = specService;
-	}
-
-	public IShopService getShopService() {
-		return shopService;
-	}
-
-	public void setShopService(IShopService shopService) {
-		this.shopService = shopService;
-	}
-
-	public IRegionService getRegionService() {
-		return regionService;
-	}
-
-	public void setRegionService(IRegionService regionService) {
-		this.regionService = regionService;
-	}
-
-	public ISupplierService getSupplierService() {
-		return supplierService;
-	}
-
-	public void setSupplierService(ISupplierService supplierService) {
-		this.supplierService = supplierService;
-	}
-
-	public IItemDao getItemDao() {
-		return itemDao;
-	}
-
-	public void setItemDao(IItemDao itemDao) {
-		this.itemDao = itemDao;
 	}
 
 }

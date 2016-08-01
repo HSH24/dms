@@ -1,0 +1,79 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.cashflow.dao.ICashflowDao">
+	
+	<insert id="createCashflow" parameterType="cashflow" useGeneratedKeys="true" keyProperty="cashflowId">
+	<![CDATA[
+		INSERT
+		INTO dms_tb_cashflow
+		  (
+			CASHFLOW_CID,
+			SHOP_ID,
+			BANK_ACCT_ID,
+			SUMMARY,
+			CR_AMOUNT,
+			DR_AMOUNT,
+			TRADE_DATE,
+			TRADE_NO,
+			STATE,
+			CREATE_DATE,
+			CREATE_USER,
+			MODIFY_DATE,
+			MODIFY_USER
+		  )
+		  VALUES
+		  (
+			#{cashflowCId},
+			#{shopId},
+			#{bankAcctId},
+			#{summary},
+			#{crAmount},
+			#{drAmount},
+			STR_TO_DATE(#{tradeDate}, '%Y-%m-%d %T'),
+			#{tradeNo},
+			'U',
+			NOW(),
+			#{modifyUser},
+			NOW(),
+			#{modifyUser}
+		  )
+	]]>
+	</insert>
+	
+	<select id="getCashflowStats" parameterType="cashflow" resultType="cashflow">
+	<![CDATA[
+		SELECT IFNULL(SUM(t.cr_amount), 0) AS crAmount,
+			   IFNULL(SUM(t.dr_amount), 0) AS drAmount
+		  FROM dms_tb_cashflow t, dms_tb_cashflow_cat p
+		 WHERE t.cashflow_cid = p.cashflow_cid
+		   AND t.state = 'U'
+		   AND p.state = 'U'
+		   AND t.shop_id = #{shopId}
+	]]>
+		<isNotEmpty property="code" prepend="and">
+		<![CDATA[ p.cashflow_code = #{code} ]]>
+		</isNotEmpty>
+	</select>
+	
+	<select id="getCashflowList" parameterType="cashflow" resultType="cashflow">
+	<![CDATA[
+		SELECT t.cashflow_id AS cashflowId,
+			   t.bank_acct_id AS bankAcctId,
+			   t.summary,
+			   t.cr_amount AS crAmount,
+			   t.dr_amount AS drAmount,
+			   DATE_FORMAT(t.trade_date, '%Y-%m-%d %T') AS tradeDate,
+			   t.trade_no AS tradeNo
+		  FROM dms_tb_cashflow t
+		 WHERE t.trade_date >= date_format(#{gmtStart}, '%Y-%m-%d %T')
+		   AND t.trade_date <= date_format(#{gmtEnd}, '%Y-%m-%d %T')
+		   AND t.state = 'U'
+		   AND t.shop_id = #{shopId}
+		 ORDER BY ${sort} ${order}
+		 LIMIT ${limit} OFFSET ${offset}
+	]]>
+	</select>
+	
+</mapper>

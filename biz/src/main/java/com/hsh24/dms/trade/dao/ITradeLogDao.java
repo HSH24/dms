@@ -14,6 +14,6 @@ public interface ITradeLogDao {
 	 * @param tradeLog
 	 * @return
 	 */
-	Long createTradeLog(TradeLog tradeLog);
+	int createTradeLog(TradeLog tradeLog);
 
 }

@@ -16,7 +16,7 @@ public interface IReceiptDao {
 	 * @param receipt
 	 * @return
 	 */
-	Long createReceipt(Receipt receipt);
+	int createReceipt(Receipt receipt);
 
 	/**
 	 * 

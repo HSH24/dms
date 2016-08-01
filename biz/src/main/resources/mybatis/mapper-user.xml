@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.user.dao.IUserDao">
+	
+	<select id="getUserByPassport" parameterType="java.lang.String" resultType="user">
+	<![CDATA[
+		SELECT t.user_id AS userId,
+			   t.user_name AS userName,
+			   t.user_code AS passport,
+			   t.password,
+			   (case when (t.state=1) then 'U' else 'F' END ) AS  state
+		  FROM  oms.auth_user_t t
+		 WHERE  t.user_code = upper(#{possport})
+	]]>
+	</select>
+	
+	<update id="updateUser" parameterType="user">
+	<![CDATA[
+		UPDATE oms.auth_user_t t
+		SET t.UPDATE_DATE = NOW(),
+		  t.UPDATE_BY = #{modifyUser}
+	]]>
+		<isNotEmpty property="password" prepend=",">
+		<![CDATA[ t.password = #{password} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="userName" prepend=",">
+		<![CDATA[ t.user_name = #{userName} ]]>
+		</isNotEmpty>
+	<![CDATA[
+		WHERE t.state = '1'
+		AND t.user_code = upper(#{passport})
+	]]>
+	</update>
+	
+</mapper>

@@ -1,0 +1,34 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.bankAcct.dao.IBankAcctDao">
+	
+	<select id="getBankAcct" parameterType="bankAcct" resultType="bankAcct">
+	<![CDATA[
+		SELECT t.bank_acct_id AS bankAcctId,
+			   t.cur_bal AS curBal
+		  FROM dms_tb_bank_account t,
+			   dms_tb_account p
+		 WHERE t.acc_id = p.acc_id
+		   AND t.shop_id = #{shopId}
+		   AND p.shop_id = #{shopId}
+		   AND t.state = 'U'
+		   AND p.state = 'U'
+		   AND p.acc_code = #{accCode}
+	]]>
+	</select>
+	
+	<update id="updateBankAcct" parameterType="bankAcct">
+	<![CDATA[
+		UPDATE dms_tb_bank_account t
+		   SET t.modify_date = NOW(),
+			   t.modify_user = #{modifyUser},
+			   t.cur_bal= t.cur_bal + #{amount}
+		 WHERE t.state = 'U'
+		   AND t.shop_id = #{shopId}
+		   AND t.bank_acct_id = #{bankAcctId}
+	]]>
+	</update>
+	
+</mapper>

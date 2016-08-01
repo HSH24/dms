@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.supplier.dao.ISupplierDao">
+	
+	<select id="getSupplier" parameterType="supplier" resultType="supplier">
+	<![CDATA[
+		SELECT t.sup_id AS supId,
+			   t.sup_name AS supName
+		  FROM oms.dms_vw_supplier t
+		 WHERE t.state = 'U'
+		   AND t.sup_id = #{supId}
+	]]>
+	</select>
+	
+	<select id="getSupplierList" parameterType="supplier" resultType="supplier">
+	<![CDATA[
+		SELECT t.sup_id AS supId,
+			   t.sup_name AS supName
+		  FROM oms.dms_vw_supplier t
+		 WHERE t.state = 'U'
+		   AND t.sup_id IN
+	]]>
+		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+	</select>
+	
+</mapper>

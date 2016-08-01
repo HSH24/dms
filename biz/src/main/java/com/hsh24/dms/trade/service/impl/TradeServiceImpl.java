@@ -160,7 +160,8 @@ public class TradeServiceImpl implements ITradeService {
 				trade.setModifyUser(modifyUser);
 
 				try {
-					tradeId = tradeDao.createTrade(trade);
+					tradeDao.createTrade(trade);
+					tradeId = trade.getTradeId();
 				} catch (Exception e) {
 					logger.error(LogUtil.parserBean(trade), e);
 					ts.setRollbackOnly();
@@ -333,7 +334,8 @@ public class TradeServiceImpl implements ITradeService {
 					trade.setCartId(sb.toString());
 
 					try {
-						tradeId = tradeDao.createTrade(trade);
+						tradeDao.createTrade(trade);
+						tradeId = trade.getTradeId();
 					} catch (Exception e) {
 						logger.error(LogUtil.parserBean(trade), e);
 						ts.setRollbackOnly();

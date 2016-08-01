@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.item.dao.IItemSkuDao">
+	
+	<select id="getItemSkuList" parameterType="itemSku" resultType="itemSku">
+	<![CDATA[
+		SELECT t.sku_id AS skuId,
+		  t.item_id AS itemId,
+		  t.properties,
+		  t.properties_name AS propertiesName,
+		  t.stock,
+		  t.price,
+		  t.origin,
+		  t.bar_code AS barCode
+		FROM  oms.dms_vw_goods_spec t
+		WHERE t.state     = 'U'
+	]]>	
+		<isNotEmpty property="itemId" prepend="and">
+		<![CDATA[ t.item_id = #{itemId} ]]>
+		</isNotEmpty>
+		<isNotEmpty property="codes" prepend="and">
+		<![CDATA[ t.sku_id IN ]]>
+			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		</isNotEmpty>
+	<![CDATA[
+		LIMIT ${limit} OFFSET ${offset}
+	]]>		
+	</select>
+		
+</mapper>

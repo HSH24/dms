@@ -1,0 +1,48 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.item.dao.IItemDao">
+	
+	<select id="getItemList" parameterType="item" resultType="item">
+	<![CDATA[
+		SELECT t.item_id AS itemId,
+			   t.item_name AS itemName,
+			   t.sup_id AS supId,
+			   t.item_no AS itemNo,
+			   t.price,
+			   t.stock,
+			   t.quota,
+			   t.origin,
+			   t.remark
+		  FROM oms.dms_vw_goods t
+		 WHERE t.state = 'U'
+	]]>	
+		<isNotEmpty property="codes" prepend="and">
+		<![CDATA[ t.item_id IN ]]>
+			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		</isNotEmpty>
+	<![CDATA[
+		LIMIT ${limit} OFFSET ${offset}
+	]]>		
+	</select>
+	
+	<select id="getItem" parameterType="item" resultType="item">
+	<![CDATA[
+		SELECT t.item_id AS itemId,
+		  t.item_name    AS itemName,
+		  t.sup_id       AS supId,
+		  t.bar_code	 AS barCode,
+		  t.item_no      AS itemNo,
+		  t.price,
+		  t.stock,
+		  t.quota,
+		  t.origin,
+		  t.remark
+		FROM oms.dms_vw_goods  t
+		WHERE t.state = 'U'
+		AND t.item_id = #{itemId}
+	]]>		
+	</select>
+		
+</mapper>

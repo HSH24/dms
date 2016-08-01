@@ -205,7 +205,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 				Long receiptId = null;
 
 				try {
-					receiptId = receiptDao.createReceipt(receipt);
+					receiptDao.createReceipt(receipt);
+					receiptId = receipt.getReceiptId();
 				} catch (Exception e) {
 					logger.error(LogUtil.parserBean(receipt), e);
 					ts.setRollbackOnly();
@@ -358,7 +359,8 @@ public class ReceiptServiceImpl implements IReceiptService {
 					Long receiptId = null;
 
 					try {
-						receiptId = receiptDao.createReceipt(receipt);
+						receiptDao.createReceipt(receipt);
+						receiptId = receipt.getReceiptId();
 					} catch (Exception e) {
 						logger.error(LogUtil.parserBean(receipt), e);
 						ts.setRollbackOnly();

@@ -2,7 +2,10 @@ package com.hsh24.dms.bankAcct.service.impl;
 
 import java.math.BigDecimal;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.bankAcct.IBankAcctService;
 import com.hsh24.dms.api.bankAcct.bo.BankAcct;
@@ -17,10 +20,12 @@ import com.hsh24.dms.framework.util.LogUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class BankAcctServiceImpl implements IBankAcctService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(BankAcctServiceImpl.class);
 
+	@Resource
 	private IBankAcctDao bankAcctDao;
 
 	@Override
@@ -86,14 +91,6 @@ public class BankAcctServiceImpl implements IBankAcctService {
 		}
 
 		return result;
-	}
-
-	public IBankAcctDao getBankAcctDao() {
-		return bankAcctDao;
-	}
-
-	public void setBankAcctDao(IBankAcctDao bankAcctDao) {
-		this.bankAcctDao = bankAcctDao;
 	}
 
 }

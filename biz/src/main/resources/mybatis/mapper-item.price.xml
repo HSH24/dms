@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.item.dao.IItemPriceDao">
+	
+	<select id="getItemPrice" parameterType="itemPrice" resultType="itemPrice">
+	<![CDATA[
+		SELECT t.id,
+			   t.price
+		  FROM sup.sup_tb_item_price t
+		 WHERE t.state= 'U'
+		   AND t.item_region_id = #{itemRegionId}
+		   AND t.sku_id = #{skuId}
+	]]>
+	</select>
+	
+</mapper>

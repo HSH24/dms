@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.item.dao.IItemRegionDao">
+	
+	<select id="getItemRegionList" parameterType="item" resultType="itemRegion">
+	<![CDATA[
+		SELECT distinct t.item_id AS itemId
+		  FROM sup.sup_tb_item_region t
+		 WHERE t.state= 'U'
+		   AND t.region_id IN
+	]]>
+		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+	</select>
+	
+	<select id="getItemRegion" parameterType="itemRegion" resultType="itemRegion">
+	<![CDATA[
+		SELECT t.item_region_id AS itemRegionId
+		FROM sup.sup_tb_item_region t
+		WHERE t.state = 'U'
+		AND t.item_id = #{itemId}
+		AND t.region_id = #{regionId}
+	]]>		
+	</select>
+	
+</mapper>

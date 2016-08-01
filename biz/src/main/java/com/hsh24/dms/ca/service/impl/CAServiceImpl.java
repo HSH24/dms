@@ -1,6 +1,9 @@
 package com.hsh24.dms.ca.service.impl;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.ca.ICAService;
 import com.hsh24.dms.api.ca.bo.ValidateResult;
@@ -15,10 +18,12 @@ import com.wideka.weixin.framework.util.EncryptUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class CAServiceImpl implements ICAService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(CAServiceImpl.class);
 
+	@Resource
 	private IUserService userService;
 
 	@Override
@@ -68,14 +73,6 @@ public class CAServiceImpl implements ICAService {
 		result.setUser(user);
 		result.setMessage(null);
 		return result;
-	}
-
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
 	}
 
 }

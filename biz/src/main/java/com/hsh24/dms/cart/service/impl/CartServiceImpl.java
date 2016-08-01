@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.cart.ICartService;
 import com.hsh24.dms.api.cart.bo.Cart;
@@ -27,18 +30,24 @@ import com.hsh24.dms.framework.util.LogUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class CartServiceImpl implements ICartService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(CartServiceImpl.class);
 
+	@Resource
 	private IItemService itemService;
 
+	@Resource
 	private IItemSkuService itemSkuService;
 
+	@Resource
 	private IItemFileService itemFileService;
 
+	@Resource
 	private ISupplierService supplierService;
 
+	@Resource
 	private ICartDao cartDao;
 
 	@Override
@@ -458,46 +467,6 @@ public class CartServiceImpl implements ICartService {
 		}
 
 		return -1;
-	}
-
-	public IItemService getItemService() {
-		return itemService;
-	}
-
-	public void setItemService(IItemService itemService) {
-		this.itemService = itemService;
-	}
-
-	public IItemSkuService getItemSkuService() {
-		return itemSkuService;
-	}
-
-	public void setItemSkuService(IItemSkuService itemSkuService) {
-		this.itemSkuService = itemSkuService;
-	}
-
-	public IItemFileService getItemFileService() {
-		return itemFileService;
-	}
-
-	public void setItemFileService(IItemFileService itemFileService) {
-		this.itemFileService = itemFileService;
-	}
-
-	public ISupplierService getSupplierService() {
-		return supplierService;
-	}
-
-	public void setSupplierService(ISupplierService supplierService) {
-		this.supplierService = supplierService;
-	}
-
-	public ICartDao getCartDao() {
-		return cartDao;
-	}
-
-	public void setCartDao(ICartDao cartDao) {
-		this.cartDao = cartDao;
 	}
 
 }

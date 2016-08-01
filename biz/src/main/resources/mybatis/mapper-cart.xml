@@ -1,0 +1,114 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.cart.dao.ICartDao">
+	
+	<insert id="createCart" parameterType="cart" useGeneratedKeys="true" keyProperty="cartId">
+	<![CDATA[
+		INSERT
+		INTO dms_tb_cart
+		  (
+			USER_ID,
+			SHOP_ID,
+			SUP_ID,
+			ITEM_ID,
+			SKU_ID,
+			QUANTITY,
+			STATE,
+			CREATE_DATE,
+			CREATE_USER,
+			MODIFY_DATE,
+			MODIFY_USER
+		  )
+		  VALUES
+		  (
+			#{userId},
+			#{shopId},
+			#{supId},
+			#{itemId},
+			#{skuId},
+			#{quantity},
+			'U',
+			NOW(),
+			#{userId},
+			NOW(),
+			#{userId}
+		  )
+	]]>
+	</insert>
+	
+	<update id="checkCart" parameterType="cart">
+	<![CDATA[
+		UPDATE dms_tb_cart t
+		   SET t.modify_date = NOW(),
+			   t.modify_user = #{modifyUser},
+			   t.quantity = t.quantity + #{quantity}
+		 WHERE t.state = 'U'
+		   AND t.user_id = #{userId}
+		   AND t.shop_id = #{shopId}
+		   AND t.sup_id  = #{supId}
+		   AND t.item_id = #{itemId}
+		   AND t.sku_id  = #{skuId}
+	]]>
+	</update>
+	
+	<select id="getCartCount" parameterType="cart" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(1)
+		  FROM dms_tb_cart t
+		 WHERE t.STATE = 'U'
+		   AND t.user_id = #{userId}
+		   AND t.shop_id = #{shopId}
+	]]>
+	</select>
+	
+	<select id="getCartList" parameterType="cart" resultType="cart">
+	<![CDATA[
+		SELECT t.cart_id AS cartId,
+			   t.sup_id AS supId,
+			   t.item_id AS itemId,
+			   t.sku_id AS skuId,
+			   t.quantity
+		  FROM dms_tb_cart t
+		 WHERE t.state = 'U'
+		   AND t.user_id = #{userId}
+		   AND t.shop_id = #{shopId}
+	]]>
+		<isNotEmpty property="codes" prepend="and">
+		<![CDATA[ t.cart_id IN ]]>
+			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		</isNotEmpty>
+	<![CDATA[
+		 ORDER BY t.sup_id, t.create_date DESC
+	]]>
+	</select>
+	
+	<update id="updateCart" parameterType="cart">
+	<![CDATA[
+		UPDATE dms_tb_cart t
+		   SET t.modify_date = NOW(),
+			   t.modify_user = #{modifyUser},
+			   t.state = #state#
+		 WHERE t.state = 'U'
+		   AND t.user_id = #{userId}
+		   AND t.shop_id = #{shopId}
+		   AND t.cart_id IN
+	]]>
+		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+	</update>
+	
+	<update id="updateQuantity" parameterType="cart">
+	<![CDATA[
+		UPDATE dms_tb_cart t
+		   SET t.modify_date = NOW(),
+			   t.modify_user = #{modifyUser},
+			   t.quantity = #{quantity}
+		 WHERE t.state = 'U'
+		   AND t.user_id = #{userId}
+		   AND t.shop_id = #{shopId}
+		   AND t.cart_id = #{cartId}
+	]]>
+	</update>
+	
+</mapper>

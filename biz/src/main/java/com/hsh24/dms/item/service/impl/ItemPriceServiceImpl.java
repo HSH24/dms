@@ -1,5 +1,9 @@
 package com.hsh24.dms.item.service.impl;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.hsh24.dms.api.item.IItemPriceService;
 import com.hsh24.dms.api.item.bo.ItemPrice;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -12,10 +16,12 @@ import com.hsh24.dms.item.dao.IItemPriceDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class ItemPriceServiceImpl implements IItemPriceService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ItemPriceServiceImpl.class);
 
+	@Resource
 	private IItemPriceDao itemPriceDao;
 
 	@Override
@@ -35,14 +41,6 @@ public class ItemPriceServiceImpl implements IItemPriceService {
 		}
 
 		return null;
-	}
-
-	public IItemPriceDao getItemPriceDao() {
-		return itemPriceDao;
-	}
-
-	public void setItemPriceDao(IItemPriceDao itemPriceDao) {
-		this.itemPriceDao = itemPriceDao;
 	}
 
 }

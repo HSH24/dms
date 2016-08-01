@@ -2,9 +2,12 @@ package com.hsh24.dms.auth.action;
 
 import java.net.URLEncoder;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.hsh24.dms.api.auth.IAuthService;
 import com.hsh24.dms.framework.action.BaseAction;
@@ -17,12 +20,15 @@ import com.hsh24.dms.framework.log.Logger4jExtend;
  * @author JiakunXu
  * 
  */
+@Controller("oauth2Action")
+@Scope("request")
 public class OAuth2Action extends BaseAction {
 
 	private static final long serialVersionUID = 6386474612475679175L;
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(OAuth2Action.class);
 
+	@Resource
 	private IAuthService authService;
 
 	private String redirectUrl;
@@ -59,14 +65,6 @@ public class OAuth2Action extends BaseAction {
 		session.setAttribute("ACEGI_SECURITY_LAST_OPEN_ID", openId);
 
 		return SUCCESS;
-	}
-
-	public IAuthService getAuthService() {
-		return authService;
-	}
-
-	public void setAuthService(IAuthService authService) {
-		this.authService = authService;
 	}
 
 	public String getRedirectUrl() {

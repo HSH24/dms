@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsh24.dms.sale.dao.ISaleDao">
+	
+	<select id="getStats" parameterType="sale" resultType="sale">
+	<![CDATA[
+		SELECT IFNULL(SUM(p.pay_money), 0) AS amount
+		  FROM oms.ord_order_t t,
+			   oms.ord_order_pay_t p
+		 WHERE t.order_dt >= date_format(#{gmtStart}, '%Y-%m-%d %T')
+		   AND t.order_dt <= date_format(#{gmtEnd}, '%Y-%m-%d %T')
+		   AND t.order_id = p.order_id
+		   AND t.order_status = '0005'
+		   AND t.org_id = #{shopId}
+	]]>
+	</select>
+	
+	<select id="getSaleList" parameterType="sale" resultType="sale">
+	<![CDATA[
+		SELECT p.pay_money AS amount,
+			   t.order_cd AS tradeNo,
+			   DATE_FORMAT(t.order_dt, '%Y-%m-%d %T') AS tradeDate
+		  FROM oms.ord_order_t t,
+			   oms.ord_order_pay_t p
+		 WHERE t.order_dt >= date_format(#{gmtStart}, '%Y-%m-%d %T')
+		   AND t.order_dt <= date_format(#{gmtEnd}, '%Y-%m-%d %T')
+		   AND t.order_id = p.order_id
+		   AND t.order_status = '0005'
+		   AND t.org_id = #{shopId}
+		  ORDER BY t.order_dt DESC
+	]]>
+	</select>
+	
+</mapper>

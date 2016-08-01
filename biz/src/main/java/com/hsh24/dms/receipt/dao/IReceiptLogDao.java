@@ -14,6 +14,6 @@ public interface IReceiptLogDao {
 	 * @param receiptLog
 	 * @return
 	 */
-	Long createReceiptLog(ReceiptLog receiptLog);
+	int createReceiptLog(ReceiptLog receiptLog);
 
 }

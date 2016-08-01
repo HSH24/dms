@@ -16,7 +16,7 @@ public interface ICashflowDao {
 	 * @param cashflow
 	 * @return
 	 */
-	Long createCashflow(Cashflow cashflow);
+	int createCashflow(Cashflow cashflow);
 
 	/**
 	 * 
