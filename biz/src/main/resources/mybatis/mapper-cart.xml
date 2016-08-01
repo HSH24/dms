@@ -89,7 +89,7 @@
 		UPDATE dms_tb_cart t
 		   SET t.modify_date = NOW(),
 			   t.modify_user = #{modifyUser},
-			   t.state = #state#
+			   t.state = #{state}
 		 WHERE t.state = 'U'
 		   AND t.user_id = #{userId}
 		   AND t.shop_id = #{shopId}
