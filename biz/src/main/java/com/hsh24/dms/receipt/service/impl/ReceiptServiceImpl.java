@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -34,22 +37,30 @@ import com.hsh24.dms.receipt.dao.IReceiptDetailDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class ReceiptServiceImpl implements IReceiptService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ReceiptServiceImpl.class);
 
+	@Resource
 	private TransactionTemplate transactionTemplate;
 
+	@Resource
 	private IMemcachedCacheService memcachedCacheService;
 
+	@Resource
 	private ITradeService tradeService;
 
+	@Resource
 	private IOrderService orderService;
 
+	@Resource
 	private IReceiptLogService receiptLogService;
 
+	@Resource
 	private IReceiptDao receiptDao;
 
+	@Resource
 	private IReceiptDetailDao receiptDetailDao;
 
 	@Override
@@ -484,62 +495,6 @@ public class ReceiptServiceImpl implements IReceiptService {
 		}
 
 		return null;
-	}
-
-	public TransactionTemplate getTransactionTemplate() {
-		return transactionTemplate;
-	}
-
-	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-		this.transactionTemplate = transactionTemplate;
-	}
-
-	public IMemcachedCacheService getMemcachedCacheService() {
-		return memcachedCacheService;
-	}
-
-	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
-		this.memcachedCacheService = memcachedCacheService;
-	}
-
-	public ITradeService getTradeService() {
-		return tradeService;
-	}
-
-	public void setTradeService(ITradeService tradeService) {
-		this.tradeService = tradeService;
-	}
-
-	public IOrderService getOrderService() {
-		return orderService;
-	}
-
-	public void setOrderService(IOrderService orderService) {
-		this.orderService = orderService;
-	}
-
-	public IReceiptLogService getReceiptLogService() {
-		return receiptLogService;
-	}
-
-	public void setReceiptLogService(IReceiptLogService receiptLogService) {
-		this.receiptLogService = receiptLogService;
-	}
-
-	public IReceiptDao getReceiptDao() {
-		return receiptDao;
-	}
-
-	public void setReceiptDao(IReceiptDao receiptDao) {
-		this.receiptDao = receiptDao;
-	}
-
-	public IReceiptDetailDao getReceiptDetailDao() {
-		return receiptDetailDao;
-	}
-
-	public void setReceiptDetailDao(IReceiptDetailDao receiptDetailDao) {
-		this.receiptDetailDao = receiptDetailDao;
 	}
 
 }

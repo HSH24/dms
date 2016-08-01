@@ -4,7 +4,7 @@
 
 <mapper namespace="com.hsh24.dms.receipt.dao.IReceiptDetailDao">
 	
-	<insert id="createReceiptDetail" parameterType="receiptDetail" useGeneratedKeys="true" keyProperty="detailId">
+	<insert id="createReceiptDetail" useGeneratedKeys="true" keyProperty="detailId">
 	<![CDATA[
 		INSERT
 		INTO dms_tb_receipt_detail
@@ -19,17 +19,21 @@
 			MODIFY_USER
 		  )
 		  VALUES
-		  (
-			#{receiptId},
-			#{orderId},
-			#{quantity},
-			'U',
-			NOW(),
-			#{modifyUser},
-			NOW(),
-			#{modifyUser}
-		  )
 	]]>
+		<foreach collection="receiptDetailList" item="receiptDetail" separator=","> 
+		<![CDATA[
+			  (
+				#{receiptId},
+				#{receiptDetail.orderId},
+				#{receiptDetail.quantity},
+				'U',
+				NOW(),
+				#{modifyUser},
+				NOW(),
+				#{modifyUser}
+			  )
+		]]>
+		</foreach>
 	</insert>
 	
 	<select id="getReceiptDetailList" parameterType="receiptDetail" resultType="receiptDetail">

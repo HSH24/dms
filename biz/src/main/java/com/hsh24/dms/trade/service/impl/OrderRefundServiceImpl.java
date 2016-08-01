@@ -1,6 +1,9 @@
 package com.hsh24.dms.trade.service.impl;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.trade.IOrderRefundService;
 import com.hsh24.dms.api.trade.bo.OrderRefund;
@@ -15,10 +18,12 @@ import com.hsh24.dms.trade.dao.IOrderRefundDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class OrderRefundServiceImpl implements IOrderRefundService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(OrderRefundServiceImpl.class);
 
+	@Resource
 	private IOrderRefundDao orderRefundDao;
 
 	@Override
@@ -66,14 +71,6 @@ public class OrderRefundServiceImpl implements IOrderRefundService {
 		}
 
 		return result;
-	}
-
-	public IOrderRefundDao getOrderRefundDao() {
-		return orderRefundDao;
-	}
-
-	public void setOrderRefundDao(IOrderRefundDao orderRefundDao) {
-		this.orderRefundDao = orderRefundDao;
 	}
 
 }

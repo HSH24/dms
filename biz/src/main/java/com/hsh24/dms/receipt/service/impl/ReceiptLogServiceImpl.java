@@ -1,6 +1,9 @@
 package com.hsh24.dms.receipt.service.impl;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.receipt.IReceiptLogService;
 import com.hsh24.dms.api.receipt.bo.ReceiptLog;
@@ -15,10 +18,12 @@ import com.hsh24.dms.receipt.dao.IReceiptLogDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class ReceiptLogServiceImpl implements IReceiptLogService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ReceiptLogServiceImpl.class);
 
+	@Resource
 	private IReceiptLogDao receiptLogDao;
 
 	@Override
@@ -60,14 +65,6 @@ public class ReceiptLogServiceImpl implements IReceiptLogService {
 		}
 
 		return result;
-	}
-
-	public IReceiptLogDao getReceiptLogDao() {
-		return receiptLogDao;
-	}
-
-	public void setReceiptLogDao(IReceiptLogDao receiptLogDao) {
-		this.receiptLogDao = receiptLogDao;
 	}
 
 }

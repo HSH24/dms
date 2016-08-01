@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.hsh24.dms.api.cache.IMemcachedCacheService;
 import com.hsh24.dms.api.supplier.ISupplierService;
 import com.hsh24.dms.api.supplier.bo.Supplier;
@@ -18,12 +22,15 @@ import com.hsh24.dms.supplier.dao.ISupplierDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class SupplierServiceImpl implements ISupplierService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(SupplierServiceImpl.class);
 
+	@Resource
 	private IMemcachedCacheService memcachedCacheService;
 
+	@Resource
 	private ISupplierDao supplierDao;
 
 	@Override
@@ -108,22 +115,6 @@ public class SupplierServiceImpl implements ISupplierService {
 		}
 
 		return null;
-	}
-
-	public IMemcachedCacheService getMemcachedCacheService() {
-		return memcachedCacheService;
-	}
-
-	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
-		this.memcachedCacheService = memcachedCacheService;
-	}
-
-	public ISupplierDao getSupplierDao() {
-		return supplierDao;
-	}
-
-	public void setSupplierDao(ISupplierDao supplierDao) {
-		this.supplierDao = supplierDao;
 	}
 
 }

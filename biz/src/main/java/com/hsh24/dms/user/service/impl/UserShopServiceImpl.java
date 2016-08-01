@@ -2,7 +2,10 @@ package com.hsh24.dms.user.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.shop.bo.Shop;
 import com.hsh24.dms.api.user.IUserShopService;
@@ -17,10 +20,12 @@ import com.hsh24.dms.user.dao.IUserShopDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class UserShopServiceImpl implements IUserShopService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(UserShopServiceImpl.class);
 
+	@Resource
 	private IUserShopDao userShopDao;
 
 	@Override
@@ -64,14 +69,6 @@ public class UserShopServiceImpl implements IUserShopService {
 		}
 
 		return null;
-	}
-
-	public IUserShopDao getUserShopDao() {
-		return userShopDao;
-	}
-
-	public void setUserShopDao(IUserShopDao userShopDao) {
-		this.userShopDao = userShopDao;
 	}
 
 }

@@ -2,7 +2,11 @@ package com.hsh24.dms.user.action;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.hsh24.dms.api.shop.bo.Shop;
 import com.hsh24.dms.api.user.IUserShopService;
@@ -14,10 +18,13 @@ import com.hsh24.dms.framework.action.BaseAction;
  * @author JiakunXu
  * 
  */
+@Controller
+@Scope("request")
 public class UserShopAction extends BaseAction {
 
 	private static final long serialVersionUID = -8988118077874200983L;
 
+	@Resource
 	private IUserShopService userShopService;
 
 	private List<Shop> shopList;
@@ -76,14 +83,6 @@ public class UserShopAction extends BaseAction {
 		session.setAttribute("ACEGI_SECURITY_LAST_SHOP", shop);
 
 		return SUCCESS;
-	}
-
-	public IUserShopService getUserShopService() {
-		return userShopService;
-	}
-
-	public void setUserShopService(IUserShopService userShopService) {
-		this.userShopService = userShopService;
 	}
 
 	public List<Shop> getShopList() {

@@ -17,13 +17,13 @@
 		FROM  oms.dms_vw_goods_spec t
 		WHERE t.state     = 'U'
 	]]>	
-		<isNotEmpty property="itemId" prepend="and">
-		<![CDATA[ t.item_id = #{itemId} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="codes" prepend="and">
-		<![CDATA[ t.sku_id IN ]]>
-			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
-		</isNotEmpty>
+		<if test="itemId != null and itemId != ''">
+		<![CDATA[ AND t.item_id = #{itemId} ]]>
+		</if>
+		<if test="codes != null and codes.length > 0">
+		<![CDATA[ AND t.sku_id IN ]]>
+			<foreach collection="codes" item="code" open="(" close=")" separator=",">#{code}</foreach>
+		</if>
 	<![CDATA[
 		LIMIT ${limit} OFFSET ${offset}
 	]]>		

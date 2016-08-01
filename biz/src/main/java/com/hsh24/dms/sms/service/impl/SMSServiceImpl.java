@@ -1,6 +1,8 @@
 package com.hsh24.dms.sms.service.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.sms.ISMSService;
 import com.hsh24.dms.framework.bo.BooleanResult;
@@ -17,14 +19,18 @@ import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
  * @author JiakunXu
  * 
  */
+@Service
 public class SMSServiceImpl implements ISMSService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(SMSServiceImpl.class);
 
+	@Value("${alidayu.server.url}")
 	private String serverUrl;
 
+	@Value("${alidayu.app.key}")
 	private String appKey;
 
+	@Value("${alidayu.app.secret}")
 	private String appSecret;
 
 	@Override
@@ -78,30 +84,6 @@ public class SMSServiceImpl implements ISMSService {
 
 		result.setResult(true);
 		return result;
-	}
-
-	public String getServerUrl() {
-		return serverUrl;
-	}
-
-	public void setServerUrl(String serverUrl) {
-		this.serverUrl = serverUrl;
-	}
-
-	public String getAppKey() {
-		return appKey;
-	}
-
-	public void setAppKey(String appKey) {
-		this.appKey = appKey;
-	}
-
-	public String getAppSecret() {
-		return appSecret;
-	}
-
-	public void setAppSecret(String appSecret) {
-		this.appSecret = appSecret;
 	}
 
 }

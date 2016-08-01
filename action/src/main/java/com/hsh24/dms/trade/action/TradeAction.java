@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
 import com.hsh24.dms.api.receipt.IReceiptService;
 import com.hsh24.dms.api.receipt.bo.Receipt;
 import com.hsh24.dms.api.receipt.bo.ReceiptDetail;
@@ -19,12 +24,16 @@ import com.hsh24.dms.framework.util.FormatUtil;
  * @author JiakunXu
  * 
  */
+@Controller
+@Scope("request")
 public class TradeAction extends BaseAction {
 
 	private static final long serialVersionUID = -912767004509511731L;
 
+	@Resource
 	private ITradeService tradeService;
 
+	@Resource
 	private IReceiptService receiptService;
 
 	private String itemId;
@@ -224,22 +233,6 @@ public class TradeAction extends BaseAction {
 		trade = tradeService.getOrder(this.getShop().getShopId(), tradeNo, orderId);
 
 		return SUCCESS;
-	}
-
-	public ITradeService getTradeService() {
-		return tradeService;
-	}
-
-	public void setTradeService(ITradeService tradeService) {
-		this.tradeService = tradeService;
-	}
-
-	public IReceiptService getReceiptService() {
-		return receiptService;
-	}
-
-	public void setReceiptService(IReceiptService receiptService) {
-		this.receiptService = receiptService;
 	}
 
 	public String getItemId() {

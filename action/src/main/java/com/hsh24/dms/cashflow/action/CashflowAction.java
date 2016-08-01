@@ -3,7 +3,11 @@ package com.hsh24.dms.cashflow.action;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.hsh24.dms.api.bankAcct.IBankAcctService;
 import com.hsh24.dms.api.bankAcct.bo.BankAcct;
@@ -18,12 +22,16 @@ import com.hsh24.dms.framework.util.FormatUtil;
  * @author JiakunXu
  * 
  */
+@Controller
+@Scope("request")
 public class CashflowAction extends BaseAction {
 
 	private static final long serialVersionUID = -3907855176084554755L;
 
+	@Resource
 	private ICashflowService cashflowService;
 
+	@Resource
 	private IBankAcctService bankAcctService;
 
 	private List<Cashflow> cashflowList;
@@ -89,22 +97,6 @@ public class CashflowAction extends BaseAction {
 		cashflowList = cashflowService.getCashflowList(shopId, init(new Cashflow()));
 
 		return SUCCESS;
-	}
-
-	public ICashflowService getCashflowService() {
-		return cashflowService;
-	}
-
-	public void setCashflowService(ICashflowService cashflowService) {
-		this.cashflowService = cashflowService;
-	}
-
-	public IBankAcctService getBankAcctService() {
-		return bankAcctService;
-	}
-
-	public void setBankAcctService(IBankAcctService bankAcctService) {
-		this.bankAcctService = bankAcctService;
 	}
 
 	public List<Cashflow> getCashflowList() {

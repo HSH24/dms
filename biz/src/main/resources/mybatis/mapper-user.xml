@@ -22,12 +22,12 @@
 		SET t.UPDATE_DATE = NOW(),
 		  t.UPDATE_BY = #{modifyUser}
 	]]>
-		<isNotEmpty property="password" prepend=",">
-		<![CDATA[ t.password = #{password} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="userName" prepend=",">
-		<![CDATA[ t.user_name = #{userName} ]]>
-		</isNotEmpty>
+		<if test="password != null password != ''">
+		<![CDATA[ , t.password = #{password} ]]>
+		</if>
+		<if test="userName != null userName != ''">
+		<![CDATA[ , t.user_name = #{userName} ]]>
+		</if>
 	<![CDATA[
 		WHERE t.state = '1'
 		AND t.user_code = upper(#{passport})

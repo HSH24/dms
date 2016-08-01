@@ -2,6 +2,8 @@ package com.hsh24.dms.receipt.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hsh24.dms.api.receipt.bo.ReceiptDetail;
 
 /**
@@ -18,7 +20,8 @@ public interface IReceiptDetailDao {
 	 * @param modifyUser
 	 * @return
 	 */
-	int createReceiptDetail(Long receiptId, List<ReceiptDetail> receiptDetailList, String modifyUser);
+	int createReceiptDetail(@Param("receiptId") Long receiptId,
+		@Param("receiptDetailList") List<ReceiptDetail> receiptDetailList, @Param("modifyUser") String modifyUser);
 
 	/**
 	 * 

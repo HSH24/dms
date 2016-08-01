@@ -2,7 +2,10 @@ package com.hsh24.dms.sale.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.sale.ISaleService;
 import com.hsh24.dms.api.sale.bo.Sale;
@@ -18,12 +21,15 @@ import com.wideka.weixin.framework.util.LogUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class SaleServiceImpl implements ISaleService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(SaleServiceImpl.class);
 
+	@Resource
 	private ISaleDao saleDao;
 
+	@Resource
 	private ISaleDetailDao saleDetailDao;
 
 	@Override
@@ -77,22 +83,6 @@ public class SaleServiceImpl implements ISaleService {
 		}
 
 		return null;
-	}
-
-	public ISaleDao getSaleDao() {
-		return saleDao;
-	}
-
-	public void setSaleDao(ISaleDao saleDao) {
-		this.saleDao = saleDao;
-	}
-
-	public ISaleDetailDao getSaleDetailDao() {
-		return saleDetailDao;
-	}
-
-	public void setSaleDetailDao(ISaleDetailDao saleDetailDao) {
-		this.saleDetailDao = saleDetailDao;
 	}
 
 }

@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.hsh24.dms.api.item.IItemFileService;
 import com.hsh24.dms.api.item.bo.ItemFile;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -16,10 +20,12 @@ import com.hsh24.dms.item.dao.IItemFileDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class ItemFileServiceImpl implements IItemFileService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(ItemFileServiceImpl.class);
 
+	@Resource
 	private IItemFileDao itemFileDao;
 
 	@Override
@@ -77,14 +83,6 @@ public class ItemFileServiceImpl implements IItemFileService {
 		}
 
 		return null;
-	}
-
-	public IItemFileDao getItemFileDao() {
-		return itemFileDao;
-	}
-
-	public void setItemFileDao(IItemFileDao itemFileDao) {
-		this.itemFileDao = itemFileDao;
 	}
 
 }

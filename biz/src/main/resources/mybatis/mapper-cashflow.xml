@@ -52,9 +52,9 @@
 		   AND p.state = 'U'
 		   AND t.shop_id = #{shopId}
 	]]>
-		<isNotEmpty property="code" prepend="and">
-		<![CDATA[ p.cashflow_code = #{code} ]]>
-		</isNotEmpty>
+		<if test="code != null and code != ''">
+		<![CDATA[ AND p.cashflow_code = #{code} ]]>
+		</if>
 	</select>
 	
 	<select id="getCashflowList" parameterType="cashflow" resultType="cashflow">

@@ -125,7 +125,7 @@
 		   AND p.sup_id = #{supId}
 		   AND t.cart_id  IN
 	]]>
-		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		<foreach collection="codes" item="code" open="(" close=")" separator=",">#{code}</foreach>
 	<![CDATA[
 		  )
 	]]>

@@ -1,5 +1,9 @@
 package com.hsh24.dms.region.service.impl;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.hsh24.dms.api.region.IRegionService;
 import com.hsh24.dms.api.region.bo.Region;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -12,10 +16,12 @@ import com.hsh24.dms.region.dao.IRegionDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class RegionServiceImpl implements IRegionService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(RegionServiceImpl.class);
 
+	@Resource
 	private IRegionDao regionDao;
 
 	@Override
@@ -60,14 +66,6 @@ public class RegionServiceImpl implements IRegionService {
 		}
 
 		return null;
-	}
-
-	public IRegionDao getRegionDao() {
-		return regionDao;
-	}
-
-	public void setRegionDao(IRegionDao regionDao) {
-		this.regionDao = regionDao;
 	}
 
 }

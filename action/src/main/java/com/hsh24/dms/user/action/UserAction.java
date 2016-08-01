@@ -1,6 +1,10 @@
 package com.hsh24.dms.user.action;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.hsh24.dms.api.user.IUserService;
 import com.hsh24.dms.api.user.bo.User;
@@ -13,10 +17,13 @@ import com.hsh24.dms.framework.bo.BooleanResult;
  * @author JiakunXu
  * 
  */
+@Controller
+@Scope("request")
 public class UserAction extends BaseAction {
 
 	private static final long serialVersionUID = 7825329647617901909L;
 
+	@Resource
 	private IUserService userService;
 
 	private String userName;
@@ -52,14 +59,6 @@ public class UserAction extends BaseAction {
 		}
 
 		return RESOURCE_RESULT;
-	}
-
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
 	}
 
 	public String getUserName() {

@@ -2,7 +2,10 @@ package com.hsh24.dms.cashflow.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.cashflow.ICashflowService;
 import com.hsh24.dms.api.cashflow.bo.Cashflow;
@@ -17,10 +20,12 @@ import com.hsh24.dms.framework.util.LogUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class CashflowServiceImpl implements ICashflowService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(CashflowServiceImpl.class);
 
+	@Resource
 	private ICashflowDao cashflowDao;
 
 	@Override
@@ -113,14 +118,6 @@ public class CashflowServiceImpl implements ICashflowService {
 		}
 
 		return null;
-	}
-
-	public ICashflowDao getCashflowDao() {
-		return cashflowDao;
-	}
-
-	public void setCashflowDao(ICashflowDao cashflowDao) {
-		this.cashflowDao = cashflowDao;
 	}
 
 }

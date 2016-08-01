@@ -2,6 +2,11 @@ package com.hsh24.dms.receipt.action;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
 import com.hsh24.dms.api.receipt.IReceiptService;
 import com.hsh24.dms.api.receipt.bo.ReceiptDetail;
 import com.hsh24.dms.framework.action.BaseAction;
@@ -12,10 +17,13 @@ import com.hsh24.dms.framework.bo.BooleanResult;
  * @author JiakunXu
  * 
  */
+@Controller
+@Scope("request")
 public class ReceiptAction extends BaseAction {
 
 	private static final long serialVersionUID = -4442075499888188764L;
 
+	@Resource
 	private IReceiptService receiptService;
 
 	private String tradeNo;
@@ -57,14 +65,6 @@ public class ReceiptAction extends BaseAction {
 		}
 
 		return RESOURCE_RESULT;
-	}
-
-	public IReceiptService getReceiptService() {
-		return receiptService;
-	}
-
-	public void setReceiptService(IReceiptService receiptService) {
-		this.receiptService = receiptService;
 	}
 
 	public String getTradeNo() {

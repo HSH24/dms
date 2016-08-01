@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -43,30 +46,42 @@ import com.hsh24.dms.trade.dao.ITradeDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class TradeServiceImpl implements ITradeService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(TradeServiceImpl.class);
 
+	@Resource
 	private TransactionTemplate transactionTemplate;
 
+	@Resource
 	private IMemcachedCacheService memcachedCacheService;
 
+	@Resource
 	private IOrderService orderService;
 
+	@Resource
 	private IOrderRefundService orderRefundService;
 
+	@Resource
 	private ICartService cartService;
 
+	@Resource
 	private ISupplierService supplierService;
 
+	@Resource
 	private IItemService itemService;
 
+	@Resource
 	private IBankAcctService bankAcctService;
 
+	@Resource
 	private ICashflowService cashflowService;
 
+	@Resource
 	private ITradeLogService tradeLogService;
 
+	@Resource
 	private ITradeDao tradeDao;
 
 	@Override
@@ -795,94 +810,6 @@ public class TradeServiceImpl implements ITradeService {
 			res.setCode("取消采购单成功");
 		}
 		return res;
-	}
-
-	public TransactionTemplate getTransactionTemplate() {
-		return transactionTemplate;
-	}
-
-	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-		this.transactionTemplate = transactionTemplate;
-	}
-
-	public IMemcachedCacheService getMemcachedCacheService() {
-		return memcachedCacheService;
-	}
-
-	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
-		this.memcachedCacheService = memcachedCacheService;
-	}
-
-	public IOrderService getOrderService() {
-		return orderService;
-	}
-
-	public void setOrderService(IOrderService orderService) {
-		this.orderService = orderService;
-	}
-
-	public IOrderRefundService getOrderRefundService() {
-		return orderRefundService;
-	}
-
-	public void setOrderRefundService(IOrderRefundService orderRefundService) {
-		this.orderRefundService = orderRefundService;
-	}
-
-	public ICartService getCartService() {
-		return cartService;
-	}
-
-	public void setCartService(ICartService cartService) {
-		this.cartService = cartService;
-	}
-
-	public ISupplierService getSupplierService() {
-		return supplierService;
-	}
-
-	public void setSupplierService(ISupplierService supplierService) {
-		this.supplierService = supplierService;
-	}
-
-	public IItemService getItemService() {
-		return itemService;
-	}
-
-	public void setItemService(IItemService itemService) {
-		this.itemService = itemService;
-	}
-
-	public IBankAcctService getBankAcctService() {
-		return bankAcctService;
-	}
-
-	public void setBankAcctService(IBankAcctService bankAcctService) {
-		this.bankAcctService = bankAcctService;
-	}
-
-	public ICashflowService getCashflowService() {
-		return cashflowService;
-	}
-
-	public void setCashflowService(ICashflowService cashflowService) {
-		this.cashflowService = cashflowService;
-	}
-
-	public ITradeLogService getTradeLogService() {
-		return tradeLogService;
-	}
-
-	public void setTradeLogService(ITradeLogService tradeLogService) {
-		this.tradeLogService = tradeLogService;
-	}
-
-	public ITradeDao getTradeDao() {
-		return tradeDao;
-	}
-
-	public void setTradeDao(ITradeDao tradeDao) {
-		this.tradeDao = tradeDao;
 	}
 
 }

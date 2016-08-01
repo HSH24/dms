@@ -2,7 +2,10 @@ package com.hsh24.dms.user.service.impl;
 
 import java.util.Random;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.ca.ICAService;
 import com.hsh24.dms.api.ca.bo.ValidateResult;
@@ -21,16 +24,21 @@ import com.hsh24.dms.framework.log.Logger4jExtend;
  * @author JiakunXu
  * 
  */
+@Service
 public class UserAcctServiceImpl implements IUserAcctService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(UserAcctServiceImpl.class);
 
+	@Resource
 	private IMemcachedCacheService memcachedCacheService;
 
+	@Resource
 	private IUserService userService;
 
+	@Resource
 	private ISMSService smsService;
 
+	@Resource
 	private ICAService caService;
 
 	@Override
@@ -166,38 +174,6 @@ public class UserAcctServiceImpl implements IUserAcctService {
 		} catch (Exception e) {
 			logger.error(IMemcachedCacheService.CACHE_KEY_CHECK_CODE + key, e);
 		}
-	}
-
-	public IMemcachedCacheService getMemcachedCacheService() {
-		return memcachedCacheService;
-	}
-
-	public void setMemcachedCacheService(IMemcachedCacheService memcachedCacheService) {
-		this.memcachedCacheService = memcachedCacheService;
-	}
-
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
-
-	public ISMSService getSmsService() {
-		return smsService;
-	}
-
-	public void setSmsService(ISMSService smsService) {
-		this.smsService = smsService;
-	}
-
-	public ICAService getCaService() {
-		return caService;
-	}
-
-	public void setCaService(ICAService caService) {
-		this.caService = caService;
 	}
 
 }

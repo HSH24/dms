@@ -51,10 +51,10 @@
 		 WHERE t.STATE = 'U'
 		   AND t.shop_id = #{shopId}
 	]]>
-		<isNotEmpty property="codes" prepend="and">
-		<![CDATA[ t.type IN ]]>
-			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
-		</isNotEmpty>
+		<if test="codes != null and codes.length > 0">
+		<![CDATA[ AND t.type IN ]]>
+			<foreach collection="codes" item="code" open="(" close=")" separator=",">#{code}</foreach>
+		</if>
 	</select>
 
 	<select id="getTradeCount" parameterType="trade" resultType="java.lang.Integer">
@@ -64,10 +64,10 @@
 		 WHERE t.STATE = 'U'
 		   AND t.shop_id = #{shopId}
 	]]>
-		<isNotEmpty property="codes" prepend="and">
-		<![CDATA[ t.type IN ]]>
-			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
-		</isNotEmpty>
+		<if test="codes != null and codes.length > 0">
+		<![CDATA[ AND t.type IN ]]>
+			<foreach collection="codes" item="code" open="(" close=")" separator=",">#{code}</foreach>
+		</if>
 	</select>
 	
 	<select id="getTradeList" parameterType="trade" resultType="trade">
@@ -91,16 +91,16 @@
 		 WHERE t.state = 'U'
 		   AND t.shop_id = #{shopId}
 	]]>
-		<isNotEmpty property="codes" prepend="and">
-		<![CDATA[ t.type IN ]]>
-			<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
-		</isNotEmpty>
-		<isEmpty property="sort">
+		<if test="codes != null and codes.length > 0">
+		<![CDATA[ AND t.type IN ]]>
+			<foreach collection="codes" item="code" open="(" close=")" separator=",">#{code}</foreach>
+		</if>
+		<if test="sort == null or sort == ''">
 		<![CDATA[ ORDER BY TRADE_ID DESC ]]>
-		</isEmpty>
-		<isNotEmpty property="sort">
+		</if>
+		<if test="sort != null and sort != ''">
 		<![CDATA[ ORDER BY ${sort} ${order}, TRADE_ID DESC ]]>
-		</isNotEmpty>
+		</if>
 	<![CDATA[
 		LIMIT ${limit} OFFSET ${offset}
 	]]>
@@ -136,50 +136,50 @@
 		SET t.modify_date = NOW(),
 		  t.modify_user   = #{modifyUser}
 	]]>
-		<isNotEmpty property="type" prepend=",">
-		<![CDATA[ t.type          = #{type} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="type">
-			<isEqual property="type" compareValue="tosend" prepend=",">
-			<![CDATA[ t.PAY_DATE = STR_TO_DATE( #payDate#, '%Y%m%d%H%i%s') ]]>
-			</isEqual>
-			<isEqual property="type" compareValue="send" prepend=",">
-			<![CDATA[ t.SEND_DATE = NOW() ]]>
-			</isEqual>
-			<isEqual property="type" compareValue="sign" prepend=",">
-			<![CDATA[ t.SIGN_DATE = NOW() ]]>
-			</isEqual>
-			<isEqual property="type" compareValue="feedback" prepend=",">
-			<![CDATA[ t.FEEDBACK_DATE = NOW() ]]>
-			</isEqual>
-			<isEqual property="type" compareValue="feedbacked" prepend=",">
-			<![CDATA[ t.FEEDBACKED_DATE = NOW() ]]>
-			</isEqual>
-		</isNotEmpty>
-		<isNotEmpty property="payType" prepend=",">
-		<![CDATA[ t.pay_type = #{payType} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="feedbackType" prepend=",">
-		<![CDATA[ t.feedback_type = #feedbackType# ]]>
-		</isNotEmpty>
-		<isNotEmpty property="score" prepend=",">
-		<![CDATA[ t.score         = #score# ]]>
-		</isNotEmpty>
+		<if test="type != null and type != ''">
+		<![CDATA[ , t.type = #{type} ]]>
+		</if>
+		<if test="type != null and type != ''">
+			<if test="type == 'tosend'">
+			<![CDATA[ , t.PAY_DATE = STR_TO_DATE(#{payDate}, '%Y%m%d%H%i%s') ]]>
+			</if>
+			<if test="type == 'send'">
+			<![CDATA[ , t.SEND_DATE = NOW() ]]>
+			</if>
+			<if test="type == 'sign'">
+			<![CDATA[ , t.SIGN_DATE = NOW() ]]>
+			</if>
+			<if test="type == 'feedback'">
+			<![CDATA[ , t.FEEDBACK_DATE = NOW() ]]>
+			</if>
+			<if test="type == 'feedbacked'">
+			<![CDATA[ , t.FEEDBACKED_DATE = NOW() ]]>
+			</if>
+		</if>
+		<if test="payType != null and payType != ''">
+		<![CDATA[ , t.pay_type = #{payType} ]]>
+		</if>
+		<if test="feedbackType != null and feedbackType != ''">
+		<![CDATA[ , t.feedback_type = #{feedbackType} ]]>
+		</if>
+		<if test="score != null and score != ''">
+		<![CDATA[ , t.score = #{score} ]]>
+		</if>
 	<![CDATA[
 		WHERE t.state       = 'U'
 	]]>
-		<isNotEmpty property="tradeId" prepend="and">
-		<![CDATA[ t.trade_id = #{tradeId} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="tradeNo" prepend="and">
-		<![CDATA[ t.trade_no = #{tradeNo} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="shopId" prepend="and">
-		<![CDATA[ t.shop_id = #{shopId} ]]>
-		</isNotEmpty>
-		<isNotEmpty property="type" prepend="and">
-		<![CDATA[ t.type <> #{type} ]]>
-		</isNotEmpty>
+		<if test="tradeId != null and tradeId != ''">
+		<![CDATA[ AND t.trade_id = #{tradeId} ]]>
+		</if>
+		<if test="tradeNo != null and tradeNo != ''">
+		<![CDATA[ AND t.trade_no = #{tradeNo} ]]>
+		</if>
+		<if test="shopId != null and shopId != ''">
+		<![CDATA[ AND t.shop_id = #{shopId} ]]>
+		</if>
+		<if test="type != null and type != ''">
+		<![CDATA[ AND t.type <> #{type} ]]>
+		</if>
 	</update>
 		
 </mapper>

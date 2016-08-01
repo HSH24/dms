@@ -3,6 +3,7 @@ package com.hsh24.dms.framework.struts.interceptor;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -12,6 +13,7 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
  * @author JiakunXu
  * 
  */
+@Component("oauth2Interceptor")
 public class OAuth2Interceptor implements Interceptor {
 
 	private static final long serialVersionUID = 2100766542685755228L;

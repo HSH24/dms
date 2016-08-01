@@ -11,7 +11,7 @@
 		 WHERE t.state= 'U'
 		   AND t.region_id IN
 	]]>
-		<iterate property="codes" open="(" close=")" conjunction=",">#codes[]#</iterate>
+		<foreach collection="codes" item="code" open="(" close=")" separator=",">#{code}</foreach>
 	</select>
 	
 	<select id="getItemRegion" parameterType="itemRegion" resultType="itemRegion">

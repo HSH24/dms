@@ -2,6 +2,10 @@ package com.hsh24.dms.stock.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.hsh24.dms.api.stock.IStockService;
 import com.hsh24.dms.api.stock.bo.Stock;
 import com.hsh24.dms.framework.log.Logger4jCollection;
@@ -14,10 +18,12 @@ import com.wideka.weixin.framework.util.LogUtil;
  * @author JiakunXu
  * 
  */
+@Service
 public class StockServiceImpl implements IStockService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(StockServiceImpl.class);
 
+	@Resource
 	private IStockDao stockDao;
 
 	@Override
@@ -53,14 +59,6 @@ public class StockServiceImpl implements IStockService {
 		}
 
 		return null;
-	}
-
-	public IStockDao getStockDao() {
-		return stockDao;
-	}
-
-	public void setStockDao(IStockDao stockDao) {
-		this.stockDao = stockDao;
 	}
 
 }

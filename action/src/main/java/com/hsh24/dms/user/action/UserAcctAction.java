@@ -1,8 +1,12 @@
 package com.hsh24.dms.user.action;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.hsh24.dms.api.user.IUserAcctService;
 import com.hsh24.dms.api.user.IUserService;
@@ -16,12 +20,16 @@ import com.hsh24.dms.framework.bo.BooleanResult;
  * @author JiakunXu
  * 
  */
+@Controller
+@Scope("request")
 public class UserAcctAction extends BaseAction {
 
 	private static final long serialVersionUID = 8267298257804000897L;
 
+	@Resource
 	private IUserAcctService userAcctService;
 
+	@Resource
 	private IUserService userService;
 
 	private String passport;
@@ -146,22 +154,6 @@ public class UserAcctAction extends BaseAction {
 		}
 
 		return RESOURCE_RESULT;
-	}
-
-	public IUserAcctService getUserAcctService() {
-		return userAcctService;
-	}
-
-	public void setUserAcctService(IUserAcctService userAcctService) {
-		this.userAcctService = userAcctService;
-	}
-
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
 	}
 
 	public String getPassport() {

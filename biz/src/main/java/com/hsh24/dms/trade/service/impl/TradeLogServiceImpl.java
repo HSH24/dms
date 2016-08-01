@@ -1,6 +1,9 @@
 package com.hsh24.dms.trade.service.impl;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.hsh24.dms.api.trade.ITradeLogService;
 import com.hsh24.dms.api.trade.bo.TradeLog;
@@ -15,10 +18,12 @@ import com.hsh24.dms.trade.dao.ITradeLogDao;
  * @author JiakunXu
  * 
  */
+@Service
 public class TradeLogServiceImpl implements ITradeLogService {
 
 	private Logger4jExtend logger = Logger4jCollection.getLogger(TradeLogServiceImpl.class);
 
+	@Resource
 	private ITradeLogDao tradeLogDao;
 
 	@Override
@@ -60,14 +65,6 @@ public class TradeLogServiceImpl implements ITradeLogService {
 		}
 
 		return result;
-	}
-
-	public ITradeLogDao getTradeLogDao() {
-		return tradeLogDao;
-	}
-
-	public void setTradeLogDao(ITradeLogDao tradeLogDao) {
-		this.tradeLogDao = tradeLogDao;
 	}
 
 }
