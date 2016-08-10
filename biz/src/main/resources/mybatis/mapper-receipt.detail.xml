@@ -4,7 +4,7 @@
 
 <mapper namespace="com.hsh24.dms.receipt.dao.IReceiptDetailDao">
 	
-	<insert id="createReceiptDetail" useGeneratedKeys="true" keyProperty="detailId">
+	<insert id="createReceiptDetail">
 	<![CDATA[
 		INSERT
 		INTO dms_tb_receipt_detail
