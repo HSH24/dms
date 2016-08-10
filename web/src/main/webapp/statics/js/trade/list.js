@@ -69,7 +69,7 @@ function trade_list(type) {
 }
 
 function trade_list_cancel(tradeNo) {
-	myApp.confirm('确定取消订单？', '订单管理', function() {
+	myApp.confirm('确定取消订单(如果已发货，订单将不能被取消)？', '订单管理', function() {
 				myApp.showIndicator();
 
 				$$('#trade_list_cancel_tradeNo').val(tradeNo);
