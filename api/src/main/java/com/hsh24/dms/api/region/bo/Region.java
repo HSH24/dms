@@ -41,8 +41,4 @@ public class Region implements Serializable {
 		this.regionName = regionName;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 }
