@@ -72,7 +72,7 @@
 		   AND t.state = 'U'
 		   AND t.shop_id = #{shopId}
 		 ORDER BY ${sort} ${order}
-		 LIMIT ${limit} OFFSET ${offset}
+		 LIMIT #{limit} OFFSET #{offset}
 	]]>
 	</select>
 	
