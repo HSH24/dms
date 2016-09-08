@@ -23,6 +23,11 @@ public interface IMemcachedCacheService extends ICacheService<String, Object> {
 	/**
 	 * session.
 	 */
+	String CACHE_KEY_SESSION = "dms:key_session_";
+
+	/**
+	 * session.
+	 */
 	int CACHE_KEY_SESSION_DEFAULT_EXP = 168 * 60 * 60;
 
 	/**
@@ -40,7 +45,7 @@ public interface IMemcachedCacheService extends ICacheService<String, Object> {
 	/**
 	 * check code.
 	 */
-	String CACHE_KEY_CHECK_CODE = "key_check_code_";
+	String CACHE_KEY_CHECK_CODE = "dms:key_check_code_";
 
 	/**
 	 * check code.
@@ -50,21 +55,21 @@ public interface IMemcachedCacheService extends ICacheService<String, Object> {
 	/**
 	 * passport.
 	 */
-	String CACHE_KEY_PASSPORT = "key_passport_";
+	String CACHE_KEY_PASSPORT = "dms:key_passport_";
 
 	// >>>>>>>>>>以下是监控相关<<<<<<<<<<
 
 	/**
 	 * log monitor.
 	 */
-	String CACHE_KEY_LOG_MONITOR = "key_log_monitor";
+	String CACHE_KEY_LOG_MONITOR = "dms:key_log_monitor";
 
 	int CACHE_KEY_LOG_MONITOR_DEFAULT_EXP = 0;
 
 	/**
 	 * action log.
 	 */
-	String CACHE_KEY_ACTION_LOG = "key_action_log";
+	String CACHE_KEY_ACTION_LOG = "dms:key_action_log";
 
 	int CACHE_KEY_ACTION_LOG_DEFAULT_EXP = 0;
 
@@ -73,27 +78,27 @@ public interface IMemcachedCacheService extends ICacheService<String, Object> {
 	/**
 	 * token.
 	 */
-	String CACHE_KEY_WX_TOKEN = "key_wx_token_";
+	String CACHE_KEY_WX_TOKEN = "dms:key_wx_token_";
 
-	String CACHE_KEY_WX_TICKET = "key_wx_ticket_";
+	String CACHE_KEY_WX_TICKET = "dms:key_wx_ticket_";
 
 	// >>>>>>>>>>以下是交易相关<<<<<<<<<<
 
-	String CACHE_KEY_TRADE_NO = "key_trade_no_";
+	String CACHE_KEY_TRADE_NO = "dms:key_trade_no_";
 
 	int CACHE_KEY_TRADE_NO_DEFAULT_EXP = 3;
 
-	String CACHE_KEY_RECEIPT_NO = "key_receipt_no_";
+	String CACHE_KEY_RECEIPT_NO = "dms:key_receipt_no_";
 
 	int CACHE_KEY_RECEIPT_NO_DEFAULT_EXP = 3;
 
 	// >>>>>>>>>>以下是供应商相关<<<<<<<<<<
 
-	String CACHE_KEY_SUP_ID = "key_sup_id_";
+	String CACHE_KEY_SUP_ID = "dms:key_sup_id_";
 
 	// >>>>>>>>>>以下是店铺相关<<<<<<<<<<
 
-	String CACHE_KEY_SHOP_ID = "key_shop_id_";
+	String CACHE_KEY_SHOP_ID = "dms:key_shop_id_";
 
 	// >>>>>>>>>>end<<<<<<<<<<
 
